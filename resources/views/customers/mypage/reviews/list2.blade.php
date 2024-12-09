@@ -1,9 +1,8 @@
-@extends('layouts.customer')
+@extends('layouts.customer_mypage')
 
 @section('content')
 <div class="container-fluid">
     <div class="row">
-
             <h2>Review List</h2>
             <div class="review-list">
                 <!-- foreach($reviews as $review) -->
@@ -61,6 +60,6 @@
                     </li>
                 </ul>
             </nav>
-    </div>
+        </div>
 </div>
 @endsection

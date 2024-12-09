@@ -1,0 +1,31 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 56px; /* ナビゲーションバーの高さ */
+  background-color: #f8f9fa; /* 背景色 */
+  border-bottom: 1px solid #ddd; /* 下線（任意） */
+}
+
+.sidebar-menu {
+  height: 100vh; /* ビューポートの高さを指定 */
+  position: fixed; /* スクロール時も固定 */
+  top: 0;
+  left: 0;
+  overflow-y: auto; /* スクロール可能にする */
+  border-right: 1px solid #ddd; /* 枠線を追加（任意） */
+  margin-top:56px;
+}
+.sidebar-content {
+  margin-top:56px;
+  margin-left: 16.66666666%; /* サイドバーの幅に合わせて調整 */
+  padding: 20px;
+}
+
+.content {
+  margin-top: 56px; /* ナビゲーションバー分のスペースを確保 */
+  padding: 20px;
+}
+
+
