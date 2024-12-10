@@ -18,4 +18,8 @@ class MypageController extends Controller
     {
         return view('customers.mypage.reviews.view');
     }
+    public function create()
+    {
+        return view('customers.mypage.reviews.submittion');
+    }
 }

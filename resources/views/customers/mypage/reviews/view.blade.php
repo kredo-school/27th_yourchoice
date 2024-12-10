@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-
+        <div class="card p-5">
                     <div class="review-card">
                     <div class="review-header d-flex justify-content-between align-items-center">
                         <div class="hotel-info">
@@ -40,6 +40,7 @@
                         <div class="image-placeholder"></div>
                     </div>
                 </div>
+            </div>
     </div>
 </div>
 @endsection
