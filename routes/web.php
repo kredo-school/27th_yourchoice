@@ -15,6 +15,8 @@ Route::get('/mypage/reviewlist',[MypageController::class,'reviewlist'])->name('m
 Route::get('/mypage/reviewlist2',[MypageController::class,'reviewlist2'])->name('mypage.reviewlist2');
 Route::get('/mypage/view',[MypageController::class,'show'])->name('mypage.show');
 Route::get('/mypage/submittion',[MypageController::class,'create'])->name('mypage.create');
+Route::get('/hotels/price/show',[MypageController::class,'showprice'])->name('mypage.showprice');
+Route::get('/hotels/price/edit',[MypageController::class,'editprice'])->name('mypage.editprice');
 
 
 
