@@ -14,4 +14,8 @@ class MypageController extends Controller
     {
         return view('customers.mypage.reviews.list2');
     }
+    public function show()
+    {
+        return view('customers.mypage.reviews.view');
+    }
 }
