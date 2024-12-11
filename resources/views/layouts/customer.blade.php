@@ -81,6 +81,12 @@
            <main class="content py-4">
                 @yield('content')
             </main>
+            <footer class="footer">
+                <div class="container">
+                    <p>&copy; {{ date('Y') }} Your Choice</p>
+
+                </div>
+            </footer>
         </div>    
     </div>
 </body>
