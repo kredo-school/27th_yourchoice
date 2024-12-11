@@ -20,15 +20,15 @@
 }
 
 
-.logo-sm {
-  font-size:1.5rem;
-  color: #363636; /* ボタンテキスト色 */
-
-}
-
 .logo-main {
   width: 2.5rem;
   height: 2.5rem;
+}
+
+
+.logo-sub {
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .language {
