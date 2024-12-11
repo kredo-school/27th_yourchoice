@@ -14,4 +14,12 @@ class MypageController extends Controller
     {
         return view('customers.mypage.reviews.list2');
     }
+    public function profileShow()
+    {
+        return view('customers.mypage.profile.show');
+    }
+    public function profileEdit()
+    {
+        return view('customers.mypage.profile.edit');
+    }
 }
