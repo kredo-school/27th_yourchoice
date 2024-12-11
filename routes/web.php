@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MypageController;
 use App\Http\Controllers\HotelController;
+use App\Http\Controllers\HotelAdminController;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
@@ -19,3 +20,7 @@ Route::get('/mypage/profile/edit',[MypageController::class,'profileEdit'])->name
 
 
 Route::get('/hotels', [HotelController::class, 'index']);
+
+
+Route::get('/profile/show',[HotelAdminController::class,'profileshow'])->name('profile.show');
+Route::get('/profile/edit',[HotelAdminController::class,'profileedit'])->name('profile.edit');
