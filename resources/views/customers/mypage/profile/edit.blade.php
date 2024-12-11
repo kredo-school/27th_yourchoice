@@ -1,5 +1,8 @@
 @extends('layouts.customer_mypage')
 
+<!-- CSSのリンク -->
+<link rel="stylesheet" href="{{ asset('css/customer-css.css') }}">
+
 @section('content')
 <div class="container-fluid">
     <div class="row">
@@ -72,8 +75,8 @@
                     </div>
             
                     <div class="d-flex justify-content-between">
-                        <button type="button" class="btn col-5" style="background-color: #CDCDCD; color: white;">Cancel</button>
-                        <button type="submit" class="btn col-5" style="background-color: #CA5C6F; color: white;" >Confirm</button>
+                        <button type="button" class="btn col-5 customer-css">Cancel</button>
+                        <button type="submit" class="btn col-5 customer-css" >Confirm</button>
                     </div>
                 </form>
             </div>
