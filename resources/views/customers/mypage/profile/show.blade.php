@@ -24,6 +24,7 @@
                         <label class="form-label">Email</label>
                         <input type="email" name="costomer-email" id="customer-email" class="form-control" value="#" autofocus>
                     </div>
+                    
                     <div class="row mb-3">
                         <div class="col">
                             <label class="form-label">Date of Birth</label>
