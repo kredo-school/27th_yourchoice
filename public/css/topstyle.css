@@ -1,0 +1,68 @@
+/* Reset */
+body, h1, h2, p, a {
+  margin: 0;
+  padding: 0;
+}
+
+.content{
+  margin:0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #f9f9f9;
+  color: #333;
+}
+a {
+  text-decoration: none;
+  color: #333;
+}
+
+.hero {
+  text-align: center;
+  padding: 50px 20px;
+  background-color: #fce4ec;
+}
+.hero h1 {
+  font-size: 2.5em;
+  font-weight: bold;
+}
+.hero p.description {
+  margin-top: 10px;
+  font-size: 1.1em;
+}
+.categories {
+  padding: 30px 20px;
+  text-align: center;
+}
+.categories h2 {
+  font-size: 1.8em;
+  margin-bottom: 20px;
+}
+
+/* カテゴリの並びを均等にする */
+.categories-grid {
+  display: grid; /* グリッドレイアウトを使用することを指定 */
+  grid-template-columns: repeat(3, 1fr); /* 3列のグリッドを設定 */
+  gap: 20px; /* 各グリッドアイテム間に20pxの間隔を設定 */
+}
+
+.category img {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 0px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.category {
+  text-decoration: none;
+  color: inherit;
+}
+.category:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
