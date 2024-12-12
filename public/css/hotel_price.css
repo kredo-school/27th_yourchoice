@@ -1,0 +1,33 @@
+
+.input-with-unit {
+    position: relative;
+    display: inline-block;
+}
+
+.input-with-unit .input-box {
+    padding-right: 25px; /* 右側に余白を確保 */
+}
+
+.input-with-unit .unit {
+    position: absolute;
+    right: 10px; /* ボックスの右端からの距離 */
+    top: 50%; /* 垂直方向中央揃え */
+    transform: translateY(-50%);
+    pointer-events: none; /* ユーザー操作を無効化 */
+    color: #6c757d; /* 任意のテキスト色 */
+    font-size: 14px; /* サイズ調整（任意） */
+}
+
+.table {
+    width: 100%; /* テーブル幅を画面いっぱいに広げる */
+    text-align: center; /* 水平方向に中央揃え */
+    vertical-align: middle; 
+    padding: 10px;
+}
+.td {
+    width: 100%; /* テーブル幅を画面いっぱいに広げる */
+    text-align: center; /* 水平方向に中央揃え */
+    vertical-align: middle; 
+    padding: 10px;
+}
+

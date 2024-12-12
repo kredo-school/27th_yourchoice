@@ -1,5 +1,7 @@
 @extends('layouts.hotel')
 
+<link rel="stylesheet" href="{{ asset('css/hotel_price.css') }}">
+
 @section('content')
 
 <h1 class="mb-4">Edit Prices</h1>
@@ -9,10 +11,10 @@
 </div>
 <form action="#" method="POST">
     @csrf
-    <table class="table table-bordered">
+    <table class="table table-bordered text-center">
         <thead class="header-row">
             <tr>
-            <th class="text-start col-2">Room Type</th>
+            <th class="col-2">Room Type</th>
             <th class="col-1">11/1 (Mon)</th>
             <th class="col-1">11/2 (Tue)</th>
             <th class="col-1">11/3 (Wed)</th>
@@ -28,40 +30,47 @@
                 <tr>
                     <td>Single Room</td>
                     
-                    <td>
-                            <input type="number" name="" value="" 
-                                   class="form-control text-center w-75" />
-                                   %
+                        <td>
+                            <div class="input-with-unit">
+                                <input type="number" class="form-control text-center input-box" />
+                                <span class="unit">%</span>
+                            </div>
                         </td>
                         <td>
-                            <input type="number" name="" value="" 
-                                   class="form-control text-center w-50" />
-                                   %
+                            <div class="input-with-unit">
+                                <input type="number" class="form-control text-center input-box" />
+                                <span class="unit">%</span>
+                            </div>
                         </td>
                         <td>
-                            <input type="number" name="" value="" 
-                                   class="form-control text-center w-50" />
-                                   %
+                            <div class="input-with-unit">
+                                <input type="number" class="form-control text-center input-box" />
+                                <span class="unit">%</span>
+                            </div>
                         </td>
                         <td>
-                            <input type="number" name="" value="" 
-                                   class="form-control text-center w-50" />
-                                   %
+                            <div class="input-with-unit">
+                                <input type="number" class="form-control text-center input-box" />
+                                <span class="unit">%</span>
+                            </div>
                         </td>
                         <td>
-                            <input type="number" name="" value="" 
-                                   class="form-control text-center w-50" />
-                                   %
+                            <div class="input-with-unit">
+                                <input type="number" class="form-control text-center input-box" />
+                                <span class="unit">%</span>
+                            </div>
                         </td>
                         <td>
-                            <input type="number" name="" value="" 
-                                   class="form-control text-center w-50" />
-                                   %
+                            <div class="input-with-unit">
+                                <input type="number" class="form-control text-center input-box" />
+                                <span class="unit">%</span>
+                            </div>
                         </td>
                         <td>
-                            <input type="number" name="" value="" 
-                                   class="form-control text-center w-50" />
-                                   %
+                            <div class="input-with-unit">
+                                <input type="number" class="form-control text-center input-box" />
+                                <span class="unit">%</span>
+                            </div>
                         </td>
                    
                 </tr>
@@ -69,39 +78,46 @@
                     <td>Double Room</td>
                     
                     <td>
-                            <input type="number" name="" value="" 
-                                   class="form-control text-center w-50" />
-                                   %
+                            <div class="input-with-unit">
+                                <input type="number" class="form-control text-center input-box" />
+                                <span class="unit">%</span>
+                            </div>
                         </td>
                         <td>
-                            <input type="number" name="" value="" 
-                                   class="form-control text-center w-50" />
-                                   %
+                            <div class="input-with-unit">
+                                <input type="number" class="form-control text-center input-box" />
+                                <span class="unit">%</span>
+                            </div>
                         </td>
                         <td>
-                            <input type="number" name="" value="" 
-                                   class="form-control text-center w-50" />
-                                   %
+                            <div class="input-with-unit">
+                                <input type="number" class="form-control text-center input-box" />
+                                <span class="unit">%</span>
+                            </div>
                         </td>
                         <td>
-                            <input type="number" name="" value="" 
-                                   class="form-control text-center w-50" />
-                                   %
+                            <div class="input-with-unit">
+                                <input type="number" class="form-control text-center input-box" />
+                                <span class="unit">%</span>
+                            </div>
                         </td>
                         <td>
-                            <input type="number" name="" value="" 
-                                   class="form-control text-center w-50" />
-                                   %
+                            <div class="input-with-unit">
+                                <input type="number" class="form-control text-center input-box" />
+                                <span class="unit">%</span>
+                            </div>
                         </td>
                         <td>
-                            <input type="number" name="" value="" 
-                                   class="form-control text-center w-50" />
-                                   %
+                            <div class="input-with-unit">
+                                <input type="number" class="form-control text-center input-box" />
+                                <span class="unit">%</span>
+                            </div>
                         </td>
                         <td>
-                            <input type="number" name="" value="" 
-                                   class="form-control text-center w-50" />
-                                   %
+                            <div class="input-with-unit">
+                                <input type="number" class="form-control text-center input-box" />
+                                <span class="unit">%</span>
+                            </div>
                         </td>
                    
                 </tr>
@@ -109,39 +125,46 @@
                     <td>Twin Room</td>
                     
                     <td>
-                            <input type="number" name="" value="" 
-                                   class="form-control text-center w-50" />
-                                   %
+                            <div class="input-with-unit">
+                                <input type="number" class="form-control text-center input-box" />
+                                <span class="unit">%</span>
+                            </div>
                         </td>
                         <td>
-                            <input type="number" name="" value="" 
-                                   class="form-control text-center w-50" />
-                                   %
+                            <div class="input-with-unit">
+                                <input type="number" class="form-control text-center input-box" />
+                                <span class="unit">%</span>
+                            </div>
                         </td>
                         <td>
-                            <input type="number" name="" value="" 
-                                   class="form-control text-center w-50" />
-                                   %
+                            <div class="input-with-unit">
+                                <input type="number" class="form-control text-center input-box" />
+                                <span class="unit">%</span>
+                            </div>
                         </td>
                         <td>
-                            <input type="number" name="" value="" 
-                                   class="form-control text-center w-50" />
-                                   %
+                            <div class="input-with-unit">
+                                <input type="number" class="form-control text-center input-box" />
+                                <span class="unit">%</span>
+                            </div>
                         </td>
                         <td>
-                            <input type="number" name="" value="" 
-                                   class="form-control text-center w-50" />
-                                   %
+                            <div class="input-with-unit">
+                                <input type="number" class="form-control text-center input-box" />
+                                <span class="unit">%</span>
+                            </div>
                         </td>
                         <td>
-                            <input type="number" name="" value="" 
-                                   class="form-control text-center w-50" />
-                                   %
+                            <div class="input-with-unit">
+                                <input type="number" class="form-control text-center input-box" />
+                                <span class="unit">%</span>
+                            </div>
                         </td>
                         <td>
-                            <input type="number" name="" value="" 
-                                   class="form-control text-center w-50" />
-                                   %
+                            <div class="input-with-unit">
+                                <input type="number" class="form-control text-center input-box" />
+                                <span class="unit">%</span>
+                            </div>
                         </td>
                 </tr>
           
