@@ -22,4 +22,8 @@ class MypageController extends Controller
     {
         return view('customers.mypage.profile.edit');
     }
+    public function profilePassword()
+    {
+        return view('customers.mypage.profile.password');
+    }
 }
