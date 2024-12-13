@@ -12,16 +12,16 @@
 <form action="#" method="POST">
     @csrf
     <table class="table table-bordered text-center">
-        <thead class="header-row">
+        <thead > 
             <tr>
-            <th class="col-2">Room Type</th>
-            <th class="col-1">11/1 (Mon)</th>
-            <th class="col-1">11/2 (Tue)</th>
-            <th class="col-1">11/3 (Wed)</th>
-            <th class="col-1">11/4 (Thu)</th>
-            <th class="col-1">11/5 (Fri)</th>
-            <th class="bg-primary text-white col-1">11/6 (Sat)</th>
-            <th class="bg-danger text-white col-1">11/7 (Sun)</th>
+            <th class="header col-2">Room Type</th>
+            <th class="header col-1">11/1 (Mon)</th>
+            <th class="header col-1">11/2 (Tue)</th>
+            <th class="header col-1">11/3 (Wed)</th>
+            <th class="header col-1">11/4 (Thu)</th>
+            <th class="header col-1">11/5 (Fri)</th>
+            <th class="header saturday col-1">11/6 (Sat)</th>
+            <th class="header sunday col-1">11/7 (Sun)</th>
            
             </tr>
         </thead>
@@ -171,8 +171,8 @@
         </tbody>
     </table>
     <div class="text-end">
-        <button type="submit" class="btn btn-success">Save Changes</button>
-        <a href="#" class="btn btn-secondary">Cancel</a>
+        <button type="submit" class="mainbtn">Save Changes</button>
+        <a href="#" class="subbtn2">Cancel</a>
     </div>
 </form>
 
