@@ -25,3 +25,6 @@ Route::get('/hotels', [HotelController::class, 'index']);
 
 Route::get('/profile/show',[HotelAdminController::class,'profileshow'])->name('profile.show');
 Route::get('/profile/edit',[HotelAdminController::class,'profileedit'])->name('profile.edit');
+Route::get('/rooms/show',[HotelAdminController::class,'roomsshow'])->name('rooms.show');
+Route::get('/rooms/create',[HotelAdminController::class,'roomscreate'])->name('rooms.create');
+Route::get('/rooms/edit',[HotelAdminController::class,'roomsedit'])->name('rooms.edit');

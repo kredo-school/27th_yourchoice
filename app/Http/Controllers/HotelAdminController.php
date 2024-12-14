@@ -18,6 +18,21 @@ class HotelAdminController extends Controller
         return view('hotels.profile.edit');
     }
 
+    public function roomsshow()
+    {
+        return view('hotels.rooms.show');
+    }
+
+    public function roomscreate()
+    {
+        return view('hotels.rooms.create');
+    }
+
+    public function roomsedit()
+    {
+        return view('hotels.rooms.edit');
+    }
+   
 
    
 }
