@@ -5,6 +5,7 @@ use App\Http\Controllers\MypageController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\HotelAdminController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\ReservationController;
 
 Auth::routes();
 
@@ -16,7 +17,7 @@ Route::get('/mypage/reviewlist2',[MypageController::class,'reviewlist2'])->name(
 Route::get('/mypage/profile/show',[MypageController::class,'profileShow'])->name('mypage.profileShow');
 Route::get('/mypage/profile/edit',[MypageController::class,'profileEdit'])->name('mypage.profileEdit');
 Route::get('/mypage/profile/password',[MypageController::class,'profilePassword'])->name('mypage.profilePassword');
-
+Route::get('/reservations',[ReservationController::class,'reservations'])->name('reservations');
 
 Route::get('/hotels', [HotelController::class, 'index']);
 
