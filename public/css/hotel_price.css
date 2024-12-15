@@ -1,0 +1,108 @@
+
+.input-with-unit {
+    position: relative;
+    display: inline-block;
+}
+
+.input-with-unit .input-box {
+    padding-right: 25px; /* 右側に余白を確保 */
+}
+
+.input-with-unit .unit {
+    position: absolute;
+    right: 10px; /* ボックスの右端からの距離 */
+    top: 50%; /* 垂直方向中央揃え */
+    transform: translateY(-50%);
+    pointer-events: none; /* ユーザー操作を無効化 */
+    color: #6c757d; /* 任意のテキスト色 */
+    font-size: 14px; /* サイズ調整（任意） */
+}
+
+.table {
+    width: 100%; /* テーブル幅を画面いっぱいに広げる */
+    text-align: center; /* 水平方向に中央揃え */
+    vertical-align: middle; 
+    padding: 10px;
+}
+.td {
+    width: 100%; /* テーブル幅を画面いっぱいに広げる */
+    text-align: center; /* 水平方向に中央揃え */
+    vertical-align: middle; 
+    padding: 10px;
+}
+
+.header {
+    background-color: #ededed !important; /* 薄い灰色 */   
+    color: #333 ; /* 文字色を濃い灰色 */
+    font-weight: bold !important;
+}
+
+
+.table td, .table th {
+    height: 60px; /* 高さを固定 (必要に応じて調整) */
+    vertical-align: middle; /* テキストや要素を中央揃え */
+}
+
+/* 入力ボックスの高さをセルに合わせる */
+.input-with-unit .form-control {
+    height: calc(100% - 10px); /* セル内の余白に合わせて調整 */
+    box-sizing: border-box; /* パディングを含めたサイズ */
+    margin: 5px 0; /* 上下の余白 */
+}
+
+.saturday{
+    background-color: #D0D7F9 !important;
+}
+
+.sunday{
+    background-color: #FFDADA !important;
+}
+
+
+/*メインボタン*/
+.mainbtn {
+    display: inline-block; /* サイズ指定を適用可能に */
+    width: 200px; /* 幅 */
+    height: 50px; /* 高さ */
+    text-align: center; /* テキストを中央揃え */
+    line-height: 50px; /* 縦方向のテキスト中央揃え */
+    background-color: #CA5C6F; /* 背景色 */
+    color: #ffffff; /* テキスト色 */
+    border: 1px solid #ccc; /* ボーダー */
+    border-radius: 8px; /* 角を丸める */
+    text-decoration: none; /* 下線を削除 */
+    cursor: pointer; /* ホバー時のポインター表示 */
+  
+  }
+
+
+/* Sub Button - Outline */
+.subbtn1 {
+    display: inline-block; /* サイズ指定を適用可能に */
+    width: 200px; /* 幅 */
+    height: 50px; /* 高さ */
+    text-align: center; /* テキストを中央揃え */
+    line-height: 50px; /* 縦方向のテキスト中央揃え */
+    color: #CA5C6F; /* テキスト色 */
+    border: 1px solid #CA5C6F; /* ボーダー */
+    border-radius: 8px; /* 角を丸める */
+    text-decoration: none; /* 下線を削除 */
+    cursor: pointer; /* ホバー時のポインター表示 */
+}
+
+
+/* キャンセルボタン*/
+
+.subbtn2 {
+    display: inline-block; /* サイズ指定を適用可能に */
+    width: 200px; /* 幅 */
+    height: 50px; /* 高さ */
+    text-align: center; /* テキストを中央揃え */
+    line-height: 50px; /* 縦方向のテキスト中央揃え */
+    background-color: #CDCDCD; /* 背景色 */
+    color: #333; /* テキスト色 */
+    border: 1px solid #ccc; /* ボーダー */
+    border-radius: 8px; /* 角を丸める */
+    text-decoration: none; /* 下線を削除 */
+    cursor: pointer; /* ホバー時のポインター表示 */
+}

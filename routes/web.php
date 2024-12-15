@@ -15,6 +15,11 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 //MypageController
 Route::get('/mypage/reviewlist',[MypageController::class,'reviewlist'])->name('mypage.reviewlist');
 Route::get('/mypage/reviewlist2',[MypageController::class,'reviewlist2'])->name('mypage.reviewlist2');
+Route::get('/mypage/view',[MypageController::class,'show'])->name('mypage.show');
+Route::get('/mypage/submittion',[MypageController::class,'create'])->name('mypage.create');
+Route::get('/hotels/price/show',[MypageController::class,'showprice'])->name('mypage.showprice');
+Route::get('/hotels/price/edit',[MypageController::class,'editprice'])->name('mypage.editprice');
+
 Route::get('/mypage/profile/show',[MypageController::class,'profileShow'])->name('mypage.profileShow');
 Route::get('/mypage/profile/edit',[MypageController::class,'profileEdit'])->name('mypage.profileEdit');
 Route::get('/mypage/profile/password',[MypageController::class,'profilePassword'])->name('mypage.profilePassword');
