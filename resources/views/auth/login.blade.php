@@ -1,16 +1,18 @@
 @extends('layouts.customer')
 
+<!-- CSSのリンク -->
+<link rel="stylesheet" href="{{ asset('css/customer-css.css') }}">
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            <h1 class="text-center">Login</h1> 
             <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
-
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
-
+                        
                         <div class="row mb-3">
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
 
@@ -53,17 +55,34 @@
 
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="customer-css-mainbutton">
                                     {{ __('Login') }}
                                 </button>
+                                
 
-                                @if (Route::has('password.request'))
+                                <!--@if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 @endif
+                                -->
+                                <!-- Forgot Password -->
+                                <div class="mt-3">
+                                    <a href="#" class="text-decoration-none">Forgot your password?</a>
+                                </div>
+
                             </div>
                         </div>
+                        
+                             
+                        <!-- Register Link -->
+                        <div class="text-center mt-4">
+                            <a href="#" class="register-text fw-bold">Please Register Here!!</a>
+                            
+                        </div>
+
+                        
+                        
                     </form>
                 </div>
             </div>
