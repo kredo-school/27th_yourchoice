@@ -1,0 +1,113 @@
+/* General Reset */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #fafafa;
+  color: #333;
+}
+
+/* Header/NavBar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #ffeef3;
+  border-bottom: 1px solid #f1d1d6;
+}
+
+.navbar .logo {
+  font-size: 18px;
+  font-weight: bold;
+  color: #d35d7d;
+}
+
+.language-switch {
+  font-size: 14px;
+  color: #333;
+}
+
+.auth-buttons .btn {
+  padding: 5px 10px;
+  margin-left: 10px;
+  border: 1px solid #d35d7d;
+  background-color: transparent;
+  color: #d35d7d;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.auth-buttons .btn:hover {
+  background-color: #d35d7d;
+  color: white;
+}
+
+/* Main Section */
+.choice-section {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.choice-section h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.choices {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.choice {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 100px;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.choice.customer {
+  background-color: #d35d7d;
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.choice.hotel {
+  /* background-color: transparent; */
+  /* background-color: #ffe9ee; */
+  border: 2px solid #d35d7d;
+  color: #d35d7d;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.choice.customer:hover, .choice.hotel:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.choice.hotel:hover {
+  background-color: #fefefe00;
+  border: 2px solid #d35d7d;
+}
+
+/* Accessibility */
+.choice-section h1 {
+  font-family: Arial, sans-serif;
+  font-size: 24px;
+  color: #333;
+}
+
+.choices .choice {
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  border: none;
+}

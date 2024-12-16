@@ -15,4 +15,8 @@ class HotelController extends Controller
     {
         return view('customers.hotel_detail');
     }
+    public function hotelRegister()
+    {
+        return view('auth.hotel_register');
+    }
 }
