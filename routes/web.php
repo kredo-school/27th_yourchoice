@@ -20,6 +20,7 @@ Route::get('/mypage/submittion',[MypageController::class,'create'])->name('mypag
 Route::get('/hotels/price/show',[MypageController::class,'showprice'])->name('mypage.showprice');
 Route::get('/hotels/price/edit',[MypageController::class,'editprice'])->name('mypage.editprice');
 Route::get('/hotels/reservations/show_daily',[HotelAdminController::class,'reservation_show_daily'])->name('reservation.reservation_show_daily');
+Route::get('/hotels/reservations/show_monthly',[HotelAdminController::class,'reservation_show_monthly'])->name('reservation.reservation_show_monthly');
 
 Route::get('/mypage/profile/show',[MypageController::class,'profileShow'])->name('mypage.profileShow');
 Route::get('/mypage/profile/edit',[MypageController::class,'profileEdit'])->name('mypage.profileEdit');

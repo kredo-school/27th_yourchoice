@@ -22,6 +22,10 @@ class HotelAdminController extends Controller
     {
         return view('hotels.reservations.show_daily');
     }
+    public function reservation_show_monthly()
+    {
+        return view('hotels.reservations.show_monthly');
+    }
 
 
    
