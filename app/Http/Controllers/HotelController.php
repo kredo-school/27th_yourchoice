@@ -10,6 +10,10 @@ class HotelController extends Controller
     {
         return view('customers.hotel_search');
     }
+    public function hotelRegister()
+    {
+        return view('auth.hotel_register');
+    }
 
     public function hotel_detail()
     {
