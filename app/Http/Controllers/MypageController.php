@@ -44,4 +44,19 @@ class MypageController extends Controller
     {
         return view('customers.mypage.profile.password');
     }
+
+    public function reservation_list()
+    {
+        return view('customers.mypage.reservation_list');
+    }
+
+    public function reservation_detail_inprogress()
+    {
+        return view('customers.mypage.reservation-detail.inprogress');
+    }
+
+    public function reservation_detail_completed()
+    {
+        return view('customers.mypage.reservation-detail.completed');
+    }
 }

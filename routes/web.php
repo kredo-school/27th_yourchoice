@@ -20,7 +20,8 @@ Route::get('/mypage/submittion',[MypageController::class,'create'])->name('mypag
 Route::get('/hotels/price/show',[MypageController::class,'showprice'])->name('mypage.showprice');
 Route::get('/hotels/price/edit',[MypageController::class,'editprice'])->name('mypage.editprice');
 Route::get('/mypage/reservation_list',[MypageController::class,'reservation_list'])->name('mypage.reservation_list');
-
+Route::get('/mypage/reservation_detail/inprogress',[MypageController::class,'reservation_detail_inprogress'])->name('mypage.reservation_detail.inprogress');
+Route::get('/mypage/reservation_detail/completed',[MypageController::class,'reservation_detail_completed'])->name('mypage.reservation_detail.completed');
 Route::get('/mypage/profile/show',[MypageController::class,'profileShow'])->name('mypage.profileShow');
 Route::get('/mypage/profile/edit',[MypageController::class,'profileEdit'])->name('mypage.profileEdit');
 Route::get('/mypage/profile/password',[MypageController::class,'profilePassword'])->name('mypage.profilePassword');
