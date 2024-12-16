@@ -3,13 +3,13 @@
 @section('content')
     <link rel="stylesheet" href="{{ asset('css/hoteladmin.css') }}">
     {{-- Editpageはvalue={{old}}置いておけばOK　新規登録の場合は空欄になる --}}
-    <div class="container mt-4">
+    <div class="container mt-2">
         <form method="POST" action="{{ route('profile.edit') }}" enctype="multipart/form-data">
             @csrf
             @method('GET')
             <div class="row">
                 <div class="col-md">
-                    <h1 class="mt-4 mb-4 ms-3 fw-bold">Hotel Admin Profile</h1>
+                    <h1 class="mb-4 ms-3 fw-bold">Hotel Admin Profile</h1>
                 </div>
             </div>
             <div class="row">
@@ -102,8 +102,7 @@
                                     </div>
                                 @endfor
                             </div>
-                            <small class="text-muted ms-3">You can upload up to 5 images. Please click on the photo icon to
-                                select an image.</small>
+                            <small class="text-muted ms-3">↑ Click here. You can upload up to 5 images.</small>
                         </div>
                     </div>
 
@@ -201,12 +200,7 @@
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="checkbox" id="toothbrush" name="toiletries[]"
                                         value="toothbrush">
-                                    <label class="form-check-label" for="toothbrush">Toothbrush</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="toothpaste" name="toiletries[]"
-                                        value="toothpaste">
-                                    <label class="form-check-label" for="toothpaste">Toothpaste</label>
+                                    <label class="form-check-label" for="toothbrush">Toothbrush&paste</label>
                                 </div>
                             </div>
                         </div>
