@@ -3,13 +3,13 @@
 @section('content')
     <link rel="stylesheet" href="{{ asset('css/hoteladmin.css') }}">
 
-    <div class="container mt-4">
+    <div class="container mt-2">
         <form method="POST" action="{{ route('profile.show') }}" enctype="multipart/form-data">
             @csrf
             @method('GET')
             <div class="row">
                 <div class="col-md">
-                    <h1 class="mt-4 mb-4 ms-3 fw-bold">Hotel Admin Profile</h1>
+                    <h1 class="mb-4 ms-3 fw-bold">Hotel Admin Profile</h1>
                 </div>
             </div>
             <div class="row">
@@ -123,8 +123,7 @@
                                     <span class="service-item">Shampoo</span>
                                     <span class="service-item">Conditioner</span>
                                     <span class="service-item">Body wash</span>
-                                    <span class="service-item">Toothbrush</span>
-                                    <span class="service-item">Toothpaste</span>
+                                    <span class="service-item">Toothbrush&paste</span>
                                 </div>
                             </div>
                         </div>
@@ -200,12 +199,12 @@
                         <div class="card-body">
                             <h5 class="card-header">Category</h5>
                             <div class="category-container">
-                                <span class="category-item">Wheelchair and Senior-friendly</span>
-                                <span class="category-item">Visual and Hearing Impaired-friendly</span>
-                                <span class="category-item">Pregnancy-friendly</span>
-                                <span class="category-item">Religious-friendly</span>
-                                <span class="category-item">Family-friendly</span>
-                                <span class="category-item">English-friendly</span>
+                                <span class="category-item">Wheelchair and Senior</span>
+                                <span class="category-item">Visual and Hearing Impaired</span>
+                                <span class="category-item">Pregnancy</span>
+                                <span class="category-item">Religious</span>
+                                <span class="category-item">Family</span>
+                                <span class="category-item">English</span>
                             </div>
                         </div>
                     </div>
