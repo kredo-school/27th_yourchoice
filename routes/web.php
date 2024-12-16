@@ -28,5 +28,6 @@ Route::get('/hotel_register', [HotelController::class,'hotelRegister'])->name('h
 
 Route::get('/profile/show',[HotelAdminController::class,'profileshow'])->name('profile.show');
 Route::get('/profile/edit',[HotelAdminController::class,'profileedit'])->name('profile.edit');
+Route::get('/reviews/list',[HotelAdminController::class,'reviewlist'])->name('reviews.list');
 
 Route::get('/customer_register', [CustomerController::class,'customerRegister'])->name('customerRegister');

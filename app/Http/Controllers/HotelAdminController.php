@@ -18,6 +18,11 @@ class HotelAdminController extends Controller
         return view('hotels.profile.edit');
     }
 
+    public function reviewlist()
+    {
+        return view('hotels.reviews.list');
+    }
+
 
    
 }
