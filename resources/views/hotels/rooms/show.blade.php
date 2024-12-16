@@ -28,7 +28,7 @@
                 </tr>
             </thead>
             <tbody>
-                {{-- @foreach ($all_users as $user) --}}
+                {{-- @foreach ($all_rooms as $room) --}}
                 <tr>
                     <td>
                         101
@@ -56,9 +56,8 @@
                         {{-- deleteページにつながる --}}
                         <a href="#" title="Delete" class="btn btn-outline-dark ms-1 border-0" data-bs-toggle="modal"
                             data-bs-target="#deleteModal"><i class="fa-solid fa-trash-can icon-md"></i></a>
-                        {{-- <a href="{{ route('author.delete', $author->id) }}" title="Delete"
-                            class="btn btn-outline-danger btn-sm border-0 text-danger" data-bs-toggle="modal"
-                            data-bs-target="#deleteModal"><i class="fa-solid fa-trash-can "></i></a> --}}
+                        {{-- <a href="{{ route('author.delete', $author->id) }}" --}}
+                          
                         {{-- Include modal here --}}
                         @include('hotels.rooms.modals.delete')
                     </td>

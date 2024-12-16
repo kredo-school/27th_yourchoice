@@ -2,7 +2,7 @@
 @section('title', 'Hotel Admin Rooms Create')
 @section('content')
     <link rel="stylesheet" href="{{ asset('css/hoteladmin.css') }}">
-    {{-- Editpageはvalue={{old}}置いておけばOK　新規登録の場合は空欄になる --}}
+
     <div class="container mt-2 d-flex justify-content-center">
         <form method="POST" action="{{ route('rooms.create') }}" enctype="multipart/form-data">
             @csrf
@@ -17,26 +17,34 @@
                             <div class="mb-3">
                                 <label for="room_number" class="form-label">Room No.</label>
                                 <input type="number" class="form-control" id="room_number" name="room_number"
-                                    value="{{ old('room_number') }}" autofocus>
+                                    value="room_number" autofocus>
                             </div>
+                            @error('room_number')
+                                <div class="text-danger small">{{ $message }}</div>
+                            @enderror
+                            
                             <div class="mb-3">
                                 <label for="room_type" class="form-label">Room Type</label>
-                                <input type="text" class="form-control" id="room_type" name="room_type"
-                                    value="{{ old('room_type') }}">
+                                <select id="room_type" name="room_type" class="form-control">
+                                    <option value="" disabled selected>-- Select Here --</option>
+                                    <option value="single">Single Room</option>
+                                    <option value="double">Double Room</option>
+                                    <option value="twin">Twin Room</option>
+                                </select>
+
                             </div>
                             <div class="mb-3">
                                 <label for="room_price" class="form-label">Room Price</label>
                                 <div class="input-group">
                                     <span class="input-group-text">$</span>
                                     <input type="number" class="form-control" id="room_price" name="room_price"
-                                        value="{{ old('room_price') }}">
+                                        value="room_price">
                                 </div>
                             </div>
 
                             <div class="mb-3">
                                 <label for="capacity" class="form-label">Capacity</label>
-                                <input type="number" class="form-control" id="capacity" name="capacity"
-                                    value="{{ old('capacity') }}">
+                                <input type="number" class="form-control" id="capacity" name="capacity" value="capacity">
                             </div>
                             <div>
                                 <label for="room_image" class="form-label">Room Image</label>
@@ -56,7 +64,7 @@
                             <div class="mb-3">
                                 <label for="room_remerks" class="form-label">Remarks</label>
                                 <input type="text" class="form-control" id="room_remerks" name="room_remerks"
-                                    value="{{ old('room_remerks') }}">
+                                    value="room_remerks">
                             </div>
 
                             <!-- Buttons -->
