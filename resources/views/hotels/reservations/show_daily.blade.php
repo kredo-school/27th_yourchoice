@@ -1,9 +1,8 @@
 @extends('layouts.hotel')
 
+<link rel="stylesheet" href="{{ asset('css/flatpickr.css') }}">
 <link rel="stylesheet" href="{{ asset('css/hotel_reservation.css') }}">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="{{ asset('js/flatpickr.js') }}"></script>
 
 @section('content')
 <div class="container">
@@ -17,7 +16,7 @@
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 flatpickr("#date-picker", {
-                    dateFormat: "Y/ m /d (l)", // 年-月-日のフォーマット
+                    dateFormat: "Y/ m /d (D)", // 年-月-日のフォーマット
                     defaultDate: "2024-11-08", // デフォルトの日付
                     onChange: function(selectedDates, dateStr, instance) {
                         console.log("Selected date: ", dateStr); // 選択された日付を取得
