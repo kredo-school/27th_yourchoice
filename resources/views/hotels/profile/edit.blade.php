@@ -268,8 +268,8 @@
                                 <div class="col-md-6">
                                     <label for="freeCancellation">Free Cancellation Period:</label>
                                     <div class="d-flex align-items-center">
-                                        <input type="number" class="form-control me-2" id="freeCancellation"
-                                            name="free_cancellation" style="width: 80px;">
+                                        <input type="number" class="form-control me-2 form-width" id="freeCancellation"
+                                            name="free_cancellation">
                                         <span>days before the reservation date.</span>
                                     </div>
                                 </div>
@@ -277,20 +277,20 @@
                                     <label>Cancellation Fee Percentage:</label>
                                     <div class="d-flex align-items-center mt-1">
                                         <span class="me-3">General</span>
-                                        <input type="number" class="form-control mx-2" name="fee_general"
-                                            style="width: 80px;">
+                                        <input type="number" class="form-control mx-2 form-width" name="fee_general"
+                                            >
                                         <span>%</span>
                                     </div>
                                     <div class="d-flex align-items-center mt-1">
                                         <span>Same-Day</span>
-                                        <input type="number" class="form-control mx-2" name="fee_same_day"
-                                            style="width: 80px;">
+                                        <input type="number" class="form-control mx-2 form-width" name="fee_same_day"
+                                          >
                                         <span>%</span>
                                     </div>
                                     <div class="d-flex align-items-center mt-1">
                                         <span>No-Shows</span>
-                                        <input type="number" class="form-control mx-2" name="fee_no_shows"
-                                            style="width: 80px;">
+                                        <input type="number" class="form-control mx-2 form-width" name="fee_no_shows"
+                                            >
                                         <span>%</span>
                                     </div>
                                 </div>
