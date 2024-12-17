@@ -1,9 +1,8 @@
-@extends('layouts.customer')
+@extends('layouts.customer_mypage')
 
 @section('content')
 <div class="container-fluid">
     <div class="row">
-
             <h2>Review List</h2>
             <div class="review-list">
                 <!-- foreach($reviews as $review) -->
@@ -18,6 +17,7 @@
                             <p class="card-text">{{ Str::limit('comments', 100) }} <a href="#">read more</a></p>
                         </div>
                     </div>
+                    
                 <!-- endforeach -->
                                  <!-- foreach($reviews as $review) -->
                                  <div class="card mb-3">
@@ -61,6 +61,6 @@
                     </li>
                 </ul>
             </nav>
-    </div>
+        </div>
 </div>
 @endsection
