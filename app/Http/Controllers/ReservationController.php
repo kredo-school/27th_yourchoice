@@ -11,6 +11,16 @@ class ReservationController extends Controller
     {
         return view('customers.reservations.reservation');
     }
+
+    public function reserved_confirmation()
+    {
+        return view('customers.reservations.confirmation'); // ビューを返す例
+    } 
+    
+    public function reserved_detail()
+    {
+        return view('customers.reservations.detail'); // ビューを返す例
+    } 
 }
 
 

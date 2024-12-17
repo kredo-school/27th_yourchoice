@@ -6,14 +6,19 @@ body {
     background-color: #f9f9f9;
 }
 
- .container {
-    max-width: 1100px; 
-    margin: 0 auto;
+ .container-reservations {
+    max-width: auto; 
+    margin: 10px;
     padding: 20px;
     background: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 8px;
     
+}
+
+.amenity {
+    margin-top: 30px;
+    padding-bottom: opx;
 }
 
 /* .container2 {
@@ -69,10 +74,16 @@ input {
 .submit-button {
     text-align: center;
     margin-top: 20px;
+    
+}
+
+.button1 {
+    background-color: #cdcdcd;
+    margin-bottom: 20px;
 }
 
 button {
-    background-color: #ff5c5c;
+    background-color: #3399cc;
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -82,7 +93,7 @@ button {
 }
 
 button:hover {
-    background-color: #ff3d3d;
+    background-color: #3399cc;
 }
 
 input[type="checkbox"] {
@@ -98,11 +109,7 @@ h2 {
 }
 
 
-.step1 {
-    max-width: 850px;
-    
-    align-items: center; /* 垂直方向を揃える */
-}
+
 
 label {
     display: inline-block; /* ラベルが必要な横幅のみ使用 */
@@ -139,8 +146,10 @@ h3 {
     border: 1px solid #ddd;
     border-radius: 8px;
     background-color: #f9f9f9;
-    
+    align-items: center; /* 垂直方向を揃える */
 }
+
+
 
 .step h2 {
     margin-bottom: 20px;
@@ -172,33 +181,58 @@ h3 {
 }
 
 .payment-details {
-    width: 420px;
-    position: relative; /* 背景要素の基準位置 */
+    width: 700px;
+    /* position: relative; 背景要素の基準位置 */
     border: 1px solid #ddd; /* 枠線 */
     border-radius: 10px; /* 角丸 */
     padding: 20px;
     background-color: #f9f9f9; /* 背景色 */
-    overflow: hidden; /* 枠を超えた部分を非表示に */
+    overflow: hidden; 枠を超えた部分を非表示に */
     
 }
 
 /* テキストとリストスタイル */
+.payment-methods {
+    margin-top: 40px;
+    margin-left: 65px;   
+    align-items: center; /* テキストとアイコンを垂直方向に中央揃え */
+    
+}
+
+
+.payment-methods img {
+    width: 60px;
+    margin-right: 10px;
+}
+
+
+.payment-methods p {
+    margin: 0; /* 余白をリセット */
+    margin-right: 10px; /* テキストとアイコンの間に余白を追加 */
+    font-size: 1em;
+    font-weight: bold;
+}
+
 .payment-methods h3 {
     font-size: 1.2em;
     font-weight: bold;
     padding: 10px;
     margin-bottom: 10px;
-    position: relative;
-    z-index: 1; /* 背景画像の上に表示 */
+    /* position: relative; */
+/* z-index: 1; 背景画像の上に表示 */
 }
 
 .payment-methods2 {
-    position: relative; /* 背景要素の基準位置 */
+    margin-top: 40px;
+    width: 500px;
+    position: relative; /*背景要素の基準位置*/
     border: 1px solid #ddd; /* 枠線 */
     border-radius: 10px; /* 角丸 */
     padding: 10px;
     background-color: #f9f9f9; /* 背景色 */
-    overflow: hidden; /* 枠を超えた部分を非表示に */
+    overflow: hidden; /*枠を超えた部分を非表示に*/
+    z-index: 1;
+    
        
 }
 
@@ -215,7 +249,7 @@ h3 {
     opacity: 0.3; /* 透明度を設定（透かし効果） */
     width: 100px;
     height: 100px;
-    z-index: 0; /* 他のコンテンツの下に配置 */
+    /* z-index: 0; 他のコンテンツの下に配置 */
 }
 
 /* テキストとリストスタイル */
@@ -224,17 +258,17 @@ h3 {
     font-weight: bold;
     padding-top: 1px;
     margin-bottom: 10px;
-    position: relative;
-    z-index: 1; /* 背景画像の上に表示 */
+    /* position: relative;
+    z-index: 1; 背景画像の上に表示 */
 }
 
 .payment-methods2 ul {
     list-style: none; /* デフォルトのリストスタイルを無効化 */
     padding: 0;
     margin: 0;
-    position: relative;
-    z-index: 1; /* 背景画像の上に表示 */
-}
+     /* position: relative; */
+    /* z-index: 1; 背景画像の上に表示 */
+} */
 
 .payment-methods2 li {
     display: flex;
@@ -254,36 +288,9 @@ h3 {
     color: #ff3d3d;
 }
 
-.payment-methods {
-    margin-top: 40px;
-    margin-left: 65px;    
-}
-
-.payment-methods2 {
-    margin-top: 40px;
-    width: 500px;
-}
-
-.payment-methods img {
-    width: 20px;
-    margin-right: 10px;
-}
-
-.payment-methods {
-    align-items: center; /* テキストとアイコンを垂直方向に中央揃え */
-    margin-top: 20px;
-    
-}
-
-.payment-methods p {
-    margin: 0; /* 余白をリセット */
-    margin-right: 10px; /* テキストとアイコンの間に余白を追加 */
-    font-size: 1em;
-    font-weight: bold;
-}
 
 .payment-icons img {
-    width: 50px; /* アイコンの幅を設定 */
+    width: 100px; /* アイコンの幅を設定 */
     margin-right: 10px; /* アイコン間の余白を設定 */
 }
 
@@ -316,7 +323,7 @@ h3 {
 }
 
 
-.cancellation-policy {
+/* .cancellation-policy {
     width: 100%;
     border-collapse: collapse;
 }
@@ -336,10 +343,99 @@ h3 {
 }
 
 
-.button5 {
-    color: green;
-    background-color: greenyellow;
+.step5 {
+    background-color: white;
+    width: 400px;
+    text-align: center;
+    border: 1px solid black;
+} */
+
+/* Step5 見出し */
+.cancellation-policy h2 {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
+
+/* ポリシーボックスの枠線とスタイル */
+.policy-box {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.policy-box h3 {
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* ポリシー詳細スタイル */
+.policy-details {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1em;
+    color: #333;
+}
+
+.free-cancellation,
+.cancellation-fees {
+    flex: 1;
+}
+
+.free-cancellation {
+    display: flex;
+    align-items: center;
+}
+
+
+.days-box {
+    margin: 0 5px;
+    padding: 4px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    font-weight: bold;
+}
+
+.cancellation-fees .fees {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.cancellation-fees .fees div {
+    display: flex;
+    align-items: center;
+}
+
+.fee-box {
+    margin: 0 5px;
+    padding: 4px 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    font-weight: bold;
+    text-align: center;
+    width: 40px;
+}
+
+/* Fully Refundable メッセージ */
+.fully-refundable {
+    margin-top: 20px;
+    background-color: #e6f7e6;
+    color: #008000;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    width: 400px;
+}
+
+
 .reservation-details {
     line-height: 1.8;
     text-decoration: underline
@@ -352,13 +448,203 @@ h3 {
 
 
 
- .fa-solid fa-user-shield {
+ /* .fa-solid fa-user-shield {
   position: absolute; /*他の要素の影響を受けずに配置される*/
-  width: 600px; /*枠の高さ*/
- height: 300px; /*枠の横幅*/
- light: 100px; /*枠の上から数えた場所(Y軸的な)*/
-     top: 100px; /*枠の横から数えた場所(X軸的な)*/
-   background-size: contain; /*枠の大きさに合わせて画像を拡大縮小する*/
-    background-repeat: no-repeat; /*繰り返し表示の無効化(デフォルトでは空いたスペースに繰り返し画像が表示されるのでそれを阻止する)*/
+  /* width: 600px; 枠の高さ */
+ /* height: 300px; 枠の横幅 */
+ /* light: 100px; 枠の上から数えた場所(Y軸的な) */
+     /* top: 100px; 枠の横から数えた場所(X軸的な) */
+   /* background-size: contain; 枠の大きさに合わせて画像を拡大縮小する */
+    /* background-repeat: no-repeat; 繰り返し表示の無効化(デフォルトでは空いたスペースに繰り返し画像が表示されるのでそれを阻止する) */
 
- }
+ /* } */ */
+
+ /* .large-icon {
+    font-size: 70px; /* サイズを50pxに設定 */
+    /* background-size: contain; 
+    color: ; /* 色も変更可能 */
+    /* position: absolute; 他の要素の影響を受けずに配置される */
+    
+/* } 
+
+
+/* confirmation. */
+
+ /* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff0f5; /* 薄いピンク色 */
+    padding: 10px 20px;
+    border: 1px solid #e4e4e4;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.header-icons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.header-icons button {
+    border: none;
+    background-color: #f8bac2; /* ボタンのピンク色 */
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.header-icons button.logout {
+    background-color: #ff7b7b;
+}
+
+/* Main Content */
+.reservation-complete {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
+.card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 500px;
+    padding: 30px;
+    text-align: center;
+}
+
+.icon {
+    background-color: #d94c66; /* 赤系の背景色 */
+    color: white;
+    font-size: 3rem;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+}
+
+h2 {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.reservation-number {
+    color: black;
+    font-weight: bold;
+}
+
+.check-button {
+    background-color: #ca5c6e;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.check-button:hover {
+    background-color: #ca5c6e; /* ボタンのホバー時 */
+}
+
+
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+label {
+    font-weight: bold;
+}
+
+/* Payment Section */
+.payment-info {
+    margin-top: 15px;
+}
+
+.payment-info i {
+    font-size: 24px;
+    margin-right: 10px;
+    color: #666;
+}
+
+/* Reservation Box */
+.reservation-box {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.reservation-box p {
+    margin: 5px 0;
+}
+
+/* Button */
+.confirmation-btn {
+    background-color: #e96d7a;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.confirmation-btn i {
+    font-size: 14px;
+}

@@ -7,6 +7,7 @@
   height: 56px; /* ナビゲーションバーの高さ */
   background-color: #FDF5F8;  /* 背景色 */
   border-bottom: 1px solid #ddd; /* 下線（任意） */
+  z-index: 1000;
 }
 
 .nabvar-hotel {
