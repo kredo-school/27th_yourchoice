@@ -52,6 +52,13 @@ class HotelAdminController extends Controller
         return view('hotels.reservations.edit');
     }
 
+    public function profilepassword()
+    {
+        return view('hotels.profile.password');
+    }
+
+
+
 
 
 

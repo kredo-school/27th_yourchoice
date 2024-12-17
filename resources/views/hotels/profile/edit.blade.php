@@ -277,20 +277,17 @@
                                     <label>Cancellation Fee Percentage:</label>
                                     <div class="d-flex align-items-center mt-1">
                                         <span class="me-3">General</span>
-                                        <input type="number" class="form-control mx-2 form-width" name="fee_general"
-                                            >
+                                        <input type="number" class="form-control mx-2 form-width" name="fee_general">
                                         <span>%</span>
                                     </div>
                                     <div class="d-flex align-items-center mt-1">
                                         <span>Same-Day</span>
-                                        <input type="number" class="form-control mx-2 form-width" name="fee_same_day"
-                                          >
+                                        <input type="number" class="form-control mx-2 form-width" name="fee_same_day">
                                         <span>%</span>
                                     </div>
                                     <div class="d-flex align-items-center mt-1">
                                         <span>No-Shows</span>
-                                        <input type="number" class="form-control mx-2 form-width" name="fee_no_shows"
-                                            >
+                                        <input type="number" class="form-control mx-2 form-width" name="fee_no_shows">
                                         <span>%</span>
                                     </div>
                                 </div>
@@ -300,9 +297,15 @@
                 </div>
 
                 <!-- Buttons -->
-                <div class="d-flex mt-4">
-                    <button type="button" class="btn btn-sub2 ms-auto">Cancel</button>
-                    <button type="submit" class="btn btn-main ms-2">Confirm</button>
+                <div class="row mt-4 mb-2">
+                  <div class="col-7"></div>
+                    <div class="col ms-auto">
+                        <a href="{{ route('profile.show') }}" class="text-decoration-none text-dark">
+                            <button type="button" class="btn btn-sub2">Cancel</button></a>
+                    </div>
+                    <div class="col"> 
+                      <button type="button" class="btn btn btn-main">Confirm</button>
+                    </div>
                 </div>
         </form>
     </div>

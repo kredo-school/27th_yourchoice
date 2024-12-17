@@ -33,6 +33,51 @@
   transition: background-color 0.3s ease;
 }
 
+.btn-main {
+  background-color: #CA5C6F; /* Button background color */
+  color: white; /* Text color */
+  border: none; /* Remove border */
+  border-radius: 8px; /* Rounded corners */
+  padding: 10px 90px; /* Spacing */
+  font-size: 16px; /* Font size */
+  font-weight: bold; /* Bold text */
+  cursor: pointer; /* Pointer cursor on hover */
+  white-space: nowrap /*文字列折り返さない*/
+}
+
+
+/* Sub Button - Outline */
+.btn-sub {
+background-color: transparent; /* Transparent background */
+color: #CA5C6F; /* Text color */
+border: 2px solid #CA5C6F; /* Outline color */
+border-radius: 8px; /* Rounded corners */
+padding: 10px 90px; /* Spacing */
+font-size: 16px; /* Font size */
+cursor: pointer; /* Pointer cursor on hover */
+white-space: nowrap /*文字列折り返さない*/
+}
+
+
+/* キャンセルボタン*/
+.btn-sub2 {
+background-color: #CDCDCD; /* Disabled button background color */
+color: white; /* Disabled text color */
+border: none; /* No border */
+border-radius: 8px; /* Rounded corners */
+padding: 10px 90px; /* Spacing */
+font-size: 16px; /* Font size */
+cursor: not-allowed; /* Show disabled cursor */
+white-space: nowrap /*文字列折り返さない*/
+}
+
+
+
+
+
+
+
+
 /* HotelAdmin Profile Edit rina */
 .form-width{
   width: 80px;
@@ -138,9 +183,9 @@ textarea#remarks {
   font-size: 1rem; /* テキストサイズ */
 }
 
-.btn-main{
-  background-color: #CA5C6F; /* ボタン背景色 */
-  color: #FFFFFF; /* ボタンテキスト色 */
+/* .btn-main{
+  background-color: #CA5C6F; 
+  color: #FFFFFF; 
   border: 1px solid #CA5C6F;
   height: 1.5rem;
   width: 5rem;
@@ -152,8 +197,8 @@ textarea#remarks {
 }
 
 .btn-sub{
-  background-color: #FFFFFF; /* ボタン背景色 */
-  color: #CA5C6F; /* ボタンテキスト色 */
+  background-color: #FFFFFF; 
+  color: #CA5C6F; 
   border: 1px solid #CA5C6F;
   height: 1.5rem;
   width: 5rem;
@@ -165,8 +210,8 @@ textarea#remarks {
 }
 
 .btn-sub2{
-  background-color: #CDCDCD; /* ボタン背景色 */
-  color: #FFFFFF; /* ボタンテキスト色 */
+  background-color: #CDCDCD; 
+  color: #FFFFFF;
   border: 1px solid #FFFFFF;
   height: 1.5rem;
   width: 5rem;
@@ -175,7 +220,7 @@ textarea#remarks {
   display: flex;
   align-items: center;
 
-}
+} */
 
 /* HotelAdmin Rooms List rina */
 

@@ -229,10 +229,21 @@
                 </div>
 
                 <!-- Buttons -->
-                <div class="d-flex mt-4">
-                    <button type="button" class="btn btn-sub ms-auto">Password Setting</button>
-                    <button type="submit" class="btn btn-sub ms-2">Edit</button>
+                <div class="row mt-4 mb-2">
+                    <div class="col-6"></div>
+                    <div class="col ms-auto">
+                        <a href="{{ route('profile.password') }}" class="text-decoration-none text-dark">
+                            <button type="button" class="btn btn-sub">Password Setting</button></a>
+                    </div>
+                    <div class="col">
+                      <a href="{{ route('profile.edit') }}" class="text-decoration-none text-dark">
+                        <button type="button" class="btn btn-sub">Edit</button>
+                    </div>
                 </div>
+
+
+
+
         </form>
     </div>
 
