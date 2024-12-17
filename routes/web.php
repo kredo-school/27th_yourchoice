@@ -21,7 +21,10 @@ Route::get('/hotels/price/show',[MypageController::class,'showprice'])->name('my
 Route::get('/hotels/price/edit',[MypageController::class,'editprice'])->name('mypage.editprice');
 Route::get('/mypage/reservation_list',[MypageController::class,'reservation_list'])->name('mypage.reservation_list');
 Route::get('/mypage/reservation_detail/inprogress',[MypageController::class,'reservation_detail_inprogress'])->name('mypage.reservation_detail.inprogress');
-Route::get('/mypage/reservation_detail/completed',[MypageController::class,'reservation_detail_completed'])->name('mypage.reservation_detail.completed');
+Route::get('/mypage/reservation_detail/completed',[MypageController::class,'reservation_detail_completed'])->name('mypage.reservation_detail.completed');Route::get('/hotels/reservations/show_daily',[HotelAdminController::class,'reservation_show_daily'])->name('reservation.reservation_show_daily');
+Route::get('/hotels/reservations/show_monthly',[HotelAdminController::class,'reservation_show_monthly'])->name('reservation.reservation_show_monthly');
+Route::get('/hotels/reservations/edit',[HotelAdminController::class,'edit'])->name('reservation.edit');
+
 Route::get('/mypage/profile/show',[MypageController::class,'profileShow'])->name('mypage.profileShow');
 Route::get('/mypage/profile/edit',[MypageController::class,'profileEdit'])->name('mypage.profileEdit');
 Route::get('/mypage/profile/password',[MypageController::class,'profilePassword'])->name('mypage.profilePassword');
