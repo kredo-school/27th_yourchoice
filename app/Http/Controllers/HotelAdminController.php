@@ -33,10 +33,16 @@ class HotelAdminController extends Controller
     return view('hotels.rooms.edit');
   }
 
-    public function reviewlist()
-    {
-        return view('hotels.reviews.list');
-    }
+  public function reviewlist()
+  {
+    return view('hotels.reviews.list');
+  }
+
+  public function reviewshow()
+  {
+    return view('hotels.reviews.show');
+  }
+
 
 
 

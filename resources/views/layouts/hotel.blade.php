@@ -76,7 +76,7 @@
                         <a href="#" class="list-group-item list-group-item-action mt-3 p-3">Room List</a>
                         <a href="#" class="list-group-item list-group-item-action mt-3 p-3">Price Management</a>
                         <a href="#" class="list-group-item list-group-item-action mt-3 p-3">Reservation Management</a>
-                        <a href="#" class="list-group-item list-group-item-action mt-3 p-3">Review Management</a>
+                        <a href="list" class="list-group-item list-group-item-action mt-3 p-3">Review Management</a>
                         <a href="#" class="list-group-item list-group-item-action mt-3 p-3">Inquary Management</a>
                     </div>
                 </div>

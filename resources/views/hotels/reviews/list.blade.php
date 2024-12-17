@@ -1,6 +1,5 @@
-<!--MEMO 表を作成していい感じにする-->
 @extends('layouts.hotel')
-@section('title', 'Hotel Review Management List')
+@section('title', 'Hotel Review Management show')
 
 <!-- CSSのリンク -->
 <link rel="stylesheet" href="{{ asset('css/customer-css.css') }}">
@@ -52,6 +51,8 @@
                                     {#comment}In an increasingly connected world where everyone's opinions are shared with a click, reviews are more powerful than ever. Statistics show that 95% of consumers now read online ...
                                 </p>
                                 <a href="#" class="text-dark fw-bold">read more</a>
+                                <!-- Stretched Link （カード全体をリンクにする）-->
+                                <a href="show" class="stretched-link"></a>
                             </div>
                         </div> 
                     </div>
@@ -59,6 +60,7 @@
             </div>
         </div>
     </div>
+</a>
 
     <!-- Duplicate Review Cards -->
     <div class="container mt-2">
