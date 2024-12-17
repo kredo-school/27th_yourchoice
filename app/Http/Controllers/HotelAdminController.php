@@ -32,7 +32,11 @@ class HotelAdminController extends Controller
   {
     return view('hotels.rooms.edit');
   }
-
+  public function reviewlist()
+  {
+      return view('hotels.reviews.list');
+  }
+  
     public function reservation_show_daily()
     {
         return view('hotels.reservations.show_daily');
