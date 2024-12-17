@@ -1,50 +1,68 @@
 @extends('layouts.customer_mypage')
 
+<link rel="stylesheet" href="{{ asset('css/reviewlist.css') }}">
+
 @section('content')
 <div class="container-fluid">
     <div class="row">
             <h2>Review List</h2>
             <div class="review-list">
                 <!-- foreach($reviews as $review) -->
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ 'hotel_name' }}</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">{{ 'location' }}</h6>
-                            <span class="badge bg-primary">{{ 'accessibility' }}</span>
-                            <p class="mt-2">Overall Rating: 
-                                <strong>★</strong>
-                            </p>
-                            <p class="card-text">{{ Str::limit('comments', 100) }} <a href="#">read more</a></p>
-                        </div>
+                 <div class="card p-3 mb-3">
+                    <div class="review-card">
+                            <div class="hotel-image">
+                                <img src="{{ asset('images/hotel.jpg') }}" alt="hotel-img" class="hotel-img">
+                            </div>
+                            <div class="hotel-info">
+                                <h5 class="card-title">{{ 'hotel_name' }}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">{{ 'location' }}</h6>
+                                <span class="badge bg-pink">{{ 'accessibility' }}</span>
+                            </div>
+                            <div class="hotel-review">
+                                <p class="mt-2">Overall Rating: 
+                                    <strong>★</strong>
+                                </p>
+                                <p class="card-text">In an increasingly connected world where everyone’s opinions are shared with a click, reviews are more powerful than ever....<a href="#">read more</a></p>
+                            </div>
                     </div>
-                    
-                <!-- endforeach -->
-                                 <!-- foreach($reviews as $review) -->
-                                 <div class="card mb-3">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ 'hotel_name' }}</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">{{ 'location' }}</h6>
-                            <span class="badge bg-primary">{{ 'accessibility' }}</span>
-                            <p class="mt-2">Overall Rating: 
-                                <strong>★</strong>
-                            </p>
-                            <p class="card-text">{{ Str::limit('comments', 100) }} <a href="#">read more</a></p>
-                        </div>
+                </div>
+
+                <div class="card p-3 mb-3">
+                    <div class="review-card">
+                            <div class="hotel-image">
+                                <img src="{{ asset('images/hotel.jpg') }}" alt="hotel-img" class="hotel-img">
+                            </div>
+                            <div class="hotel-info">
+                                <h5 class="card-title">{{ 'hotel_name' }}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">{{ 'location' }}</h6>
+                                <span class="badge bg-pink">{{ 'accessibility' }}</span>
+                            </div>
+                            <div class="hotel-review">
+                                <p class="mt-2">Overall Rating: 
+                                    <strong>★</strong>
+                                </p>
+                                <p class="card-text">In an increasingly connected world where everyone’s opinions are shared with a click, reviews are more powerful than ever....<a href="#">read more</a></p>
+                            </div>
                     </div>
-                <!-- endforeach -->
-                                 <!-- foreach($reviews as $review) -->
-                                 <div class="card mb-3">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ 'hotel_name' }}</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">{{ 'location' }}</h6>
-                            <span class="badge bg-primary">{{ 'accessibility' }}</span>
-                            <p class="mt-2">Overall Rating: 
-                                <strong>★</strong>
-                            </p>
-                            <p class="card-text">{{ Str::limit('comments', 100) }} <a href="#">read more</a></p>
-                        </div>
+                </div>
+                <div class="card p-3 mb-3">
+                    <div class="review-card">
+                            <div class="hotel-image">
+                                <img src="{{ asset('images/hotel.jpg') }}" alt="hotel-img" class="hotel-img">
+                            </div>
+                            <div class="hotel-info">
+                                <h5 class="card-title">{{ 'hotel_name' }}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">{{ 'location' }}</h6>
+                                <span class="badge bg-pink">{{ 'accessibility' }}</span>
+                            </div>
+                            <div class="hotel-review">
+                                <p class="mt-2">Overall Rating: 
+                                    <strong>★</strong>
+                                </p>
+                                <p class="card-text">In an increasingly connected world where everyone’s opinions are shared with a click, reviews are more powerful than ever....<a href="#">read more</a></p>
+                            </div>
                     </div>
-                <!-- endforeach -->
+                </div>
             </div>
 
             <!-- ページネーション -->

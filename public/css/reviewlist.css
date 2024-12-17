@@ -1,4 +1,4 @@
-.review-header {
+.review-card {
   display: flex; /* Flexboxを有効化 */
   justify-content: space-between; /* 要素間を等間隔に配置 */
   align-items: center; /* 垂直方向の中央揃え */
@@ -13,12 +13,12 @@
 }
 
 .hotel-info {
-  flex: 1; /* ホテル情報部分を広げる */
+  flex: 0.5; /* ホテル情報部分を広げる */
   text-align: left; /* 左揃え */
 }
 
-.stay-info {
-  text-align: right; /* 右揃え */
+.hotel-review {
+  text-align: left; /* 右揃え */
   flex: 1; /* 同じ割合で伸縮 */
 }
 
