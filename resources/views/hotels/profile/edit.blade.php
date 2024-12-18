@@ -251,10 +251,14 @@
                                 </div>
                             </div>
                             <!-- Requirements Button -->
-                            <button type="button" class="btn btn-sub mt-3 ms-auto" data-bs-toggle="modal"
-                                data-bs-target="#requirementsModal">
-                                Requirements
-                            </button>
+                            <div class="row">
+                                <div class="col text-end">
+                                    <button type="button" class="btn btn-sub mt-3 ms-auto" data-bs-toggle="modal"
+                                        data-bs-target="#requirementsModal">
+                                        Requirements
+                                    </button>
+                                </div>
+                            </div>
                             {{-- Include modal here --}}
                             @include('hotels.profile.modals.requirements_category')
                         </div>
@@ -297,14 +301,11 @@
                 </div>
 
                 <!-- Buttons -->
-                <div class="row mt-4 mb-2">
-                  <div class="col-7"></div>
-                    <div class="col ms-auto">
+                <div class="row mt-4 mb-2 text-end">
+                    <div class="col">
                         <a href="{{ route('profile.show') }}" class="text-decoration-none text-dark">
                             <button type="button" class="btn btn-sub2">Cancel</button></a>
-                    </div>
-                    <div class="col"> 
-                      <button type="button" class="btn btn btn-main">Confirm</button>
+                        <button type="button" class="btn btn btn-main ms-2">Confirm</button>
                     </div>
                 </div>
         </form>

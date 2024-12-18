@@ -13,7 +13,6 @@
                 </div>
             </div>
             <div class="row">
-
                 <!-- Left Side (Basic Information) -->
                 <div class="col-md-6">
                     <div class="card mb-4">
@@ -229,21 +228,14 @@
                 </div>
 
                 <!-- Buttons -->
-                <div class="row mt-4 mb-2">
-                    <div class="col-6"></div>
-                    <div class="col ms-auto">
+                <div class="row mt-4 mb-2 text-end">
+                    <div class="col">
                         <a href="{{ route('profile.password') }}" class="text-decoration-none text-dark">
                             <button type="button" class="btn btn-sub">Password Setting</button></a>
-                    </div>
-                    <div class="col">
-                      <a href="{{ route('profile.edit') }}" class="text-decoration-none text-dark">
-                        <button type="button" class="btn btn-sub">Edit</button>
+                        <a href="{{ route('profile.edit') }}" class="text-decoration-none text-dark ms-2">
+                            <button type="button" class="btn btn-sub">Edit</button>
                     </div>
                 </div>
-
-
-
-
         </form>
     </div>
 
