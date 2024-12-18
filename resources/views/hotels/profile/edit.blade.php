@@ -198,9 +198,9 @@
                                     <label class="form-check-label" for="bodywash">Body wash</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="toothbrush" name="toiletries[]"
-                                        value="toothbrush">
-                                    <label class="form-check-label" for="toothbrush">Toothbrush&paste</label>
+                                    <input class="form-check-input" type="checkbox" id="tooth" name="toiletries[]"
+                                        value="tooth">
+                                    <label class="form-check-label" for="tooth">Toothbrush&paste</label>
                                 </div>
                             </div>
                         </div>
