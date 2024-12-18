@@ -34,3 +34,20 @@
     cursor: not-allowed; /* Show disabled cursor */
   }
   
+  .register-text{
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: black;
+    text-shadow: 1px 1px 2px gray;
+    text-align: center;
+  }
+
+  .reviewslist-css{
+    background-color: #f8d7da; /* ボタンの背景色（淡いピンク） */
+    color: black; /* 文字の色（ダークレッド） */
+    padding: 5px 5px;
+    border-radius: 5px;
+    font-size: 14px;
+    display: inline-block;
+  }
+  

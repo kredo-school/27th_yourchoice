@@ -1,5 +1,5 @@
 
-/* HotelAdmin Profile ShowShow rina */
+/* HotelAdmin Profile Show rina */
 
 .form-control-plaintext.border-bottom {
   border-bottom: 1px solid #cdcdcd; /* 太さと色を変更 */
@@ -20,13 +20,13 @@
 .category-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px; /* カテゴリー間の間隔 */
+  gap: 20px; /* カテゴリー間の間隔 */
 }
 
 .category-item {
   background-color: #f8d7da; /* ボタンの背景色（淡いピンク） */
   color: #000; /* 文字の色（ダークレッド） */
-  padding: 5px 5px;
+  padding: 5px 10px;
   border-radius: 5px;
   font-size: 14px;
   display: inline-block;
@@ -134,9 +134,9 @@ textarea#remarks {
   font-size: 1rem; /* テキストサイズ */
 }
 
-.btn-sub{
-  background-color: #FFFFFF; /* ボタン背景色 */
-  color: #CA5C6F; /* ボタンテキスト色 */
+.btn-main{
+  background-color: #CA5C6F; /* ボタン背景色 */
+  color: #FFFFFF; /* ボタンテキスト色 */
   border: 1px solid #CA5C6F;
   height: 1.5rem;
   width: 5rem;
@@ -147,9 +147,9 @@ textarea#remarks {
 
 }
 
-.btn-main{
-  background-color: #CA5C6F; /* ボタン背景色 */
-  color: #FFFFFF; /* ボタンテキスト色 */
+.btn-sub{
+  background-color: #FFFFFF; /* ボタン背景色 */
+  color: #CA5C6F; /* ボタンテキスト色 */
   border: 1px solid #CA5C6F;
   height: 1.5rem;
   width: 5rem;
@@ -172,3 +172,28 @@ textarea#remarks {
   align-items: center;
 
 }
+
+/* HotelAdmin Rooms List rina */
+
+/* modal */
+.modal-message {
+  font-size: 32px;
+  color: red;
+  margin-bottom: 20px;
+}
+
+/* modal exclamation icon */
+.icon-lg {
+ font-size: 100px;
+ color: red;
+}
+
+/* table edit delete icon part */
+.fixed-width{
+  width: 10%;
+}
+
+/* edit delete icon */
+.icon-md {
+  font-size: 1rem;
+ }

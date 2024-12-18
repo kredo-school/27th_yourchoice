@@ -7,7 +7,7 @@
   height: 56px; /* ナビゲーションバーの高さ */
   background-color: #FDF5F8;  /* 背景色 */
   border-bottom: 1px solid #ddd; /* 下線（任意） */
-  z-index: 1000;
+  z-index: 1000; /* 高い値を指定 */
 }
 
 .nabvar-hotel {
@@ -18,18 +18,19 @@
   height: 56px; /* ナビゲーションバーの高さ */
   background-color: #F8A2A2;  /* 背景色 */
   border-bottom: 1px solid #ddd; /* 下線（任意） */
+  z-index: 1000; /* 高い値を指定 */
 }
 
-
-.logo-sm {
-  font-size:1.5rem;
-  color: #363636; /* ボタンテキスト色 */
-
-}
 
 .logo-main {
   width: 2.5rem;
   height: 2.5rem;
+}
+
+
+.logo-sub {
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .language {
@@ -112,5 +113,17 @@
 .content {
   margin-top: 56px; /* ナビゲーションバー分のスペースを確保 */
   padding: 20px;
+}
+
+
+.footer {
+
+  bottom: 0;
+  width: 100%;
+  background-color: #f8f9fa;
+  padding: 10px 0;
+  text-align: center;
+  font-size: 14px;
+  color: #6c757d;
 }
 
