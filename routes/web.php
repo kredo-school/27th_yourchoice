@@ -12,6 +12,8 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/customer/inquary', [App\Http\Controllers\CustomerController::class, 'inquiry'])->name('customers.inquary.show');
+
 //MypageController
 Route::get('/mypage/reviewlist',[MypageController::class,'reviewlist'])->name('mypage.reviewlist');
 Route::get('/mypage/reviewlist2',[MypageController::class,'reviewlist2'])->name('mypage.reviewlist2');
@@ -29,6 +31,8 @@ Route::get('/mypage/profile/password',[MypageController::class,'profilePassword'
 //HotelController
 Route::get('/hotels', [HotelController::class, 'index']);
 Route::get('/hotel_register', [HotelController::class,'hotelRegister'])->name('hotelRegister');
+Route::get('/hotel/inquary', [App\Http\Controllers\HotelController::class, 'inquary'])->name('hotels.inquary.show');
+
 
 //HotelAdminContoller
 Route::get('/profile/show',[HotelAdminController::class,'profileshow'])->name('profile.show');
