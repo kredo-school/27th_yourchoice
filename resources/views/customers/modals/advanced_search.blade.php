@@ -1,18 +1,5 @@
-    <script>
-        function updatePrice() {
-            var minPrice = document.getElementById('minPrice').value;
-            var maxPrice = document.getElementById('maxPrice').value;
-            var priceLabel = document.getElementById('priceLabel');
-
-            if (parseInt(minPrice) > parseInt(maxPrice)) {
-                alert('Minimum price cannot be greater than maximum price.');
-                return;
-            }
-
-            var maxPriceLabel = maxPrice >= 100000 ? '¥100,000+' : '¥' + parseInt(maxPrice).toLocaleString();
-            priceLabel.innerHTML = '¥' + parseInt(minPrice).toLocaleString() + ' – ' + maxPriceLabel;
-        }
-    </script>
+<link rel="stylesheet" href="{{ asset('css/hotel_search.css') }}">
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <div class="modal fade" id="advanced-search" tabindex="-1" aria-labelledby="advancedSearchLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -24,27 +11,42 @@
             <div class="modal-body">
                 <div class="mb-3">
                     <span class="badge bg-secondary">Accessibility</span>
-                    <button type="button" class="btn-close" aria-label="Remove"></button>
+                    {{-- <button type="button" class="btn-close" aria-label="Remove"></button> --}}
                 </div>
                 <div class="mb-3">
                     <div class="container mt-5">
                         <div class="price-range-container">
-                            <div class="price-label" id="priceLabel">¥0 - ¥100,000+</div>
                             <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="minPrice">Minimum Price</label>
-                                    <input type="number" class="form-control" id="minPrice" min="0" max="100000" step="1000" value="0">
-                                </div>
-                                <div class="form-group col-md-6 mb-2">
-                                    <label for="maxPrice">Maximum Price</label>
-                                    <input type="number" class="form-control" id="maxPrice" min="0" max="100000" step="1000" value="100000">
+                                <div class="slidecontainer">
+                                    <div class="slider-value" id="rangeLabel"></div> <!-- スライダー値の表示 -->
+                                    <div id="slider-range"></div>
                                 </div>
                             </div>
-                            <button class="btn btn-primary" onclick="updatePrice()">Update Price Range</button>
                         </div>
                     </div>
                 </div>
                 <div class="mb-3">
+                    {{-- Hotel service --}}
+                    <h6>Hotel service</h6>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="tvService">
+                        <label class="form-check-label" for="tvService">
+                            Parking availability
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="tvService">
+                        <label class="form-check-label" for="tvService">
+                            Luggage storage service
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="tvService">
+                        <label class="form-check-label" for="tvService">
+                            Breakfast
+                        </label>
+                    </div>
+                    
                     <h6>Facility & Service</h6>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="luggageService">
@@ -82,6 +84,21 @@
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<script>
+    $(function() {
+        $("#slider-range").slider({
+            range: true,
+            min: 0,
+            max: 100000,
+            values: [0, 30000],
+            slide: function(event, ui) {
+                $("#rangeLabel").text("¥" + ui.values[0].toLocaleString() + " - ¥" + ui.values[1].toLocaleString());
+            }
+        });
+        $("#rangeLabel").text("¥" + $("#slider-range").slider("values", 0).toLocaleString() + " - ¥" + $("#slider-range").slider("values", 1).toLocaleString());
+    });
+</script>

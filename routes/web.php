@@ -27,15 +27,17 @@ Route::get('/mypage/profile/edit',[MypageController::class,'profileEdit'])->name
 Route::get('/mypage/profile/password',[MypageController::class,'profilePassword'])->name('mypage.profilePassword');
 
 //HotelController
-Route::get('/hotels', [HotelController::class, 'index']);
+Route::get('/hotel_search', [HotelController::class, 'hotelSearch']);
 Route::get('/hotel_register', [HotelController::class,'hotelRegister'])->name('hotelRegister');
 
 //HotelAdminContoller
 Route::get('/profile/show',[HotelAdminController::class,'profileshow'])->name('profile.show');
 Route::get('/profile/edit',[HotelAdminController::class,'profileedit'])->name('profile.edit');
+Route::get('/rooms/show',[HotelAdminController::class,'roomsshow'])->name('rooms.show');
+Route::get('/rooms/create',[HotelAdminController::class,'roomscreate'])->name('rooms.create');
+Route::get('/rooms/edit',[HotelAdminController::class,'roomsedit'])->name('rooms.edit');
 
 //CustomerController
 Route::get('/register_top', [CustomerController::class, 'register_top'])->name('register_top');
-
 Route::get('/customer_register', [CustomerController::class,'customerRegister'])->name('customerRegister');
-Route::get('/customers/hotel_detail', [HotelController::class, 'hotel_detail']);
+Route::get('/customers/hotel_detail', [HotelController::class, 'hotel_detail'])->name('hotelDetail');;
