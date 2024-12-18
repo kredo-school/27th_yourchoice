@@ -74,7 +74,7 @@
 
                         <a href="#" class="list-group-item list-group-item-action mt-3 p-3">Profile</a>
                         <a href="#" class="list-group-item list-group-item-action mt-3 p-3">Reservation List</a>
-                        <a href="{{ route('mypage.reviewlist') }}" class="list-group-item list-group-item-action mt-3 p-3">Review List</a>
+                        <a href="{{ route('customer.review.list') }}" class="list-group-item list-group-item-action mt-3 p-3">Review List</a>
                     </div>
                 </div>
             </aside>
