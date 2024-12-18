@@ -1,0 +1,32 @@
+.review-card {
+  display: flex; /* Flexboxを有効化 */
+  justify-content: space-between; /* 要素間を等間隔に配置 */
+  align-items: center; /* 垂直方向の中央揃え */
+  gap: 20px; /* 要素間の間隔 */
+}
+
+.hotel-image img {
+  width: 200px; /* 画像の幅を調整 */
+  height: auto; 
+  object-fit: cover; /* 画像を枠内に収める */
+  border-radius: 5px; /* 角を丸くする */
+}
+
+.hotel-info {
+  flex: 0.5; /* ホテル情報部分を広げる */
+  text-align: left; /* 左揃え */
+}
+
+.hotel-review {
+  text-align: left; /* 右揃え */
+  flex: 1; /* 同じ割合で伸縮 */
+}
+
+.hotel-image {
+  flex: 0 0 auto; /* 画像のサイズを固定 */
+}
+
+.bg-pink {
+  background-color: #ffcccb; /* 薄いピンク */
+  color: #000000 !important; /* 文字色（必要に応じて変更） */
+}
