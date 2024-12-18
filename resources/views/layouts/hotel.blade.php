@@ -54,9 +54,9 @@
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ms-auto">
                             <div class="d-flex">
-                                    <a href="#"><i class="logo-sm fa-solid fa-globe"></i></a> <span class="language mx-1 me-3">English</span>
-                                    <a href="#"><i class="logo-sm fa-solid fa-calendar-days me-3"></i></i></a> 
-                                    <a href="#"><i class="logo-sm fa-solid fa-envelope me-3"></i></a> 
+                                    <a href="#"><img src="{{ asset('images/globe-solid.svg') }}" class="logo-sub"></a><span class="language mx-1 me-3">English</span>
+                                    <a href="#"><img src="{{ asset('images/calendar-days-solid.svg') }}" class="logo-sub me-3"></i></a> 
+                                    <a href="#"><img src="{{ asset('images/envelope-solid.svg') }}" class="logo-sub me-3"></a> 
                                     <a href="#" class="btn btn-outline-secondary btn-mypage me-2">My Page</a>
                                     <a href="#" class="btn btn-outline-secondary btn-logout">Log Out</a>
                             </div>   
@@ -74,10 +74,10 @@
 
                         <a href="#" class="list-group-item list-group-item-action mt-3 p-3">Profile</a>
                         <a href="#" class="list-group-item list-group-item-action mt-3 p-3">Room List</a>
-                        <a href="#" class="list-group-item list-group-item-action mt-3 p-3">Price Manageman</a>
-                        <a href="#" class="list-group-item list-group-item-action mt-3 p-3">Reservation Manageman</a>
-                        <a href="#" class="list-group-item list-group-item-action mt-3 p-3">Review Manageman</a>
-                        <a href="#" class="list-group-item list-group-item-action mt-3 p-3">Inquary Manageman</a>
+                        <a href="#" class="list-group-item list-group-item-action mt-3 p-3">Price Management</a>
+                        <a href="#" class="list-group-item list-group-item-action mt-3 p-3">Reservation Management</a>
+                        <a href="list" class="list-group-item list-group-item-action mt-3 p-3">Review Management</a>
+                        <a href="#" class="list-group-item list-group-item-action mt-3 p-3">Inquary Management</a>
                     </div>
                 </div>
             </aside>

@@ -27,9 +27,6 @@
     <!-- CSSのリンク -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
-
-
-
 </head>
 
 <body>
@@ -55,18 +52,18 @@
                             <!-- Authentication Links -->
                             @guest
                                 <div class="d-flex">
-                                        <a href="#"><i class="logo-sm fa-solid fa-globe"></i></a> <span class="language mx-1 me-3">English</span>
-                                        <a href="#"><i class="logo-sm fa-solid fa-calendar-days me-3"></i></i></a> 
-                                        <a href="#"><i class="logo-sm fa-solid fa-envelope me-3"></i></a> 
-                                        <a href="#" class="btn btn-outline-secondary btn-mypage me-2">Log In</a>
-                                        <a href="#" class="btn btn-outline-secondary btn-logout">Register</a>
+                                    <a href="#"><img src="{{ asset('images/globe-solid.svg') }}" class="logo-sub"></a><span class="language mx-1 me-3">English</span>
+                                    <a href="#"><img src="{{ asset('images/calendar-days-solid.svg') }}" class="logo-sub me-3"></i></a> 
+                                    <a href="#"><img src="{{ asset('images/envelope-solid.svg') }}" class="logo-sub me-3"></a> 
+                                    <a href="#" class="btn btn-outline-secondary btn-mypage me-2">Log In</a>
+                                    <a href="#" class="btn btn-outline-secondary btn-logout">Register</a>
                                 </div>   
                             @else
                                 <li class="nav-item dropdown">
                                 <div class="d-flex">
-                                    <a href="#"><i class="logo-sm fa-solid fa-globe"></i></a> <span class="language mx-1 me-3">English</span>
-                                    <a href="#"><i class="logo-sm fa-solid fa-calendar-days me-3"></i></i></a> 
-                                    <a href="#"><i class="logo-sm fa-solid fa-envelope me-3"></i></a> 
+                                    <a href="#"><img src="{{ asset('images/globe-solid.svg') }}" class="logo-sub"></a><span class="language mx-1 me-3">English</span>
+                                    <a href="#"><img src="{{ asset('images/calendar-days-solid.svg') }}" class="logo-sub me-3"></i></a> 
+                                    <a href="#"><img src="{{ asset('images/envelope-solid.svg') }}" class="logo-sub me-3"></a> 
                                     <a href="#" class="btn btn-outline-secondary btn-mypage me-2">My Page</a>
                                     <a href="#" class="btn btn-outline-secondary btn-logout">Log Out</a>
                                 </div>   
@@ -81,6 +78,12 @@
            <main class="content py-4">
                 @yield('content')
             </main>
+            <footer class="footer">
+                <div class="container">
+                    <p>&copy; {{ date('Y') }} Your Choice</p>
+
+                </div>
+            </footer>
         </div>    
     </div>
 </body>

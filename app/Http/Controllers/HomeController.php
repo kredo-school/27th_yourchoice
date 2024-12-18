@@ -25,8 +25,5 @@ class HomeController extends Controller
     {
         return view('toppage');
     }
-    public function register()
-    {
-        return view('auth.register_top');
-    }
+
 }
