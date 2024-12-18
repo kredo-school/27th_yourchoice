@@ -1,0 +1,113 @@
+
+
+.navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.btn-nav {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+.date {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.reservation-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    font-size: 12px;
+}
+
+.reservation-table th, .reservation-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.reservation-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.reservation-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.reservation-table select {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.reservation-table td:last-child {
+    text-align: left;
+}
+
+.col1{
+    width: 30px;
+}
+
+.col2{
+    width: 20px;
+}
+
+.col3{
+    width: 60px;
+}
+
+.col4{
+    width: 40px;
+}
+
+.col5{
+    width: 40px;
+}
+
+.col6{
+    width: 40px;
+}
+
+.col7{
+    width: 40px;
+}
+
+.col8{
+    width: 40px;
+}
+
+.col9{
+    width: 40px;
+}
+
+.col10{
+    width: 40px;
+}
+
+.col11{
+    width: 40px;
+}
+
+.date-picker {
+    border: none; /* ボーダーを消す */
+    background-color: transparent; /* 背景を透明にする */
+    color: inherit; /* テキストの色を周囲と同じに */
+    font-size: 20px; /* テキストサイズを調整 */
+    padding: 0; /* パディングを削除（必要なら調整可能） */
+    width: auto; /* 必要に応じて幅を自動調整 */
+    outline: none; /* フォーカス時の青いアウトラインを削除 */
+    cursor: pointer; /* ポインター表示を適用 */
+    text-align: center;
+
+}
