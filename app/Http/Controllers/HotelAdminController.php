@@ -53,6 +53,12 @@ class HotelAdminController extends Controller
     }
 
 
+  public function reviewshow()
+  {
+    return view('hotels.reviews.show');
+  }
+
+
 
 
   // BE memo RoomList Rina
