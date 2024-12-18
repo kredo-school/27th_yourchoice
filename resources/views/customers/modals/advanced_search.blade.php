@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="{{ asset('css/hotel_search.css') }}">
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="{{ asset('css/jquery-ui.css')}}">
 
 <div class="modal fade" id="advanced-search" tabindex="-1" aria-labelledby="advancedSearchLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -85,20 +85,6 @@
 </div>
 
 
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-<script>
-    $(function() {
-        $("#slider-range").slider({
-            range: true,
-            min: 0,
-            max: 100000,
-            values: [0, 30000],
-            slide: function(event, ui) {
-                $("#rangeLabel").text("¥" + ui.values[0].toLocaleString() + " - ¥" + ui.values[1].toLocaleString());
-            }
-        });
-        $("#rangeLabel").text("¥" + $("#slider-range").slider("values", 0).toLocaleString() + " - ¥" + $("#slider-range").slider("values", 1).toLocaleString());
-    });
-</script>
+<script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
+<script src="{{ asset('js/jquery-ui.js') }}"></script>
+<script src="{{ asset('js/jquery.js') }}"></script>
