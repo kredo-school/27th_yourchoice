@@ -43,6 +43,7 @@ Route::get('/hotel/inquary', [App\Http\Controllers\HotelController::class, 'inqu
 //HotelAdminContoller
 Route::get('/profile/show',[HotelAdminController::class,'profileshow'])->name('profile.show');
 Route::get('/profile/edit',[HotelAdminController::class,'profileedit'])->name('profile.edit');
+Route::get('/profile/password',[HotelAdminController::class,'profilepassword'])->name('profile.password');
 Route::get('/reservations/reserved_confirmation',[ReservationController::class,'reserved_confirmation'])->name('reserved_confirmation');
 Route::get('/reviews/list',[HotelAdminController::class,'reviewlist'])->name('reviews.list');
 Route::get('/reviews/show',[HotelAdminController::class,'reviewshow'])->name('reviews.show');
