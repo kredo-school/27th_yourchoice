@@ -48,6 +48,7 @@
     
     <div class="list-group">
         <div class="list-group-item">
+            <a href="{{ route('hotelDetail') }}" class="stretched-link"></a>
             <div class="row align-items-center">
                 <div class="col-md-2">
                     <img src="{{ asset('images/hotel.jpg') }}" alt="hotel-img" class="hotel-img">

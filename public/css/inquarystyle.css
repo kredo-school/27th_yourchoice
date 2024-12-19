@@ -1,0 +1,215 @@
+/* ----------------- 共通スタイル ----------------- */
+/* すべての要素のデフォルトのマージンとパディングをリセットし、ボックスモデルを統一 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif; /* すっきりとしたモダンなフォント */
+}
+
+body {
+  background-color: #f7f7f7; /* 全体の背景色：薄いグレー */
+}
+
+.chat-container {
+  display: flex; /* フレックスボックスを使用して子要素を横並び */
+  height: 100vh; /* 画面全体の高さを指定 */
+}
+
+/* ----------------- サイドバーのスタイル ----------------- */
+.sidebar {
+  background-color: #fff; /* 背景色：白 */
+  border-right: 1px solid #ddd; /* 右端に薄いボーダー */
+  width: 25%; /* サイドバーの幅 */
+  overflow-y: auto; /* コンテンツが多い場合は縦スクロール */
+  padding: 20px 10px; /* 上下に20px、左右に10pxの余白 */
+}
+
+.sidebar h2 {
+  text-align: center; /* タイトルを中央揃え */
+  margin-bottom: 20px; /* タイトル下に余白 */
+  color: #333; /* ダークグレーで読みやすい色 */
+}
+
+.inquiry-item {
+  display: flex; /* 要素を横並びに */
+  align-items: center; /* アイコンとテキストを中央揃え */
+  gap: 5px; /* アイコンとテキスト間の間隔 */
+  margin-bottom: 2px; /* 各アイテムの下に余白 */
+  height: 130px !important;
+  border-radius: 8px; /* 角を丸くする */
+  transition: background-color 0.3s; /* 背景色の変化を滑らかに */
+  
+}
+
+/* アクティブまたはホバー状態 */
+.inquiry-item.active,
+.inquiry-item:hover {
+  background-color: #f2dede; /* ホバー時に薄いピンク色 */
+}
+
+/* アイコンスタイル */
+.inquiry-item .icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; /* アイコンを円形に */
+  overflow: hidden; /* アイコンの内容がはみ出さないように */
+  background-color: #e7e7e7; /* 背景色 */
+  display: flex;
+  justify-content: center; /* 中央揃え */
+  align-items: center; /* 垂直中央揃え */
+}
+
+.inquiry-item .icon img,
+.inquiry-item .icon i {
+  width: 100%; /* 画像またはアイコンを全体にフィット */
+  height: 100%;
+  object-fit: cover; /* コンテンツの比率を維持 */
+  font-size: 20px; /* フォントサイズ（アイコンの場合） */
+  color: #555; /* 色 */
+  
+}
+
+/* テキスト部分 */
+.inquiry-item .content h3 {
+  font-size: 14px; /* タイトルのフォントサイズ */
+  color: #333;
+}
+
+.inquiry-item .content p {
+  font-size: 12px; /* サブテキストのフォントサイズ */
+  color: #666; /* 薄い色で控えめ */
+  
+}
+
+.inquiry-item .date {
+  font-size: 11px; /* 日付表示用の小さいフォントサイズ */
+  color: #aaa; /* 灰色 */
+}
+
+/* ----------------- チャットのメインセクション ----------------- */
+.chat-main {
+  flex: 1; /* 残りのスペースを占める */
+  display: flex;
+  flex-direction: column; /* 縦方向に配置 */
+  background-color: #fff;
+}
+
+/* チャットヘッダー */
+.chat-header {
+
+  padding: 15px 20px; /* 内側の余白 */
+  border-bottom: 1px solid #ddd; /* 下端にボーダー */
+ 
+  align-items: center; /* 縦方向に中央揃え */
+  text-align: center; /* タイトルを中央揃え */
+}
+
+.chat-header h2 {
+  color: #333;
+
+}
+.chat-date{
+  font-size: 15px;
+  padding-top: 10px;
+  color: #999;
+  text-align: center; /* タイトルを中央揃え */
+}
+
+/* チャット内容エリア */
+.chat-content {
+  flex: 1; /* 残りのスペースを埋める */
+  padding: 20px; /* 内側の余白 */
+  overflow-y: auto; /* コンテンツが多い場合にスクロール */
+  display: flex;
+  flex-direction: column; /* メッセージを縦方向に配置 */
+  gap: 15px; /* メッセージ間の余白 */
+  background-color: #fff;
+}
+
+/* ----------------- チャット入力エリア ----------------- */
+.chat-input {
+  display: flex;
+  padding: 10px;
+  background-color: #fff;
+  border-top: 1px solid #ddd;
+}
+
+.chat-input input {
+  flex: 1; /* 入力フィールドを広くする */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px; /* 角を丸く */
+  outline: none;
+}
+
+.chat-input button {
+  background-color: #e29b9b; /* 薄い赤 */
+  border: none;
+  color: #fff;
+  margin-left: 10px;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer; /* カーソルをポインターに */
+  transition: background-color 0.3s;
+}
+
+.chat-input button:hover {
+  background-color: #c87d7d; /* ホバー時に色を少し暗く */
+}
+
+/* ----------------- 吹き出しメッセージ ----------------- */
+.message {
+  max-width: 60%; /* 幅を60%に制限 */
+  padding: 12px 16px;
+  border-radius: 12px; /* 角を丸くする */
+  font-size: 14px;
+  line-height: 1.6;
+  position: relative;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 軽い影で立体感 */
+  word-wrap: break-word; /* テキストが長い場合に折り返し */
+}
+
+.message.received {
+  background-color: #F1F1F5; /* 受信メッセージはグレー */
+  align-self: flex-start;
+  color: #333;
+}
+
+.message.received::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: -15px;
+  border-width: 8px;
+  border-style: solid;
+  border-color: transparent #F1F1F5 transparent transparent;
+  filter: drop-shadow(-2px 0 2px rgba(0, 0, 0, 0.05)); /* 矢印にも影をつけて自然に */
+}
+
+.message.sent {
+  background-color: #f2dede; /* 送信メッセージはピンク */
+  align-self: flex-end;
+  color: #333;
+}
+
+.message.sent::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  right: -15px;
+  border-width: 8px;
+  border-style: solid;
+  border-color: transparent transparent transparent #f2dede;
+  filter: drop-shadow(2px 0 2px rgba(0, 0, 0, 0.05));
+}
+
+/* タイムスタンプ */
+.message .time {
+  font-size: 10px;
+  color: #999;
+  position: absolute;
+  bottom: -18px;
+  right: 8px;
+}

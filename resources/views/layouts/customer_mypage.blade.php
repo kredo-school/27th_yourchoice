@@ -73,7 +73,7 @@
                     <div class="mt-4"><h2>[#Username]</h2></div>
 
                         <a href="#" class="list-group-item list-group-item-action mt-3 p-3">Profile</a>
-                        <a href="#" class="list-group-item list-group-item-action mt-3 p-3">Reservation List</a>
+                        <a href="{{ route('mypage.reservation_list') }}" class="list-group-item list-group-item-action mt-3 p-3">Reservation List</a>
                         <a href="{{ route('mypage.reviewlist') }}" class="list-group-item list-group-item-action mt-3 p-3">Review List</a>
                     </div>
                 </div>
@@ -89,4 +89,3 @@
 
 
 </html>
-
