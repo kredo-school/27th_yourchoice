@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class HotelController extends Controller
 {
-    public function index()
+    public function hotelSearch()
     {
         return view('customers.hotel_search');
     }
@@ -19,4 +19,9 @@ class HotelController extends Controller
     {
         return view('customers.hotel_detail');
     }
+    public function inquary()
+    {
+        return view('hotels.inquary.show');
+    }
+    
 }

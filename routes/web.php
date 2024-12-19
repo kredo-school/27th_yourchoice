@@ -7,6 +7,7 @@ use App\Http\Controllers\HotelController;
 use App\Http\Controllers\MypageController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HotelAdminController;
+use App\Http\Controllers\ReservationController;
 
 Auth::routes();
 
@@ -94,22 +95,27 @@ Route::get('/register/create_hotel',[App\Http\Controllers\RegisterController::cl
 // Route::get('/mypage/profile/show',[MypageController::class,'profileShow'])->name('mypage.profileShow');
 // Route::get('/mypage/profile/edit',[MypageController::class,'profileEdit'])->name('mypage.profileEdit');
 // Route::get('/mypage/profile/password',[MypageController::class,'profilePassword'])->name('mypage.profilePassword');
+Route::get('/reservations',[ReservationController::class,'reservations'])->name('reservations');
+Route::get('/reservation/confirmation', [ReservationController::class, 'reserved_confirmation']);
+Route::get('/reservation/detail', [ReservationController::class, 'reserved_detail']);
 
 // //HotelController
-// Route::get('/hotels', [HotelController::class, 'index']);
+// Route::get('/hotel_search', [HotelController::class, 'hotelSearch']);
 // Route::get('/hotel_register', [HotelController::class,'hotelRegister'])->name('hotelRegister');
+Route::get('/hotel/inquary', [App\Http\Controllers\HotelController::class, 'inquary'])->name('hotels.inquary.show');
+
 
 // //HotelAdminContoller
 // Route::get('/profile/show',[HotelAdminController::class,'profileshow'])->name('profile.show');
 // Route::get('/profile/edit',[HotelAdminController::class,'profileedit'])->name('profile.edit');
+Route::get('/reservations/reserved_confirmation',[ReservationController::class,'reserved_confirmation'])->name('reserved_confirmation');
 // Route::get('/reviews/list',[HotelAdminController::class,'reviewlist'])->name('reviews.list');
 // Route::get('/reviews/show',[HotelAdminController::class,'reviewshow'])->name('reviews.show');
 // Route::get('/rooms/show',[HotelAdminController::class,'roomsshow'])->name('rooms.show');
 // Route::get('/rooms/create',[HotelAdminController::class,'roomscreate'])->name('rooms.create');
 // Route::get('/rooms/edit',[HotelAdminController::class,'roomsedit'])->name('rooms.edit');
 
-
 // //CustomerController
 // Route::get('/register_top', [CustomerController::class, 'register_top'])->name('register_top');
 // Route::get('/customer_register', [CustomerController::class,'customerRegister'])->name('customerRegister');
-// Route::get('/customers/hotel_detail', [HotelController::class, 'hotel_detail']);
+// Route::get('/customers/hotel_detail', [HotelController::class, 'hotel_detail'])->name('hotelDetail');;
