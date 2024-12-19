@@ -52,6 +52,13 @@ class HotelAdminController extends Controller
         return view('hotels.reservations.edit');
     }
 
+    public function profilepassword()
+    {
+        return view('hotels.profile.password');
+    }
+
+
+
 
   public function reviewshow()
   {
@@ -80,21 +87,84 @@ class HotelAdminController extends Controller
   // {
   //   #1. Validate all form data
   //   $request->validate([
-  //     'room_number' => 'required|min:1|max:50|unique:rooms,number',
-  //     'room_type' => 'required',
-  //     'room_price' => 'required|min:1|max:30000',
-  //     'room_image' => '',
-  //     'room_remerks' => 'min:1|max:1000',
+  //     'room_number'  => 'required|min:1|max:50|unique:rooms,number',
+  //     'room_type'    => 'required',
+  //     'room_price'   => 'required|min:1|max:30000',
+  //     'room_image'   => '',
+  //     'room_remarks' => 'min:1|max:1000',
   //   ]);
+
   //   #2. Save the room
   //   $this->room->number  = $request->room->number;
   //   $this->room->type    = $request->room->type;
   //   $this->room->price   = $request->room->price;
   //   $this->room->image   = $request->room->image;
-  //   $this->room->remerks = $request->room->remerks;
+  //   $this->room->remarks = $request->room->remarks;
 
   //   $this->room->save();
   //   #3. Go back
   //   return redirect()->back();
   // }
+
+//   public function show($id)
+//   {
+//     $room = $this->room->findOrFail($id);
+
+//     return view('hotels.rooms.show')
+//       ->with('room', $room);
+//   }
+
+//   public function update(Request $request, $id)
+//   {
+//     #1. Validate the data from the form
+//     $request->validate([
+//       'room_number'  => 'required|min:1|max:50|unique:rooms,number',
+//       'room_type'    => 'required',
+//       'room_price'   => 'required|min:1|max:30000',
+//       'room_image'   => '',
+//       'room_remarks' => 'min:1|max:1000',
+//     ]);
+
+//     #2. Update the post
+//     $room              = $this->room->findOrFail($id);
+//     $room->number  = $request->room->number;
+//     $room->type    = $request->room->type;
+//     $room->price   = $request->room->price;
+//     $room->image   = $request->room->image;
+//     $room->remarks = $request->room->remarks;
+
+//     //If there is a new image
+//     if ($request->image) {
+//       $room->image = 'data:image.' . $request->image->extension() . ';base64,' . base64_encode(file_get_contents($request->image));
+//     }
+//       $room->save()
+// }
+
+
+
+ // BE memo profile Rina
+  // private $room;
+
+  // public function __construct(Room $room)
+  // {
+  //   $this->room = $room;
+  // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

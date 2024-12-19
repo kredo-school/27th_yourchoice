@@ -19,4 +19,9 @@ class HotelController extends Controller
     {
         return view('customers.hotel_detail');
     }
+    public function inquary()
+    {
+        return view('hotels.inquary.show');
+    }
+    
 }
