@@ -35,7 +35,7 @@ Route::get('/reservation/confirmation', [ReservationController::class, 'reserved
 Route::get('/reservation/detail', [ReservationController::class, 'reserved_detail']);
 
 //HotelController
-Route::get('/hotels', [HotelController::class, 'index']);
+Route::get('/hotel_search', [HotelController::class, 'hotelSearch']);
 Route::get('/hotel_register', [HotelController::class,'hotelRegister'])->name('hotelRegister');
 Route::get('/hotel/inquary', [App\Http\Controllers\HotelController::class, 'inquary'])->name('hotels.inquary.show');
 
@@ -50,8 +50,7 @@ Route::get('/rooms/show',[HotelAdminController::class,'roomsshow'])->name('rooms
 Route::get('/rooms/create',[HotelAdminController::class,'roomscreate'])->name('rooms.create');
 Route::get('/rooms/edit',[HotelAdminController::class,'roomsedit'])->name('rooms.edit');
 
-
 //CustomerController
 Route::get('/register_top', [CustomerController::class, 'register_top'])->name('register_top');
 Route::get('/customer_register', [CustomerController::class,'customerRegister'])->name('customerRegister');
-Route::get('/customers/hotel_detail', [HotelController::class, 'hotel_detail']);
+Route::get('/customers/hotel_detail', [HotelController::class, 'hotel_detail'])->name('hotelDetail');;

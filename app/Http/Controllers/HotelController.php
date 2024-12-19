@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class HotelController extends Controller
 {
-    public function index()
+    public function hotelSearch()
     {
         return view('customers.hotel_search');
     }
