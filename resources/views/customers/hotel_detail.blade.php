@@ -59,7 +59,6 @@
                     <div class="mt-4">
                         <h6>Explore the area</h6>
                         <p>Blackheath, NSW</p>
-                        {{-- <a href="#">View map</a> --}}
                     </div>
                 </div>
             </div>
