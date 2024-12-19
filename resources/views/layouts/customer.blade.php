@@ -34,7 +34,7 @@
         <div class="container-fluid">
             <nav class="navbar nabvar-customer navbar-expand-md navbar-light shadow-sm">
                 <div class="container">
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <a class="navbar-brand" href="{{ route('customer.top.list') }}">
                         <img src="{{ asset('images/logo.png') }}" alt="Logo" class="logo-main">
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -53,7 +53,7 @@
                             @guest
                                 <div class="d-flex">
                                     <a href="#"><img src="{{ asset('images/globe-solid.svg') }}" class="logo-sub"></a><span class="language mx-1 me-3">English</span>
-                                    <a href="#"><img src="{{ asset('images/calendar-days-solid.svg') }}" class="logo-sub me-3"></i></a> 
+                                    <a href="{{ route('customer.reservation.reservationlist') }}"><img src="{{ asset('images/calendar-days-solid.svg') }}" class="logo-sub me-3"></i></a> 
                                     <a href="#"><img src="{{ asset('images/envelope-solid.svg') }}" class="logo-sub me-3"></a> 
                                     <a href="#" class="btn btn-outline-secondary btn-mypage me-2">Log In</a>
                                     <a href="#" class="btn btn-outline-secondary btn-logout">Register</a>
@@ -62,9 +62,9 @@
                                 <li class="nav-item dropdown">
                                 <div class="d-flex">
                                     <a href="#"><img src="{{ asset('images/globe-solid.svg') }}" class="logo-sub"></a><span class="language mx-1 me-3">English</span>
-                                    <a href="#"><img src="{{ asset('images/calendar-days-solid.svg') }}" class="logo-sub me-3"></i></a> 
-                                    <a href="#"><img src="{{ asset('images/envelope-solid.svg') }}" class="logo-sub me-3"></a> 
-                                    <a href="#" class="btn btn-outline-secondary btn-mypage me-2">My Page</a>
+                                    <a href="{{ route('customer.reservation.reservationlist') }}"><img src="{{ asset('images/calendar-days-solid.svg') }}" class="logo-sub me-3"></i></a> 
+                                    <a href="{{ route('customer.inquary.show') }}"><img src="{{ asset('images/envelope-solid.svg') }}" class="logo-sub me-3"></a> 
+                                    <a href="{{ route('customer.profile.show') }}" class="btn btn-outline-secondary btn-mypage me-2">My Page</a>
                                     <a href="#" class="btn btn-outline-secondary btn-logout">Log Out</a>
                                 </div>   
                                 </li>

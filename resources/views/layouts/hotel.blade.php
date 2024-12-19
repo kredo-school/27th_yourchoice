@@ -38,7 +38,7 @@
         <div class="container-fluid">
             <nav class="navbar nabvar-hotel navbar-expand-md navbar-light shadow-sm">
                 <div class="container">
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <a class="navbar-brand" href="{{ route('hotel.profile.show') }}">
                         <img src="{{ asset('images/logo.png') }}" alt="Logo" class="logo-main">
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -55,9 +55,9 @@
                         <ul class="navbar-nav ms-auto">
                             <div class="d-flex">
                                     <a href="#"><img src="{{ asset('images/globe-solid.svg') }}" class="logo-sub"></a><span class="language mx-1 me-3">English</span>
-                                    <a href="#"><img src="{{ asset('images/calendar-days-solid.svg') }}" class="logo-sub me-3"></i></a> 
-                                    <a href="#"><img src="{{ asset('images/envelope-solid.svg') }}" class="logo-sub me-3"></a> 
-                                    <a href="#" class="btn btn-outline-secondary btn-mypage me-2">My Page</a>
+                                    <a href="{{ route('hotel.reservation.show_daily') }}"><img src="{{ asset('images/calendar-days-solid.svg') }}" class="logo-sub me-3"></i></a> 
+                                    <a href="{{ route('hotel.inquary.show') }}"><img src="{{ asset('images/envelope-solid.svg') }}" class="logo-sub me-3"></a> 
+                                    <a href="{{ route('hotel.profile.show') }}" class="btn btn-outline-secondary btn-mypage me-2">My Page</a>
                                     <a href="#" class="btn btn-outline-secondary btn-logout">Log Out</a>
                             </div>   
                         </ul>
@@ -72,12 +72,12 @@
                     <div class="list-group">
                     <div class="mt-4"><h2>Kredo Hotel</h2></div>
 
-                        <a href="#" class="list-group-item list-group-item-action mt-3 p-3">Profile</a>
-                        <a href="#" class="list-group-item list-group-item-action mt-3 p-3">Room List</a>
-                        <a href="#" class="list-group-item list-group-item-action mt-3 p-3">Price Management</a>
-                        <a href="#" class="list-group-item list-group-item-action mt-3 p-3">Reservation Management</a>
-                        <a href="list" class="list-group-item list-group-item-action mt-3 p-3">Review Management</a>
-                        <a href="#" class="list-group-item list-group-item-action mt-3 p-3">Inquary Management</a>
+                        <a href="{{ route('hotel.profile.show') }}" class="list-group-item list-group-item-action mt-3 p-3">Profile</a>
+                        <a href="{{ route('hotel.room.show') }}" class="list-group-item list-group-item-action mt-3 p-3">Room List</a>
+                        <a href="{{ route('hotel.price.show') }}" class="list-group-item list-group-item-action mt-3 p-3">Price Management</a>
+                        <a href="{{ route('hotel.reservation.show_daily') }}" class="list-group-item list-group-item-action mt-3 p-3">Reservation Management</a>
+                        <a href="{{ route('hotel.review.list') }}" class="list-group-item list-group-item-action mt-3 p-3">Review Management</a>
+                        <a href="{{ route('hotel.inquary.show') }}" class="list-group-item list-group-item-action mt-3 p-3">Inquary Management</a>
                     </div>
                 </div>
             </aside>
