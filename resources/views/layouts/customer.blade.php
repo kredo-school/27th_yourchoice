@@ -54,9 +54,9 @@
                                 <div class="d-flex">
                                     <a href="#"><img src="{{ asset('images/globe-solid.svg') }}" class="logo-sub"></a><span class="language mx-1 me-3">English</span>
                                     <a href="{{ route('customer.reservation.reservationlist') }}"><img src="{{ asset('images/calendar-days-solid.svg') }}" class="logo-sub me-3"></i></a> 
-                                    <a href="#"><img src="{{ asset('images/envelope-solid.svg') }}" class="logo-sub me-3"></a> 
-                                    <a href="#" class="btn btn-outline-secondary btn-mypage me-2">Log In</a>
-                                    <a href="#" class="btn btn-outline-secondary btn-logout">Register</a>
+                                    <a href="{{ route('customer.inquary.show') }}"><img src="{{ asset('images/envelope-solid.svg') }}" class="logo-sub me-3"></a> 
+                                    <a href="{{ route('login') }}" class="btn btn-outline-secondary btn-mypage me-2">Log In</a>
+                                    <a href="{{ route('register.top') }}" class="btn btn-outline-secondary btn-logout">Register</a>
                                 </div>   
                             @else
                                 <li class="nav-item dropdown">
@@ -65,7 +65,13 @@
                                     <a href="{{ route('customer.reservation.reservationlist') }}"><img src="{{ asset('images/calendar-days-solid.svg') }}" class="logo-sub me-3"></i></a> 
                                     <a href="{{ route('customer.inquary.show') }}"><img src="{{ asset('images/envelope-solid.svg') }}" class="logo-sub me-3"></a> 
                                     <a href="{{ route('customer.profile.show') }}" class="btn btn-outline-secondary btn-mypage me-2">My Page</a>
-                                    <a href="#" class="btn btn-outline-secondary btn-logout">Log Out</a>
+                                    <a href="#" class="btn btn-outline-secondary btn-logout" 
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        Log Out
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
                                 </div>   
                                 </li>
                             @endguest

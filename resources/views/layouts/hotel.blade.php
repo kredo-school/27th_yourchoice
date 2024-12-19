@@ -58,7 +58,13 @@
                                     <a href="{{ route('hotel.reservation.show_daily') }}"><img src="{{ asset('images/calendar-days-solid.svg') }}" class="logo-sub me-3"></i></a> 
                                     <a href="{{ route('hotel.inquary.show') }}"><img src="{{ asset('images/envelope-solid.svg') }}" class="logo-sub me-3"></a> 
                                     <a href="{{ route('hotel.profile.show') }}" class="btn btn-outline-secondary btn-mypage me-2">My Page</a>
-                                    <a href="#" class="btn btn-outline-secondary btn-logout">Log Out</a>
+                                    <a href="#" class="btn btn-outline-secondary btn-logout" 
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        Log Out
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
                             </div>   
                         </ul>
                     </div>

@@ -4,20 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class CustomerController extends Controller
+class RegisterController extends Controller
 {
-    public function register_top()
+    public function top()
     {
         return view('auth.register_top');
     }
-    public function customerRegister()
+
+    public function create_customer()
     {
         return view('auth.customer_register');
     }
 
-    public function register()
+    public function create_hotel()
     {
-        return view('auth.register');
+        return view('auth.hotel_register');
     }
-
+    
 }

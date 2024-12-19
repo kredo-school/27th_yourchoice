@@ -22,7 +22,7 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function () {
 
 
   // ログインが必要ページ
-  Route::group(['middleware' => 'auth'], function () {
+  // Route::group(['middleware' => 'auth'], function () {
       Route::get('/reserve/edit',[App\Http\Controllers\Customer\ReserveController::class,'edit'])->name('reserve.edit');
       Route::get('/reserve/show',[App\Http\Controllers\Customer\ReserveController::class,'show'])->name('reserve.show');
       Route::get('/reserve/confirmation',[App\Http\Controllers\Customer\ReserveController::class,'confirmation'])->name('reserve.confirmation');
@@ -40,12 +40,13 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function () {
 
       Route::get('/inquary/show',[App\Http\Controllers\Customer\InquaryController::class,'show'])->name('inquary.show');
 
-  });
+  // });
 
 });
 
 // ホテル側
-Route::group(['prefix' => 'hotel', 'as' => 'hotel.', 'middleware' => 'auth'], function () {
+// Route::group(['prefix' => 'hotel', 'as' => 'hotel.', 'middleware' => 'auth'], function () {
+Route::group(['prefix' => 'hotel', 'as' => 'hotel.'], function () {
 
     Route::get('/inquary/show',[App\Http\Controllers\Hotel\InquaryController::class,'show'])->name('inquary.show');
 
@@ -70,6 +71,11 @@ Route::group(['prefix' => 'hotel', 'as' => 'hotel.', 'middleware' => 'auth'], fu
 });
 
 
+Route::get('/register/top',[App\Http\Controllers\RegisterController::class,'top'])->name('register.top');
+Route::get('/register/create_customer',[App\Http\Controllers\RegisterController::class,'create_customer'])->name('register.create_customer');
+Route::get('/register/create_hotel',[App\Http\Controllers\RegisterController::class,'create_hotel'])->name('register.create_hotel');
+
+// Route::get('/register', [CustomerController::class, 'register'])->name('register');
 
 // Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
