@@ -19,4 +19,10 @@ class CustomerController extends Controller
     {
         return view('customers.inquary.show');
     }
+
+    public function register()
+    {
+        return view('auth.register');
+    }
+
 }
