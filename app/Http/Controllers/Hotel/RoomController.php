@@ -21,4 +21,12 @@ class RoomController extends Controller
     {
         return view('hotels.rooms.edit');
     }
+
+
+    public function destroy()
+    {
+      return redirect()->back();
+    }
+
+
 }
