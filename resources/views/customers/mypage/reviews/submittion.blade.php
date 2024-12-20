@@ -27,11 +27,13 @@
                             <div class="rating" id="rating">
                                 <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
                             </div>
+                            <form action="{{ route('customer.review.store') }}" method="GET">
                                 <label for="comments">Comments</label>
                                 <textarea id="comments" rows="4"></textarea>
                                 <label for="image-upload">Image file</label>
                                 <input type="file" id="image-upload">
                                 <button type="submit" class="mainbtn">Submit review</button>
+                            </form>
                         </div>
                     </div>
         
