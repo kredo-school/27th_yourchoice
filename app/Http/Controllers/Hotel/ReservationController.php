@@ -21,5 +21,13 @@ class ReservationController extends Controller
     {
         return view('hotels.reservations.show_monthly');
     }
+
+    public function store()
+    {
+        return redirect()->route('hotel.reservation.show_daily');
+    }
+
+
+    
     
 }

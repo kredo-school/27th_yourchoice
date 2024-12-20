@@ -9,7 +9,7 @@
     <button class="btn btn-outline-secondary">&lt;</button>
     <button class="btn btn-outline-secondary">&gt;</button>
 </div>
-<form action="#" method="POST">
+<form action="{{ route('hotel.price.update') }}" method="GET">
     @csrf
     <table class="table table-bordered text-center">
         <thead > 
@@ -171,8 +171,8 @@
         </tbody>
     </table>
     <div class="text-end">
+        <a href="{{ route('hotel.price.show') }}" class="subbtn2">Cancel</a>
         <button type="submit" class="mainbtn">Save Changes</button>
-        <a href="#" class="subbtn2">Cancel</a>
     </div>
 </form>
 

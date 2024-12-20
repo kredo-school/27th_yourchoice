@@ -81,7 +81,7 @@
                         <a href="{{ route('hotel.profile.show') }}" class="list-group-item list-group-item-action mt-3 p-3">Profile</a>
                         <a href="{{ route('hotel.room.show') }}" class="list-group-item list-group-item-action mt-3 p-3">Room List</a>
                         <a href="{{ route('hotel.price.show') }}" class="list-group-item list-group-item-action mt-3 p-3">Price Management</a>
-                        <a href="{{ route('hotel.reservation.show_daily') }}" class="list-group-item list-group-item-action mt-3 p-3">Reservation Management</a>
+                        <a href="{{ route('hotel.reservation.show_monthly') }}" class="list-group-item list-group-item-action mt-3 p-3">Reservation Management</a>
                         <a href="{{ route('hotel.review.list') }}" class="list-group-item list-group-item-action mt-3 p-3">Review Management</a>
                         <a href="{{ route('hotel.inquary.show') }}" class="list-group-item list-group-item-action mt-3 p-3">Inquary Management</a>
                     </div>
