@@ -10,7 +10,7 @@
                 </div>
                 <div class="col-auto text-end mt-3 mb-2">
                     {{-- createページにつながる --}}
-                    <a href="{{ route('hotel.room.create') }}" class="btn btn-sub w-100">
+                    <a href="{{ route('rooms.create') }}" class="btn btn-sub w-100">
                         <i class="fa-solid fa-plus me-1"></i>Add rooms
                     </a>
                 </div>
@@ -46,7 +46,7 @@
                             <td>Not available</td>
                             <td>
                                 {{-- editページにつながる --}}
-                                <a href="{{ route('hotel.room.edit') }}" title="Edit" class="btn btn-outline-dark border-0"><i
+                                <a href="{{ route('rooms.edit') }}" title="Edit" class="btn btn-outline-dark border-0"><i
                                         class="fa-solid fa-file-pen icon-md"></i></a>
                                 {{-- deleteページにつながる --}}
                                 <a href="#" title="Delete" class="btn btn-outline-dark ms-1 border-0"

@@ -4,9 +4,9 @@
     <link rel="stylesheet" href="{{ asset('css/hoteladmin.css') }}">
 
     <div class="container mt-2 d-flex justify-content-center">
-        <form method="GET" action="{{ route('hotel.room.show') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('rooms.create') }}" enctype="multipart/form-data">
             @csrf
-            {{-- @method('GET') --}}
+            @method('GET')
 
             <div class="row">
                 <h1 class="mb-4 ms-3 fw-bold">Add Rooms</h1>
@@ -68,7 +68,7 @@
                             <!-- Buttons -->
                             <div class="row mt-4 mb-2 text-center">
                                 <div class="col d-flex justify-content-center gap-2">
-                                    <a href="{{ route('hotel.room.show') }}" class="text-decoration-none text-dark">
+                                    <a href="{{ route('rooms.show') }}" class="text-decoration-none text-dark">
                                         <button type="button" class="btn btn-sub2">Cancel</button></a>
                                     <button type="submit" class="btn btn-main ms-2">Confirm</button>
                                 </div>
