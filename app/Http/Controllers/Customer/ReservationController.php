@@ -14,7 +14,7 @@ class ReservationController extends Controller
 
     public function show()
     {
-        return view('customers.mypage.reservation_detail.inprogress');
+        return view('customers.mypage.reservation-detail.inprogress');
     }
 
 }

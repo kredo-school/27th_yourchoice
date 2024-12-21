@@ -56,7 +56,9 @@
                             <div class="d-flex">
                                     <a href="#"><img src="{{ asset('images/globe-solid.svg') }}" class="logo-sub"></a><span class="language mx-1 me-3">English</span>
                                     {{-- notification挿入：うまくいかず... --}}
-                                    <a href="#" data-toggle="modal" data-target="#reservationModal"><img src="{{ asset('images/calendar-days-solid.svg') }}" class="logo-sub me-3"></i></a> 
+                                    <!-- <a href="#" data-toggle="modal" data-target="#reservationModal"><img src="{{ asset('images/calendar-days-solid.svg') }}" class="logo-sub me-3"></i></a>  -->
+
+                                    
                                     @include('notification.modals.notification')
                                     
                                     <a href="{{ route('customer.inquary.show') }}"><img src="{{ asset('images/envelope-solid.svg') }}" class="logo-sub me-3"></a> 
