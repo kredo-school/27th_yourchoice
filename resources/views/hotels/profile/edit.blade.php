@@ -4,9 +4,9 @@
     <link rel="stylesheet" href="{{ asset('css/hoteladmin.css') }}">
     {{-- Editpageはvalue={{old}}置いておけばOK　新規登録の場合は空欄になる --}}
     <div class="container mt-2">
-        <form method="POST" action="{{ route('profile.edit') }}" enctype="multipart/form-data">
+        <form method="GET" action="{{ route('hotel.profile.show') }}" enctype="multipart/form-data">
             @csrf
-            @method('GET')
+            {{-- @method('GET') --}}
             <div class="row">
                 <div class="col-md">
                     <h1 class="mb-4 ms-3 fw-bold">Hotel Admin Profile</h1>
@@ -198,9 +198,9 @@
                                     <label class="form-check-label" for="bodywash">Body wash</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="toothbrush" name="toiletries[]"
-                                        value="toothbrush">
-                                    <label class="form-check-label" for="toothbrush">Toothbrush&paste</label>
+                                    <input class="form-check-input" type="checkbox" id="tooth" name="toiletries[]"
+                                        value="tooth">
+                                    <label class="form-check-label" for="tooth">Toothbrush&paste</label>
                                 </div>
                             </div>
                         </div>
@@ -251,10 +251,14 @@
                                 </div>
                             </div>
                             <!-- Requirements Button -->
-                            <button type="button" class="btn btn-sub mt-3 ms-auto" data-bs-toggle="modal"
-                                data-bs-target="#requirementsModal">
-                                Requirements
-                            </button>
+                            <div class="row">
+                                <div class="col text-end">
+                                    <button type="button" class="btn btn-sub mt-3 ms-auto" data-bs-toggle="modal"
+                                        data-bs-target="#requirementsModal">
+                                        Requirements
+                                    </button>
+                                </div>
+                            </div>
                             {{-- Include modal here --}}
                             @include('hotels.profile.modals.requirements_category')
                         </div>
@@ -268,8 +272,8 @@
                                 <div class="col-md-6">
                                     <label for="freeCancellation">Free Cancellation Period:</label>
                                     <div class="d-flex align-items-center">
-                                        <input type="number" class="form-control me-2" id="freeCancellation"
-                                            name="free_cancellation" style="width: 80px;">
+                                        <input type="number" class="form-control me-2 form-width" id="freeCancellation"
+                                            name="free_cancellation">
                                         <span>days before the reservation date.</span>
                                     </div>
                                 </div>
@@ -277,20 +281,17 @@
                                     <label>Cancellation Fee Percentage:</label>
                                     <div class="d-flex align-items-center mt-1">
                                         <span class="me-3">General</span>
-                                        <input type="number" class="form-control mx-2" name="fee_general"
-                                            style="width: 80px;">
+                                        <input type="number" class="form-control mx-2 form-width" name="fee_general">
                                         <span>%</span>
                                     </div>
                                     <div class="d-flex align-items-center mt-1">
                                         <span>Same-Day</span>
-                                        <input type="number" class="form-control mx-2" name="fee_same_day"
-                                            style="width: 80px;">
+                                        <input type="number" class="form-control mx-2 form-width" name="fee_same_day">
                                         <span>%</span>
                                     </div>
                                     <div class="d-flex align-items-center mt-1">
                                         <span>No-Shows</span>
-                                        <input type="number" class="form-control mx-2" name="fee_no_shows"
-                                            style="width: 80px;">
+                                        <input type="number" class="form-control mx-2 form-width" name="fee_no_shows">
                                         <span>%</span>
                                     </div>
                                 </div>
@@ -300,9 +301,12 @@
                 </div>
 
                 <!-- Buttons -->
-                <div class="d-flex mt-4">
-                    <button type="button" class="btn btn-sub2 ms-auto">Cancel</button>
-                    <button type="submit" class="btn btn-main ms-2">Confirm</button>
+                <div class="row mt-4 mb-2 text-end">
+                    <div class="col">
+                        <a href="{{ route('hotel.profile.show') }}" class="text-decoration-none text-dark">
+                            <button type="button" class="btn btn-sub2">Cancel</button></a>
+                        <button type="submit" class="btn btn btn-main ms-2">Confirm</button>
+                    </div>
                 </div>
         </form>
     </div>

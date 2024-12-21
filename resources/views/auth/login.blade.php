@@ -68,7 +68,7 @@
                                 -->
                                 <!-- Forgot Password -->
                                 <div class="mt-3">
-                                    <a href="#" class="text-decoration-none">Forgot your password?</a>
+                                    <a href="{{ route('password.request') }}" class="text-decoration-none">Forgot your password?</a>
                                 </div>
 
                             </div>

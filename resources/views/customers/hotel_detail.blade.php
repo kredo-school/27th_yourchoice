@@ -61,80 +61,57 @@
             </div>
         </div>
     </div>
-</div>
-    <div class="mt-5">
-        <div class="d-flex justify-content-start mb-3">
-            <div class="dropdown me-3">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="filterDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Filter
-                </button>
-                <div class="dropdown-menu" aria-labelledby="filterDropdown">
-                    <a class="dropdown-item" href="#">Option 1</a>
-                    <a class="dropdown-item" href="#">Option 2</a>
+    <div class="input-group my-4 w-50">
+        <input type="date" class="form-control">
+        <input type="number" class="form-control" placeholder="Travellers">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button">
+                <i class="fa fa-search"></i>
+            </button>
+        </div>
+    </div>
+    <div class="list-group">
+        <div class="list-group-item">
+            <div class="row align-items-center">
+                <div class="col-md-2">
+                    <img src="{{ asset('images/hotel-room.jpg') }}" alt="hotel-room" class="hotel-room img-fluid">
                 </div>
-            </div>
-            <div class="dropdown me-3">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="priceDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Price
-                </button>
-                <div class="dropdown-menu" aria-labelledby="priceDropdown">
-                    <a class="dropdown-item" href="#">Low to High</a>
-                    <a class="dropdown-item" href="#">High to Low</a>
+                <div class="col-md-7">
+                    <h5>Single Room</h5>
+                    <ul class="list-inline">
+                        <li class="list-inline-item"><i class="fa fa-check"></i> Shampoo</li>
+                        <li class="list-inline-item"><i class="fa fa-check"></i> Conditioner</li>
+                        <li class="list-inline-item"><i class="fa fa-check"></i> Body wash</li>
+                        <li class="list-inline-item"><i class="fa fa-check"></i> Toothbrush</li>
+                        <li class="list-inline-item"><i class="fa fa-check"></i> Toothpaste</li>
+                    </ul>
                 </div>
-            </div>
-            <div class="dropdown me-3">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="roomDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Room
-                </button>
-                <div class="dropdown-menu" aria-labelledby="roomDropdown">
-                    <a class="dropdown-item" href="#">Single</a>
-                    <a class="dropdown-item" href="#">Double</a>
+                <div class="col-md-3 text-end">
+                    <h6>$100 / 2 travellers</h6>
+                    <small>include taxes & fees for 1 night</small>
+                    <a href="#" class="btn btn-danger mt-2">Book now</a>
                 </div>
             </div>
         </div>
-        <div class="list-group">
-            <div class="list-group-item">
-                <div class="row align-items-center">
-                    <div class="col-md-2">
-                        <img src="{{ asset('images/hotel-room.jpg') }}" alt="hotel-room" class="hotel-room img-fluid">
-                    </div>
-                    <div class="col-md-7">
-                        <h5>Single Room</h5>
-                        <ul class="list-inline">
-                            <li class="list-inline-item"><i class="fa fa-check"></i> Shampoo</li>
-                            <li class="list-inline-item"><i class="fa fa-check"></i> Conditioner</li>
-                            <li class="list-inline-item"><i class="fa fa-check"></i> Body wash</li>
-                            <li class="list-inline-item"><i class="fa fa-check"></i> Toothbrush</li>
-                            <li class="list-inline-item"><i class="fa fa-check"></i> Toothpaste</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-3 text-end">
-                        <h6>$100 / 2 travellers</h6>
-                        <small>include taxes & fees for 1 night</small>
-                        <button class="btn btn-danger mt-2">Book now</button>
-                    </div>
+        <div class="list-group-item">
+            <div class="row align-items-center">
+                <div class="col-md-2">
+                    <img src="{{ asset('images/hotel-room.jpg') }}" alt="hotel-room" class="hotel-room img-fluid">
                 </div>
-            </div>
-            <div class="list-group-item">
-                <div class="row align-items-center">
-                    <div class="col-md-2">
-                        <img src="{{ asset('images/hotel-room.jpg') }}" alt="hotel-room" class="hotel-room img-fluid">
-                    </div>
-                    <div class="col-md-7">
-                        <h5>Double Room</h5>
-                        <ul class="list-inline">
-                            <li class="list-inline-item"><i class="fa fa-check"></i> Shampoo</li>
-                            <li class="list-inline-item"><i class="fa fa-check"></i> Conditioner</li>
-                            <li class="list-inline-item"><i class="fa fa-check"></i> Body wash</li>
-                            <li class="list-inline-item"><i class="fa fa-check"></i> Toothbrush</li>
-                            <li class="list-inline-item"><i class="fa fa-check"></i> Toothpaste</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-3 text-end">
-                        <h6>$100 / 2 travellers</h6>
-                        <small>include taxes & fees for 1 night</small>
-                        <button class="btn btn-danger mt-2">Book now</button>
-                    </div>
+                <div class="col-md-7">
+                    <h5>Double Room</h5>
+                    <ul class="list-inline">
+                        <li class="list-inline-item"><i class="fa fa-check"></i> Shampoo</li>
+                        <li class="list-inline-item"><i class="fa fa-check"></i> Conditioner</li>
+                        <li class="list-inline-item"><i class="fa fa-check"></i> Body wash</li>
+                        <li class="list-inline-item"><i class="fa fa-check"></i> Toothbrush</li>
+                        <li class="list-inline-item"><i class="fa fa-check"></i> Toothpaste</li>
+                    </ul>
+                </div>
+                <div class="col-md-3 text-end">
+                    <h6>$100 / 2 travellers</h6>
+                    <small>include taxes & fees for 1 night</small>
+                    <a href="#" class="btn btn-danger mt-2">Book now</a>
                 </div>
             </div>
         </div>

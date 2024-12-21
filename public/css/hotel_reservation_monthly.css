@@ -71,4 +71,8 @@
         font-size: 14px !important; /* フォントサイズを適切に */
         color: #000 !important; /* ボタンの文字色 */
     }
+
+    .fc-daygrid-day { /* カレンダーの日付セルに適用 */
+        cursor: pointer;
+    }
     

@@ -9,9 +9,8 @@
             @method('GET')
 
             <div class="row">
-                <!-- Left Side (Basic Information) -->
                 <h1 class="mb-4 ms-3 fw-bold">Add Rooms</h1>
-                <div class="col-10">
+                <div class="col">
                     <div class="card">
                         <div class="card-body">
                             <div class="mb-3">
@@ -22,7 +21,7 @@
                             @error('room_number')
                                 <div class="text-danger small">{{ $message }}</div>
                             @enderror
-                            
+
                             <div class="mb-3">
                                 <label for="room_type" class="form-label">Room Type</label>
                                 <select id="room_type" name="room_type" class="form-control">
@@ -62,23 +61,22 @@
                                 <small class="text-muted ms-1">↑ Click here.</small>
                             </div>
                             <div class="mb-3">
-                                <label for="room_remerks" class="form-label">Remarks</label>
-                                <input type="text" class="form-control" id="room_remerks" name="room_remerks"
-                                    value="room_remerks">
+                                <label for="room_remarks" class="form-label">Remarks</label>
+                                <textarea class="form-control" id="room_remarks" name="room_remarks" value="{{ old('room_remarks') }}"></textarea>
                             </div>
 
                             <!-- Buttons -->
-                            <div class="row mt-4 mb-2">
-                                <div class="col">
+                            <div class="row mt-4 mb-2 text-center">
+                                <div class="col d-flex justify-content-center gap-2">
                                     <a href="{{ route('rooms.show') }}" class="text-decoration-none text-dark">
-                                        <button type="button" class="btn btn-sub2 w-100">Cancel</button></a>
-                                </div>
-                                <div class="col ms-auto"> <button type="submit" class="btn btn-main w-100">Confirm</button>
+                                        <button type="button" class="btn btn-sub2">Cancel</button></a>
+                                    <button type="submit" class="btn btn-main ms-2">Confirm</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
         </form>
     </div>
 @endsection

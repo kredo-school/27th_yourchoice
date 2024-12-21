@@ -28,7 +28,7 @@
                                         <p class="fs-5 fw-bolder align-bottom" >{{ '$100' }}</p>
                                     </div>
                                     <div class="col-12 mt-2 d-flex justify-content-end">
-                                        <a href="#" class="align-self-end">read more</a>
+                                        <a href="{{ route('mypage.reservation_detail.inprogress')}}" class="align-self-end">read more</a>
                                     </div>
                                 </div>
                             </div>
@@ -56,7 +56,7 @@
                                         <p class="fs-5 fw-bolder align-bottom" >{{ '$100' }}</p>
                                     </div>
                                     <div class="col-12 mt-2 d-flex justify-content-end">
-                                        <a href="#" class="align-self-end">read more</a>
+                                        <a href="{{ route('mypage.reservation_detail.inprogress')}}" class="align-self-end">read more</a>
                                     </div>
                                 </div>
                             </div>
@@ -84,7 +84,7 @@
                                         <p class="fs-5 fw-bolder align-bottom" >{{ '$100' }}</p>
                                     </div>
                                     <div class="col-12  d-flex justify-content-end">
-                                        <a href="#" class="align-self-end">read more</a>
+                                        <a href="{{ route('mypage.reservation_detail.inprogress')}}" class="align-self-end">read more</a>
                                     </div>
                                 </div>
                             </div>

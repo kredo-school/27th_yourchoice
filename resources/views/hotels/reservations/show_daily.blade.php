@@ -33,7 +33,7 @@
             </thead>
             <tbody>
                 <tr>
-                    <td><a href=""><img src="{{ asset('images/pen-to-square-solid.svg') }}" class="edit-logo"></a></td>
+                    <td><a href="{{ route('hotel.reservation.edit') }}"><img src="{{ asset('images/pen-to-square-solid.svg') }}" class="edit-logo"></a></td>
                     <td>101</td>
                     <td>Shinji Watanabe</td>
                     <td>1</td>
@@ -56,7 +56,7 @@
                     <td>Please provide a room on a higher floor with a quiet environment.</td>
                 </tr>
                 <tr>
-                    <td><a href=""><img src="{{ asset('images/pen-to-square-solid.svg') }}" class="edit-logo"></a></td>
+                    <td><a href="{{ route('hotel.reservation.edit') }}"><img src="{{ asset('images/pen-to-square-solid.svg') }}" class="edit-logo"></a></td>
                     <td>102</td>
                     <td></td>
                     <td></td>
@@ -79,7 +79,7 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <td><a href=""><img src="{{ asset('images/pen-to-square-solid.svg') }}" class="edit-logo"></a></td>
+                    <td><a href="{{ route('hotel.reservation.edit') }}"><img src="{{ asset('images/pen-to-square-solid.svg') }}" class="edit-logo"></a></td>
                     <td>103</td>
                     <td></td>
                     <td></td>
@@ -102,7 +102,7 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <td><a href=""><img src="{{ asset('images/pen-to-square-solid.svg') }}" class="edit-logo"></a></td>
+                    <td><a href="{{ route('hotel.reservation.edit') }}"><img src="{{ asset('images/pen-to-square-solid.svg') }}" class="edit-logo"></a></td>
                     <td>201</td>
                     <td>AAAA BBB</td>
                     <td>1</td>
@@ -125,7 +125,7 @@
                     <td>Please ensure the room is wheelchair accessible.</td>
                 </tr>
                 <tr>
-                    <td><a href=""><img src="{{ asset('images/pen-to-square-solid.svg') }}" class="edit-logo"></a></td>
+                    <td><a href="{{ route('hotel.reservation.edit') }}"><img src="{{ asset('images/pen-to-square-solid.svg') }}" class="edit-logo"></a></td>
                     <td>202</td>
                     <td></td>
                     <td></td>
@@ -148,7 +148,7 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <td><a href=""><img src="{{ asset('images/pen-to-square-solid.svg') }}" class="edit-logo"></a></td>
+                    <td><a href="{{ route('hotel.reservation.edit') }}"><img src="{{ asset('images/pen-to-square-solid.svg') }}" class="edit-logo"></a></td>
                     <td>203</td>
                     <td></td>
                     <td></td>
