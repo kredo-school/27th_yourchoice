@@ -1,7 +1,9 @@
 <!-- Delete Modal -->
 <link rel="stylesheet" href="{{ asset('css/hoteladmin.css') }}">
 <div class="modal fade" id="deleteModal">
-    <form method="GET" action="{{ route('hotel.room.destroy') }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('hotel.room.destroy') }}" enctype="multipart/form-data">
+      @csrf
+      @method('GET')
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <i class="fa-solid fa-triangle-exclamation icon-lg mt-5"></i>

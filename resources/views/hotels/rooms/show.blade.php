@@ -46,12 +46,13 @@
                             <td>Not available</td>
                             <td>
                                 {{-- editページにつながる --}}
-                                <a href="{{ route('hotel.room.edit') }}" title="Edit"
-                                    class="btn btn-outline-dark border-0"><i class="fa-solid fa-file-pen icon-md"></i></a>
+
+                                <a href="{{ route('hotel.room.edit') }}" title="Edit"><img
+                                        src="{{ asset('images/pen-to-square-solid.svg') }}" class="icon-md"></a>
                                 {{-- deleteページにつながる --}}
-                                <a href="#" title="Delete" class="btn btn-outline-dark ms-1 border-0"
-                                    data-bs-toggle="modal" data-bs-target="#deleteModal"><i
-                                        class="fa-solid fa-trash-can icon-md"></i></a>
+                                <a href="#" title="Delete" data-bs-toggle="modal"
+                                    data-bs-target="#deleteModal"><img src="{{ asset('images/trash-can-solid.svg') }}"
+                                        class="icon-md ms-1"></a>
                                 {{-- Include modal here --}}
                                 @include('hotels.rooms.modals.delete')
                             </td>
@@ -64,21 +65,21 @@
 
             <!-- ページネーションエリア -->
             {{-- <div class="pagination-container"> --}}
-                <nav aria-label="Page navigation">
-                    <ul class="pagination justify-content-center">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1">Previous</a>
-                        </li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">…</a></li>
-                        <li class="page-item"><a class="page-link" href="#">10</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">Next</a>
-                        </li>
-                    </ul>
-                </nav>
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">Previous</a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">…</a></li>
+                    <li class="page-item"><a class="page-link" href="#">10</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
             {{-- </div> --}}
         </div>
     </div>

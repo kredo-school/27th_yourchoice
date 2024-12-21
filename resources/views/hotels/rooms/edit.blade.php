@@ -4,9 +4,9 @@
     <link rel="stylesheet" href="{{ asset('css/hoteladmin.css') }}">
     {{-- Editpageはvalue={{old}}置いておけばOK　新規登録の場合は空欄になる --}}
     <div class="container mt-2 d-flex justify-content-center">
-        <form method="GET" action="{{ route('hotel.room.show') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('hotel.room.show') }}" enctype="multipart/form-data">
             @csrf
-            {{-- @method('GET') --}}
+            @method('GET')
 
             <div class="row">
                 <!-- Left Side (Basic Information) -->
