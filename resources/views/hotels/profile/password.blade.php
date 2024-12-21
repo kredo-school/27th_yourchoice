@@ -5,7 +5,7 @@
     <!-- CSSのリンク -->
     <link rel="stylesheet" href="{{ asset('css/hoteladmin.css') }}">
     <div class="container-fluid d-flex justify-content-center mt-5">
-        <form action="">
+        <form method="GET" action="{{ route('hotel.profile.show') }}" enctype="multipart/form-data">
             <div class="row">
                 <div class="col">
                     <h2>Password Setting</h2>
@@ -21,9 +21,9 @@
             </div>
             <div class="row mt-4 text-center">
                 <div class="col">
-                    <a href="{{ route('profile.show') }}" class="text-decoration-none text-dark">
+                    <a href="{{ route('hotel.profile.show') }}" class="text-decoration-none text-dark">
                         <button type="button" class="btn btn-sub2">Cancel</button></a>
-                    <button type="button" class="btn btn-main ms-2">Confirm</button>
+                    <button type="submit" class="btn btn-main ms-2">Confirm</button>
                 </div>
             </div>
         </form>
