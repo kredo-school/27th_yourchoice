@@ -38,6 +38,7 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function () {
       Route::get('/review/list',[App\Http\Controllers\Customer\ReviewController::class,'list'])->name('review.list');
       Route::get('/review/show',[App\Http\Controllers\Customer\ReviewController::class,'show'])->name('review.show');
       Route::get('/review/create',[App\Http\Controllers\Customer\ReviewController::class,'create'])->name('review.create');
+      Route::get('/review/store',[App\Http\Controllers\Customer\ReviewController::class,'store'])->name('review.store');
 
       Route::get('/inquary/show',[App\Http\Controllers\Customer\InquaryController::class,'show'])->name('inquary.show');
 
@@ -61,10 +62,13 @@ Route::group(['prefix' => 'hotel', 'as' => 'hotel.'], function () {
 
     Route::get('/price/show',[App\Http\Controllers\Hotel\PriceController::class,'show'])->name('price.show');
     Route::get('/price/edit',[App\Http\Controllers\Hotel\PriceController::class,'edit'])->name('price.edit');
+    Route::get('/price/update',[App\Http\Controllers\Hotel\PriceController::class,'update'])->name('price.update');
 
+    Route::get('/reservation/show_monthly',[App\Http\Controllers\Hotel\ReservationController::class,'show_monthly'])->name('reservation.show_monthly');
     Route::get('/reservation/show_daily',[App\Http\Controllers\Hotel\ReservationController::class,'show_daily'])->name('reservation.show_daily');
     Route::get('/reservation/edit',[App\Http\Controllers\Hotel\ReservationController::class,'edit'])->name('reservation.edit');
-    Route::get('/reservation/show_monthly',[App\Http\Controllers\Hotel\ReservationController::class,'show_monthly'])->name('reservation.show_monthly');
+    Route::get('/reservation/store',[App\Http\Controllers\Hotel\ReservationController::class,'store'])->name('reservation.store');
+
 
     Route::get('/review/list',[App\Http\Controllers\Hotel\ReviewController::class,'list'])->name('review.list');
     Route::get('/review/show',[App\Http\Controllers\Hotel\ReviewController::class,'show'])->name('review.show');

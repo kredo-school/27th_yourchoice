@@ -40,9 +40,15 @@
                         </p>
                     </div>
                     <div class="review-images d-flex mt-4">
-                        <div class="image-placeholder"></div>
-                        <div class="image-placeholder"></div>
-                        <div class="image-placeholder"></div>
+                        <div class="hotel-image me-2">
+                            <img src="{{ asset('images/hotel.jpg') }}" alt="hotel-img" class="hotel-img">
+                        </div>
+                        <div class="hotel-image me-2">
+                            <img src="{{ asset('images/hotel.jpg') }}" alt="hotel-img" class="hotel-img">
+                        </div>
+                        <div class="hotel-image me-2">
+                            <img src="{{ asset('images/hotel.jpg') }}" alt="hotel-img" class="hotel-img">
+                        </div>
                     </div>
                 </div>
             </div>

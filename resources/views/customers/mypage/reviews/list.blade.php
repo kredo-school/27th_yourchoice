@@ -24,6 +24,7 @@
                                 </p>
                                 <p class="card-text">In an increasingly connected world where everyone’s opinions are shared with a click, reviews are more powerful than ever....<a href="#">read more</a></p>
                             </div>
+                            <a href="{{ route('customer.review.show') }}" class="stretched-link"></a>
                     </div>
                 </div>
 
@@ -43,6 +44,7 @@
                                 </p>
                                 <p class="card-text">In an increasingly connected world where everyone’s opinions are shared with a click, reviews are more powerful than ever....<a href="#">read more</a></p>
                             </div>
+                            <a href="{{ route('customer.review.show') }}" class="stretched-link"></a>
                     </div>
                 </div>
                 <div class="card p-3 mb-3">
@@ -61,6 +63,7 @@
                                 </p>
                                 <p class="card-text">In an increasingly connected world where everyone’s opinions are shared with a click, reviews are more powerful than ever....<a href="#">read more</a></p>
                             </div>
+                            <a href="{{ route('customer.review.show') }}" class="stretched-link"></a>
                     </div>
                 </div>
             </div>

@@ -6,7 +6,7 @@
 <div class="container-fluid">
     <div class="row">
 
-                        <h2 class="mb-4"><strong>Reservation</strong></h2>
+                        <h2 class="mb-4"><strong>Edit Reservation</strong></h2>
                     <div class="card p-5 shadow-sm rounded">
                         <!-- Room and Date Information -->
                         <div class="mb-4">
@@ -16,6 +16,8 @@
                         </div>
 
                         <!-- Comment Section -->
+                        <form action="{{ route('hotel.reservation.store') }}" method="GET">
+
                         <div class="form-group mb-3">
                             <label for="comment"><strong>Comment</strong></label>
                             <textarea class="form-control" id="comment" rows="3" placeholder="Value"></textarea>
@@ -35,9 +37,11 @@
 
                         <!-- Buttons -->
                         <div class="d-flex justify-content-start">
-                            <button type="button" class="subbtn2 me-3" disabled>Cancel</button>
+                            <a href="{{ route('hotel.reservation.show_daily') }}" class="subbtn2 me-3">Cancel</a>
                             <button type="submit" class="mainbtn">Confirm</button>
                         </div>
+
+                        </form>
                     </div>
 
         
