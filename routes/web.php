@@ -34,6 +34,7 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function () {
 
       Route::get('/reservation/reservationlist',[App\Http\Controllers\Customer\ReservationController::class,'reservationlist'])->name('reservation.reservationlist');
       Route::get('/reservation/show',[App\Http\Controllers\Customer\ReservationController::class,'show'])->name('reservation.show');
+      Route::get('/reservation/show2',[App\Http\Controllers\Customer\ReservationController::class,'show2'])->name('reservation.show2');
 
       Route::get('/review/list',[App\Http\Controllers\Customer\ReviewController::class,'list'])->name('review.list');
       Route::get('/review/show',[App\Http\Controllers\Customer\ReviewController::class,'show'])->name('review.show');
@@ -59,6 +60,7 @@ Route::group(['prefix' => 'hotel', 'as' => 'hotel.'], function () {
     Route::get('/room/show',[App\Http\Controllers\Hotel\RoomController::class,'show'])->name('room.show');
     Route::get('/room/create',[App\Http\Controllers\Hotel\RoomController::class,'create'])->name('room.create');
     Route::get('/room/edit',[App\Http\Controllers\Hotel\RoomController::class,'edit'])->name('room.edit');
+    Route::get('/room/destroy', [App\Http\Controllers\Hotel\RoomController::class, 'destroy'])->name('room.destroy');
 
     Route::get('/price/show',[App\Http\Controllers\Hotel\PriceController::class,'show'])->name('price.show');
     Route::get('/price/edit',[App\Http\Controllers\Hotel\PriceController::class,'edit'])->name('price.edit');

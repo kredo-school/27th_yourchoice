@@ -27,6 +27,9 @@
     <!-- CSSのリンク -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
+    <!-- JSのリング -->
+    <script src="{{ asset('js/notification.js') }}"></script>
+
 </head>
 
 <body>
@@ -53,8 +56,7 @@
                             @guest
                                 <div class="d-flex">
                                     <a href="#"><img src="{{ asset('images/globe-solid.svg') }}" class="logo-sub"></a><span class="language mx-1 me-3">English</span>
-                                    <a href="{{ route('customer.reservation.reservationlist') }}"><img src="{{ asset('images/calendar-days-solid.svg') }}" class="logo-sub me-3"></i></a> 
-                                    <a href="{{ route('customer.inquary.show') }}"><img src="{{ asset('images/envelope-solid.svg') }}" class="logo-sub me-3"></a> 
+                                    
                                     <a href="{{ route('login') }}" class="btn btn-outline-secondary btn-mypage me-2">Log In</a>
                                     <a href="{{ route('register.top') }}" class="btn btn-outline-secondary btn-logout">Register</a>
                                 </div>   
@@ -62,8 +64,15 @@
                                 <li class="nav-item dropdown">
                                 <div class="d-flex">
                                     <a href="#"><img src="{{ asset('images/globe-solid.svg') }}" class="logo-sub"></a><span class="language mx-1 me-3">English</span>
-                                    <a href="{{ route('customer.reservation.reservationlist') }}"><img src="{{ asset('images/calendar-days-solid.svg') }}" class="logo-sub me-3"></i></a> 
+
+                                    <a href="#" id="reservationModalLabel" class="notification-icon">
+                                        <img src="{{ asset('images/calendar-days-solid.svg') }}" class="logo-sub me-3">
+                                    </a>
+                                    {{-- Include modal here --}}
+                                    @include('layouts.modals.notification_customer')
+
                                     <a href="{{ route('customer.inquary.show') }}"><img src="{{ asset('images/envelope-solid.svg') }}" class="logo-sub me-3"></a> 
+
                                     <a href="{{ route('customer.profile.show') }}" class="btn btn-outline-secondary btn-mypage me-2">My Page</a>
                                     <a href="#" class="btn btn-outline-secondary btn-logout" 
                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

@@ -67,9 +67,10 @@
                                 @endif
                                 -->
                                 <!-- Forgot Password -->
-                                <div class="mt-3">
+                                {{--優先度下げる　時間があれば --}}
+                                {{-- <div class="mt-3">
                                     <a href="{{ route('password.request') }}" class="text-decoration-none">Forgot your password?</a>
-                                </div>
+                                </div> --}}
 
                             </div>
                         </div>
@@ -77,7 +78,7 @@
                              
                         <!-- Register Link -->
                         <div class="text-center mt-4">
-                            <a href="#" class="register-text fw-bold">Please Register Here!!</a>
+                            <a href="{{route("register.top")}}" class="register-text fw-bold">Please Register Here!!</a>
                             
                         </div>
 
