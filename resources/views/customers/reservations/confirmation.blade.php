@@ -39,7 +39,7 @@
             <h2><strong> Thank you for your reservation!</strong></h2>
             <p>Your reservation has been completed.<br>Please check your reservation details.</p>
             <p><strong>reservation number : <span class="reservation-number">ABC12345678</span></strong></p>
-            <button class="check-button">check your reservation</button>
+            <button class="check-button"><a href="{{ url('/reservation/detail') }}" >check your reservation</button></a>
         </div>
     </main>
 </body>
