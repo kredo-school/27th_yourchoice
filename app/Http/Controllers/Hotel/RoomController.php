@@ -24,7 +24,7 @@ class RoomController extends Controller
 
   public function destroy()
   {
-    // return view('hotels.rooms.modals.delete');後で消す
+
     return redirect()->back();
   }
 }

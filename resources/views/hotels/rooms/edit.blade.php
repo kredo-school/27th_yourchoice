@@ -71,7 +71,6 @@
                             </div>
 
                             <!-- Buttons -->
-                            <!-- Buttons -->
                             <div class="row mt-4 mb-2 text-center">
                                 <div class="col d-flex justify-content-center gap-2">
                                     <a href="{{ route('hotel.room.show') }}" class="text-decoration-none text-dark">
