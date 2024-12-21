@@ -4,9 +4,9 @@
     <link rel="stylesheet" href="{{ asset('css/hoteladmin.css') }}">
     {{-- Editpageはvalue={{old}}置いておけばOK　新規登録の場合は空欄になる --}}
     <div class="container mt-2">
-        <form method="POST" action="{{ route('profile.edit') }}" enctype="multipart/form-data">
+        <form method="GET" action="{{ route('hotel.profile.show') }}" enctype="multipart/form-data">
             @csrf
-            @method('GET')
+            {{-- @method('GET') --}}
             <div class="row">
                 <div class="col-md">
                     <h1 class="mb-4 ms-3 fw-bold">Hotel Admin Profile</h1>
@@ -303,9 +303,9 @@
                 <!-- Buttons -->
                 <div class="row mt-4 mb-2 text-end">
                     <div class="col">
-                        <a href="{{ route('profile.show') }}" class="text-decoration-none text-dark">
+                        <a href="{{ route('hotel.profile.show') }}" class="text-decoration-none text-dark">
                             <button type="button" class="btn btn-sub2">Cancel</button></a>
-                        <button type="button" class="btn btn btn-main ms-2">Confirm</button>
+                        <button type="submit" class="btn btn btn-main ms-2">Confirm</button>
                     </div>
                 </div>
         </form>

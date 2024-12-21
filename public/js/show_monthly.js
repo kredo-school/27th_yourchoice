@@ -5,6 +5,15 @@ document.addEventListener('DOMContentLoaded', function() {
       initialView: 'dayGridMonth', // 月表示
       initialDate: '2024-04-01',   // 初期表示する日付
       firstDay: 1, // 月曜日を週の始まりにする (デフォルトは0=日曜日)
+      dateClick: function(info) {
+        // info.dateStrはクリックされた日付を"YYYY-MM-DD"形式で取得
+        const clickedDate = info.dateStr;
+
+        // ページ遷移
+        const targetUrl = `/hotel/reservation/show_daily`;
+        window.location.href = targetUrl;
+        },
+
       headerToolbar: {
           left: 'today prev',
           center: 'title',

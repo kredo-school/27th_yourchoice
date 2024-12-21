@@ -63,6 +63,6 @@
     </tbody>
 </table>
 
-<a href="#" class="subbtn1">Edit Prices</a>
+<a href="{{ route('hotel.price.edit') }}" class="subbtn1">Edit Prices</a>
 
 @endsection

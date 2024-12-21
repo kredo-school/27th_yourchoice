@@ -21,5 +21,10 @@ class ReviewController extends Controller
     {
         return view('customers.mypage.reviews.submittion');
     }
+
+    public function store()
+    {
+        return redirect()->route('customer.review.list');
+    }
     
 }
