@@ -19,7 +19,7 @@ class ProfileController extends Controller
 
     public function editpass()
     {
-        return view('customers.mypage.profile.password');
+        return view('customers.mypage.profile.editpass');
     }
     
 }

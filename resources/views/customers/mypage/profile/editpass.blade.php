@@ -23,7 +23,7 @@
                     </div>
                     
                     <div class="d-flex justify-content-between">
-                        <button type="button" class="sub-button-disabled " >Cancel</button>
+                        <a href="{{ route('customer.profile.show') }}" class="sub-button-disabled ">Cancel</a>
                         <button type="submit" class="customer-css-mainbutton" >Confirm</button>
                     </div>
                 </form>
