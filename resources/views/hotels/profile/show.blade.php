@@ -4,9 +4,9 @@
     <link rel="stylesheet" href="{{ asset('css/hoteladmin.css') }}">
 
     <div class="container mt-2">
-        <form method="POST" action="{{ route('profile.show') }}" enctype="multipart/form-data">
+        <form method="GET" action="{{ route('hotel.profile.edit') }}" enctype="multipart/form-data">
             @csrf
-            @method('GET')
+            {{-- @method('GET') --}}
             <div class="row">
                 <div class="col-md">
                     <h1 class="mb-4 ms-3 fw-bold">Hotel Admin Profile</h1>
@@ -230,10 +230,10 @@
                 <!-- Buttons -->
                 <div class="row mt-4 mb-2 text-end">
                     <div class="col">
-                        <a href="{{ route('profile.password') }}" class="text-decoration-none text-dark">
+                        <a href="{{ route('hotel.profile.editpass') }}" class="text-decoration-none text-dark">
                             <button type="button" class="btn btn-sub">Password Setting</button></a>
-                        <a href="{{ route('profile.edit') }}" class="text-decoration-none text-dark ms-2">
-                            <button type="button" class="btn btn-sub">Edit</button>
+                        <a href="{{ route('hotel.profile.edit') }}" class="text-decoration-none text-dark ms-2">
+                            <button type="submit" class="btn btn-sub">Edit</button>
                     </div>
                 </div>
         </form>

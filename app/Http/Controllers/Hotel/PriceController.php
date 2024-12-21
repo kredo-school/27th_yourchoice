@@ -16,5 +16,10 @@ class PriceController extends Controller
     {
         return view('hotels.price.edit');
     }
+
+    public function update()
+    {
+        return redirect()->route('hotel.price.show');
+    }
     
 }
