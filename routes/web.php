@@ -60,6 +60,7 @@ Route::group(['prefix' => 'hotel', 'as' => 'hotel.'], function () {
     Route::get('/room/show',[App\Http\Controllers\Hotel\RoomController::class,'show'])->name('room.show');
     Route::get('/room/create',[App\Http\Controllers\Hotel\RoomController::class,'create'])->name('room.create');
     Route::get('/room/edit',[App\Http\Controllers\Hotel\RoomController::class,'edit'])->name('room.edit');
+    Route::get('/room/destroy', [App\Http\Controllers\Hotel\RoomController::class, 'destroy'])->name('room.destroy');
 
     Route::get('/price/show',[App\Http\Controllers\Hotel\PriceController::class,'show'])->name('price.show');
     Route::get('/price/edit',[App\Http\Controllers\Hotel\PriceController::class,'edit'])->name('price.edit');

@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{{ asset('css/hoteladmin.css') }}">
     {{-- Editpageはvalue={{old}}置いておけばOK　新規登録の場合は空欄になる --}}
     <div class="container mt-2 d-flex justify-content-center">
-        <form method="POST" action="{{ route('rooms.edit') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('hotel.room.show') }}" enctype="multipart/form-data">
             @csrf
             @method('GET')
 
@@ -71,10 +71,9 @@
                             </div>
 
                             <!-- Buttons -->
-                            <!-- Buttons -->
                             <div class="row mt-4 mb-2 text-center">
                                 <div class="col d-flex justify-content-center gap-2">
-                                    <a href="{{ route('rooms.show') }}" class="text-decoration-none text-dark">
+                                    <a href="{{ route('hotel.room.show') }}" class="text-decoration-none text-dark">
                                         <button type="button" class="btn btn-sub2">Cancel</button></a>
                                     <button type="submit" class="btn btn-main ms-2">Confirm</button>
                                 </div>

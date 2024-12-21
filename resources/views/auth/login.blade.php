@@ -67,9 +67,10 @@
                                 @endif
                                 -->
                                 <!-- Forgot Password -->
-                                <div class="mt-3">
+                                {{--優先度下げる　時間があれば --}}
+                                {{-- <div class="mt-3">
                                     <a href="{{ route('password.request') }}" class="text-decoration-none">Forgot your password?</a>
-                                </div>
+                                </div> --}}
 
                             </div>
                         </div>
