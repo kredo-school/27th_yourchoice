@@ -87,9 +87,9 @@
                     <div class="list-group">
                     <div class="mt-4"><h2>[#Username]</h2></div>
 
-                        <a href="{{ route('customer.profile.show') }}" class="list-group-item list-group-item-action mt-3 p-3">Profile</a>
-                        <a href="{{ route('customer.reservation.reservationlist') }}" class="list-group-item list-group-item-action mt-3 p-3">Reservation List</a>
-                        <a href="{{ route('customer.review.list') }}" class="list-group-item list-group-item-action mt-3 p-3">Review List</a>
+                        <a href="{{ route('customer.profile.show') }}" class="list-group-item list-group-item-action mt-3 p-3 {{ request()->is('customer/profile/*') ? 'active' : '' }}">Profile</a>
+                        <a href="{{ route('customer.reservation.reservationlist') }}" class="list-group-item list-group-item-action mt-3 p-3 {{ request()->is('customer/reservation/*') ? 'active' : '' }}">Reservation List</a>
+                        <a href="{{ route('customer.review.list') }}" class="list-group-item list-group-item-action mt-3 p-3 {{ request()->is('customer/review/*') ? 'active' : '' }}">Review List</a>
                     </div>
                 </div>
             </aside>

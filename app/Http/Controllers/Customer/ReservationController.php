@@ -17,4 +17,9 @@ class ReservationController extends Controller
         return view('customers.mypage.reservation-detail.inprogress');
     }
 
+    public function show2()
+    {
+        return view('customers.mypage.reservation-detail.completed');
+    }
+
 }

@@ -49,7 +49,7 @@
                 </div>
             </div>
             <div class="mt-3 d-flex justify-content-center">
-                <button class="btn btn-outline-secondary me-5">Write review</button>
+                <a href="{{ route('customer.review.create') }}"><button class="btn btn-outline-secondary me-5">Write review</button></a>
             </div>
         </div>
     </div>
