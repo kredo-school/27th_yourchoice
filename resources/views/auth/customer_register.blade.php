@@ -12,7 +12,7 @@
            
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('customer.top.list') }}">
+                    <form method="POST" action="{{ route('customer.profile.show') }}">
                         @csrf
                         @method('GET')
 
