@@ -84,8 +84,7 @@ input {
 }
 
 .button2 {
-    position: ;
-    margin: 25px;
+     margin: 25px;
     display: grid;
      margin: auto;
 
@@ -203,7 +202,7 @@ h3 {
     border-radius: 10px; /* 角丸 */
     padding: 20px;
     background-color: #f9f9f9; /* 背景色 */
-    overflow: hidden; 枠を超えた部分を非表示に */
+    overflow: hidden; 
     
 }
 
@@ -472,8 +471,8 @@ h3 {
 
 
 .reservation-details dl {
-    margin: 0;
-    padding: 0;
+    margin: 0px;
+    padding: 0px;
     text-align: center;
 }
 

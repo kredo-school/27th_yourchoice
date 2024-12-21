@@ -167,7 +167,7 @@
   </section>
 
     <!-- Submit Button -->
-    <button type="submit" class="button2"><a href="{{ route('customer.reserve.edit') }}">Book</button></a>
+    <button type="submit" class="button2"><a href="{{ route('customer.reserve.show') }}">Book</button></a>
     
         
   

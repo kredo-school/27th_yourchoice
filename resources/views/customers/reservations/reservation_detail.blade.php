@@ -4,7 +4,6 @@
 <!-- Link the CSS file -->
 <link rel="stylesheet" href="{{ asset('css/reservations.css') }}">
 
-<body>
     <!-- Your Details -->
     <div class="container-fluid">
     <section class="step" id="step1">
@@ -119,10 +118,9 @@
     <section class="confirmation">
         <button class="confirmation-btn">
             <i class="fa-solid fa-lock"></i> 
-            <a href="{{ route('customer.reserve.show') }}" >Reservation confirmation
+            <a href="{{ route('customer.reserve.confirmation') }}" >Reservation confirmation
         </button></a>
     </section>
-</body>
-</html>
+
 </div>
 @endsection
