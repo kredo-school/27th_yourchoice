@@ -1,11 +1,9 @@
-<div class="modal fade" id="reservationModal" tabindex="-1" role="dialog" aria-labelledby="reservationModalLabel" aria-hidden="true">
+<div class="dropdown-menu notification-dropdown" aria-labelledby="reservationModalLabel">
+
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-speech-bubble">
             <div class="modal-header">
                 <h5 class="modal-title" id="reservationModalLabel">Reservations</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
             <div class="modal-body">
                 <div class="list-group">
@@ -28,7 +26,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <a href="#" class="btn btn-link">Go to reservation list</a>
+                <a href="{{ route('hotel.reservation.show_monthly') }}" class="btn btn-link">Go to reservation list</a>
             </div>
         </div>
     </div>

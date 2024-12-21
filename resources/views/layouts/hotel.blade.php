@@ -26,7 +26,10 @@
     <!-- CSSのリンク -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
-    
+    <!-- JSのリング -->
+    <script src="{{ asset('js/notification.js') }}"></script>
+
+
 
 
 
@@ -55,8 +58,15 @@
                         <ul class="navbar-nav ms-auto">
                             <div class="d-flex">
                                     <a href="#"><img src="{{ asset('images/globe-solid.svg') }}" class="logo-sub"></a><span class="language mx-1 me-3">English</span>
-                                    <a href="{{ route('hotel.reservation.show_daily') }}"><img src="{{ asset('images/calendar-days-solid.svg') }}" class="logo-sub me-3"></i></a> 
+
+                                    <a href="#" id="reservationModalLabel" class="notification-icon">
+                                        <img src="{{ asset('images/calendar-days-solid.svg') }}" class="logo-sub me-3">
+                                    </a>
+                                    {{-- Include modal here --}}
+                                    @include('layouts.modals.notification_hotel')
+
                                     <a href="{{ route('hotel.inquary.show') }}"><img src="{{ asset('images/envelope-solid.svg') }}" class="logo-sub me-3"></a> 
+                                    
                                     <a href="{{ route('hotel.profile.show') }}" class="btn btn-outline-secondary btn-mypage me-2">My Page</a>
                                     <a href="#" class="btn btn-outline-secondary btn-logout" 
                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
