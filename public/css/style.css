@@ -127,3 +127,29 @@
   color: #6c757d;
 }
 
+.notification-dropdown {
+  display: none; /* 初期状態で非表示 */
+  position: absolute;
+  top: 40px;
+  right: 80px;
+  z-index: 1000;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  min-width: 200px;
+  padding: 10px;
+}
+
+.notification-dropdown a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #CA5C6F;
+  margin:auto
+  
+}
+
+.notification-dropdown a:hover {
+  background-color: #f1f1f1;
+}
