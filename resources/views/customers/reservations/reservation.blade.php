@@ -7,7 +7,7 @@
 <div class="container-fluid">
   <div class="row">                                
     <div class="container-reservations">
-      <button  type="submit" class="button1"><a href="{{ url('/reviews/show') }}" >Return to the  previous page</button></a>
+      <button  type="submit" class="button1"><a href="{{ route('customer.top.show') }}" >Return to the  previous page</button></a>
                       
       <!-- Step 1 -->
       <section class="step" id="step1">
@@ -135,24 +135,24 @@
     <div class="reservation-container">
       <h1>■Reservation Details</h1>
       <div class="reservation-details">
-          <dl>
-              <dt>Hotel Name</dt>
-              <dd>YOUR CHOICE</dd>
+        <dl>
+          <dt>■ Hotel Name</dt>
+          <dd>YOUR CHOICE</dd>
   
-              <dt>Room Type</dt>
-              <dd>Twin Room</dd>
+          <dt>■ Room Type</dt>
+          <dd>Twin Room</dd>
   
-              <dt>Number of people</dt>
-              <dd>2</dd>
+          <dt>■ Number of people</dt>
+          <dd>2</dd>
   
-              <dt>Reservation Date</dt>
-              <dd>9, December, 2024 → 10, December, 2024</dd>
+          <dt>■ Reservation Date</dt>
+          <dd>9, December, 2024 → 10, December, 2024</dd>
   
-              <dt>Price</dt>
-              <dd>$ 150</dd>
-          </dl>
+          <dt>■ Price</dt>
+          <dd>$ 150</dd>
+      </dl>
           <div class="amenities">
-              <strong>Amenity</strong><br>
+              <strong>■ Amenity</strong><br>
               <label><input type="checkbox" checked disabled> Wi-Fi</label>
               <label><input type="checkbox" checked disabled> Air conditioning</label>
               <label><input type="checkbox" checked disabled> TV</label>
@@ -160,15 +160,16 @@
           </div>
       </div>
   </div>
+</div>
+</div>
+</div>
   
   </section>
 
     <!-- Submit Button -->
-    <button type="submit"><a href="{{ url('/reservation/detail') }}" >Book</button></a>
+    <button type="submit" class="button2"><a href="{{ route('customer.reserve.edit') }}">Book</button></a>
     
         
-  </div>
+  
             
-    </div>
-</div>
 @endsection

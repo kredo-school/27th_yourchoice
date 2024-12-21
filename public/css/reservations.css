@@ -16,9 +16,10 @@ body {
     
 }
 
-.amenity {
+.amenities {
     margin-top: 30px;
     padding-bottom: opx;
+    text-align: center;
 }
 
 /* .container2 {
@@ -71,16 +72,25 @@ input {
     color: #444;
 }
 
-.submit-button {
+/* .submit-button {
     text-align: center;
     margin-top: 20px;
     
-}
+} */
 
 .button1 {
     background-color: #cdcdcd;
     margin-bottom: 20px;
 }
+
+.button2 {
+    position: ;
+    margin: 25px;
+    display: grid;
+     margin: auto;
+
+}
+
 
 button {
     background-color: #3399cc;
@@ -90,6 +100,7 @@ button {
     border-radius: 5px;
     cursor: pointer;
     font-size: 1rem;
+        
 }
 
 button:hover {

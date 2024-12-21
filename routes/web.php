@@ -25,12 +25,16 @@ Route::get('/mypage/reservation_detail/completed',[MypageController::class,'rese
 Route::get('/hotels/reservations/show_monthly',[HotelAdminController::class,'reservation_show_monthly'])->name('reservation.reservation_show_monthly');
 Route::get('/hotels/reservations/edit',[HotelAdminController::class,'edit'])->name('reservation.edit');
 
+
 Route::get('/mypage/profile/show',[MypageController::class,'profileShow'])->name('mypage.profileShow');
 Route::get('/mypage/profile/edit',[MypageController::class,'profileEdit'])->name('mypage.profileEdit');
 Route::get('/mypage/profile/password',[MypageController::class,'profilePassword'])->name('mypage.profilePassword');
 Route::get('/reservations',[ReservationController::class,'reservations'])->name('reservations');
 Route::get('/reservation/confirmation', [ReservationController::class, 'reserved_confirmation']);
 Route::get('/reservation/detail', [ReservationController::class, 'reserved_detail']);
+Route::get('/reserve/edit', [ReservationController::class, 'edit'])->name('customer.reserve.edit');
+Route::get('/reserve/show', [ReservationController::class, 'show'])->name('customer.reserve.show');
+Route::get('/reservation/reservationlist', [ReservationController::class, 'reservationlist'])->name('customer.reservation.reservationlist');
 
 //HotelController
 Route::get('/hotels', [HotelController::class, 'index']);
@@ -51,3 +55,4 @@ Route::get('/rooms/edit',[HotelAdminController::class,'roomsedit'])->name('rooms
 Route::get('/register_top', [CustomerController::class, 'register_top'])->name('register_top');
 Route::get('/customer_register', [CustomerController::class,'customerRegister'])->name('customerRegister');
 Route::get('/customers/hotel_detail', [HotelController::class, 'hotel_detail']);
+Route::get('/top', [MypageController::class, 'show'])->name('customer.top.show');

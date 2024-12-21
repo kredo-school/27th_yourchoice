@@ -21,6 +21,26 @@ class ReservationController extends Controller
     {
         return view('customers.reservations.detail'); // ビューを返す例
     } 
+
+    
+    public function edit()
+{
+    return view('customers.reservations.detail');
+}
+
+public function show()
+{
+    return view('customers.reservations.confirmation');
+}
+
+public function reservationlist()
+{
+    return view('customers.mypage.reservation_list');
+}
+
+
+
+    
 }
 
 

@@ -119,7 +119,7 @@
     <section class="confirmation">
         <button class="confirmation-btn">
             <i class="fa-solid fa-lock"></i> 
-            <a href="{{ url('/reservation/confirmation') }}" >Reservation confirmation
+            <a href="{{ route('customer.reserve.show') }}" >Reservation confirmation
         </button></a>
     </section>
 </body>
