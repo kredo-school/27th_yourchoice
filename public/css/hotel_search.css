@@ -35,3 +35,10 @@
 
 
 /* hotel_detail */
+
+
+/* Google map */
+#map {
+    height: 200px; /* 必要に応じて調整 */
+    width: 100%;
+}
