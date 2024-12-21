@@ -98,7 +98,7 @@
                 <div class="col-md-3 text-end">
                     <h6>$100 / 2 travellers</h6>
                     <small>include taxes & fees for 1 night</small>
-                    <a href="#" class="btn btn-danger mt-2">Book now</a>
+                    <a href="{{ route('customer.reserve.edit') }}" class="btn btn-danger mt-2">Book now</a>
                 </div>
             </div>
         </div>
@@ -120,7 +120,7 @@
                 <div class="col-md-3 text-end">
                     <h6>$100 / 2 travellers</h6>
                     <small>include taxes & fees for 1 night</small>
-                    <a href="#" class="btn btn-danger mt-2">Book now</a>
+                    <a href="{{ route('customer.reserve.edit') }}" class="btn btn-danger mt-2">Book now</a>
                 </div>
             </div>
         </div>
