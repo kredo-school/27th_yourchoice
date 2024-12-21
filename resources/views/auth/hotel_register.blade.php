@@ -1,4 +1,5 @@
-@extends('layouts.hotel')
+{{-- login前のためCustomerのNav使用 --}}
+@extends('layouts.customer')
 @section('title', 'Hotel Admin Register')
 
 <!-- CSSのリンク -->

@@ -34,6 +34,7 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function () {
 
       Route::get('/reservation/reservationlist',[App\Http\Controllers\Customer\ReservationController::class,'reservationlist'])->name('reservation.reservationlist');
       Route::get('/reservation/show',[App\Http\Controllers\Customer\ReservationController::class,'show'])->name('reservation.show');
+      Route::get('/reservation/show2',[App\Http\Controllers\Customer\ReservationController::class,'show2'])->name('reservation.show2');
 
       Route::get('/review/list',[App\Http\Controllers\Customer\ReviewController::class,'list'])->name('review.list');
       Route::get('/review/show',[App\Http\Controllers\Customer\ReviewController::class,'show'])->name('review.show');

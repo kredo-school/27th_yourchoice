@@ -56,7 +56,7 @@
                                         <p class="fs-5 fw-bolder align-bottom" >{{ '$100' }}</p>
                                     </div>
                                     <div class="col-12 mt-2 d-flex justify-content-end">
-                                        <a href="{{ route('customer.reservation.show')}}" class="align-self-end">read more</a>
+                                        <a href="{{ route('customer.reservation.show2')}}" class="align-self-end">read more</a>
                                     </div>
                                 </div>
                             </div>
