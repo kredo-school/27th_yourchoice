@@ -1,7 +1,7 @@
 {{-- Customers Inquary --}}
 @extends('layouts.customer')
     <!-- CSS -->
-    <link rel="stylesheet" href="{{ asset('css/chatstyle.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/inquarystyle.css') }}">
 
 @section('content')
 <!DOCTYPE html>

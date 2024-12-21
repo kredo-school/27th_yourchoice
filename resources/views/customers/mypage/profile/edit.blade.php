@@ -97,7 +97,7 @@
 
                     <!-- Action Buttons -->
                     <div class="d-flex justify-content-between">
-                        <a href="#" class="sub-button-disabled ">Cancel</a>
+                        <a href="{{ route('customer.profile.show') }}" class="sub-button-disabled ">Cancel</a>
                         <button type="submit" class="customer-css-mainbutton">Save Changes</button>
                     </div>
                 </form>

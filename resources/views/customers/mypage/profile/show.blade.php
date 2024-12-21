@@ -57,8 +57,8 @@
                         <!--into the selected category from edit page-->
             
                     <div class="d-flex justify-content-between">
-                        <button type="button" class="sub-button-outline" >Password Setting</button>
-                        <button type="submit" class="sub-button-outline" >Edit Profile</button>
+                        <a href="{{ route('customer.profile.editpass') }}" class="sub-button-outline ">Password Setting</a>
+                        <a href="{{ route('customer.profile.edit') }}" class="sub-button-outline ">Edit Profile</a>
                     </div>
                 </form>
             </div>

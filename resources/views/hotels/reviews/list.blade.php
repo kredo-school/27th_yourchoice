@@ -52,7 +52,7 @@
                                 </p>
                                 <a href="#" class="text-dark fw-bold">read more</a>
                                 <!-- Stretched Link （カード全体をリンクにする）-->
-                                <a href="show" class="stretched-link"></a>
+                                <a href="{{ route('hotel.review.show') }}" class="stretched-link"></a>
                             </div>
                         </div> 
                     </div>

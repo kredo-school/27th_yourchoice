@@ -55,7 +55,10 @@
                         <ul class="navbar-nav ms-auto">
                             <div class="d-flex">
                                     <a href="#"><img src="{{ asset('images/globe-solid.svg') }}" class="logo-sub"></a><span class="language mx-1 me-3">English</span>
-                                    <a href="{{ route('customer.reservation.reservationlist') }}"><img src="{{ asset('images/calendar-days-solid.svg') }}" class="logo-sub me-3"></i></a> 
+                                    {{-- notification挿入：うまくいかず... --}}
+                                    <a href="#" data-toggle="modal" data-target="#reservationModal"><img src="{{ asset('images/calendar-days-solid.svg') }}" class="logo-sub me-3"></i></a> 
+                                    @include('notification.modals.notification')
+                                    
                                     <a href="{{ route('customer.inquary.show') }}"><img src="{{ asset('images/envelope-solid.svg') }}" class="logo-sub me-3"></a> 
                                     <a href="{{ route('customer.profile.show') }}" class="btn btn-outline-secondary btn-mypage me-2">My Page</a>
                                     <a href="#" class="btn btn-outline-secondary btn-logout" 
