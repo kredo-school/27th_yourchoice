@@ -101,8 +101,7 @@
         </ul>
     </nav>
     <div class="text-center">
-                <a href="{{ route('hotel.review.list') }}">
-                    <button type="button" class="btn sub-button-disabled">Back</button></a>
+             <a href="{{ route('hotel.review.list') }}" class="sub-button-disabled ">Back</a>
         
     </div>
 </div>
