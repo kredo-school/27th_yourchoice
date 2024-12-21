@@ -77,7 +77,7 @@
                              
                         <!-- Register Link -->
                         <div class="text-center mt-4">
-                            <a href="#" class="register-text fw-bold">Please Register Here!!</a>
+                            <a href="{{route("register.top")}}" class="register-text fw-bold">Please Register Here!!</a>
                             
                         </div>
 

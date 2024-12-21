@@ -26,7 +26,10 @@
     <!-- CSSのリンク -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
-    
+    <!-- JSのリング -->
+    <script src="{{ asset('js/notification.js') }}"></script>
+
+
 
 
 
@@ -55,8 +58,15 @@
                         <ul class="navbar-nav ms-auto">
                             <div class="d-flex">
                                     <a href="#"><img src="{{ asset('images/globe-solid.svg') }}" class="logo-sub"></a><span class="language mx-1 me-3">English</span>
-                                    <a href="{{ route('hotel.reservation.show_daily') }}"><img src="{{ asset('images/calendar-days-solid.svg') }}" class="logo-sub me-3"></i></a> 
+
+                                    <a href="#" id="reservationModalLabel" class="notification-icon">
+                                        <img src="{{ asset('images/calendar-days-solid.svg') }}" class="logo-sub me-3">
+                                    </a>
+                                    {{-- Include modal here --}}
+                                    @include('layouts.modals.notification_hotel')
+
                                     <a href="{{ route('hotel.inquary.show') }}"><img src="{{ asset('images/envelope-solid.svg') }}" class="logo-sub me-3"></a> 
+                                    
                                     <a href="{{ route('hotel.profile.show') }}" class="btn btn-outline-secondary btn-mypage me-2">My Page</a>
                                     <a href="#" class="btn btn-outline-secondary btn-logout" 
                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -78,12 +88,12 @@
                     <div class="list-group">
                     <div class="mt-4"><h2>Kredo Hotel</h2></div>
 
-                        <a href="{{ route('hotel.profile.show') }}" class="list-group-item list-group-item-action mt-3 p-3">Profile</a>
-                        <a href="{{ route('hotel.room.show') }}" class="list-group-item list-group-item-action mt-3 p-3">Room List</a>
-                        <a href="{{ route('hotel.price.show') }}" class="list-group-item list-group-item-action mt-3 p-3">Price Management</a>
-                        <a href="{{ route('hotel.reservation.show_monthly') }}" class="list-group-item list-group-item-action mt-3 p-3">Reservation Management</a>
-                        <a href="{{ route('hotel.review.list') }}" class="list-group-item list-group-item-action mt-3 p-3">Review Management</a>
-                        <a href="{{ route('hotel.inquary.show') }}" class="list-group-item list-group-item-action mt-3 p-3">Inquary Management</a>
+                        <a href="{{ route('hotel.profile.show') }}" class="list-group-item list-group-item-action mt-3 p-3 {{ request()->is('hotel/profile/*') ? 'active' : '' }}">Profile</a>
+                        <a href="{{ route('hotel.room.show') }}" class="list-group-item list-group-item-action mt-3 p-3 {{ request()->is('hotel/room/*') ? 'active' : '' }}">Room List</a>
+                        <a href="{{ route('hotel.price.show') }}" class="list-group-item list-group-item-action mt-3 p-3 {{ request()->is('hotel/price/*') ? 'active' : '' }}">Price Management</a>
+                        <a href="{{ route('hotel.reservation.show_monthly') }}" class="list-group-item list-group-item-action mt-3 p-3 {{ request()->is('hotel/reservation/*') ? 'active' : '' }}">Reservation Management</a>
+                        <a href="{{ route('hotel.review.list') }}" class="list-group-item list-group-item-action mt-3 p-3 {{ request()->is('hotel/review/*') ? 'active' : '' }}">Review Management</a>
+                        <a href="{{ route('hotel.inquary.show') }}" class="list-group-item list-group-item-action mt-3 p-3 {{ request()->is('hotel/inquary/*') ? 'active' : '' }}">Inquary Management</a>
                     </div>
                 </div>
             </aside>
