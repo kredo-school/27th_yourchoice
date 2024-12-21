@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ asset('css/hoteladmin.css') }}">
     {{-- Editpageはvalue={{old}}置いておけばOK　新規登録の場合は空欄になる --}}
     <div class="container mt-4">
-        <form method="POST" action="{{ route('profile.edit') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('hotel.profile.show') }}" enctype="multipart/form-data">
             @csrf
             @method('GET')
             <div class="row">

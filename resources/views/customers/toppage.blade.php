@@ -14,31 +14,31 @@
         <div class="categories-grid">
             <!-- Wheelchair and Senior -->
             {{-- <a href="{{ route('categories.wheelchair') }}" class="category"> --}}
-            <a href="#" class="category">
+            <a href="{{route("customer.top.search")}}" class="category">
                 <img src="{{ asset('images/wheelchair.png') }}" alt="Wheelchair and Senior">
             </a>
             <!-- Pregnancy -->
-            <a href="#" class="category">
+            <a href="{{route("customer.top.search")}}" class="category">
                 {{-- <a href="{{ route('categories.pregnancy') }}" class="category"> --}}
                 <img src="{{ asset('images/pregnancy.png') }}" alt="Pregnancy">
             </a>
             <!-- Family -->
-            <a href="#" class="category">
+            <a href="{{route("customer.top.search")}}" class="category">
                 {{-- <a href="{{ route('categories.family') }}" class="category"> --}}
                 <img src="{{ asset('images/family.png') }}" alt="Family">
             </a>
             <!-- Visual and Hearing Impaired -->
-            <a href="#" class="category">
+            <a href="{{route("customer.top.search")}}" class="category">
                 {{-- <a href="{{ route('categories.visualHearing') }}" class="category"> --}}
                 <img src="{{ asset('images/visual-hearing.png') }}" alt="Visual and Hearing Impaired">
             </a>
             <!-- Religious -->
-            <a href="#" class="category">
+            <a href="{{route("customer.top.search")}}" class="category">
             {{-- <a href="{{ route('categories.religious') }}" class="category"> --}}
                 <img src="{{ asset('images/religious.png') }}" alt="Religious">
             </a>
             <!-- English Friendly -->
-            <a href="#" class="category">
+            <a href="{{route("customer.top.search")}}" class="category">
             {{-- <a href="{{ route('categories.englishFriendly') }}" class="category"> --}}
                 <img src="{{ asset('images/english-friendly.png') }}" alt="English Friendly">
             </a>

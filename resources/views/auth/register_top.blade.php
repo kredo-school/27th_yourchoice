@@ -10,8 +10,8 @@
         <section class="choice-section">
             <h1>Which one are you?</h1>
             <div class="choices">
-                <a href="/customer" class="choice customer">Customer</a>
-                <a href="/hotel" class="choice hotel">Hotel</a>
+                <a href="{{route("register.create_customer")}}" class="choice customer">Customer</a>
+                <a href="{{route("register.create_hotel")}}" class="choice hotel">Hotel</a>
             </div>
         </section>
     </main>
