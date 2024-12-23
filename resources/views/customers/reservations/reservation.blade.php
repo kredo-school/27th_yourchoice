@@ -7,7 +7,7 @@
 <div class="container-fluid">
   <div class="row">                                
     <div class="container-reservations">
-      <button  type="submit" class="button1">Return to the  previous page</button>
+      <button  type="submit" class="button1"><a href="{{ route('customer.top.show') }}" >Return to the  previous page</button></a>
                       
       <!-- Step 1 -->
       <section class="step" id="step1">
@@ -132,36 +132,44 @@
 
   <!-- Reservation Details -->
   <section class="step">
-      <h2><strong><i class="fa-solid fa-hotel"></i> Reservation Details</strong></h2>
+    <div class="reservation-container">
+      <h1>■Reservation Details</h1>
       <div class="reservation-details">
-          <p><strong>Hotel Name:</strong> YOUR CHOICE</p>
-          <p><strong>Room Type:</strong> Twin Room</p>
-          <p><strong>Number of people:</strong> 2</p>
-          <p><strong>Reservation Date:</strong> 9, December, 2024 → 10, December, 2024</p>
-          <p><strong>Price:</strong> $150</p>
+        <dl>
+          <dt>■ Hotel Name</dt>
+          <dd>YOUR CHOICE</dd>
+  
+          <dt>■ Room Type</dt>
+          <dd>Twin Room</dd>
+  
+          <dt>■ Number of people</dt>
+          <dd>2</dd>
+  
+          <dt>■ Reservation Date</dt>
+          <dd>9, December, 2024 → 10, December, 2024</dd>
+  
+          <dt>■ Price</dt>
+          <dd>$ 150</dd>
+      </dl>
+          <div class="amenities">
+              <strong>■ Amenity</strong><br>
+              <label><input type="checkbox" checked disabled> Wi-Fi</label>
+              <label><input type="checkbox" checked disabled> Air conditioning</label>
+              <label><input type="checkbox" checked disabled> TV</label>
+              <label><input type="checkbox" checked disabled> Dryer</label>
+          </div>
       </div>
-     <div>
-
-      <h5 class="amenity">■Amenity</h5>
-      <input type="checkbox" name="amenity" id="wi-fi" 
-     value="wi-fi">
-      <label for="wi-fi">Wi-fi</label>
-      <input type="checkbox" name="amenity" id="air" 
-     value="air">
-      <label for="air">Air conditioning</label>
-      <input type="checkbox" name="amenity" id="tv" 
-     value="tv">
-      <label for="tv">TV</label>
-      <input type="checkbox" name="amenity" id="dryer" 
-     value="dryer">
-      <label for="dryer">Dryer</label>
-     </div>
+  </div>
+</div>
+</div>
+</div>
+  
   </section>
 
     <!-- Submit Button -->
-    <button type="submit">Book</button>
-  </div>
+    <button type="submit" class="button2"><a href="{{ route('customer.reserve.show') }}">Book</button></a>
+    
+        
+  
             
-    </div>
-</div>
 @endsection
