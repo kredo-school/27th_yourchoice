@@ -153,3 +153,12 @@
 .notification-dropdown a:hover {
   background-color: #f1f1f1;
 }
+
+body {
+  background-color: #ffffff; /* 任意の背景色 */
+}
+
+.card {
+  background-color: #ffffff; /* 任意の背景色 */
+}
+

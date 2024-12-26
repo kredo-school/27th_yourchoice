@@ -16,9 +16,10 @@ body {
     
 }
 
-.amenity {
+.amenities {
     margin-top: 30px;
     padding-bottom: opx;
+    text-align: center;
 }
 
 /* .container2 {
@@ -71,16 +72,24 @@ input {
     color: #444;
 }
 
-.submit-button {
+/* .submit-button {
     text-align: center;
     margin-top: 20px;
     
-}
+} */
 
 .button1 {
     background-color: #cdcdcd;
     margin-bottom: 20px;
 }
+
+.button2 {
+     margin: 25px;
+    display: grid;
+     margin: auto;
+
+}
+
 
 button {
     background-color: #3399cc;
@@ -90,6 +99,7 @@ button {
     border-radius: 5px;
     cursor: pointer;
     font-size: 1rem;
+        
 }
 
 button:hover {
@@ -140,6 +150,7 @@ h3 {
     font-family: Arial, sans-serif;
 }
 
+
 .step {
     margin-bottom: 40px;
     padding: 20px;
@@ -160,6 +171,10 @@ h3 {
 .step4 {
     display:flex;
     
+}
+
+.step5 {
+    text-align: center;
 }
 
 .form-group {
@@ -187,7 +202,7 @@ h3 {
     border-radius: 10px; /* 角丸 */
     padding: 20px;
     background-color: #f9f9f9; /* 背景色 */
-    overflow: hidden; 枠を超えた部分を非表示に */
+    overflow: hidden; 
     
 }
 
@@ -436,14 +451,42 @@ h3 {
 }
 
 
+/* reservation-details */
 .reservation-details {
-    line-height: 1.8;
-    text-decoration: underline
+    line-height: 1.6;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    align-items: center; 垂直方向を揃える
 }
 
-.reservation-details p {
-    margin: 5px 0;
+/* .reservation-details p {
+    margin: 10px 0;
     font-size: 1em;
+    text-align: auto;
+    text-decoration: underline;
+} */
+
+
+.reservation-details dl {
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+}
+
+.reservation-details dt {
+    font-weight: bold;
+    color: #555;
+    margin-top: 10px;
+}
+
+.reservation-details dd {
+    margin: 0 0 10px 0;
+    padding-left: 10px;
+    color: #333;
+    text-decoration: underline;
 }
 
 
@@ -577,7 +620,7 @@ p {
 
 
 /* Button */
-.confirmation-btn {
+/* .confirmation-btn {
     background-color: #e96d7a;
     color: #fff;
     border: none;
@@ -589,9 +632,18 @@ p {
     display: inline-flex;
     align-items: center;
     gap: 5px;
+} */
+
+.confirmation {
+    text-align: center;
+    margin-top: 20px;
 }
 
 .confirmation-btn  {
-    font-size: 14px;
     background-color: #3399cc;
+    
 }
+
+
+
+
