@@ -15,7 +15,7 @@
             <div class="row">
                 <!-- Left Side (Basic Information) -->
                 <div class="col-md-6">
-                    <div class="card mb-4">
+                    <div class="card mb-3">
                         <div class="card-header">Basic</div>
                         <div class="card-body">
                             <div class="mb-3">
@@ -45,15 +45,12 @@
 
                             <div class="mb-3">
                                 <label for="hotel_address" class="form-label">Address</label>
-                                <div class="d-flex gap-2">
-                                    <input type="text" class="form-control" id="hotel_region" name="hotel_region"
-                                        placeholder="Region/State" value="{{ old('hotel_region') }}">
-                                    <input type="text" class="form-control" id="hotel_city" name="hotel_city"
-                                        placeholder="City" value="{{ old('hotel_city') }}">
-                                    <input type="text" class="form-control" id="hotel_address" name="hotel_address"
-                                        placeholder="Address" value="{{ old('hotel_address') }}">
-
-                                </div>
+                                <input type="text" class="form-control mb-2" id="hotel_region" name="hotel_region"
+                                    placeholder="Region/State" value="{{ old('hotel_region') }}">
+                                <input type="text" class="form-control mb-2" id="hotel_city" name="hotel_city"
+                                    placeholder="City" value="{{ old('hotel_city') }}">
+                                <input type="text" class="form-control" id="hotel_address" name="hotel_address"
+                                    placeholder="Address" value="{{ old('hotel_address') }}">
                             </div>
 
                             <div class="mb-3">
@@ -62,17 +59,13 @@
                                     value="{{ old('hotel_phone') }}">
                             </div>
                             <div class="mb-3">
-                                <label for="access" class="form-label">Definition of Access</label>
+                                <label for="access" class="form-label">Access</label>
                                 <input type="text" class="form-control" id="access" name="access"
                                     value="{{ old('access') }}">
                             </div>
                             <div class="mb-3">
-                                <label for="attractions" class="form-label">Attractions of the Hotel</label>
+                                <label for="attractions" class="form-label">Description</label>
                                 <textarea class="form-control" id="attractions" name="attractions">{{ old('attractions') }}</textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label for="remarks" class="form-label">Remarks</label>
-                                <textarea class="form-control" id="remarks" name="remarks">{{ old('remarks') }}</textarea>
                             </div>
                         </div>
                     </div>
@@ -80,9 +73,9 @@
 
                 <!-- Right Side (Images and Other Sections) -->
                 <div class="col-md-6">
-                    <div class="card mb-2">
+                    <div class="card mt-2 mb-2">
+                        <h5 class="card-header">Upload Images</h5>
                         <div class="card-body">
-                            <h5 class="card-header">Upload Images</h5>
                             <div class="image-upload-container ms-3 mt-3">
                                 @for ($i = 0; $i < 5; $i++)
                                     <div class="image-preview">
@@ -123,8 +116,7 @@
                         </div>
                     </div> --}}
 
-
-                    <div class="card mb-2">
+                    <div class="card mt-2 mb-2">
                         <div class="card-header">Service</div>
                         <div class="card-body">
                             <!-- Hotel Service Section -->
@@ -147,11 +139,12 @@
                                 </div>
                                 <div class="price-input d-inline-flex align-items-center">
                                     <span>Price:</span>
-                                    <span class="ms-1">$</span>
-                                    <input type="number" class="form-control price-field ms-1" name="breakfast_price"
-                                        aria-label="Price">
+                                    <div class="input-group ms-2 w-50">
+                                        <span class="input-group-text">$</span>
+                                        <input type="number" class="form-control w-50"
+                                            name="breakfast_price" aria-label="Price">
+                                    </div>
                                 </div>
-
                             </div>
 
                             <!-- Amenity Section -->
@@ -207,9 +200,9 @@
                     </div>
 
                     <!-- Category Section -->
-                    <div class="card mb-2">
+                    <div class="card mt-2 mb-2">
+                        <h5 class="card-header">Category</h5>
                         <div class="card-body">
-                            <h5 class="card-header">Category</h5>
                             <div class="row">
                                 <div class="col-md">
                                     <div class="form-check">
@@ -265,9 +258,9 @@
                     </div>
 
                     <!-- Cancellation Policy Section -->
-                    <div class="card">
+                    <div class="card mt-2 mb-2">
+                        <h5 class="card-header">Cancellation Policy</h5>
                         <div class="card-body">
-                            <h5 class="card-header">Cancellation Policy</h5>
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="freeCancellation">Free Cancellation Period:</label>
@@ -287,11 +280,6 @@
                                     <div class="d-flex align-items-center mt-1">
                                         <span>Same-Day</span>
                                         <input type="number" class="form-control mx-2 form-width" name="fee_same_day">
-                                        <span>%</span>
-                                    </div>
-                                    <div class="d-flex align-items-center mt-1">
-                                        <span>No-Shows</span>
-                                        <input type="number" class="form-control mx-2 form-width" name="fee_no_shows">
                                         <span>%</span>
                                     </div>
                                 </div>

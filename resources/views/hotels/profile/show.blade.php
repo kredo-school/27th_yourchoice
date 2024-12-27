@@ -15,7 +15,7 @@
             <div class="row">
                 <!-- Left Side (Basic Information) -->
                 <div class="col-md-6">
-                    <div class="card mb-4">
+                    <div class="card mt-2 mb-2">
                         <div class="card-header">Basic</div>
                         <div class="card-body">
                             <div class="mb-3">
@@ -50,16 +50,12 @@
                                 <p class="form-control-plaintext border-bottom">{{ old('hotel_phone') }}</p>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Definition of Access</label>
+                                <label class="form-label">Access</label>
                                 <p class="form-control-plaintext border-bottom">{{ old('access') }}</p>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Attractions of the Hotel</label>
+                                <label class="form-label">Description</label>
                                 <p class="form-control-plaintext border-bottom">{{ old('attractions') }}</p>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Remarks</label>
-                                <p class="form-control-plaintext border-bottom">{{ old('remarks') }}</p>
                             </div>
                         </div>
                     </div>
@@ -67,9 +63,9 @@
 
                 <!-- Right Side (Images and Other Sections) -->
                 <div class="col-md-6">
-                    <div class="card mb-2">
+                    <div class="card mt-2 mb-2">
+                        <h5 class="card-header">Uploaded Images</h5>
                         <div class="card-body">
-                            <h5 class="card-header">Uploaded Images</h5>
                             <div class="image-upload-container ms-3 mt-3">
                                 @for ($i = 0; $i < 5; $i++)
                                     <div class="image-preview">
@@ -91,7 +87,7 @@
                     </div>
 
                     <!-- Right Side (Service and Amenities) -->
-                    <div class="card mb-2">
+                    <div class="card mt-2 mb-2">
                         <div class="card-header">Service</div>
                         <div class="card-body">
                             <!-- Hotel Service Section -->
@@ -194,9 +190,9 @@
                 </div> --}}
 
                     <!-- Category Section -->
-                    <div class="card mb-2">
+                    <div class="card mt-2 mb-2">
+                        <h5 class="card-header">Category</h5>
                         <div class="card-body">
-                            <h5 class="card-header">Category</h5>
                             <div class="category-container">
                                 <span class="category-item">Wheelchair and Senior</span>
                                 <span class="category-item">Visual and Hearing Impaired</span>
@@ -209,9 +205,9 @@
                     </div>
 
                     <!-- Cancellation Policy Section -->
-                    <div class="card">
+                    <div class="card mt-2 mb-2">
+                        <h5 class="card-header">Cancellation Policy</h5>
                         <div class="card-body">
-                            <h5 class="card-header">Cancellation Policy</h5>
                             <div class="row">
                                 <div class="col-md-6">
                                     <p>Free Cancellation Period: <br>X days before the reservation date.</p>
@@ -220,7 +216,6 @@
                                     <p>Cancellation Fee Percentage:</p>
                                     <p>General: X%</p>
                                     <p>Same-Day: X%</p>
-                                    <p>No-Shows: X%</p>
                                 </div>
                             </div>
                         </div>
