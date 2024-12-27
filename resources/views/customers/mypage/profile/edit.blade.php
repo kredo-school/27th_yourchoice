@@ -40,28 +40,10 @@
                         <input type="email" name="customer-email" id="customer-email" class="form-control" value="#" autofocus>
                     </div>
 
-                    <!-- Date of Birth and Nationality -->
-                    <div class="row mb-3">
-                        <div class="col">
-                            <label class="form-label">Date of Birth</label>
-                            <input type="date" name="birthdate" id="birthdate" class="form-control" value="{{ old('birthdate') }}">
-                        </div>
-                        <div class="col">
-                            <label class="form-label">Nationality</label>
-                            <input type="text" name="nationality" id="nationality" class="form-control" value="{{ old('nationality') }}">
-                        </div>
-                    </div>
-
                     <!-- Phone Number -->
                     <div class="mb-3">
                         <label class="form-label">Phone Number</label>
                         <input type="text" name="customer-phone" id="customer-phone" class="form-control" value="{{ old('customer-phone') }}">
-                    </div>
-
-                    <!-- Passport Number -->
-                    <div class="mb-3">
-                        <label class="form-label">Passport No.</label>
-                        <input type="number" name="passport" id="passport" class="form-control" value="#" autofocus>
                     </div>
 
                     <!-- Accessibility Categories -->
