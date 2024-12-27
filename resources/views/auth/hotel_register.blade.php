@@ -12,7 +12,7 @@
             <h1 class="text-center">Register as a Hotel Admin</h1> 
             <div class="card">
                 <div class="card-body">
-                    <form method="POST" action="{{ route('customer.profile.show') }}">
+                    <form method="POST" action="{{ route('hotel.profile.show') }}">
                         @csrf
                         @method('GET')
                         <div class="row">
@@ -54,6 +54,20 @@
                                 <input type="text" class="form-control" id="hotel_phone" name="hotel_phone"
                                     value="{{ old('hotel_phone') }}">
                             </div>
+
+                            
+                            <!-- Password -->
+                            <div class="mb-3">
+                                <label class="form-label">Password</label>
+                                <input type="password" name="password" id="password" class="form-control" value="#" autofocus>
+                            </div>
+
+                            <!-- Confirm Password -->
+                            <div class="mb-3">
+                                <label class="form-label">Confirm Password</label>
+                                <input type="password" name="password" id="password" class="form-control" value="#" autofocus>
+                            </div>
+
                         </div>
 
                         <!-- Action Buttons -->
