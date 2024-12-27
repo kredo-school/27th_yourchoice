@@ -18,8 +18,8 @@ return new class extends Migration
       $table->string('room_type', 100); // 部屋タイプ
       $table->decimal('price', 10, 2); // 価格（1泊）
       $table->unsignedInteger('capacity'); // 定員（人数）
-      $table->longText('image'); // 画像
-      $table->text('remarks'); // 備考
+      $table->longText('image')->nullable(); // 画像
+      $table->text('remarks')->nullable();; // 備考
       $table->timestamps(); //作成・更新日時
 
       $table->foreign('hotel_id')->references('id')->on('hotels');
