@@ -35,7 +35,7 @@ return new class extends Migration
       $table->decimal('breakfast_price', 10, 2); // 朝食の値段
       $table->timestamps(); // 作成・更新日時
 
-      $table->foreign('user_id')->references('id')->on('users');
+      $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
     });
   }
 
