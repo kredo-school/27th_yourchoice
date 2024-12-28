@@ -32,23 +32,9 @@
                         <input type="email" name="costomer-email" id="customer-email" class="form-control" value="#" autofocus>
                     </div>
                     
-                    <div class="row mb-3">
-                        <div class="col">
-                            <label class="form-label">Date of Birth</label>
-                            <input type="date" name="birthdate" id="birthdate" class="form-control" value="#" autofocus>
-                        </div>
-                        <div class="col">
-                            <label class="form-label">Nationality</label>
-                            <input type="text" name="nationality" id="nationality" class="form-control" value="#" autofocus>
-                        </div>
-                    </div>
                     <div class="mb-3">
                         <label class="form-label">Phone number</label>
                         <input type="number" name="customer-phone" id="cusomer-phone" class="form-control" value="#" autofocus>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Passport No.</label>
-                        <input type="number" name="passport" id="passport" class="form-control" value="#" autofocus>
                     </div>
 
                     <div class="mb-4">
