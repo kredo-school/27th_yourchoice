@@ -15,14 +15,12 @@ return new class extends Migration
       $table->id(); // ホテルID
       $table->unsignedBigInteger('user_id'); // ユーザーID（外部キー）
       $table->string('hotel_name'); // ホテル名
-      $table->string('email')->unique(); // メール
-      $table->text('url'); // ホテルの公式ウェブサイトURL
+            $table->text('url'); // ホテルの公式ウェブサイトURL
       $table->string('postal_code', 10); // 郵便番号
       $table->string('prefecture', 10); // 都道府県
       $table->string('city', 100); // 市
       $table->string('address', 100); // 市以下の住所
-      $table->string('phone_number', 20); // 電話番号
-      $table->string('access'); // 最寄駅までのアクセス時間
+            $table->string('access'); // 最寄駅までのアクセス時間
       $table->text('description'); // ホテルの説明
       $table->longText('image_main'); // ホテルの画像(メイン)
       $table->longText('image_sub1')->nullable(); // ホテルの画像(サブ1)
