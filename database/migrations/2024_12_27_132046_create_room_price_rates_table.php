@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('room_price_rates', function (Blueprint $table) {
             $table->id(); // 自動増分ID
-            $table->enum('room_type', ['SINGLE', 'DOUBLE', 'TWIN']); // ルームタイプ
+            $table->string('room_type', 100); // ルームタイプ
             $table->decimal('rate', 8, 2); // レート（小数点を含む金額）
             $table->date('date'); // 日付
             $table->timestamps(); // 作成日時と更新日時
