@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="{{ asset('css/hotel_search.css') }}">
 
 <div class="container mt-5">
-    <h1 class="text-center">Wheelchair and Senior</h1>
+    <h1 class="text-center">{{ " Wheelchair and Senior " }}</h1>
     
     <div class="input-group my-4">
         <input type="text" class="form-control" placeholder="Where to?">
@@ -54,9 +54,9 @@
                     <img src="{{ asset('images/hotel.jpg') }}" alt="hotel-img" class="hotel-img">
                 </div>
                 <div class="col-md-7">
-                    <h5>Hotel A</h5>
-                    <p>Tokyo</p>
-                    <span class="badge bg-pink">Family</span>
+                    <h5>{{"Hotel A"}}</h5>
+                    <p>{{"Tokyo"}}</p>
+                    <span class="badge bg-pink">{{"Family"}}</span>
                 </div>
                 <div class="col-md-3 text-end">
                     <div class="rating">
