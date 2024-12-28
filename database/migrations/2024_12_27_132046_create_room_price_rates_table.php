@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('room_price_rate', function (Blueprint $table) {
+        Schema::create('room_price_rates', function (Blueprint $table) {
             $table->id(); // 自動増分ID
             $table->enum('room_type', ['SINGLE', 'DOUBLE', 'TWIN']); // ルームタイプ
             $table->decimal('rate', 8, 2); // レート（小数点を含む金額）
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('room_price_rate');
+        Schema::dropIfExists('room_price_rates');
     }
 };
