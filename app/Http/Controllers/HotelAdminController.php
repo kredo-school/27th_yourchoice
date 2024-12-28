@@ -68,6 +68,36 @@ class HotelAdminController extends Controller
 
 
 
+  private $hotel;
+  
+  public function __construct(Hotel $hotel)
+  {
+    $this->hotel = $hotel;
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   // BE memo RoomList Rina
   // private $room;
 
