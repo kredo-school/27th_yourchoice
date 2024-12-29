@@ -12,14 +12,22 @@ class PriceController extends Controller
 {
 
     // レートを表示させるページに遷移する
-    public function show()
+    public function show(Request $request)
     {
+        // 現在の週を指定（`current_week`がなければ今週）
+        $currentWeek =  (int) $request->input('current_week', 0);
+
+        // 基準日（今日）
+        $today = now();
+
+        // 指定された週の月曜日を取得
+        $startDate = $today->startOfWeek()->addWeeks($currentWeek);
+
+        // 指定された週の日曜日を取得
+        $endDate = $startDate->copy()->endOfWeek();
+        
         // 固定されたホテルID
         $hotelId = 1;
-
-        // 現在の開発条件に基づき12/2から1週間のデータを取得
-        $startDate = Carbon::create(2024, 12, 2); // 開始日
-        $endDate = $startDate->copy()->addDays(6); // 1週間後
 
         // ホテルが持つ全てのルームタイプを取得（重複を排除）
         $roomTypes = Room::where('hotel_id', $hotelId)
@@ -41,21 +49,29 @@ class PriceController extends Controller
         }
 
         // ビューにデータを渡す
-        return view('hotels.price.show', compact('roomTypes', 'rates', 'dates'));
+        return view('hotels.price.show', compact('roomTypes', 'rates', 'dates', 'currentWeek'));
     }
 
 
 
 
     // レートを編集するページに遷移する
-    public function edit()
+    public function edit(Request $request)
     {
+        // 現在の週を指定（`current_week`がなければ今週）
+        $currentWeek =  (int) $request->input('current_week', 0);
+
+        // 基準日（今日）
+        $today = now();
+
+        // 指定された週の月曜日を取得
+        $startDate = $today->startOfWeek()->addWeeks($currentWeek);
+
+        // 指定された週の日曜日を取得
+        $endDate = $startDate->copy()->endOfWeek();
+
         // 固定されたホテルID
                 $hotelId = 1;
-
-        // 固定された日付範囲（例: 12/2から1週間）
-        $startDate = Carbon::create(2024, 12, 2);
-        $endDate = $startDate->copy()->addDays(6);
 
         // ホテルが持つ全てのルームタイプを取得（重複を排除）
         $roomTypes = Room::where('hotel_id', $hotelId)
@@ -77,7 +93,7 @@ class PriceController extends Controller
             $dates[] = $date->toDateString();
         }
 
-        return view('hotels.price.edit', compact('roomTypes', 'rates', 'dates'));
+        return view('hotels.price.edit', compact('roomTypes', 'rates', 'dates', 'currentWeek'));
 
     }
 
@@ -106,9 +122,11 @@ class PriceController extends Controller
                 ]
             );
         }
+            // 編集対象の週を取得
+            $currentWeek = $request->input('current_week', 0);
 
         // 更新完了後にリダイレクト
-        return redirect()->route('hotel.price.show')->with('success', 'Prices updated successfully.');
+        return redirect()->route('hotel.price.show', ['current_week' => $currentWeek])->with('success', 'Prices updated successfully.');
     }
     
 }

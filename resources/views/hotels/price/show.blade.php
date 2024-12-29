@@ -8,8 +8,17 @@
 
 
 <div class="d-flex justify-content-between align-items-center mb-3">
-    <button class="btn btn-outline-secondary">&lt;</button>
-    <button class="btn btn-outline-secondary">&gt;</button>
+    <!-- PREVIOUS WEEK BUTTON -->
+    <form method="GET" action="{{ route('hotel.price.show') }}">
+        <input type="hidden" name="current_week" value="{{ $currentWeek - 1 }}">
+        <button class="btn btn-outline-secondary">&lt;</button>
+    </form>
+
+    <!-- NEXT WEEK BUTTON -->
+    <form method="GET" action="{{ route('hotel.price.show') }}">
+        <input type="hidden" name="current_week" value="{{ $currentWeek + 1 }}">
+        <button class="btn btn-outline-secondary">&gt;</button>
+    </form>
 </div>
 
 
@@ -43,10 +52,14 @@
                     <td>{{ $roomType }}</td>
                     @foreach ($dates as $date)
                         @php
-                            $rate = $rates[$roomType]->firstWhere('date', $date) ?? null;
+                            $rate = isset($rates[$roomType]) ? $rates[$roomType]->firstWhere('date', $date) : null;
+                            $rateValue = $rate ? round($rate->rate) : null;
+                            $class = $rateValue === null || $rateValue === 100.00
+                                ? 'black-rate' 
+                                : ($rateValue > 100 ? 'red-rate' : 'blue-rate');
                         @endphp
-                        <td>
-                            {{ $rate ? round($rate->rate) . '%' : '-' }}
+                        <td class="{{ $class }}">
+                            {{ $rateValue !== null ? $rateValue . '%' : '-' }}
                         </td>
                     @endforeach
                 </tr>
@@ -57,6 +70,9 @@
 </table>
 
 
-<a href="{{ route('hotel.price.edit') }}" class="subbtn1">Edit Prices</a>
+    <form method="GET" action="{{ route('hotel.price.edit') }}">
+        <input type="hidden" name="current_week" value="{{ $currentWeek }}">
+        <button class="subbtn1">Edit Prices</button>
+    </form>
 
 @endsection

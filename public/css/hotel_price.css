@@ -88,6 +88,7 @@
     border-radius: 8px; /* 角を丸める */
     text-decoration: none; /* 下線を削除 */
     cursor: pointer; /* ホバー時のポインター表示 */
+    background-color: #ffffff;
 }
 
 
@@ -105,4 +106,20 @@
     border-radius: 8px; /* 角を丸める */
     text-decoration: none; /* 下線を削除 */
     cursor: pointer; /* ホバー時のポインター表示 */
+}
+
+/* 文字色を修正 */
+.red-rate {
+    color: red !important;
+    font-weight: bold !important;
+}
+
+.blue-rate {
+    color: blue !important;
+    font-weight: bold !important;
+}
+
+.black-rate {
+    color: black !important;
+    font-weight: normal !important;
 }

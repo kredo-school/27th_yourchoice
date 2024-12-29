@@ -1,13 +1,23 @@
 @extends('layouts.hotel')
 
 <link rel="stylesheet" href="{{ asset('css/hotel_price.css') }}">
+<script src="{{ asset('js/inputcolor.js') }}"></script>
 
 @section('content')
 
 <h1 class="mb-4">Edit Prices</h1>
 <div class="d-flex justify-content-between align-items-center mb-3">
-    <button class="btn btn-outline-secondary">&lt;</button>
-    <button class="btn btn-outline-secondary">&gt;</button>
+    <!-- PREVIOUS WEEK BUTTON -->
+    <form method="GET" action="{{ route('hotel.price.edit') }}">
+        <input type="hidden" name="current_week" value="{{ $currentWeek - 1 }}">
+        <button class="btn btn-outline-secondary">&lt;</button>
+    </form>
+
+    <!-- NEXT WEEK BUTTON -->
+    <form method="GET" action="{{ route('hotel.price.edit') }}">
+        <input type="hidden" name="current_week" value="{{ $currentWeek + 1 }}">
+        <button class="btn btn-outline-secondary">&gt;</button>
+    </form>
 </div>
 
 
@@ -41,7 +51,7 @@
                 <td>{{ $roomType }}</td>
                 @foreach ($dates as $date)
                     @php
-                        $rate = $rates[$roomType]->firstWhere('date', $date);
+                            $rate = isset($rates[$roomType]) ? $rates[$roomType]->firstWhere('date', $date) : null;
                     @endphp
                     <td>
                         <div class="input-with-unit">
@@ -64,7 +74,7 @@
                             type="number" 
                             name="rates[{{ $rate->id ?? 'new_' . $loop->parent->index . '_' . $loop->index }}][rate]" 
                             value="{{ isset($rate->rate) ? round(abs($rate->rate)) : 100 }}" 
-                            class="form-control text-center input-box" step="5"
+                            class="form-control text-center input-box dynamic-color" step="5" oninput="changeColor(this)"
                         >
                         <span class="unit">%</span>
                         </div>
@@ -76,8 +86,10 @@
 
     </table>
     <div class="text-end">
-        <a href="{{ route('hotel.price.show') }}" class="subbtn2">Cancel</a>
+        <a href="{{ route('hotel.price.show', ['current_week' => $currentWeek]) }}" class="subbtn2">Cancel</a>
+        <input type="hidden" name="current_week" value="{{ $currentWeek }}">
         <button type="submit" class="mainbtn">Save Changes</button>
+    </form>
     </div>
 </form>
 
