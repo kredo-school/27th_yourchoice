@@ -22,7 +22,7 @@ return new class extends Migration
       $table->text('remarks')->nullable();; // 備考
       $table->timestamps(); //作成・更新日時
 
-      $table->foreign('hotel_id')->references('id')->on('hotels');
+      $table->foreign('hotel_id')->references('id')->on('hotels')->onDelete('cascade');
     });
   }
 
