@@ -36,16 +36,16 @@
         </thead>
 
 
-    <!-- レートテーブル最上段 -->
+    <!-- レートテーブルのデータ一覧 -->
         <tbody>
-            @foreach ($rates as $roomType => $rateData)
+            @foreach ($roomTypes as $roomType)
                 <tr>
                     <td>{{ $roomType }}</td>
                     @foreach ($dates as $date)
+                        @php
+                            $rate = $rates[$roomType]->firstWhere('date', $date) ?? null;
+                        @endphp
                         <td>
-                            @php
-                                $rate = $rateData->firstWhere('date', $date);
-                            @endphp
                             {{ $rate ? round($rate->rate) . '%' : '-' }}
                         </td>
                     @endforeach

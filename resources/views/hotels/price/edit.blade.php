@@ -9,166 +9,71 @@
     <button class="btn btn-outline-secondary">&lt;</button>
     <button class="btn btn-outline-secondary">&gt;</button>
 </div>
-<form action="{{ route('hotel.price.update') }}" method="GET">
+
+
+<form action="{{ route('hotel.price.update') }}" method="POST">
     @csrf
+
+
     <table class="table table-bordered text-center">
-        <thead > 
+
+    <!-- レートテーブル最上段 -->
+    <thead > 
             <tr>
-            <th class="header col-2">Room Type</th>
-            <th class="header col-1">11/1 (Mon)</th>
-            <th class="header col-1">11/2 (Tue)</th>
-            <th class="header col-1">11/3 (Wed)</th>
-            <th class="header col-1">11/4 (Thu)</th>
-            <th class="header col-1">11/5 (Fri)</th>
-            <th class="header saturday col-1">11/6 (Sat)</th>
-            <th class="header sunday col-1">11/7 (Sun)</th>
-           
+                <th class="header col-2">Room Type</th>
+                @foreach ($dates as $date)
+                    @php
+                        $dayOfWeek = \Carbon\Carbon::parse($date)->format('D'); // 曜日を取得
+                        $additionalClass = $dayOfWeek === 'Sat' ? 'saturday' : ($dayOfWeek === 'Sun' ? 'sunday' : '');
+                    @endphp
+                    <th class="header {{ $additionalClass }} col-1">
+                        {{ \Carbon\Carbon::parse($date)->format('n/j (D)') }}
+                    </th>
+                @endforeach
             </tr>
         </thead>
-        <tbody>
-            
-                <tr>
-                    <td>Single Room</td>
-                    
-                        <td>
-                            <div class="input-with-unit">
-                                <input type="number" class="form-control text-center input-box" />
-                                <span class="unit">%</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="input-with-unit">
-                                <input type="number" class="form-control text-center input-box" />
-                                <span class="unit">%</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="input-with-unit">
-                                <input type="number" class="form-control text-center input-box" />
-                                <span class="unit">%</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="input-with-unit">
-                                <input type="number" class="form-control text-center input-box" />
-                                <span class="unit">%</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="input-with-unit">
-                                <input type="number" class="form-control text-center input-box" />
-                                <span class="unit">%</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="input-with-unit">
-                                <input type="number" class="form-control text-center input-box" />
-                                <span class="unit">%</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="input-with-unit">
-                                <input type="number" class="form-control text-center input-box" />
-                                <span class="unit">%</span>
-                            </div>
-                        </td>
-                   
-                </tr>
-                <tr>
-                    <td>Double Room</td>
-                    
+
+    <!-- レートテーブルのデータ一覧 -->
+
+    <tbody>
+        @foreach ($roomTypes as $roomType)
+            <tr>
+                <td>{{ $roomType }}</td>
+                @foreach ($dates as $date)
+                    @php
+                        $rate = $rates[$roomType]->firstWhere('date', $date);
+                    @endphp
                     <td>
-                            <div class="input-with-unit">
-                                <input type="number" class="form-control text-center input-box" />
-                                <span class="unit">%</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="input-with-unit">
-                                <input type="number" class="form-control text-center input-box" />
-                                <span class="unit">%</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="input-with-unit">
-                                <input type="number" class="form-control text-center input-box" />
-                                <span class="unit">%</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="input-with-unit">
-                                <input type="number" class="form-control text-center input-box" />
-                                <span class="unit">%</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="input-with-unit">
-                                <input type="number" class="form-control text-center input-box" />
-                                <span class="unit">%</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="input-with-unit">
-                                <input type="number" class="form-control text-center input-box" />
-                                <span class="unit">%</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="input-with-unit">
-                                <input type="number" class="form-control text-center input-box" />
-                                <span class="unit">%</span>
-                            </div>
-                        </td>
-                   
-                </tr>
-                <tr>
-                    <td>Twin Room</td>
-                    
-                    <td>
-                            <div class="input-with-unit">
-                                <input type="number" class="form-control text-center input-box" />
-                                <span class="unit">%</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="input-with-unit">
-                                <input type="number" class="form-control text-center input-box" />
-                                <span class="unit">%</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="input-with-unit">
-                                <input type="number" class="form-control text-center input-box" />
-                                <span class="unit">%</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="input-with-unit">
-                                <input type="number" class="form-control text-center input-box" />
-                                <span class="unit">%</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="input-with-unit">
-                                <input type="number" class="form-control text-center input-box" />
-                                <span class="unit">%</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="input-with-unit">
-                                <input type="number" class="form-control text-center input-box" />
-                                <span class="unit">%</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="input-with-unit">
-                                <input type="number" class="form-control text-center input-box" />
-                                <span class="unit">%</span>
-                            </div>
-                        </td>
-                </tr>
-          
-        </tbody>
+                        <div class="input-with-unit">
+                        <input 
+                            type="hidden" 
+                            name="rates[{{ $rate->id ?? 'new_' . $loop->parent->index . '_' . $loop->index }}][id]" 
+                            value="{{ $rate->id ?? '' }}"
+                        >
+                        <input 
+                            type="hidden" 
+                            name="rates[{{ $rate->id ?? 'new_' . $loop->parent->index . '_' . $loop->index }}][room_type]" 
+                            value="{{ $roomType }}"
+                        >
+                        <input 
+                            type="hidden" 
+                            name="rates[{{ $rate->id ?? 'new_' . $loop->parent->index . '_' . $loop->index }}][date]" 
+                            value="{{ $date }}"
+                        >
+                        <input 
+                            type="number" 
+                            name="rates[{{ $rate->id ?? 'new_' . $loop->parent->index . '_' . $loop->index }}][rate]" 
+                            value="{{ isset($rate->rate) ? round(abs($rate->rate)) : 100 }}" 
+                            class="form-control text-center input-box" step="5"
+                        >
+                        <span class="unit">%</span>
+                        </div>
+                    </td>
+                @endforeach
+            </tr>
+        @endforeach
+    </tbody>
+
     </table>
     <div class="text-end">
         <a href="{{ route('hotel.price.show') }}" class="subbtn2">Cancel</a>
