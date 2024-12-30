@@ -9,7 +9,7 @@
         <h1>Reservation Management</h1>
         <div class="navigation">
             <button class="btn btn-nav btn-outline-secondary">&lt;</button>
-            <input type="date" id="date-picker" value="2024-11-08" class="date-picker">
+            <input type="date" id="date-picker" value="{{ $date }}" class="date-picker">
             <button class="btn btn-nav btn-outline-secondary">&gt;</button>
         </div>
 
@@ -32,7 +32,33 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                @foreach ($roomStatus as $status)
+                    <tr>
+                        <td><a href="{{ route('hotel.reservation.edit') }}"><img src="{{ asset('images/pen-to-square-solid.svg') }}" class="edit-logo"></a></td>
+                        <td>{{ $status['room']->room_number }}</td>
+                        @if ($status['reservation'])
+                            <td>{{ $status['reservation']->user->first_name }} {{ $status['reservation']->user->last_name }}</td>
+                            <td>{{ $status['details']->number_of_people }}</td>
+                            <td>{{ $status['reservation']->check_in_date }}</td>
+                            <td>{{ $status['reservation']->check_out_date }}</td>
+                            <td>{{ $status['reservation']->breakfast ? 'Yes' : 'No' }}</td>
+                            <td>{{ $status['reservation']->payment->status }}</td>
+                            <td>{{ $status['reservation']->checkin_status }}</td> 
+                            <td>{{ $status['reservation']->user->phone_number }}</td>
+                            <td>{{ $status['reservation']->customer_request }}</td>
+                        @else
+                            <td colspan="9" class="text-center">No Reservation</td>
+                        @endif
+                    </tr>
+                @endforeach
+
+
+
+
+
+
+
+                <!-- <tr>
                     <td><a href="{{ route('hotel.reservation.edit') }}"><img src="{{ asset('images/pen-to-square-solid.svg') }}" class="edit-logo"></a></td>
                     <td>101</td>
                     <td>Shinji Watanabe</td>
@@ -169,7 +195,7 @@
                     </td>
                     <td></td>
                     <td></td>
-                </tr>
+                </tr> -->
 
             </tbody>
         </table>
