@@ -12,4 +12,21 @@ class Hotel extends Model
   {
     return $this->belongsTo(User::class);
   }
+
+   public function hotelCategory()
+  {
+    return $this->hasMany(HotelCategory::class);
+  }
+
+  public function room()
+  {
+    return $this->hasMany(Room::class);
+  }
+
+  public function roomPriceRate()
+  {
+    return $this->hasMany(RoomPriceRate::class);
+  }
+
+ 
 }
