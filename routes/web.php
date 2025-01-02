@@ -62,9 +62,9 @@ Route::group(['prefix' => 'hotel', 'as' => 'hotel.'], function () {
   Route::get('/room/edit', [App\Http\Controllers\Hotel\RoomController::class, 'edit'])->name('room.edit');
   Route::get('/room/destroy', [App\Http\Controllers\Hotel\RoomController::class, 'destroy'])->name('room.destroy');
 
-  Route::get('/price/show', [App\Http\Controllers\Hotel\PriceController::class, 'show'])->name('price.show');
-  Route::get('/price/edit', [App\Http\Controllers\Hotel\PriceController::class, 'edit'])->name('price.edit');
-  Route::get('/price/update', [App\Http\Controllers\Hotel\PriceController::class, 'update'])->name('price.update');
+    Route::get('/price/show',[App\Http\Controllers\Hotel\PriceController::class,'show'])->name('price.show');
+    Route::get('/price/edit',[App\Http\Controllers\Hotel\PriceController::class,'edit'])->name('price.edit');
+    Route::post('/price/update',[App\Http\Controllers\Hotel\PriceController::class,'update'])->name('price.update');
 
   Route::get('/reservation/show_monthly', [App\Http\Controllers\Hotel\ReservationController::class, 'show_monthly'])->name('reservation.show_monthly');
   Route::get('/reservation/show_daily', [App\Http\Controllers\Hotel\ReservationController::class, 'show_daily'])->name('reservation.show_daily');
@@ -82,7 +82,8 @@ Route::get('/register/create_customer', [App\Http\Controllers\RegisterController
 Route::get('/register/create_hotel', [App\Http\Controllers\RegisterController::class, 'create_hotel'])->name('register.create_hotel');
 
 // Route::get('/register', [CustomerController::class, 'register'])->name('register');
-
+Route::get('/register/create_customer/signup',[App\Http\Controllers\RegisterController::class,'create'])->name('register.create');
+Route::get('/register/create_customer/hotel_signup',[App\Http\Controllers\RegisterController::class,'create_admin'])->name('register.create_admin');
 // Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // //MypageController
