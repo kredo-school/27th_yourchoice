@@ -153,6 +153,70 @@ class ReservationController extends Controller
         return redirect()->route('hotel.reservation.show_daily', ['date' => $request->input('date')])
         ->with('success', 'Reservation updated successfully.');
     }
+
+
+    public function getCalendarEvents(Request $request)
+    {
+        $hotelId = 1; // ホテルIDを指定
+
+        // ホテルに関連する全ての部屋を取得
+        $rooms = Room::where('hotel_id', $hotelId)->get();
+
+        // 指定期間の予約を取得（必要なら期間をリクエストから指定）
+        $reservations = Reservation::with(['reservationRooms.room' => function ($query) use ($hotelId) {
+                $query->where('hotel_id', $hotelId);
+            }])
+            ->whereBetween('check_in_date', [$request->start, $request->end])
+            ->orWhereBetween('check_out_date', [$request->start, $request->end])
+            ->get();
+
+        // 日ごとの空き部屋数を計算
+        $events = [];
+        $period = new \DatePeriod(
+            new \DateTime($request->start),
+            new \DateInterval('P1D'),
+            (new \DateTime($request->end))->modify('+1 day')
+        );
+
+        foreach ($period as $date) {
+            $dateStr = $date->format('Y-m-d');
+
+            // その日の予約された部屋IDを取得
+            $reservedRoomIds = $reservations
+                ->filter(function ($reservation) use ($dateStr) {
+                    return $dateStr >= $reservation->check_in_date && $dateStr <= $reservation->check_out_date;
+                })
+                ->flatMap(function ($reservation) {
+                    return $reservation->reservationRooms->pluck('room_id');
+                })
+                ->unique();
+
+            // 空き部屋数を計算
+            $availableRooms = $rooms->count() - $reservedRoomIds->count();
+
+            // イベントデータを作成
+            if ($availableRooms == 0) {
+                $events[] = [
+                    'title' => "-----",
+                    'start' => $dateStr,
+                ];
+            } elseif ($availableRooms == 1) {
+                $events[] = [
+                    'title' => "{$availableRooms} room",
+                    'start' => $dateStr,
+                ];
+            } else {
+                $events[] = [
+                    'title' => "{$availableRooms} rooms",
+                    'start' => $dateStr,
+                ];
+            }
+        }
+
+        return response()->json($events);
+    }
+
+
     
 
 
