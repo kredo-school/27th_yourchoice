@@ -32,7 +32,10 @@ class ReservationController extends Controller
             return [
                 'room' => $room,
                 'reservation' => $reservationRoom && isset($reservationRoom->reservation) ? $reservationRoom->reservation : null,
-                'details' => $reservationRoom
+                'details' => $reservationRoom,
+                'payment_status' => isset($reservationRoom->reservation->payment) 
+                ? $reservationRoom->reservation->payment->status 
+                : 'pending',
             ];
         });
 

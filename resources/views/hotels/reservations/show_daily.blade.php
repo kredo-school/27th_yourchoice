@@ -8,9 +8,11 @@
 <div class="container">
         <h1>Reservation Management</h1>
         <div class="navigation">
-            <button id="prev-date" class="btn btn-nav btn-outline-secondary">&lt;</button>
-            <input type="date" id="date-picker" value="{{ $date }}" class="date-picker">
-            <button id="next-date" class="btn btn-nav btn-outline-secondary">&gt;</button>
+            <form id="date-form" action="{{ route('hotel.reservation.show_daily') }}" method="GET">
+                <button type="button" id="prev-date" class="btn btn-nav btn-outline-secondary">&lt;</button>
+                <input type="date" id="date-picker" name="date" value="{{ $date }}" class="date-picker">
+                <button type="button" id="next-date" class="btn btn-nav btn-outline-secondary">&gt;</button>
+            </form>
         </div>
 
         <script src="{{ asset('js/show_daily.js') }}"></script>
@@ -42,7 +44,7 @@
                             <td>{{ $status['reservation']->check_in_date }}</td>
                             <td>{{ $status['reservation']->check_out_date }}</td>
                             <td>{{ $status['reservation']->breakfast ? 'Yes' : 'No' }}</td>
-                            <td>{{ $status['reservation']->payment->status }}</td>
+                            <td>{{ $status['payment_status'] }}</td>
                             <td>
                                 <form action="{{ route('hotel.reservation.updateCheckinStatus', $status['reservation']->id) }}" method="POST">
                                     @csrf
