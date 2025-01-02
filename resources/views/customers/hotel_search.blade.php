@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="{{ asset('css/hotel_search.css') }}">
 
 <div class="container mt-5">
-    <h1 class="text-center">{{ " Wheelchair and Senior " }}</h1>
+    <h1 class="text-center">{{ ucfirst($topCategory) }}</h1>
     
     <div class="input-group my-4">
         <input type="text" class="form-control" placeholder="Where to?">
@@ -45,83 +45,38 @@
             </div>
         </div>
     </div>
-    
+
     <div class="list-group">
-        <div class="list-group-item">
-            <a href="{{ route('customer.top.show') }}" class="stretched-link"></a>
-            <div class="row align-items-center">
-                <div class="col-md-2">
-                    <img src="{{ asset('images/hotel.jpg') }}" alt="hotel-img" class="hotel-img">
-                </div>
-                <div class="col-md-7">
-                    <h5>{{"Hotel A"}}</h5>
-                    <p>{{"Tokyo"}}</p>
-                    <span class="badge bg-pink">{{"Family"}}</span>
-                </div>
-                <div class="col-md-3 text-end">
-                    <div class="rating">
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                        (120)
+        @foreach ($hotels as $hotel)
+            <div class="list-group-item">
+                <a href="{{ route('customer.top.show') }}" class="stretched-link"></a>
+                <div class="row align-items-center">
+                    <div class="col-md-2">
+                        <img src="{{ asset('images/hotel.jpg') }}" alt="hotel-img" class="hotel-img">
                     </div>
-                    <h6>$100 / 2 travellers</h6>
-                    <small>include taxes & fees for 1 night</small>
+                    <div class="col-md-7">
+                        <h5>{{$hotel->hotel_name}}</h5>
+                        <p>{{$hotel->prefecture}}</p>
+                        {{-- @foreach($hotel->hotelCategory as $hotel_category)
+                            <span class="badge bg-pink">{{$hotel_category->id}}</span>
+                        @endforeach --}}
+                    </div>
+                    <div class="col-md-3 text-end">
+                        <div class="rating">
+                            <span class="fa fa-star checked"></span>x
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            (120)
+                        </div>
+                        <h6>$100 / 2 travellers</h6>
+                        <small>include taxes & fees for 1 night</small>
+                    </div>
                 </div>
             </div>
-        </div>
-        <!-- Repeat similar blocks for Hotel B and Hotel C -->
-        <div class="list-group-item">
-            <div class="row">
-                <div class="col-md-2">
-                    <img src="{{ asset('images/hotel.jpg') }}" alt="hotel-img" class="hotel-img">
-                </div>
-                <div class="col-md-7">
-                    <h5>Hotel B</h5>
-                    <p>Tokyo</p>
-                    <span class="badge bg-pink">Pregnancy</span>
-                </div>
-                <div class="col-md-3 text-end">
-                    <div class="rating">
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                        (60)
-                    </div>
-                    <h6>$100 / 2 travellers</h6>
-                    <small>include taxes & fees for 1 night</small>
-                </div>
-            </div>
-        </div>
-        <div class="list-group-item">
-            <div class="row">
-                <div class="col-md-2">
-                    <img src="{{ asset('images/hotel.jpg') }}" alt="hotel-img" class="hotel-img">
-                </div>
-                <div class="col-md-7">
-                    <h5>Hotel C</h5>
-                    <p>Tokyo</p>
-                    <span class="badge bg-pink">Religious</span>
-                </div>
-                <div class="col-md-3 text-end">
-                    <div class="rating">
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                        (200)
-                    </div>
-                    <h6>$100 / 2 travellers</h6>
-                    <small>include taxes & fees for 1 night</small>
-                </div>
-            </div>
-        </div>
-    </div>
+        @endforeach
+
     <!-- ページネーション -->
     <nav aria-label="Page navigation">
         <ul class="pagination">

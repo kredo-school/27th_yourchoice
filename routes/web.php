@@ -17,7 +17,7 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function () {
 
   // ログイン不要ページ
     Route::get('/top/list',[App\Http\Controllers\Customer\TopController::class,'list'])->name('top.list');
-    Route::get('/top/search',[App\Http\Controllers\Customer\TopController::class,'search'])->name('top.search');
+    Route::post('/top/search',[App\Http\Controllers\Customer\TopController::class,'search'])->name('top.search');
 
     Route::get('/top/show',[App\Http\Controllers\Customer\TopController::class,'show'])->name('top.show');
 
