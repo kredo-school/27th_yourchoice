@@ -33,6 +33,7 @@
     padding: 10px;
     text-align: center;
     vertical-align: middle;
+    
 }
 
 .reservation-table th {
@@ -45,10 +46,15 @@
 }
 
 .reservation-table select {
-    padding: 5px;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
+    font-size: 12px;
+    text-align: center;
+
+    
+}
+
+.reservation-table form {
+    margin-block-end: auto;
 }
 
 .reservation-table td:last-child {

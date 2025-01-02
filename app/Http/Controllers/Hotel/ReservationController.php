@@ -45,6 +45,19 @@ class ReservationController extends Controller
 
     }
 
+    public function updateCheckinStatus(Request $request, $id)
+    {
+        $request->validate([
+            'checkin_status' => 'required|string|in:done,not done', 
+        ]);
+
+        $reservation = Reservation::findOrFail($id);
+        $reservation->checkin_status = $request->input('checkin_status');
+        $reservation->save();
+
+        return redirect()->back()->with('success', 'Check-in status updated successfully.');
+    }
+
     public function edit()
     {
         return view('hotels.reservations.edit');
