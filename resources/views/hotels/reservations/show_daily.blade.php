@@ -36,7 +36,7 @@
             <tbody>
                 @foreach ($roomStatus as $status)
                     <tr>
-                        <td><a href="{{ route('hotel.reservation.edit') }}"><img src="{{ asset('images/pen-to-square-solid.svg') }}" class="edit-logo"></a></td>
+                        <td><a href="{{ route('hotel.reservation.edit', $status['reservation']->id ?? '') }}"><img src="{{ asset('images/pen-to-square-solid.svg') }}" class="edit-logo"></a></td>
                         <td>{{ $status['room']->room_number }}</td>
                         @if ($status['reservation'])
                             <td>{{ $status['reservation']->user->first_name }} {{ $status['reservation']->user->last_name }}</td>

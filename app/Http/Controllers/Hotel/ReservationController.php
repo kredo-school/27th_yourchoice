@@ -15,13 +15,19 @@ class ReservationController extends Controller
         $date = $request->query('date', now()->toDateString()); // デフォルトは現在の日付
         $rooms = Room::all(); // 全ての部屋を取得
 
+        // hotel_id が 1 の部屋のみ取得
+        $hotelId = 1;
+        $rooms = Room::where('hotel_id', $hotelId)->get();
+
         // 指定日の予約を取得
         $nextDate = Carbon::parse($date)->addDay(); // 指定日付の翌日を取得
 
-        $reservations = Reservation::with('reservationRooms.room', 'user', 'payment')
-            ->whereDate('check_in_date', '<=', $date)
-            ->whereDate('check_out_date', '>=', $nextDate) // check_out_dateを前日に設定
-            ->get();
+        $reservations = Reservation::with(['reservationRooms.room' => function ($query) use ($hotelId) {
+            $query->where('hotel_id', $hotelId); // hotel_id が $hotelId の部屋のみ
+        }, 'user', 'payment'])
+        ->whereDate('check_in_date', '<=', $date)
+        ->whereDate('check_out_date', '>=', $nextDate)
+        ->get();
 
         // 部屋ごとの予約状況を作成
         $roomStatus = $rooms->map(function ($room) use ($reservations) {
@@ -61,9 +67,11 @@ class ReservationController extends Controller
         return redirect()->back()->with('success', 'Check-in status updated successfully.');
     }
 
-    public function edit()
+    public function edit($id)
     {
-        return view('hotels.reservations.edit');
+        $reservation = Reservation::findOrFail($id);
+
+        return view('hotels.reservations.edit', compact('reservation'));
     }
 
     public function show_monthly()

@@ -69,7 +69,7 @@ Route::group(['prefix' => 'hotel', 'as' => 'hotel.'], function () {
     Route::get('/reservation/show_monthly',[App\Http\Controllers\Hotel\ReservationController::class,'show_monthly'])->name('reservation.show_monthly');
     Route::get('/reservation/show_daily',[App\Http\Controllers\Hotel\ReservationController::class,'show_daily'])->name('reservation.show_daily');
     Route::put('/hotel/reservation/{id}/update-checkin-status', [App\Http\Controllers\Hotel\ReservationController::class, 'updateCheckinStatus'])->name('reservation.updateCheckinStatus');
-    Route::get('/reservation/edit',[App\Http\Controllers\Hotel\ReservationController::class,'edit'])->name('reservation.edit');
+    Route::get('/reservation/{id}/edit',[App\Http\Controllers\Hotel\ReservationController::class,'edit'])->name('reservation.edit');
     Route::get('/reservation/store',[App\Http\Controllers\Hotel\ReservationController::class,'store'])->name('reservation.store');
 
 
