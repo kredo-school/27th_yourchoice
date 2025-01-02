@@ -83,7 +83,8 @@ Route::get('/register/create_customer',[App\Http\Controllers\RegisterController:
 Route::get('/register/create_hotel',[App\Http\Controllers\RegisterController::class,'create_hotel'])->name('register.create_hotel');
 
 // Route::get('/register', [CustomerController::class, 'register'])->name('register');
-
+Route::get('/register/create_customer/signup',[App\Http\Controllers\RegisterController::class,'create'])->name('register.create');
+Route::get('/register/create_customer/hotel_signup',[App\Http\Controllers\RegisterController::class,'create_admin'])->name('register.create_admin');
 // Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // //MypageController

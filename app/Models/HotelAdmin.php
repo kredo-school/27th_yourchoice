@@ -2,29 +2,20 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class HotelAdmin extends Model
 {
-
-    const CUSTOMER_ROLE_ID  = 1;
-    const HOTEL_ROLE_ID   = 2;
-
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+    protected $table = 'users';
+
     protected $fillable = [
         'role_id',
-        'first_name',
-        'last_name',
+        // 'first_name',
+        // 'last_name',
         'username',
         'email',
         'phone_number',
@@ -52,10 +43,5 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password_hash' => 'hashed',
         ];
-    }
-
-    public function Category()
-    {
-        return $this->hasMany(UserCategory::class);
     }
 }
