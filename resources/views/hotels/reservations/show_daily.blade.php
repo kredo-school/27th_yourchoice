@@ -36,10 +36,18 @@
             <tbody>
                 @foreach ($roomStatus as $status)
                     <tr>
-                        <td><a href="{{ route('hotel.reservation.edit', $status['reservation']->id ?? '') }}"><img src="{{ asset('images/pen-to-square-solid.svg') }}" class="edit-logo"></a></td>
+                        <td>
+                        @if ($status['reservation'])
+                            <!-- 予約が存在する場合 -->
+                            <a href="{{ route('hotel.reservation.edit', ['id' => $status['reservation']->id]) }}"><img src="{{ asset('images/pen-to-square-solid.svg') }}" class="edit-logo"></a>
+                        @else
+                            <!-- 予約が存在しない場合 -->
+                            <a href="{{ route('hotel.reservation.edit', ['id' => 'new', 'date' => $date, 'room_id' => $status['room']->id]) }}"><img src="{{ asset('images/pen-to-square-solid.svg') }}" class="edit-logo"></a>
+                        @endif
+                        </td>
                         <td>{{ $status['room']->room_number }}</td>
                         @if ($status['reservation'])
-                            <td>{{ $status['reservation']->user->first_name }} {{ $status['reservation']->user->last_name }}</td>
+                            <td>{{ $status['reservation']->user->first_name ?? ''}} {{ $status['reservation']->user->last_name ?? ''}}</td>
                             <td>{{ $status['details']->number_of_people }}</td>
                             <td>{{ $status['reservation']->check_in_date }}</td>
                             <td>{{ $status['reservation']->check_out_date }}</td>
@@ -55,7 +63,7 @@
                                     </select>
                                 </form>
                             </td> 
-                            <td>{{ $status['reservation']->user->phone_number }}</td>
+                            <td>{{ $status['reservation']->user->phone_number ?? ''}}</td>
                             <td>{{ $status['reservation']->customer_request }}</td>
                         @else
                             <td colspan="9" class="text-center">No Reservation</td>

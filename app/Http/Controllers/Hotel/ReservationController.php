@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Room;
 use App\Models\Reservation;
+use App\Models\ReservationRoom;
 use Carbon\Carbon;
 
 class ReservationController extends Controller
@@ -67,22 +68,92 @@ class ReservationController extends Controller
         return redirect()->back()->with('success', 'Check-in status updated successfully.');
     }
 
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        $reservation = Reservation::findOrFail($id);
+        if ($id === 'new') {
+            // 新規予約の場合
+            $date = $request->query('date');
+            $roomId = $request->query('room_id');
+            // Room モデルから room_number を取得
+            $room = Room::find($roomId);
+    
+            return view('hotels.reservations.edit', [
+                'reservation' => null,
+                'date' => $date,
+                'room_id' => $roomId,
+                'room_number' => $room->room_number,
+            ]);
+        }
+    
+        // 既存予約の編集
+        $reservation = Reservation::find($id);
+    
+        if (!$reservation) {
+            abort(404, 'Reservation not found');
+        }
 
-        return view('hotels.reservations.edit', compact('reservation'));
+        $rooms = $reservation->reservationRooms->map(function ($reservationRoom) {
+            return $reservationRoom->room;
+        });
+    
+        return view('hotels.reservations.edit', compact('reservation', 'rooms'));
     }
+    
 
     public function show_monthly()
     {
         return view('hotels.reservations.show_monthly');
     }
 
-    public function store()
+
+    public function store(Request $request)
     {
-        return redirect()->route('hotel.reservation.show_daily');
+        // バリデーション
+        $validated = $request->validate([
+            'check_in_date' => 'required|date',
+            'check_out_date' => 'required|date',
+            'customer_request' => 'nullable|string|max:255',
+            'room_id' => 'required|integer|exists:rooms,id',
+        ]);
+
+        // 新しい予約を作成
+        $reservation = Reservation::create([
+            'check_in_date' => $validated['check_in_date'],
+            'check_out_date' => $validated['check_out_date'],
+            'customer_request' => $validated['customer_request'] ?? null,
+            // 必要に応じて他のカラムを追加
+        ]);
+
+        // ReservationRoom を作成して中間テーブルに保存
+        ReservationRoom::create([
+            'reservation_id' => $reservation->id,
+            'room_id' => $validated['room_id'],
+        ]);
+
+        return redirect()->route('hotel.reservation.show_daily', ['date' => $request->input('date')])
+        ->with('success', 'Reservation updated successfully.');
     }
+
+    public function update(Request $request, $id)
+    {
+        // 対象の予約を取得
+        $reservation = Reservation::findOrFail($id);
+    
+        // バリデーション
+        $validated = $request->validate([
+            'customer_request' => 'nullable|string|max:255'
+        ]);
+    
+        // 予約を更新
+        $reservation->update([
+            'customer_request' => $validated['customer_request'] ?? null
+
+        ]);
+    
+        return redirect()->route('hotel.reservation.show_daily', ['date' => $request->input('date')])
+        ->with('success', 'Reservation updated successfully.');
+    }
+    
 
 
     

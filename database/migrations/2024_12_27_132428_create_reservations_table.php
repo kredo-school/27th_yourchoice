@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('check_in_date'); // チェックイン日
             $table->date('check_out_date'); // チェックアウト日
             $table->integer('number_of_people')->nullable(); // 予約人数
-            $table->boolean('breakfast'); // 朝食有無（0: 無し、1: 有り）
+            $table->boolean('breakfast')->nullable(); // 朝食有無（0: 無し、1: 有り）
             $table->enum('reservation_status', ['confirmed', 'cancelled'])->default('confirmed'); // 予約状態
             $table->enum('checkin_status', ['done', 'not done'])->default('not done'); // チェックイン状態
             $table->string('customer_request', 255)->nullable(); // 顧客リクエスト
