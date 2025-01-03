@@ -17,7 +17,7 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function () {
 
   // ログイン不要ページ
     Route::get('/top/list',[App\Http\Controllers\Customer\TopController::class,'list'])->name('top.list');
-    Route::get('/top/search',[App\Http\Controllers\Customer\TopController::class,'search'])->name('top.search');
+    Route::post('/top/search',[App\Http\Controllers\Customer\TopController::class,'search'])->name('top.search');
 
     Route::get('/top/show',[App\Http\Controllers\Customer\TopController::class,'show'])->name('top.show');
 
@@ -88,7 +88,8 @@ Route::get('/register/create_customer',[App\Http\Controllers\RegisterController:
 Route::get('/register/create_hotel',[App\Http\Controllers\RegisterController::class,'create_hotel'])->name('register.create_hotel');
 
 // Route::get('/register', [CustomerController::class, 'register'])->name('register');
-
+Route::get('/register/create_customer/signup',[App\Http\Controllers\RegisterController::class,'create'])->name('register.create');
+Route::get('/register/create_customer/hotel_signup',[App\Http\Controllers\RegisterController::class,'create_admin'])->name('register.create_admin');
 // Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // //MypageController

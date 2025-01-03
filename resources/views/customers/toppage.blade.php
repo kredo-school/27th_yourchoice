@@ -14,34 +14,53 @@
         <div class="categories-grid">
             <!-- Wheelchair and Senior -->
             {{-- <a href="{{ route('categories.wheelchair') }}" class="category"> --}}
-            <a href="{{route("customer.top.search")}}" class="category">
-                <img src="{{ asset('images/wheelchair.png') }}" alt="Wheelchair and Senior">
-            </a>
+                <form action="{{ route('customer.top.search') }}" method="POST" class="category-form">
+                    @csrf
+                    <input type="hidden" name="topCategory" value="Wheelchair and Senior">
+                    <button type="submit" class="category-btn">
+                        <img src="{{ asset('images/wheelchair.png') }}" alt="Wheelchair and Senior">
+                    </button>
+                </form>
             <!-- Pregnancy -->
-            <a href="{{route("customer.top.search")}}" class="category">
-                {{-- <a href="{{ route('categories.pregnancy') }}" class="category"> --}}
-                <img src="{{ asset('images/pregnancy.png') }}" alt="Pregnancy">
-            </a>
+            <form action="{{ route('customer.top.search') }}" method="POST" class="category-form">
+                @csrf
+                <input type="hidden" name="topCategory" value="Pregnancy">
+                <button type="submit" class="category-btn">
+                    <img src="{{ asset('images/pregnancy.png') }}" alt="Pregnancy">
+                </button>
+            </form>
             <!-- Family -->
-            <a href="{{route("customer.top.search")}}" class="category">
-                {{-- <a href="{{ route('categories.family') }}" class="category"> --}}
-                <img src="{{ asset('images/family.png') }}" alt="Family">
-            </a>
+            <form action="{{ route('customer.top.search') }}" method="POST" class="category-form">
+                @csrf
+                <input type="hidden" name="topCategory" value="Family">
+                <button type="submit" class="category-btn">
+                    <img src="{{ asset('images/family.png') }}" alt="Family">
+                </button>
+            </form>
             <!-- Visual and Hearing Impaired -->
-            <a href="{{route("customer.top.search")}}" class="category">
-                {{-- <a href="{{ route('categories.visualHearing') }}" class="category"> --}}
-                <img src="{{ asset('images/visual-hearing.png') }}" alt="Visual and Hearing Impaired">
-            </a>
+            <form action="{{ route('customer.top.search') }}" method="POST" class="category-form">
+                @csrf
+                <input type="hidden" name="topCategory" value="Visual and Hearing Impaired">
+                <button type="submit" class="category-btn">
+                    <img src="{{ asset('images/visual-hearing.png') }}" alt="Visual and Hearing Impaired">
+                </button>
+            </form>
             <!-- Religious -->
-            <a href="{{route("customer.top.search")}}" class="category">
-            {{-- <a href="{{ route('categories.religious') }}" class="category"> --}}
-                <img src="{{ asset('images/religious.png') }}" alt="Religious">
-            </a>
+            <form action="{{ route('customer.top.search') }}" method="POST" class="category-form">
+                @csrf
+                <input type="hidden" name="topCategory" value="Religious">
+                <button type="submit" class="category-btn">
+                    <img src="{{ asset('images/religious.png') }}" alt="Religious">
+                </button>
+            </form>
             <!-- English Friendly -->
-            <a href="{{route("customer.top.search")}}" class="category">
-            {{-- <a href="{{ route('categories.englishFriendly') }}" class="category"> --}}
-                <img src="{{ asset('images/english-friendly.png') }}" alt="English Friendly">
-            </a>
+            <form action="{{ route('customer.top.search') }}" method="POST" class="category-form">
+                @csrf
+                <input type="hidden" name="topCategory" value="English Friendly">
+                <button type="submit" class="category-btn">
+                    <img src="{{ asset('images/english-friendly.png') }}" alt="English Friendly">
+                </button>
+            </form>
         </div>
     </section>
 @endsection
