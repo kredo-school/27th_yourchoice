@@ -16,8 +16,8 @@ Auth::routes();
 Route::group(['prefix' => 'customer', 'as' => 'customer.'], function () {
 
   // ログイン不要ページ
-  Route::get('/top/list', [App\Http\Controllers\Customer\TopController::class, 'list'])->name('top.list');
-  Route::get('/top/search', [App\Http\Controllers\Customer\TopController::class, 'search'])->name('top.search');
+    Route::get('/top/list',[App\Http\Controllers\Customer\TopController::class,'list'])->name('top.list');
+    Route::post('/top/search',[App\Http\Controllers\Customer\TopController::class,'search'])->name('top.search');
 
   Route::get('/top/show', [App\Http\Controllers\Customer\TopController::class, 'show'])->name('top.show');
 
@@ -66,10 +66,10 @@ Route::group(['prefix' => 'hotel', 'as' => 'hotel.'], function () {
     Route::get('/price/edit',[App\Http\Controllers\Hotel\PriceController::class,'edit'])->name('price.edit');
     Route::post('/price/update',[App\Http\Controllers\Hotel\PriceController::class,'update'])->name('price.update');
 
-  Route::get('/reservation/show_monthly', [App\Http\Controllers\Hotel\ReservationController::class, 'show_monthly'])->name('reservation.show_monthly');
-  Route::get('/reservation/show_daily', [App\Http\Controllers\Hotel\ReservationController::class, 'show_daily'])->name('reservation.show_daily');
-  Route::get('/reservation/edit', [App\Http\Controllers\Hotel\ReservationController::class, 'edit'])->name('reservation.edit');
-  Route::get('/reservation/store', [App\Http\Controllers\Hotel\ReservationController::class, 'store'])->name('reservation.store');
+    Route::get('/reservation/show_monthly',[App\Http\Controllers\Hotel\ReservationController::class,'show_monthly'])->name('reservation.show_monthly');
+    Route::get('/reservation/show_daily',[App\Http\Controllers\Hotel\ReservationController::class,'show_daily'])->name('reservation.show_daily');
+    Route::get('/reservation/edit',[App\Http\Controllers\Hotel\ReservationController::class,'edit'])->name('reservation.edit');
+    Route::get('/reservation/store',[App\Http\Controllers\Hotel\ReservationController::class,'store'])->name('reservation.store');
 
 
   Route::get('/review/list', [App\Http\Controllers\Hotel\ReviewController::class, 'list'])->name('review.list');

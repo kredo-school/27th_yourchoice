@@ -13,5 +13,9 @@ class Hotel extends Model
     return $this->belongsTo(User::class);
   }
 
-   
+  //Hotel_Categoryの関係
+  public function hotelCategories()
+  {
+      return $this->hasMany(HotelCategory::class);
+  }
 }
