@@ -5,7 +5,7 @@
 
     <div class="container mt-2">
         <form method="GET" action="{{ route('hotel.profile.edit') }}" enctype="multipart/form-data">
-            @csrf
+            {{-- @csrf --}}
             {{-- @method('GET') --}}
             <div class="row">
                 <div class="col-md">
@@ -20,11 +20,11 @@
                         <div class="card-body">
                             <div class="mb-3">
                                 <label class="form-label">Hotel Name</label>
-                                <p class="form-control-plaintext border-bottom">{{ old('hotel_name') }}</p>
+                                <p class="form-control-plaintext border-bottom">{{ $hoteladmin->username }}</p>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Email</label>
-                                <p class="form-control-plaintext border-bottom">{{ old('hotel_email') }}</p>
+                                <p class="form-control-plaintext border-bottom">{{ $hoteladmin->email }}</p>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Website URL</label>
@@ -47,7 +47,7 @@
 
                             <div class="mb-3">
                                 <label class="form-label">Phone Number</label>
-                                <p class="form-control-plaintext border-bottom">{{ old('hotel_phone') }}</p>
+                                <p class="form-control-plaintext border-bottom">{{ $hoteladmin->phone_number }}</p>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Access</label>
