@@ -21,7 +21,16 @@
                         <div class="stay-info text-right">
                             <p><strong>Date of stay:</strong>{{ $review->reservation->check_in_date }} ~ {{ $review->reservation->check_out_date }}</p>
                             <p><strong>people:</strong> {{ $review->reservation->number_of_people }} </p>
-                            <p><strong>Type of room:</strong> twin</p> //修正必要
+                            <p><strong>Room type:</strong>
+                            @foreach($review->reservation->rooms as $room)
+                                @if(!in_array($room->room_type, $uniqueRoomTypes= []))
+                                    <span class="badge bg-pink">{{ $room->room_type }}</span>
+                                    @php
+                                        $uniqueRoomTypes[] = $room->room_type;
+                                    @endphp
+                                @endif
+                            @endforeach
+                            </p> //修正必要
                         </div>
                     </div>
                     <hr>
