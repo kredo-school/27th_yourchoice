@@ -41,4 +41,8 @@ class Reservation extends Model
         return $this->belongsTo(Payment::class, 'payment_id');
     }
     
+    public function review()
+    {
+        return $this->belongsTo(Review::class);
+    }
 }
