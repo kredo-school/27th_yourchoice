@@ -63,4 +63,13 @@ class User extends Authenticatable
     {
         return $this->hasMany(Reservation::class, 'user_id');
     }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+    public function getAuthPassword()
+    {
+        return $this->password_hash;
+    }
 }

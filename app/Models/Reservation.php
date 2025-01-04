@@ -23,7 +23,7 @@ class Reservation extends Model
     }
 
     // 中間テーブルを経由して部屋を取得
-    public function rooms()
+    public function room()
     {
         return $this->reservationRooms->map(function ($reservationRoom) {
             return $reservationRoom->room;
@@ -42,4 +42,14 @@ class Reservation extends Model
         return $this->belongsTo(Payment::class, 'payment_id');
     }
     
+    public function review()
+    {
+        return $this->belongsTo(Review::class);
+    }
+
+    public function rooms()
+    {
+        return $this->belongsToMany(Room::class,'reservation_room','reservation_id','room_id');
+    }
+  
 }

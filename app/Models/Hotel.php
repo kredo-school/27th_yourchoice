@@ -18,4 +18,10 @@ class Hotel extends Model
       return $this->belongsToMany(Category::class,'hotel_category','hotel_id','category_id');
   }
 
+
+  public function reviews()
+  {
+      return $this->hasMany(Review::class);
+  }
+  
 }
