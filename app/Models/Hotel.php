@@ -18,4 +18,31 @@ class Hotel extends Model
   {
       return $this->hasMany(HotelCategory::class);
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //先生に言われてUser::classをHotelAdmin::classに変更したけどUser::classでも機能している？
+  // public function hotelAdmin()
+  // {
+  //   return $this->belongsTo(HotelAdmin::class);
+  // }
+
+
+
 }

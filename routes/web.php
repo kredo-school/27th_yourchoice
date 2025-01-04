@@ -53,7 +53,7 @@ Route::group(['prefix' => 'hotel', 'as' => 'hotel.'], function () {
 
   Route::get('/inquary/show', [App\Http\Controllers\Hotel\InquaryController::class, 'show'])->name('inquary.show');
 
-  Route::get('/profile/{id}/show', [App\Http\Controllers\Hotel\ProfileController::class, 'show'])->name('profile.show');
+  Route::get('/profile/show', [App\Http\Controllers\Hotel\ProfileController::class, 'show'])->name('profile.show');
   Route::get('/profile/edit', [App\Http\Controllers\Hotel\ProfileController::class, 'edit'])->name('profile.edit');
   Route::get('/profile/editpass', [App\Http\Controllers\Hotel\ProfileController::class, 'editpass'])->name('profile.editpass');
   Route::get('/profile/update', [App\Http\Controllers\Hotel\ProfileController::class, 'update'])->name('profile.update'); //←空白行に追加confrict懸念(プルリクの前に一旦確認)

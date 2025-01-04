@@ -21,17 +21,17 @@
                             <div class="mb-3">
                                 <label for="hotel_name" class="form-label">Hotel Name</label>
                                 <input type="text" class="form-control" id="hotel_name" name="hotel_name"
-                                    value="{{ old('username', $user->username) }}">
+                                    value="{{ old('hotel_name') }}">
                             </div>
                             <div class="mb-3">
                                 <label for="hotel_email" class="form-label">Email</label>
                                 <input type="email" class="form-control" id="hotel_email" name="hotel_email"
-                                    value="{{ old('email', $user->email) }}">
+                                    value="{{ old('email') }}">
                             </div>
                             <div class="mb-3">
                                 <label for="url" class="form-label">Website URL</label>
-                                <input type="url" class="url" id="url" name="url"
-                                    value="{{ old('url', $hotel->url) }}">
+                                <input type="url" class="form-control" id="url" name="url"
+                                    value="{{ old('url') }}">
                             </div>
 
                             <div class="mb-3">
@@ -39,32 +39,32 @@
                                 <div class="input-group">
                                     <span class="input-group-text">〒</span>
                                     <input type="text" class="form-control" id="postal_code"
-                                        name="postal_code" value="{{ old('postal_code',$hotel->postal_code) }}">
+                                        name="postal_code" value="{{ old('postal_code') }}">
                                 </div>
                             </div>
 
                             <div class="mb-3">
                                 <label for="prefecture" class="form-label">Address</label>
                                 <input type="text" class="form-control mb-2" id="prefecture" name="prefecture"
-                                    placeholder="Region/State" value="{{ old('prefecture', $hotel->prefecture ?? '') }}">
+                                    placeholder="Region/State" value="{{ old('prefecture') }}">
                                 <input type="text" class="form-control mb-2" id="city" name="city"
-                                    placeholder="City" value="{{ old('city', $hotel->city ?? '') }}">
+                                    placeholder="City" value="{{ old('city') }}">
                                 <input type="text" class="form-control" id="address" name="address"
-                                    placeholder="Address" value="{{ old('address', $hotel->address ?? '') }}">
+                                    placeholder="Address" value="{{ old('address') }}">
                             </div>
                             <div class="mb-3">
                                 <label for="phone_number" class="form-label">Phone Number</label>
                                 <input type="text" class="form-control" id="phone_number" name="phone_number"
-                                    value="{{ old('phone_number', $user->phone_number) }}">
+                                    value="{{ old('phone_number') }}">
                             </div>
                             <div class="mb-3">
                                 <label for="access" class="form-label">Access</label>
                                 <input type="text" class="form-control" id="access" name="access"
-                                    value="{{ old('access', $hotel->access) }}">
+                                    value="{{ old('access') }}">
                             </div>
                             <div class="mb-3">
                                 <label for="description" class="form-label">Description</label>
-                                <textarea class="form-control" id="description" name="description">{{ old('description', $hotel->description) }}</textarea>
+                                <textarea class="form-control" id="description" name="description">{{ old('description') }}</textarea>
                             </div>
                         </div>
                     </div>
