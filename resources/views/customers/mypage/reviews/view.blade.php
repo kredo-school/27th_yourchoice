@@ -24,13 +24,13 @@
                             <p><strong>Room type:</strong>
                             @foreach($review->reservation->rooms as $room)
                                 @if(!in_array($room->room_type, $uniqueRoomTypes= []))
-                                    <span class="badge bg-pink">{{ $room->room_type }}</span>
+                                    <span>' {{ $room->room_type }} '</span>
                                     @php
                                         $uniqueRoomTypes[] = $room->room_type;
                                     @endphp
                                 @endif
                             @endforeach
-                            </p> //修正必要
+                            </p>
                         </div>
                     </div>
                     <hr>
