@@ -38,7 +38,8 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function () {
       //後ほど使用↓
       // Route::get('/reservation/{id}/reservationlist',[ReservationController::class,'reservationlist'])->name('reservation.reservationlist');
     
-      Route::get('/reservation/{id}/show', [ReservationController::class, 'show'])->name('reservation.show');
+      Route::get('/reservation/{reservationid}/show', [ReservationController::class, 'show'])->name('reservation.show');
+      Route::delete('/reservation/{reservationid}', [ReservationController::class, 'destroy'])->name('reservation.destroy');
       Route::get('/review/list',[App\Http\Controllers\Customer\ReviewController::class,'list'])->name('review.list');
       Route::get('/review/show',[App\Http\Controllers\Customer\ReviewController::class,'show'])->name('review.show');
       Route::get('/review/create',[App\Http\Controllers\Customer\ReviewController::class,'create'])->name('review.create');
