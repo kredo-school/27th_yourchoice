@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use App\Models\Hotel;
 use App\Models\Category;
+use App\Models\Room;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -15,38 +16,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // // User::factory(10)->create();
-
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-
-        //usersTable
+        // 各Seederを実行（順序に注意）
         $this->call([
-            UsersTableSeeder::class,
+            UsersTableSeeder::class,         // ユーザー情報
+            HotelsTableSeeder::class,        // ホテル情報
+            CategoriesTableSeeder::class,    // カテゴリー情報
+            PaymentsTableSeeder::class,      // 支払い情報
+            ReservationsTableSeeder::class,  // 予約情報
+            HotelCategoryTableSeeder::class, // ホテルとカテゴリーの関連付け
+            RoomsTableSeeder::class,         // 部屋情報
+            ReservationRoomTableSeeder::class,         // 部屋情報
+            ReviewsTableSeeder::class,       // レビュー情報
         ]);
-
-        //hotelsTable
-        $this->call([
-            HotelsTableSeeder::class,
-        ]);
-
-        //CategoriesTable
-        $this->call([
-            CategoriesTableSeeder::class,
-        ]);
-
-        //Payment
-        $this->call([
-            PaymentsTableSeeder::class,
-        ]);
-        
-        //Reservation
-        $this->call([
-            ReservationsTableSeeder::class,
-        ]);
-
-        
     }
 }
