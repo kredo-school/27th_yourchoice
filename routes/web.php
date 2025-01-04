@@ -7,9 +7,11 @@ use App\Http\Controllers\HotelController;
 use App\Http\Controllers\MypageController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HotelAdminController;
-use App\Http\Controllers\ReservationController;
+// use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\customer\ReservationController;
 
 Auth::routes();
+
 
 // カスタマー側
 
@@ -33,9 +35,10 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function () {
       Route::get('/profile/editpass',[App\Http\Controllers\Customer\ProfileController::class,'editpass'])->name('profile.editpass');
 
       Route::get('/reservation/reservationlist',[App\Http\Controllers\Customer\ReservationController::class,'reservationlist'])->name('reservation.reservationlist');
-      Route::get('/reservation/show',[App\Http\Controllers\Customer\ReservationController::class,'show'])->name('reservation.show');
-      Route::get('/reservation/show2',[App\Http\Controllers\Customer\ReservationController::class,'show2'])->name('reservation.show2');
-
+      //後ほど使用↓
+      // Route::get('/reservation/{id}/reservationlist',[ReservationController::class,'reservationlist'])->name('reservation.reservationlist');
+    
+      Route::get('/reservation/{id}/show', [ReservationController::class, 'show'])->name('reservation.show');
       Route::get('/review/list',[App\Http\Controllers\Customer\ReviewController::class,'list'])->name('review.list');
       Route::get('/review/show',[App\Http\Controllers\Customer\ReviewController::class,'show'])->name('review.show');
       Route::get('/review/create',[App\Http\Controllers\Customer\ReviewController::class,'create'])->name('review.create');

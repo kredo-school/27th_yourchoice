@@ -8,9 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ReservationRoom extends Model
 {
     use HasFactory;
-    
-    protected $table = 'reservation_room';
-
+    protected $table = 'reservation_room';  // 正しいテーブル名を指定
     protected $fillable = ['reservation_id', 'room_id', 'number_of_people', 'price'];
 
     // 予約へのリレーション
