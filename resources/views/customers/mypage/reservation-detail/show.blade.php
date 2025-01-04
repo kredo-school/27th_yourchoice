@@ -76,10 +76,34 @@
                     </div>
                 </div> --}}
             </div>
+
+            {{-- 宿泊前後で表示切替 --}}
+            @if($reservation->checkin_status == 'done')
             <div class="mt-3 d-flex justify-content-center">
-                <a href="{{ route('customer.review.create') }}"><button class="btn btn-outline-secondary me-5">Write review</button></a>
+                <a href="{{ route('customer.review.create') }}">
+                    <button class="btn btn-outline-secondary me-5">Write review</button>
+                </a>
             </div>
+            @else
+                <div class="mt-3 d-flex justify-content-center">
+                    <button class="btn btn-outline-secondary me-5" data-bs-toggle="modal" data-bs-target="#delete">Cancel reservation</button>
+                    @include('customers.mypage.reservation-detail.modals.delete')
+                    <button class="btn btn-danger ms-5">Contact Hotel</button>
+                </div>
+            @endif
+
         </div>
     </div>
 </div>
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
 @endsection

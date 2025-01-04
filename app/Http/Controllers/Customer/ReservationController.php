@@ -51,6 +51,21 @@ class ReservationController extends Controller
         return view('customers.mypage.reservation-detail.show', compact('reservation','payment','hotel','roomTypes'));
     }
 
+    // 削除処理 予約キャンセル時に使用
+    public function destroy($id)
+    {
+        // 該当する予約を検索
+        $reservation = Reservation::find($id);
+
+        if ($reservation) {
+            $reservation->delete();
+            return view('customers.mypage.reservation_list');
+            // return redirect()->back()->with('success', 'Reservation deleted successfully.');
+        }
+    
+        return redirect()->back()->with('error', 'Reservation not found.');
+    }
+
     public function reservationlist()
     {
         return view('customers.mypage.reservation_list');
@@ -60,7 +75,7 @@ class ReservationController extends Controller
 
             // 取得したデータをビューに渡す
             // return view('customer.reservation_list', compact('reservations'));
-    return view('customers.mypage.reservation_list', compact('reservations'));
+        return view('customers.mypage.reservation_list', compact('reservations'));
     }
 
     //@Miu-------------------------------------------------------End//
