@@ -39,7 +39,7 @@
                                         @endif
                                 </p>
                             </div>
-                            <a href="{{ route('customer.review.show') }}" class="stretched-link"></a>
+                            <a href="{{ route('customer.review.show', $review->id) }}" class="stretched-link"></a>
                     </div>
                 </div>
                 @endforeach

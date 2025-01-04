@@ -46,9 +46,11 @@ class ReviewController extends Controller
 
     }
 
-    public function show()
+    public function show($id)
     {
-        return view('customers.mypage.reviews.view');
+        $review = $this->review->findOrFail($id);
+
+        return view('customers.mypage.reviews.view') ->with('review', $review);
     }
 
     public function create()

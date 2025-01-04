@@ -12,31 +12,33 @@
                             <img src="{{ asset('images/hotel.jpg') }}" alt="hotel-img" class="hotel-img">
                         </div>
                         <div class="hotel-info">
-                            <h4>Hotel A</h4>
-                            <p>Tokyo</p>
-                            <span class="badge bg-pink">Wheelchair</span>
+                            <h4>{{ $review->hotel->hotel_name }}</h4>
+                            <p>{{ $review->hotel->prefecture }}</p>
+                                @foreach($review->hotel->categories as $hotelcategory)
+                                    <span class="badge bg-pink">{{ $hotelcategory->name }}</span>
+                                @endforeach
                         </div>
                         <div class="stay-info text-right">
-                            <p><strong>date of stay:</strong> 2023/11/2 ~ 2024/11/3</p>
-                            <p><strong>people:</strong> 2</p>
-                            <p><strong>type of room:</strong> twin</p>
+                            <p><strong>Date of stay:</strong>{{ $review->reservation->check_in_date }} ~ {{ $review->reservation->check_out_date }}</p>
+                            <p><strong>people:</strong> {{ $review->reservation->number_of_people }} </p>
+                            <p><strong>Type of room:</strong> twin</p> //修正必要
                         </div>
                     </div>
                     <hr>
                     <div class="review-body">
                         <h5>Overall rating</h5>
                         <p class="rating">
-                            ★★★★☆
+                                    @for ($i = 0; $i < $review->rating; $i++)
+                                        <strong>★</strong>
+                                    @endfor
+                                    @for ($i = $review->rating; $i < 5; $i++)
+                                        <strong>☆</strong>
+                                    @endfor
+                                    {{ $review->rating }}
                         </p>
                         <h5>Comments</h5>
                         <p>
-                            In an increasingly connected world where everyone’s opinions are shared with a click, reviews are more powerful than ever. Statistics show that 95% of consumers now read online reviews, and as many as 88% trust them as much as personal recommendations.
-                        </p>
-                        <p>
-                            Yet, acquiring these gold nuggets of advocacy can often feel as daunting as striking gold. So how do you motivate your customers to share their fantastic experiences and pen them into persuasive, positive reviews?
-                        </p>
-                        <p>
-                            In this article, we’ll show you real-life examples of positive customer reviews. These review examples not only laud excellent customer experiences but are powerful tools that boost your online reputation and catalyze business success.
+                        {{ $review->comment }}
                         </p>
                     </div>
                     <div class="review-images d-flex mt-4">
