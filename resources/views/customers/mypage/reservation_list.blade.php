@@ -1,6 +1,7 @@
 @extends('layouts.customer_mypage')
 
 @section('content')
+
 <link rel="stylesheet" href="{{ asset('css/hotel_search.css') }}">
 
 <div class="container-fluid">
@@ -28,7 +29,7 @@
                                         <p class="fs-5 fw-bolder align-bottom" >{{ '$100' }}</p>
                                     </div>
                                     <div class="col-12 mt-2 d-flex justify-content-end">
-                                        <a href="{{ route('customer.reservation.show')}}" class="align-self-end">read more</a>
+                                        <a href="{{ route('customer.reservation.show', '1')}}" class="align-self-end">read more</a>
                                     </div>
                                 </div>
                             </div>
@@ -56,7 +57,7 @@
                                         <p class="fs-5 fw-bolder align-bottom" >{{ '$100' }}</p>
                                     </div>
                                     <div class="col-12 mt-2 d-flex justify-content-end">
-                                        <a href="{{ route('customer.reservation.show2')}}" class="align-self-end">read more</a>
+                                        <a href="{{ route('customer.reservation.show','2')}}" class="align-self-end">read more</a>
                                     </div>
                                 </div>
                             </div>
@@ -84,7 +85,7 @@
                                         <p class="fs-5 fw-bolder align-bottom" >{{ '$100' }}</p>
                                     </div>
                                     <div class="col-12  d-flex justify-content-end">
-                                        <a href="{{ route('customer.reservation.show')}}" class="align-self-end">read more</a>
+                                        <a href="{{ route('customer.reservation.show','3')}}" class="align-self-end">read more</a>
                                     </div>
                                 </div>
                             </div>
