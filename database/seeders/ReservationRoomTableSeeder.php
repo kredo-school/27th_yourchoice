@@ -13,7 +13,7 @@ class ReservationRoomTableSeeder extends Seeder
      */
     public function run()
     {
-        $reservations = range(1, 12); // reservation_id: 1〜12
+        $reservations = range(1, 27); // reservation_id: 1〜12
         $rooms = range(1, 60); // room_id: 1〜12（1つの予約に1部屋を対応させる）
 
         // 両方の配列をランダム化

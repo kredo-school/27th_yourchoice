@@ -19,7 +19,7 @@ class ReservationsTableSeeder extends Seeder
 
         // user_id: 1, 3, 5 のみ予約を作成
         for ($userId = 1; $userId <= 5; $userId += 2) {
-            for ($i = 1; $i <= 4; $i++) { // 各ユーザーに4つの予約を作成
+            for ($i = 1; $i <= 9; $i++) { // 各ユーザーに4つの予約を作成
                 DB::table('reservations')->insert([
                     'id'                => $reservationId,
                     'user_id'           => $userId,
