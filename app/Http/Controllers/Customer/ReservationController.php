@@ -59,7 +59,7 @@ class ReservationController extends Controller
 
         if ($reservation) {
             $reservation->delete();
-            return view('admin.posts.index')->with('all_posts', $all_posts);
+            return view('customers.mypage.reservation_list');
             // return redirect()->back()->with('success', 'Reservation deleted successfully.');
         }
     
