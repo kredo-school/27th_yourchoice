@@ -4,8 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-
 use Illuminate\Support\Facades\Auth;
 
 class Reservation extends Model
@@ -19,7 +17,7 @@ class Reservation extends Model
     ];
 
     // 中間テーブルへのリレーション
-    public function reservationRooms()
+    public function reservationRoom()
     {
         return $this->hasMany(ReservationRoom::class, 'reservation_id');
     }
