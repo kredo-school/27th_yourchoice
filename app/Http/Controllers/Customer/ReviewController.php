@@ -32,7 +32,7 @@ class ReviewController extends Controller
 
     private function getReviewList()
     {
-        $all_reviews = $this->review->latest()->get();
+        $all_reviews = $this->review->with(['hotel.categories'])->latest()->get();
         $list_reviews =[];
 
         foreach($all_reviews as $review){
