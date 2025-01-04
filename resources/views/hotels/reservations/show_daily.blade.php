@@ -8,9 +8,11 @@
 <div class="container">
         <h1>Reservation Management</h1>
         <div class="navigation">
-            <button class="btn btn-nav btn-outline-secondary">&lt;</button>
-            <input type="date" id="date-picker" value="2024-11-08" class="date-picker">
-            <button class="btn btn-nav btn-outline-secondary">&gt;</button>
+            <form id="date-form" action="{{ route('hotel.reservation.show_daily') }}" method="GET">
+                <button type="button" id="prev-date" class="btn btn-nav btn-outline-secondary">&lt;</button>
+                <input type="date" id="date-picker" name="date" value="{{ $date }}" class="date-picker">
+                <button type="button" id="next-date" class="btn btn-nav btn-outline-secondary">&gt;</button>
+            </form>
         </div>
 
         <script src="{{ asset('js/show_daily.js') }}"></script>
@@ -28,148 +30,46 @@
                     <th class="col8">Payment</th>
                     <th class="col9">Check-in</th>
                     <th class="col10">Phone number</th>
-                    <th class="col11">Customer request</th>
+                    <th class="col11">Customer request & Hotel memo</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td><a href="{{ route('hotel.reservation.edit') }}"><img src="{{ asset('images/pen-to-square-solid.svg') }}" class="edit-logo"></a></td>
-                    <td>101</td>
-                    <td>Shinji Watanabe</td>
-                    <td>1</td>
-                    <td>2024/11/8</td>
-                    <td>2024/11/10</td>
-                    <td>breakfast</td>
-                    <td>
-                        <select>
-                            <option>done</option>
-                            <option>pending</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select>
-                            <option>done</option>
-                            <option>not done</option>
-                        </select>
-                    </td>
-                    <td>080-3452-5212</td>
-                    <td>Please provide a room on a higher floor with a quiet environment.</td>
-                </tr>
-                <tr>
-                    <td><a href="{{ route('hotel.reservation.edit') }}"><img src="{{ asset('images/pen-to-square-solid.svg') }}" class="edit-logo"></a></td>
-                    <td>102</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <select>
-                            <option>done</option>
-                            <option>pending</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select>
-                            <option>done</option>
-                            <option>not done</option>
-                        </select>
-                    </td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td><a href="{{ route('hotel.reservation.edit') }}"><img src="{{ asset('images/pen-to-square-solid.svg') }}" class="edit-logo"></a></td>
-                    <td>103</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <select>
-                            <option>done</option>
-                            <option>pending</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select>
-                            <option>done</option>
-                            <option>not done</option>
-                        </select>
-                    </td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td><a href="{{ route('hotel.reservation.edit') }}"><img src="{{ asset('images/pen-to-square-solid.svg') }}" class="edit-logo"></a></td>
-                    <td>201</td>
-                    <td>AAAA BBB</td>
-                    <td>1</td>
-                    <td>2024/11/8</td>
-                    <td>2024/11/10</td>
-                    <td>breakfast</td>
-                    <td>
-                        <select>
-                            <option>pending</option>
-                            <option>done</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select>
-                            <option>not done</option>
-                            <option>done</option>
-                        </select>
-                    </td>
-                    <td>080-3452-5212</td>
-                    <td>Please ensure the room is wheelchair accessible.</td>
-                </tr>
-                <tr>
-                    <td><a href="{{ route('hotel.reservation.edit') }}"><img src="{{ asset('images/pen-to-square-solid.svg') }}" class="edit-logo"></a></td>
-                    <td>202</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <select>
-                            <option>done</option>
-                            <option>pending</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select>
-                            <option>done</option>
-                            <option>not done</option>
-                        </select>
-                    </td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td><a href="{{ route('hotel.reservation.edit') }}"><img src="{{ asset('images/pen-to-square-solid.svg') }}" class="edit-logo"></a></td>
-                    <td>203</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <select>
-                            <option>done</option>
-                            <option>pending</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select>
-                            <option>done</option>
-                            <option>not done</option>
-                        </select>
-                    </td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                @foreach ($roomStatus as $status)
+                    <tr>
+                        <td>
+                        @if ($status['reservation'])
+                            <!-- 予約が存在する場合 -->
+                            <a href="{{ route('hotel.reservation.edit', ['id' => $status['reservation']->id]) }}"><img src="{{ asset('images/pen-to-square-solid.svg') }}" class="edit-logo"></a>
+                        @else
+                            <!-- 予約が存在しない場合 -->
+                            <a href="{{ route('hotel.reservation.edit', ['id' => 'new', 'date' => $date, 'room_id' => $status['room']->id]) }}"><img src="{{ asset('images/pen-to-square-solid.svg') }}" class="edit-logo"></a>
+                        @endif
+                        </td>
+                        <td>{{ $status['room']->room_number }}</td>
+                        @if ($status['reservation'])
+                            <td>{{ $status['reservation']->user->first_name ?? ''}} {{ $status['reservation']->user->last_name ?? ''}}</td>
+                            <td>{{ $status['details']->number_of_people }}</td>
+                            <td>{{ $status['reservation']->check_in_date }}</td>
+                            <td>{{ $status['reservation']->check_out_date }}</td>
+                            <td>{{ $status['reservation']->breakfast ? 'Yes' : 'No' }}</td>
+                            <td>{{ $status['payment_status'] }}</td>
+                            <td>
+                                <form action="{{ route('hotel.reservation.updateCheckinStatus', $status['reservation']->id) }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <select name="checkin_status" onchange="this.form.submit()">
+                                        <option value="not done" {{ $status['reservation']->checkin_status === 'not done' ? 'selected' : '' }}>not done</option>
+                                        <option value="done" {{ $status['reservation']->checkin_status === 'done' ? 'selected' : '' }}>done</option>
+                                    </select>
+                                </form>
+                            </td> 
+                            <td>{{ $status['reservation']->user->phone_number ?? ''}}</td>
+                            <td>{{ $status['reservation']->customer_request }}</td>
+                        @else
+                            <td colspan="9" class="text-center">No Reservation</td>
+                        @endif
+                    </tr>
+                @endforeach
 
             </tbody>
         </table>

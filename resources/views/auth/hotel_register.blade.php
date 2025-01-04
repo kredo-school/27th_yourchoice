@@ -12,38 +12,57 @@
                 <h1 class="text-center">Register as a Hotel Admin</h1>
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{ route('hotel.profile.show') }}">
+                        <form method="POST" action="{{ route('register.create_admin') }}">
                             @csrf
                             @method('GET')
                             <div class="row">
                                 <div class="mb-3">
-                                    <label for="hotel_name" class="form-label">Hotel Name</label>
-                                    <input type="text" class="form-control" id="hotel_name" name="hotel_name"
-                                        value="{{ old('hotel_name') }}">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="hotel_email" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="hotel_email" name="hotel_email"
-                                        value="{{ old('hotel_email') }}">
+                                    <label for="username" class="form-label">{{ __('Hotel name') }}</label>
+                                    <input type="text" class="form-control" id="username" name="username"
+                                        value="{{ old('username') }}">
+                                        @error('username')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="hotel_phone" class="form-label">Phone Number</label>
-                                    <input type="text" class="form-control" id="hotel_phone" name="hotel_phone"
-                                        value="{{ old('hotel_phone') }}">
+                                    <label for="email" class="form-label">{{ __('Email') }}</label>
+                                    <input type="email" class="form-control" id="email" name="email"
+                                        value="{{ old('email') }}">
+                                            @error('email')
+                                                <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                 </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">{{ __('Phone Number') }}</label>
+                                    <input type="text" name="phone_number" id="phone_number" class="form-control" value="{{ old('phone_number') }}">
+                                        @error('phone_number')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                </div>
+
                                 <!-- Password -->
                                 <div class="mb-3">
-                                    <label class="form-label">Password</label>
-                                    <input type="password" name="password" id="password" class="form-control"
-                                        value="#" autofocus>
+                                    <label class="form-label">{{ __('Password') }}</label>
+                                    <input type="password" name="password_hash" id="password_hash" class="form-control" value="{{ old('password_hash') }}" autofocus>
+                                        @error('passwordd_hash')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                 </div>
 
                                 <!-- Confirm Password -->
                                 <div class="mb-3">
-                                    <label class="form-label">Confirm Password</label>
-                                    <input type="password" name="password" id="password" class="form-control"
-                                        value="#" autofocus>
+                                    <label class="form-label">{{ __('Confirm Password') }}</label>
+                                    <input type="password" name="password_hash_confirm" id="password_hash" class="form-control" autofocus>
                                 </div>
 
                             </div>

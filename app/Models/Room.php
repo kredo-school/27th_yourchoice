@@ -1,14 +1,31 @@
 <?php
 
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Room extends Model
 {
-    // 予約ルームとのリレーション(一対多)
+    use HasFactory;
+
+    protected $fillable = [
+        'room_number',
+        'hotel_id',
+        'room_type',
+        'price',
+        'capacity',
+        'image',
+        'remarks',
+    ];
+
+    public function hotel()
+    {
+        return $this->belongsTo(Hotel::class);
+    }
+
     public function reservationRoom()
     {
-        return $this->hasMany(ReservationRoom::class);
+        return $this->hasMany(ReservationRoom::class, 'room_id');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -11,30 +12,36 @@ class Reservation extends Model
 {
     use HasFactory;
 
-    //更新可能な項目を設定する
     protected $fillable = [
-        'user_id',
-        'payment_id',
-        'check_in_date' ,
-        'check_out_date' ,
-        'number_of_people',
-        'breakfast', 
-        'reservation_status',
-        'checkin_status',
-        'customer_request',
+        'user_id', 'payment_id', 'check_in_date', 'check_out_date', 
+        'number_of_people', 'breakfast', 'reservation_status', 
+        'checkin_status', 'customer_request'
     ];
 
+    // 中間テーブルへのリレーション
+    public function reservationRooms()
+    {
+        return $this->hasMany(ReservationRoom::class, 'reservation_id');
+    }
 
-    // ユーザーとのリレーション(このモデルが他のモデルに属している Many-to-On)
+    // 中間テーブルを経由して部屋を取得
+    public function rooms()
+    {
+        return $this->reservationRooms->map(function ($reservationRoom) {
+            return $reservationRoom->room;
+        });
+    }
+
+    //ユーザーとのリレーション
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
-    //Reservation_roomとのリレーション(１対多)
-    public function reservationRoom()
-    {
-        return $this->hasMany(ReservationRoom::class);
-    }
-   
 
+    //paymentとのリレーション
+    public function payment()
+    {
+        return $this->belongsTo(Payment::class, 'payment_id');
+    }
+    
 }
