@@ -44,4 +44,10 @@ class HotelAdmin extends Model
             'password_hash' => 'hashed',
         ];
     }
+
+    public function getAuthPassword()
+    {
+        return $this->password_hash;
+    }
+    
 }

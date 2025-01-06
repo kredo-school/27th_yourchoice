@@ -77,7 +77,7 @@
                     <div class="mb-3">
                         <label class="form-label">{{ __('Password') }}</label>
                         <input type="password" name="password_hash" id="password_hash" class="form-control" value="{{ old('password_hash') }}" autofocus>
-                            @error('passwordd_hash')
+                            @error('password_hash')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -94,7 +94,7 @@
                  <!--ここでtableが変わる-->
                     <!-- Accessibility Categories -->
                     <div class="mb-4">
-                        <label class="form-label">Category</label>
+                        <label class="form-label">{{ __('Category') }}</label>
                        
               
                         <div class="form-check">
@@ -138,4 +138,5 @@
         </div>
     </div>
 </div>
+
 @endsection
