@@ -4,9 +4,9 @@
     <link rel="stylesheet" href="{{ asset('css/hoteladmin.css') }}">
     {{-- Editpageはvalue={{old}}置いておけばOK　新規登録の場合は空欄になる --}}
     <div class="container mt-2 d-flex justify-content-center">
-        <form method="POST" action="{{ route('hotel.room.show') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('hotel.room.update', $room->id ) }}" enctype="multipart/form-data">
             @csrf
-            @method('GET')
+            @method('PUT')
 
             <div class="row">
                 <!-- Left Side (Basic Information) -->
@@ -16,38 +16,32 @@
                         <div class="card-body">
                             <div class="mb-3">
                                 <label for="room_number" class="form-label">Room No.</label>
-                                <input type="number" class="form-control" id="room_number" name="room_number"
-                                    value="{{ old('room_number') }}">
+                                <input type="number" class="form-control" id="{{ $room-> room_number }}" name="room_number"
+                                    value="{{ $room-> room_number }}">
                             </div>
                             <div class="mb-3">
                                 <label for="room_type" class="form-label">Room Type</label>
-                                <select id="room_type" name="room_type" class="form-control">
-                                    <option value="" disabled selected>-- Select Here --</option>
-                                    <option value="single">Single Room</option>
-                                    <option value="double">Double Room</option>
-                                    <option value="twin">Twin Room</option>
-                                </select>
-                            </div>
 
-                            {{-- BEで以下に変更　<select id="room_type" name="room_type" class="form-control" required>
-                                  <option value="" disabled {{ !isset($room->type) ? 'selected' : '' }}>-- Select Here --</option>
-                                  <option value="single" {{ isset($room->type) && $room->type == 'single' ? 'selected' : '' }}>Single Room</option>
-                                  <option value="double" {{ isset($room->type) && $room->type == 'double' ? 'selected' : '' }}>Double Room</option>
-                                  <option value="twin" {{ isset($room->type) && $room->type == 'twin' ? 'selected' : '' }}>Twin Room</option>
-                              </select> --}}
+                                <select id="room_type" name="room_type" class="form-control" required>
+                                    <option value="" disabled {{ !isset($room->room_type) ? 'selected' : '' }}>-- Select Here --</option>
+                                    <option value="single" {{ isset($room->room_type) && $room->room_type == 'single' ? 'selected' : '' }}>Single Room</option>
+                                    <option value="double" {{ isset($room->room_type) && $room->room_type == 'double' ? 'selected' : '' }}>Double Room</option>
+                                    <option value="twin" {{ isset($room->room_type) && $room->room_type == 'twin' ? 'selected' : '' }}>Twin Room</option>
+                                </select> 
+                              </div>
 
                             <div class="mb-3">
                                 <label for="room_price" class="form-label">Room Price</label>
                                 <div class="input-group">
                                     <span class="input-group-text">$</span>
                                     <input type="number" class="form-control" id="room_price" name="room_price"
-                                        value="{{ old('room_price') }}">
+                                        value="{{ $room-> price }}">
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label for="capacity" class="form-label">Capacity</label>
                                 <input type="number" class="form-control" id="capacity" name="capacity"
-                                    value="{{ old('capacity') }}">
+                                    value="{{ $room-> capacity }}">
                             </div>
                             <div>
                                 <label for="room_image" class="form-label">Room Image</label>
@@ -67,7 +61,8 @@
                             </div>
                             <div class="mb-3">
                                 <label for="room_remarks" class="form-label">Remarks</label>
-                                <textarea class="form-control" id="room_remarks" name="room_remarks" value="{{ old('room_remarks') }}"></textarea>
+                                <textarea class="form-control" id="room_remarks" name="room_remarks" value="{{ $room-> capacity }}">{{ $room-> remarks }}
+                                </textarea>
                             </div>
 
                             <!-- Buttons -->
@@ -79,6 +74,15 @@
                                 </div>
                             </div>
                         </div>
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
