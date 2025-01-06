@@ -7,9 +7,11 @@ use App\Http\Controllers\HotelController;
 use App\Http\Controllers\MypageController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HotelAdminController;
-use App\Http\Controllers\ReservationController;
+// use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\customer\ReservationController;
 
 Auth::routes();
+
 
 // カスタマー側
 
@@ -33,11 +35,13 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function () {
       Route::get('/profile/editpass',[App\Http\Controllers\Customer\ProfileController::class,'editpass'])->name('profile.editpass');
 
       Route::get('/reservation/reservationlist',[App\Http\Controllers\Customer\ReservationController::class,'reservationlist'])->name('reservation.reservationlist');
-      Route::get('/reservation/show',[App\Http\Controllers\Customer\ReservationController::class,'show'])->name('reservation.show');
-      Route::get('/reservation/show2',[App\Http\Controllers\Customer\ReservationController::class,'show2'])->name('reservation.show2');
-
+      //後ほど使用↓
+      // Route::get('/reservation/{id}/reservationlist',[ReservationController::class,'reservationlist'])->name('reservation.reservationlist');
+    
+      Route::get('/reservation/{reservationid}/show', [ReservationController::class, 'show'])->name('reservation.show');
+      Route::delete('/reservation/{reservationid}', [ReservationController::class, 'destroy'])->name('reservation.destroy');
       Route::get('/review/list',[App\Http\Controllers\Customer\ReviewController::class,'list'])->name('review.list');
-      Route::get('/review/show',[App\Http\Controllers\Customer\ReviewController::class,'show'])->name('review.show');
+      Route::get('/review/show/{id}',[App\Http\Controllers\Customer\ReviewController::class,'show'])->name('review.show');
       Route::get('/review/create',[App\Http\Controllers\Customer\ReviewController::class,'create'])->name('review.create');
       Route::get('/review/store',[App\Http\Controllers\Customer\ReviewController::class,'store'])->name('review.store');
 
@@ -68,8 +72,13 @@ Route::group(['prefix' => 'hotel', 'as' => 'hotel.'], function () {
 
     Route::get('/reservation/show_monthly',[App\Http\Controllers\Hotel\ReservationController::class,'show_monthly'])->name('reservation.show_monthly');
     Route::get('/reservation/show_daily',[App\Http\Controllers\Hotel\ReservationController::class,'show_daily'])->name('reservation.show_daily');
-    Route::get('/reservation/edit',[App\Http\Controllers\Hotel\ReservationController::class,'edit'])->name('reservation.edit');
-    Route::get('/reservation/store',[App\Http\Controllers\Hotel\ReservationController::class,'store'])->name('reservation.store');
+    Route::put('/hotel/reservation/{id}/update-checkin-status', [App\Http\Controllers\Hotel\ReservationController::class, 'updateCheckinStatus'])->name('reservation.updateCheckinStatus');
+    Route::get('/reservation/{id}/edit',[App\Http\Controllers\Hotel\ReservationController::class,'edit'])->where('id', 'new|\d+') // 'new' または数字を許可
+    ->name('reservation.edit');
+    Route::post('/reservation/store',[App\Http\Controllers\Hotel\ReservationController::class,'store'])->name('reservation.store');
+    Route::put('/reservation/update/{id}',[App\Http\Controllers\Hotel\ReservationController::class,'update'])->name('reservation.update');
+    Route::get('/api/hotel/reservations/calendar', [App\Http\Controllers\Hotel\ReservationController::class, 'getCalendarEvents']);
+
 
 
     Route::get('/review/list',[App\Http\Controllers\Hotel\ReviewController::class,'list'])->name('review.list');

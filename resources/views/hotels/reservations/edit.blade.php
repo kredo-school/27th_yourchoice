@@ -8,38 +8,47 @@
 
                         <h2 class="mb-4"><strong>Edit Reservation</strong></h2>
                     <div class="card p-5 shadow-sm rounded">
+                    <form action="{{ $reservation ? route('hotel.reservation.update', $reservation->id) : route('hotel.reservation.store') }}" method="POST">
+                            @csrf
+                            @if ($reservation)
+                                @method('PUT')
+                            @endif
                         <!-- Room and Date Information -->
                         <div class="mb-4">
-                            <p><strong>Room No. 102</strong></p>
-                            <p><strong>Check-in date:</strong> 11/8</p>
-                            <p><strong>Check-out date:</strong> 11/9</p>
+                            @if ($reservation)
+                                <p><strong>Room No. {{ $rooms->pluck('room_number')->join(', ') }}</strong></p>
+                                <p><strong>Check-in date:</strong> {{ $reservation->check_in_date }}</p>
+                                <p><strong>Check-out date:</strong> {{ $reservation->check_out_date }}</p>
+                            @else
+                                <p><strong>Room No. {{ $room_number }}</strong></p>
+                                <input type="hidden" name="room_id" value="{{ $room_id }}">
+                                <div class="form-group mb-3 col-2">
+                                    <label for="check-in-date"><strong>Check-in date:</strong></label>
+                                    <input type="date" class="form-control" id="check-in-date" name="check_in_date" 
+                                        value="{{ $date }}">
+                                </div>
+
+                                <div class="form-group mb-3 col-2">
+                                    <label for="check-out-date"><strong>Check-out date:</strong></label>
+                                    <input type="date" class="form-control" id="check-out-date" name="check_out_date">
+                                </div>
+                            @endif
                         </div>
 
                         <!-- Comment Section -->
-                        <form action="{{ route('hotel.reservation.store') }}" method="GET">
+                             <!-- 隠しフィールドで date を保持 -->
+                            <input type="hidden" name="date" value="{{ request('date', $reservation->check_in_date ?? $date) }}">
 
-                        <div class="form-group mb-3">
-                            <label for="comment"><strong>Comment</strong></label>
-                            <textarea class="form-control" id="comment" rows="3" placeholder="Value"></textarea>
-                        </div>
+                            <div class="form-group mb-3">
+                                <label for="customer_request"><strong>Customer request & Hotel memo</strong></label>
+                                <textarea class="form-control" id="customer_request" name="customer_request" rows="3">{{ $reservation->customer_request ?? '' }}</textarea>
+                            </div>
 
-                        <!-- Phone Number -->
-                        <div class="form-group mb-3">
-                            <label for="phone-number"><strong>Phone number</strong></label>
-                            <input type="text" class="form-control" id="phone-number" placeholder="Value">
-                        </div>
-
-                        <!-- Checkbox for Breakfast -->
-                        <div class="form-check mb-4">
-                            <input type="checkbox" class="form-check-input" id="breakfast" checked>
-                            <label class="form-check-label" for="breakfast">Breakfast</label>
-                        </div>
-
-                        <!-- Buttons -->
-                        <div class="d-flex justify-content-start">
-                            <a href="{{ route('hotel.reservation.show_daily') }}" class="subbtn2 me-3">Cancel</a>
-                            <button type="submit" class="mainbtn">Confirm</button>
-                        </div>
+                            <!-- Buttons -->
+                            <div class="d-flex justify-content-start">
+                                <a href="{{ route('hotel.reservation.show_daily', ['date' => request('date', $reservation->check_in_date ?? $date)]) }}" class="subbtn2 me-3">Cancel</a>
+                                <button type="submit" class="mainbtn">Confirm</button>
+                            </div>
 
                         </form>
                     </div>

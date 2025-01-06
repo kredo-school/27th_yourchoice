@@ -87,10 +87,10 @@ class RegisterController extends Controller
         }
 
         // Redirect to a specific page
-        return redirect()->route('login')->with('success', 'Registration successful!');
+        return redirect()->route('customer.profile.show')->with('success', 'Registration successful!');
     } catch (\Exception $e) {
         Log::error('Failed: ' . $e->getMessage());
-        return redirect()->back()->withErrors(['error' => 'Failed']);
+        return redirect()->route('customer.profile.show')->withErrors(['error' => 'Failed']);
     }
     }
 
@@ -107,10 +107,10 @@ class RegisterController extends Controller
         ]);
 
         // Redirect to a specific page
-        return redirect()->route('login')->with('success', 'Registration successful!');
+        return redirect()->route('hotel.profile.show')->with('success', 'Registration successful!');
     } catch (\Exception $e) {
         Log::error('Failed: ' . $e->getMessage());
-        return redirect()->back()->withErrors(['error' => 'Failed']);
+        return redirect()->route('hotel.profile.show')->withErrors(['error' => 'Failed']);
     }
     }
 

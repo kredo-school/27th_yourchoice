@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('reservation_room', function (Blueprint $table) {
             $table->unsignedBigInteger('reservation_id'); // 予約ID
             $table->unsignedBigInteger('room_id'); // 部屋ID
-            $table->integer('number_of_people'); // 宿泊者数
-            $table->decimal('price', 10, 2); // 部屋の料金
+            $table->integer('number_of_people')->nullable(); // 宿泊者数
+            $table->decimal('price', 10, 2)->nullable(); // 部屋の料金
             $table->timestamps(); // 作成日・更新日のタイムスタンプ
 
             // 外部キー制約
