@@ -89,7 +89,7 @@ class RegisterController extends Controller
         return redirect()->route('customer.profile.show')->with('success', 'Registration successful!');
     } catch (\Exception $e) {
         Log::error('Failed: ' . $e->getMessage());
-        return redirect()->route('customer.profile.show')->withErrors(['error' => 'Failed']);
+        return redirect()->back()->withErrors(['error' => 'Failed']);
     }
     }
 
@@ -109,7 +109,7 @@ class RegisterController extends Controller
         return redirect()->route('hotel.profile.show')->with('success', 'Registration successful!');
     } catch (\Exception $e) {
         Log::error('Failed: ' . $e->getMessage());
-        return redirect()->route('hotel.profile.show')->withErrors(['error' => 'Failed']);
+        return redirect()->back()->withErrors(['error' => 'Failed']);
     }
     }
 

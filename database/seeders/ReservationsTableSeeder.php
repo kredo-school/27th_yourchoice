@@ -35,7 +35,7 @@ class ReservationsTableSeeder extends Seeder
                 'payment_id'        => 2,
                 'check_in_date'     => '2025-02-03',
                 'check_out_date'    => '2025-02-04',
-                'number_of_people'  => 2,
+                'number_of_people'  => 1,
                 'breakfast'         => 1, // 朝食あり
                 'reservation_status'=> 'confirmed',
                 'checkin_status'    => 'not done',
@@ -45,13 +45,13 @@ class ReservationsTableSeeder extends Seeder
             ],
             // パターン3
             [
-                'user_id'           => 3,
+                'user_id'           => 1,
                 'payment_id'        => 3,
-                'check_in_date'     => '2025-02-10',
-                'check_out_date'    => '2025-02-12',
+                'check_in_date'     => '2025-02-03',
+                'check_out_date'    => '2025-02-05',
                 'number_of_people'  => 4,
                 'breakfast'         => 1, // 朝食あり
-                'reservation_status'=> 'cancelled', // 予約キャンセル
+                'reservation_status'=> 'confirmed', // 予約キャンセル
                 'checkin_status'    => 'done', // チェックイン済み
                 'customer_request'  => 'I need a late check-out.',
                 'created_at'        => now(),
@@ -59,13 +59,13 @@ class ReservationsTableSeeder extends Seeder
             ],
             // パターン4
             [
-                'user_id'           => 4,
+                'user_id'           => 2,
                 'payment_id'        => 4,
-                'check_in_date'     => '2025-03-01',
-                'check_out_date'    => '2025-03-02',
-                'number_of_people'  => 5,
+                'check_in_date'     => '2025-02-01',
+                'check_out_date'    => '2025-02-03',
+                'number_of_people'  => 1,
                 'breakfast'         => 0, // 朝食なし
-                'reservation_status'=> 'confirmed',
+                'reservation_status'=> 'cancelled',
                 'checkin_status'    => 'not done',
                 'customer_request'  => 'Please provide extra towels.',
                 'created_at'        => now(),
@@ -73,11 +73,11 @@ class ReservationsTableSeeder extends Seeder
             ],
             // パターン5
             [
-                'user_id'           => 5,
+                'user_id'           => 2,
                 'payment_id'        => 5,
-                'check_in_date'     => '2024-12-24',
-                'check_out_date'    => '2024-12-25',
-                'number_of_people'  => 10,
+                'check_in_date'     => '2024-02-02',
+                'check_out_date'    => '2024-02-04',
+                'number_of_people'  => 2,
                 'breakfast'         => 1, // 朝食あり
                 'reservation_status'=> 'confirmed',
                 'checkin_status'    => 'done', // チェックイン済み

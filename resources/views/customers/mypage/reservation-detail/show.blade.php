@@ -36,7 +36,8 @@
                     {{-- Location --}}
                     <p class="text-muted">{{ $hotel->prefecture }}</p>
                     {{-- Category --}}
-                    <span class="badge bg-danger">{{$hotel->categories->pluck('name')->implode(', ')}}</span>
+                    {{-- <span class="badge bg-danger">{{$hotel->categories->pluck('name')->implode(', ')}}</span> UserTableのusernameからHotelTableのHotel_nameへ仕様変更 --}}
+                    <span class="badge bg-danger">{{ $hotel->hotelname }}</span>
                 </div>
                 <div class="col-4">
                     {{-- Date --}}
