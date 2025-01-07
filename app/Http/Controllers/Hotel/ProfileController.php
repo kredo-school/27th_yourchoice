@@ -78,7 +78,7 @@ class ProfileController extends Controller
     $user->password_hash = Hash::make($request->password);  // 'password' フィールドをハッシュ化して 'password_hash' カラムに保存
 
     // ユーザー情報を保存
-    $user->save();  //→→→→→→→→→→→→→→→→→→→→→→→→赤線あるのに機能している
+    $user->save();
 
     // パスワード更新完了後、プロフィールページにリダイレクト
     return redirect()->route('hotel.profile.show');
