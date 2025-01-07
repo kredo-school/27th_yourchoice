@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class UsersTableSeeder extends Seeder
+class RoomsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,7 +15,6 @@ class UsersTableSeeder extends Seeder
 public function run(): void
 {
     DB::table('rooms')->insert([
-        $rooms = [
             [
                 'room_number' => 101,
                 'hotel_id' => 1,
@@ -181,7 +180,7 @@ public function run(): void
                 'created_at' => '2025-01-07 11:21:14',
                 'updated_at' => '2025-01-07 11:21:14',
             ],
-        ]
+
     ]);
         
     }
