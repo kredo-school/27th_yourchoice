@@ -19,6 +19,7 @@ class HotelsTableSeeder extends Seeder
     DB::table('hotels')->insert([
       [
         'user_id' => 2,
+        'hotel_name' => 'Sunshine Hotel',
         'url' => 'https://sunshinehotel.com',
         'postal_code' => '100-0001',
         'prefecture' => 'Tokyo',
@@ -41,6 +42,7 @@ class HotelsTableSeeder extends Seeder
       // 他のホテルデータをここに追加
       [
         'user_id' => 4,
+        'hotel_name' => 'Moonlight Inn',
         'url' => 'https://moonlightinn.com',
         'postal_code' => '150-0001',
         'prefecture' => 'Tokyo',
@@ -62,6 +64,7 @@ class HotelsTableSeeder extends Seeder
       ],
       [
         'user_id' => 6,
+        'hotel_name' => 'Star Hotel',
         'url' => 'https://starhotel.com',
         'postal_code' => '100-0002',
         'prefecture' => 'Tokyo',
@@ -83,6 +86,7 @@ class HotelsTableSeeder extends Seeder
       ],
       [
         'user_id' => 7,
+        'hotel_name' => 'Galaxy Hotel',
         'url' => 'https://galaxyhotel.com',
         'postal_code' => '100-0003',
         'prefecture' => 'Kyoto',
@@ -104,6 +108,7 @@ class HotelsTableSeeder extends Seeder
       ],
       [
         'user_id' => 8,
+        'hotel_name' => 'Oceanview Resort',
         'url' => 'https://oceanviewresort.com',
         'postal_code' => '100-0004',
         'prefecture' => 'Kanagawa',
@@ -125,6 +130,7 @@ class HotelsTableSeeder extends Seeder
       ],
       [
         'user_id' => 9,
+        'hotel_name' => 'Mountain Lodge',
         'url' => 'https://mountainlodge.com',
         'postal_code' => '100-0005',
         'prefecture' => 'Hokkaido',

@@ -20,42 +20,42 @@
                         <div class="card-body">
                             <div class="mb-3">
                                 <label class="form-label">Hotel Name :</label>
-                                <p class="form-control-plaintext border-bottom">{{ $hoteladmin->username }}</p>
+                                <p class="form-control-plaintext border-bottom">{{ $user->hotel->hotel_name }}</p>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Email :</label>
-                                <p class="form-control-plaintext border-bottom">{{ $hoteladmin->email }}</p>
+                                <p class="form-control-plaintext border-bottom">{{ $user->email }}</p>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Website URL :</label>
-                                <p class="form-control-plaintext border-bottom">{{ $hotel->url }}</p>
+                                <p class="form-control-plaintext border-bottom">{{ $user->hotel->url }}</p>
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label">Postal Code :</label>
-                                <p class="form-control-plaintext border-bottom">〒{{ $hotel->postal_code }}</p>
+                                <p class="form-control-plaintext border-bottom">〒{{ $user->hotel->postal_code }}</p>
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label">Address :</label>
                                 <div>
                                     <p class="form-control-plaintext border-bottom">
-                                        {{ $hotel->prefecture }} {{ $hotel->city }} {{ $hotel->address }}
+                                        {{ $user->hotel->prefecture }} {{ $user->hotel->city }} {{ $user->hotel->address }}
                                     </p>
                                 </div>
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label">Phone Number :</label>
-                                <p class="form-control-plaintext border-bottom">{{ $hoteladmin->phone_number }}</p>
+                                <p class="form-control-plaintext border-bottom">{{ $user->phone_number }}</p>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Access :</label>
-                                <p class="form-control-plaintext border-bottom">{{ $hotel->access }}</p>
+                                <p class="form-control-plaintext border-bottom">{{ $user->hotel->access }}</p>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Description :</label>
-                                <p class="form-control-plaintext border-bottom">{{ $hotel->description }}</p>
+                                <p class="form-control-plaintext border-bottom">{{ $user->hotel->description }}</p>
                             </div>
                         </div>
                     </div>
@@ -85,6 +85,7 @@
                             </div>
                         </div>
                     </div>
+
 
                     <!-- Right Side (Service and Amenities) -->
                     <div class="card mt-2 mb-2">
@@ -153,26 +154,27 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <p>Free Cancellation Period :<br> {{ $hotel->cancellation_period }} days before the
+                                    <p>Free Cancellation Period :<br> {{ $user->hotel->cancellation_period }} days
+                                        before the
                                         reservation date.</p>
                                 </div>
                                 <div class="col-md-6">
                                     <p>Cancellation Fee Percentage :</p>
-                                    <p>General : {{ $hotel->general_fee }}%</p>
-                                    <p>Same-Day : {{ $hotel->sameday_fee }}%</p>
+                                    <p>General : {{ $user->hotel->general_fee }}%</p>
+                                    <p>Same-Day : {{ $user->hotel->sameday_fee }}%</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Buttons -->
-                <div class="row mt-4 mb-2 text-end">
-                    <div class="col">
-                        <a href="{{ route('hotel.profile.editpass') }}" class="text-decoration-none text-dark">
-                            <button type="button" class="btn btn-sub">Password Setting</button></a>
-                        <a href="{{ route('hotel.profile.edit') }}" class="text-decoration-none text-dark ms-2">
-                            <button type="submit" class="btn btn-sub">Edit</button>
+                    <!-- Buttons -->
+                    <div class="row mt-4 mb-2 text-end">
+                        <div class="col">
+                            <a href="{{ route('hotel.profile.editpass') }}" class="text-decoration-none text-dark">
+                                <button type="button" class="btn btn-sub">Password Setting</button></a>
+                            <a href="{{ route('hotel.profile.edit') }}" class="text-decoration-none text-dark ms-2">
+                                <button type="submit" class="btn btn-sub">Edit</button>
+                        </div>
                     </div>
                 </div>
         </form>

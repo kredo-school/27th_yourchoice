@@ -59,8 +59,10 @@ Route::group(['prefix' => 'hotel', 'as' => 'hotel.'], function () {
 
   Route::get('/profile/show', [App\Http\Controllers\Hotel\ProfileController::class, 'show'])->name('profile.show');
   Route::get('/profile/edit', [App\Http\Controllers\Hotel\ProfileController::class, 'edit'])->name('profile.edit');
+  Route::get('/profile/update', [App\Http\Controllers\Hotel\ProfileController::class, 'update'])->name('profile.update'); 
   Route::get('/profile/editpass', [App\Http\Controllers\Hotel\ProfileController::class, 'editpass'])->name('profile.editpass');
-  Route::get('/profile/update', [App\Http\Controllers\Hotel\ProfileController::class, 'update'])->name('profile.update'); //←空白行に追加confrict懸念(プルリクの前に一旦確認)
+  Route::post('/profile/updatepass', [App\Http\Controllers\Hotel\ProfileController::class, 'updatepass'])->name('profile.updatepass'); 
+
   Route::get('/room/show', [App\Http\Controllers\Hotel\RoomController::class, 'show'])->name('room.show');
   Route::get('/room/create', [App\Http\Controllers\Hotel\RoomController::class, 'create'])->name('room.create');
   Route::get('/room/edit', [App\Http\Controllers\Hotel\RoomController::class, 'edit'])->name('room.edit');

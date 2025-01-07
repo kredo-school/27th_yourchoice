@@ -4,54 +4,43 @@ namespace App\Http\Controllers\Hotel;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\HotelAdmin;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 use App\Models\Hotel;
 use App\Models\Category;
 use App\Http\Controllers\Controller;
 
 class ProfileController extends Controller
 {
-  // public function show()
-  // {
-  //     return view('hotels.profile.show');
-  // }
-
-  public function edit()
-  {
-    return view('hotels.profile.edit');
-  }
-
-  public function editpass()
-  {
-    return view('hotels.profile.password');
-  }
-
-  private $hoteladmin;
+  private $user;
   private $hotel;
   private $category;
 
-  // コンストラクタでHotelAdmin,Hotel,HotelCategoryモデルをインジェクト
-  public function __construct(HotelAdmin $hoteladmin, Hotel $hotel, Category $category)
+  // コンストラクタでUser,Hotel,HotelCategoryモデルをインジェクト
+  public function __construct(User $user, Hotel $hotel, Category $category)
   {
-    $this->hoteladmin = $hoteladmin;
+    $this->user = $user;
     $this->hotel = $hotel;
     $this->category = $category;
   }
 
-  public function show($id = 2)
+
+  public function show()
   {
 
-    // ホテルに関連するユーザー情報を取得
-    $hoteladmin = $this->hoteladmin->findOrFail($id);
-    // 現在のログインユーザーに関連するホテル情報を取得
-    $hotel      = $this->hotel->findOrFail($id);
-    // $hotel = $this->hotel->where('user_id', Auth::id())->findOrFail($id);
-    $category = Hotel::with('hotelCategories.category')->findOrFail($id); 
+    //ログインユーザー情報を取得
+    $user = $this->user->findOrFail(Auth::id());
+
+    //Userモデルのhotelメソッドを取得
+    $hotel = $this->user::with('hotel')->get();
+
+    $category = $this->hotel::with('Categories.hotel_category')->findOrFail(Auth::id());
 
 
     // ビューにデータを渡す　compact('hotel', 'user', 'category')とは"ビューに$hotelデータと$userデータと$categoryデータを渡す"
-    return view('hotels.profile.show', compact('hoteladmin', 'hotel', 'category'));
+    return view('hotels.profile.show', compact('user', 'hotel', 'category'));
   }
+
 
   // public function edit()
   // {
@@ -63,6 +52,37 @@ class ProfileController extends Controller
   //   // ビューにデータを渡す
   //   return view('hotels.profile.edit')->with('hoteladmin', $hoteladmin);
   // }
+
+
+  public function edit()
+  {
+    return view('hotels.profile.edit');
+  }
+
+  public function editpass()
+  {
+    return view('hotels.profile.password');
+  }
+
+  public function updatepass(Request $request)
+  {
+    // バリデーション: パスワードが4文字以上で確認用パスワードと一致しているかをチェック/'password'= formの'password'フィールドのこと
+    $request->validate([
+      'password' => 'required|string|min:4|confirmed',
+    ]);
+
+    // 現在のログインユーザーを取得
+    $user = Auth::user(); // Auth::user()を直接使用して現在のユーザーを取得
+
+    // パスワードをハッシュ化して保存
+    $user->password_hash = Hash::make($request->password);  // 'password' フィールドをハッシュ化して 'password_hash' カラムに保存
+
+    // ユーザー情報を保存
+    $user->save();  //→→→→→→→→→→→→→→→→→→→→→→→→赤線あるのに機能している
+
+    // パスワード更新完了後、プロフィールページにリダイレクト
+    return redirect()->route('hotel.profile.show');
+  }
 
 
   // public function update(Request $request)

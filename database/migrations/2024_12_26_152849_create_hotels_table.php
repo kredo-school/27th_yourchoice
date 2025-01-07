@@ -14,6 +14,7 @@ return new class extends Migration
     Schema::create('hotels', function (Blueprint $table) {
       $table->id(); // ホテルID
       $table->unsignedBigInteger('user_id'); // ユーザーID（外部キー）
+      $table->string('hotel_name'); // ホテル名
       $table->text('url'); // ホテルの公式ウェブサイトURL
       $table->string('postal_code', 10); // 郵便番号
       $table->string('prefecture', 10); // 都道府県
