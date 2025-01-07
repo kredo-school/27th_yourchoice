@@ -64,6 +64,46 @@ class UsersTableSeeder extends Seeder
                 'password_hash' => Hash::make('password'),
                 'created_at' => now(),
             ],
+            [
+                'role_id' => 2,
+                'first_name' => 'Emily',
+                'last_name' => 'Clark',
+                'username' => 'emilyclark',
+                'email' => 'emilyclark@example.com',
+                'phone_number' => '3344556677',
+                'password_hash' => Hash::make('password'),
+                'created_at' => now(),
+            ],
+            [
+                'role_id' => 2,
+                'first_name' => 'Michael',
+                'last_name' => 'Taylor',
+                'username' => 'michaeltaylor',
+                'email' => 'michaeltaylor@example.com',
+                'phone_number' => '4455667788',
+                'password_hash' => Hash::make('password'),
+                'created_at' => now(),
+            ],
+            [
+                'role_id' => 2,
+                'first_name' => 'Sophia',
+                'last_name' => 'Anderson',
+                'username' => 'sophiaanderson',
+                'email' => 'sophiaanderson@example.com',
+                'phone_number' => '5566778899',
+                'password_hash' => Hash::make('password'),
+                'created_at' => now(),
+            ],
+            [
+                'role_id' => 2,
+                'first_name' => 'James',
+                'last_name' => 'Moore',
+                'username' => 'jamesmoore',
+                'email' => 'jamesmoore@example.com',
+                'phone_number' => '6677889900',
+                'password_hash' => Hash::make('password'),
+                'created_at' => now(),
+            ]
         ]);
     }
 }

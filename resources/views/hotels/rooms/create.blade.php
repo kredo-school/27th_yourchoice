@@ -4,9 +4,9 @@
     <link rel="stylesheet" href="{{ asset('css/hoteladmin.css') }}">
 
     <div class="container mt-2 d-flex justify-content-center">
-        <form method="POST" action="{{ route('hotel.room.show') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('hotel.room.store') }}" enctype="multipart/form-data">
             @csrf
-            @method('GET')
+            @method('POST')
 
             <div class="row">
                 <h1 class="mb-4 ms-3 fw-bold">Add Rooms</h1>
