@@ -10,20 +10,24 @@
       <button  type="submit" class="button1"><a href="{{ route('customer.top.show') }}" >Return to the  previous page</button></a>
                       
       <!-- Step 1 -->
-      <section class="step" id="step1">
-        <h2><strong><i class="fa-solid fa-user"></i> Step 1: Your Details</strong></h2>
-          <form class="step1">
+      <section class="step">
+         <h2><strong><i class="fa-solid fa-user"></i> Step 1: Your Details</strong></h2>
+          {{-- <form class="step1" id="step1" action="/reservation_detail" method="POST"> --}}
+            <form class="step1" id="step1" action="{{ route('customer.reserve.show') }}" method="POST">
+            @csrf <!-- LaravelのCSRFトークン -->
             <label for="first-name"><strong>First Name</strong></label>
-            <input type="text" id="first-name" name="first-name" required>
+            <input type="text" id="first-name" name="first_name" required>
+            {{-- <input type="text" name="first_name" value="{{ $first_name }}" readonly> --}}
 
             <label for="last-name"><strong>Last Name</strong></label>
-            <input type="text" id="last-name" name="last-name" required>
+            <input type="text" id="last-name" name="last_name" required>
 
             <label for="contact"><strong> Email Address</strong></label>
             <input type="email" id="contact" name="contact" required>
 
             <label for="contact"><strong> Mobile Number</strong></label>
             <input type="tel" id="contact" name="contact" required>
+            
           </form>
       </section>
 

@@ -8,18 +8,25 @@
     <div class="container-fluid">
     <section class="step" id="step1">
         <h2 class="step5"><strong>■ Your details</strong></h2>
-        <form>
-            <label>First Name</label>
-            <input type="text" placeholder="Shinji" required>
+        <form method="POST" action="{{ route('customer.top.show') }}">
+          @csrf
+        
+            <label class="form-lavel">First Name</label>
+            <input type="text" name="first_name" id="first-name" class="form-control" value="{{ old('first_name', $first_name ?? '') }}" readonly>
+            {{-- <input type="text" name="first-name" id="first-name" class="form-control" value="{{ $first_name }}" readonly> --}}
             
-            <label>Last Name</label>
-            <input type="text" placeholder="Watanabe" required>
+            <label class="form-lavel">Last Name</label>
+            <input type="text" name="last_name" id="last-name" class="form-control" value="#" autofocus>
             
-            <label>Email Address</label>
-            <input type="email" placeholder="youremail@gmail.com" required>
+            <label class="form-lavel">Email Address</label>
+            <input type="email" name="reservation-email" id="reservation-email" class="form-control" value="#" autofocus>
+                    
+            {{-- <input type="email" placeholder="youremail@gmail.com" required> --}}
             
-            <label>Mobile Number</label>
-            <input type="tel" placeholder="089-4243-4242" required>
+            <label class="form-lavel">Mobile Number</label>
+            <input type="text" name="reservation-phone" id="reservation-phone" class="form-control" value="{{ old('reservation-phone') }}">
+            {{-- <input type="tel" placeholder="089-4243-4242" required> --}}
+        </div>
         </form>
       </section>
 
