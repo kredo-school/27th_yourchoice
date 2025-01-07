@@ -15,19 +15,19 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('role_id')
                 ->comment('1:customer 2:hotel');
-            $table->string('first_name', 100);
-            $table->string('last_name', 100);
+            $table->string('first_name', 100)->nullable();
+            $table->string('last_name', 100)->nullable();
             $table->string('username', 100);
             $table->string('email', 100)->unique();
             $table->string('phone_number', 20);
             $table->string('password_hash');
-            $table->timestamp('created_at');
+            $table->timestamps();
         }); 
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
             $table->string('token');
-            $table->timestamp('created_at')->nullable();
+            $table->timestamps();
         });
 
         Schema::create('sessions', function (Blueprint $table) {

@@ -5,64 +5,74 @@
 @section('content')
 
 <h1 class="mb-4">Price Management</h1>
+
+
 <div class="d-flex justify-content-between align-items-center mb-3">
-    <button class="btn btn-outline-secondary">&lt;</button>
-    <button class="btn btn-outline-secondary">&gt;</button>
+    <!-- PREVIOUS WEEK BUTTON -->
+    <form method="GET" action="{{ route('hotel.price.show') }}">
+        <input type="hidden" name="current_week" value="{{ $currentWeek - 1 }}">
+        <button class="btn btn-outline-secondary">&lt;</button>
+    </form>
+
+    <!-- NEXT WEEK BUTTON -->
+    <form method="GET" action="{{ route('hotel.price.show') }}">
+        <input type="hidden" name="current_week" value="{{ $currentWeek + 1 }}">
+        <button class="btn btn-outline-secondary">&gt;</button>
+    </form>
 </div>
+
+
+
+<!-- 料金レートテーブル -->
+
     <table class="table table-bordered text-center">
+
+
+    <!-- レートテーブル最上段 -->
         <thead > 
             <tr>
-            <th class="header col-2">Room Type</th>
-            <th class="header col-1">11/1 (Mon)</th>
-            <th class="header col-1">11/2 (Tue)</th>
-            <th class="header col-1">11/3 (Wed)</th>
-            <th class="header col-1">11/4 (Thu)</th>
-            <th class="header col-1">11/5 (Fri)</th>
-            <th class="header saturday col-1">11/6 (Sat)</th>
-            <th class="header sunday col-1">11/7 (Sun)</th>
-           
-        </tr>
-    </thead>
-    <tbody>
-    <tr>
-                <td>Single Room</td>
-                
-                    <td>100%</td>
-                    <td>100%</td>
-                    <td>100%</td>
-                    <td>100%</td>
-                    <td>100%</td>
-                    <td>100%</td>
-                    <td>100%</td>
-                
+                <th class="header col-2">Room Type</th>
+                @foreach ($dates as $date)
+                    @php
+                        $dayOfWeek = \Carbon\Carbon::parse($date)->format('D'); // 曜日を取得
+                        $additionalClass = $dayOfWeek === 'Sat' ? 'saturday' : ($dayOfWeek === 'Sun' ? 'sunday' : '');
+                    @endphp
+                    <th class="header {{ $additionalClass }} col-1">
+                        {{ \Carbon\Carbon::parse($date)->format('n/j (D)') }}
+                    </th>
+                @endforeach
             </tr>
-            <tr>
-                <td>Double Room</td>
-                
-                    <td>100%</td>
-                    <td>100%</td>
-                    <td>100%</td>
-                    <td>100%</td>
-                    <td>100%</td>
-                    <td>100%</td>
-                    <td>100%</td>
-                
-            </tr>
-            <tr>
-                <td>Twin Room</td>
-                
-                    <td>100%</td>
-                    <td>100%</td>
-                    <td>100%</td>
-                    <td>100%</td>
-                    <td>100%</td>
-                    <td>100%</td>
-                    <td>100%</td>
-                
-            </tr>
-    </tbody>
+        </thead>
+
+
+    <!-- レートテーブルのデータ一覧 -->
+        <tbody>
+            @foreach ($roomTypes as $roomType)
+                <tr>
+                    <td>{{ $roomType }}</td>
+                    @foreach ($dates as $date)
+                        @php
+                            $rate = isset($rates[$roomType]) ? $rates[$roomType]->firstWhere('date', $date) : null;
+                            $rateValue = $rate ? round($rate->rate) : null;
+                            $class = $rateValue === null || $rateValue === 100.00
+                                ? 'black-rate' 
+                                : ($rateValue > 100 ? 'red-rate' : 'blue-rate');
+                        @endphp
+                        <td class="{{ $class }}">
+                            {{ $rateValue !== null ? $rateValue . '%' : '-' }}
+                        </td>
+                    @endforeach
+                </tr>
+            @endforeach
+        </tbody>
+
+
 </table>
 
-<a href="{{ route('hotel.price.edit') }}" class="subbtn1">Edit Prices</a>
+
+    <form method="GET" action="{{ route('hotel.price.edit') }}">
+        <input type="hidden" name="current_week" value="{{ $currentWeek }}">
+        <button class="subbtn1">Edit Prices</button>
+    </form>
 
 @endsection

@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id(); // 予約ID（主キー）
-            $table->unsignedBigInteger('user_id'); // ユーザーID（外部キー）
-            $table->unsignedBigInteger('payment_id'); // 支払いID（外部キー）
+            $table->unsignedBigInteger('user_id')->nullable(); // ユーザーID（外部キー）
+            $table->unsignedBigInteger('payment_id')->nullable(); // 支払いID（外部キー）
             $table->date('check_in_date'); // チェックイン日
             $table->date('check_out_date'); // チェックアウト日
-            $table->integer('number_of_people'); // 予約人数
-            $table->boolean('breakfast'); // 朝食有無（0: 無し、1: 有り）
+            $table->integer('number_of_people')->nullable(); // 予約人数
+            $table->boolean('breakfast')->nullable(); // 朝食有無（0: 無し、1: 有り）
             $table->enum('reservation_status', ['confirmed', 'cancelled'])->default('confirmed'); // 予約状態
             $table->enum('checkin_status', ['done', 'not done'])->default('not done'); // チェックイン状態
             $table->string('customer_request', 255)->nullable(); // 顧客リクエスト

@@ -66,3 +66,19 @@ a {
   transition: transform 0.3s ease;
 }
 
+.category-form {
+  display: inline-block;
+}
+
+.category-btn {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.category-btn img {
+  width: 450px; /* 適切なサイズに調整してください */
+  height: auto;
+  display: block;
+}
