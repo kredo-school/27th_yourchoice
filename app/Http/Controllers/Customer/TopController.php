@@ -56,10 +56,6 @@ class TopController extends Controller
             $query->where('prefecture', 'LIKE', "%{$location}%");
         }
 
-        if (!empty($location)) {
-            $query->where('prefecture', 'LIKE', "%{$location}%");
-        }
-
         // 検索結果の取得
         $hotels = $query->with('categories')->get();
 
