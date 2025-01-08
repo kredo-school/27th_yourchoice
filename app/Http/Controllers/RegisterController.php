@@ -85,6 +85,8 @@ class RegisterController extends Controller
             ]);
         }
 
+        Auth::login($user);
+
         // Redirect to a specific page
         return redirect()->route('customer.profile.show')->with('success', 'Registration successful!');
     } catch (\Exception $e) {
@@ -104,6 +106,9 @@ class RegisterController extends Controller
             'phone_number' => $request->input('phone_number'),
             'password_hash' => Hash::make($request->input('password_hash')),
         ]);
+
+        
+        Auth::login($user);
 
         // Redirect to a specific page
         return redirect()->route('hotel.profile.show')->with('success', 'Registration successful!');
