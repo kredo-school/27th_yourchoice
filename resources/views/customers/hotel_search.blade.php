@@ -69,7 +69,9 @@
                     <div class="col-md-7">
                         <h5>{{$hotel->hotel_name}}</h5>
                         <p>{{$hotel->prefecture}}</p>
-                        <span class="badge bg-pink">{{ $hotel->categories->pluck('name')->implode(', ') }}</span>
+                            @foreach($hotel->categories as $hotelcategory)
+                                <span class="badge bg-pink">{{ $hotelcategory->name }}</span>
+                            @endforeach
                     </div>
                     <div class="col-md-3 text-end">
                         <div class="rating">
