@@ -97,7 +97,7 @@ class RegisterController extends Controller
 
     public function create_admin(Request $request)
     {try{
-        $user =  HotelAdmin::create([
+        $user =  User::create([
             'role_id' => $request->input('role_id', 2),
             //'first_name' => $request->input('first_name'),
             //'last_name' => $request->input('last_name'),
