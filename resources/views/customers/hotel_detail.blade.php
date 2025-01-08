@@ -33,12 +33,12 @@
     </div>
     <div class="row">
         <div class="col-md-8">
-            <h1 class="mt-3">{{ $hotel->hotel_name }}</h1>
-            <span class="badge badge-primary">{{ $hotel->categories->pluck('name')}}</span>
+            <h1 class="mt-3">{{ $hotels->hotel_name }}</h1>
+            <span class="badge badge-primary">{{ $hotels->categories->pluck('name')}}</span>
             <p class="mt-3">About</p>
-            <p>{{ $hotel->description }}</p>
+            <p>{{ $hotels->description }}</p>
             <p>Access</p>
-            <p>{{ $hotel->access }}</p>
+            <p>{{ $hotels->access }}</p>
         </div>
         <div class="col-md-4">
             <div class="card">
@@ -79,51 +79,32 @@
             </button>
         </div>
     </div>
-    <div class="list-group">
-        <div class="list-group-item">
-            <div class="row align-items-center">
-                <div class="col-md-2">
-                    <img src="{{ asset('images/hotel-room.jpg') }}" alt="hotel-room" class="hotel-room img-fluid">
-                </div>
-                <div class="col-md-7">
-                    <h5>Single Room</h5>
-                    <ul class="list-inline">
-                        <li class="list-inline-item"><i class="fa fa-check"></i> Shampoo</li>
-                        <li class="list-inline-item"><i class="fa fa-check"></i> Conditioner</li>
-                        <li class="list-inline-item"><i class="fa fa-check"></i> Body wash</li>
-                        <li class="list-inline-item"><i class="fa fa-check"></i> Toothbrush</li>
-                        <li class="list-inline-item"><i class="fa fa-check"></i> Toothpaste</li>
-                    </ul>
-                </div>
-                <div class="col-md-3 text-end">
-                    <h6>$100 / 2 travellers</h6>
-                    <small>include taxes & fees for 1 night</small>
-                    <a href="{{ route('customer.reserve.edit') }}" class="btn btn-danger mt-2">Book now</a>
-                </div>
-            </div>
-        </div>
-        <div class="list-group-item">
-            <div class="row align-items-center">
-                <div class="col-md-2">
-                    <img src="{{ asset('images/hotel-room.jpg') }}" alt="hotel-room" class="hotel-room img-fluid">
-                </div>
-                <div class="col-md-7">
-                    <h5>Double Room</h5>
-                    <ul class="list-inline">
-                        <li class="list-inline-item"><i class="fa fa-check"></i> Shampoo</li>
-                        <li class="list-inline-item"><i class="fa fa-check"></i> Conditioner</li>
-                        <li class="list-inline-item"><i class="fa fa-check"></i> Body wash</li>
-                        <li class="list-inline-item"><i class="fa fa-check"></i> Toothbrush</li>
-                        <li class="list-inline-item"><i class="fa fa-check"></i> Toothpaste</li>
-                    </ul>
-                </div>
-                <div class="col-md-3 text-end">
-                    <h6>$100 / 2 travellers</h6>
-                    <small>include taxes & fees for 1 night</small>
-                    <a href="{{ route('customer.reserve.edit') }}" class="btn btn-danger mt-2">Book now</a>
+    @foreach ($hotels->rooms as $room)
+        <div class="list-group">
+            <div class="list-group-item">
+                <div class="row align-items-center">
+                    <div class="col-md-2">
+                        <img src="{{ asset('images/hotel-room.jpg') }}" alt="hotel-room" class="hotel-room img-fluid">
+                    </div>
+                    <div class="col-md-7">
+                        <h5>{{ $room->room_type }}</h5>
+                        <ul class="list-inline">
+                            <li class="list-inline-item"><i class="fa fa-check"></i> Shampoo</li>
+                            <li class="list-inline-item"><i class="fa fa-check"></i> Conditioner</li>
+                            <li class="list-inline-item"><i class="fa fa-check"></i> Body wash</li>
+                            <li class="list-inline-item"><i class="fa fa-check"></i> Toothbrush</li>
+                            <li class="list-inline-item"><i class="fa fa-check"></i> Toothpaste</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 text-end">
+                        <h6>{{ $room->price }} / {{$room->capacity }} travellers</h6>
+                        <small>include taxes & fees for 1 night</small>
+                        <a href="{{ route('customer.reserve.edit') }}" class="btn btn-danger mt-2">Book now</a>
+                    </div>
                 </div>
             </div>
-        </div>
+        @endforeach
+
     </div>
 </div>
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Customer;
 use App\Models\User;
 use App\Models\Hotel;
+use App\Models\Room;
 use App\Models\Category;
 use App\Models\HotelCategory;
 use App\Models\HasFactory;
@@ -14,11 +15,11 @@ class TopController extends Controller
 {
     private $hotel;
 
-    public function __construct(Hotel $hotel , Category $category)
+    public function __construct(Hotel $hotel , Category $category , Room $room)
     {
         $this->hotel = $hotel;
         $this->category = $category;
-        // $this->hotelCategory = $hotelCategory;
+        $this->room = $room;
     }
 
     public function list()
@@ -68,9 +69,10 @@ class TopController extends Controller
     public function show($id)
     {
 
-        $hotel = Hotel::with('categories')->find($id); // IDに基づいてホテルを取得
+        $hotels = Hotel::with(['categories' ,'rooms'])->find($id); // IDに基づいてホテルを取得
+        
 
-        return view('customers.hotel_detail', ['hotel' => $hotel]);
+        return view('customers.hotel_detail', ['hotels' => $hotels]);
 
     }
     
