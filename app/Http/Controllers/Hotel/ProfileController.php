@@ -32,13 +32,17 @@ class ProfileController extends Controller
     $user = $this->user->findOrFail(Auth::id());
 
     //Userモデルのhotelメソッドを取得
-    $hotel = $this->user::with('hotel')->get();
+    // $hotel = $this->user::with('hotel')->get();
+   
+    $hotel = $this->user::find(Auth::id())->hotel;
 
-    $category = $this->hotel::with('Categories.hotel_category')->findOrFail(Auth::id());
-
+    // $category = Hotel::where('user_id', auth()->id())->with('categories')->get();
+    $categories = $hotel->categories;
+    // $category = Hotel::with('categories')->findOrFail(Auth::id());
+    // dd($category);
 
     // ビューにデータを渡す　compact('hotel', 'user', 'category')とは"ビューに$hotelデータと$userデータと$categoryデータを渡す"
-    return view('hotels.profile.show', compact('user', 'hotel', 'category'));
+    return view('hotels.profile.show', compact('user', 'hotel', 'categories'));
   }
 
 
