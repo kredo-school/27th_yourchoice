@@ -138,6 +138,12 @@
                         <h5 class="card-header">Category</h5>
                         <div class="card-body">
                             <div class="category-container">
+                                 @foreach ($categories as $category)
+                                        <span class="category-item">
+                                            {{ $category->name }}
+                                        </span>
+                                      @endforeach
+
                                 {{-- <span class="category-item">Wheelchair and Senior</span>
                                 <span class="category-item">Visual and Hearing Impaired</span>
                                 <span class="category-item">Pregnancy</span>

@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Customer;
+use App\Models\User;
 use App\Models\Hotel;
+use App\Models\Room;
 use App\Models\Category;
 use App\Models\HotelCategory;
 use App\Models\HasFactory;
@@ -13,11 +15,11 @@ class TopController extends Controller
 {
     private $hotel;
 
-    public function __construct(Hotel $hotel , Category $category)
+    public function __construct(Hotel $hotel , Category $category , Room $room)
     {
         $this->hotel = $hotel;
         $this->category = $category;
-        // $this->hotelCategory = $hotelCategory;
+        $this->room = $room;
     }
 
     public function list()
@@ -28,16 +30,50 @@ class TopController extends Controller
     }
     public function search(Request $request)
     {
-        $hotels = Hotel::with('categories')->get();
-        //top/listからのカテゴリー情報
+        // カテゴリー情報の取得
         $topCategory = $request->input('topCategory');
+    
+        // 検索キーワードの取得
+        $location = $request->input('location');
+        $date = $request->input('date');
+        $travellers = $request->input('travellers');
 
-        return view('customers.hotel_search',['hotels' => $hotels, 'topCategory'=> $topCategory ]);
+
+        
+        // クエリの準備
+        $query = Hotel::query();
+                
+        // キーワード検索条件の適用(topページからの検索)
+        if (!empty($topCategory)) {
+            $query->whereHas('categories', function ($query) use ($topCategory) {
+                $query->where('name', 'LIKE', "%{$topCategory}%");
+            });
+        }
+
+        $filteredHotels = $query->get();
+
+        // キーワード検索条件の適用(searchページの中での検索)
+        if (!empty($location)) {
+            $query->where('prefecture', 'LIKE', "%{$location}%");
+        }
+
+        // 検索結果の取得
+        $hotels = $query->with('categories')->get();
+
+        
+        // ビューのレンダリング
+        return view('customers.hotel_search', ['hotels' => $hotels, 'topCategory' => $topCategory]);
+
     }
     
-    public function show()
+    public function show($id)
     {
-        return view('customers.hotel_detail');
+
+        $hotels = Hotel::with(['categories' ,'rooms'])->find($id); // IDに基づいてホテルを取得
+        
+
+        return view('customers.hotel_detail', ['hotels' => $hotels]);
+
     }
     
 }

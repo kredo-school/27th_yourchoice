@@ -22,7 +22,7 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function () {
     Route::get('/top/list',[App\Http\Controllers\Customer\TopController::class,'list'])->name('top.list');
     Route::post('/top/search',[App\Http\Controllers\Customer\TopController::class,'search'])->name('top.search');
 
-    Route::get('/top/show',[App\Http\Controllers\Customer\TopController::class,'show'])->name('top.show');
+    Route::get('/top/show/{id}',[App\Http\Controllers\Customer\TopController::class,'show'])->name('top.show');
 
 
   // ログインが必要ページ
