@@ -72,4 +72,12 @@ class User extends Authenticatable
     {
         return $this->password_hash;
     }
+    
+    public function hotel()
+    {
+        return $this->hasOne(Hotel::class);
+    }
+
+
+
 }

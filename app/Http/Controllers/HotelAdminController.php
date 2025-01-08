@@ -1,5 +1,5 @@
 <?php
-
+//使用しない
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
@@ -64,6 +64,7 @@ class HotelAdminController extends Controller
   {
     return view('hotels.reviews.show');
   }
+
 
 
 
@@ -156,6 +157,7 @@ class HotelAdminController extends Controller
 
 
 
+  
 
 
 
@@ -167,4 +169,4 @@ class HotelAdminController extends Controller
 
 
 
-}
+  }
