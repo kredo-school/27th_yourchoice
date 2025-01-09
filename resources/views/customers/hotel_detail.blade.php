@@ -33,12 +33,12 @@
     </div>
     <div class="row">
         <div class="col-md-8">
-            <h1 class="mt-3">Hotel A</h1>
-            <span class="badge badge-primary">Family</span>
+            <h1 class="mt-3">{{ $hotels->hotel_name }}</h1>
+            <span class="badge badge-primary">{{ $hotels->categories->pluck('name')}}</span>
             <p class="mt-3">About</p>
-            <p>Hotel A offers modern and comfortable accommodations conveniently located within a 5-minute walk from Shibatachi Station and Shiba Park. This hotel is ideal for both business and leisure travelers, providing easy access to local attractions, restaurants, and parks. Our rooms are equipped with all the amenities you need for a pleasant stay, including free Wi-Fi, air conditioning, a flat-screen TV, and a private bathroom with complimentary toiletries. Enjoy our on-site restaurant, fitness center, and 24-hour front desk service.</p>
+            <p>{{ $hotels->description }}</p>
             <p>Access</p>
-            <p>From Shibatachi Station, it takes approximately 5 minutes to walk to Hotel A. The hotel is also within a 10-minute drive from Tokyo Tower and 20 minutes from Haneda Airport by car. Nearby attractions include the beautiful Shiba Park, the historic Zojoji Temple, and the bustling Roppongi area. Shiba Park offers a peaceful retreat in the heart of Tokyo, while Roppongi is known for its vibrant nightlife and diverse dining options.</p>
+            <p>{{ $hotels->access }}</p>
         </div>
         <div class="col-md-4">
             <div class="card">
@@ -79,51 +79,32 @@
             </button>
         </div>
     </div>
-    <div class="list-group">
-        <div class="list-group-item">
-            <div class="row align-items-center">
-                <div class="col-md-2">
-                    <img src="{{ asset('images/hotel-room.jpg') }}" alt="hotel-room" class="hotel-room img-fluid">
-                </div>
-                <div class="col-md-7">
-                    <h5>Single Room</h5>
-                    <ul class="list-inline">
-                        <li class="list-inline-item"><i class="fa fa-check"></i> Shampoo</li>
-                        <li class="list-inline-item"><i class="fa fa-check"></i> Conditioner</li>
-                        <li class="list-inline-item"><i class="fa fa-check"></i> Body wash</li>
-                        <li class="list-inline-item"><i class="fa fa-check"></i> Toothbrush</li>
-                        <li class="list-inline-item"><i class="fa fa-check"></i> Toothpaste</li>
-                    </ul>
-                </div>
-                <div class="col-md-3 text-end">
-                    <h6>$100 / 2 travellers</h6>
-                    <small>include taxes & fees for 1 night</small>
-                    <a href="{{ route('customer.reserve.edit') }}" class="btn btn-danger mt-2">Book now</a>
-                </div>
-            </div>
-        </div>
-        <div class="list-group-item">
-            <div class="row align-items-center">
-                <div class="col-md-2">
-                    <img src="{{ asset('images/hotel-room.jpg') }}" alt="hotel-room" class="hotel-room img-fluid">
-                </div>
-                <div class="col-md-7">
-                    <h5>Double Room</h5>
-                    <ul class="list-inline">
-                        <li class="list-inline-item"><i class="fa fa-check"></i> Shampoo</li>
-                        <li class="list-inline-item"><i class="fa fa-check"></i> Conditioner</li>
-                        <li class="list-inline-item"><i class="fa fa-check"></i> Body wash</li>
-                        <li class="list-inline-item"><i class="fa fa-check"></i> Toothbrush</li>
-                        <li class="list-inline-item"><i class="fa fa-check"></i> Toothpaste</li>
-                    </ul>
-                </div>
-                <div class="col-md-3 text-end">
-                    <h6>$100 / 2 travellers</h6>
-                    <small>include taxes & fees for 1 night</small>
-                    <a href="{{ route('customer.reserve.edit') }}" class="btn btn-danger mt-2">Book now</a>
+    @foreach ($hotels->rooms as $room)
+        <div class="list-group">
+            <div class="list-group-item">
+                <div class="row align-items-center">
+                    <div class="col-md-2">
+                        <img src="{{ asset('images/hotel-room.jpg') }}" alt="hotel-room" class="hotel-room img-fluid">
+                    </div>
+                    <div class="col-md-7">
+                        <h5>{{ $room->room_type }}</h5>
+                        <ul class="list-inline">
+                            <li class="list-inline-item"><i class="fa fa-check"></i> Shampoo</li>
+                            <li class="list-inline-item"><i class="fa fa-check"></i> Conditioner</li>
+                            <li class="list-inline-item"><i class="fa fa-check"></i> Body wash</li>
+                            <li class="list-inline-item"><i class="fa fa-check"></i> Toothbrush</li>
+                            <li class="list-inline-item"><i class="fa fa-check"></i> Toothpaste</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 text-end">
+                        <h6>{{ $room->price }} / {{$room->capacity }} travellers</h6>
+                        <small>include taxes & fees for 1 night</small>
+                        <a href="{{ route('customer.reserve.edit') }}" class="btn btn-danger mt-2">Book now</a>
+                    </div>
                 </div>
             </div>
-        </div>
+        @endforeach
+
     </div>
 </div>
 
