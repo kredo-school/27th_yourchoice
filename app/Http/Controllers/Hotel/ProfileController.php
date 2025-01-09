@@ -16,7 +16,7 @@ class ProfileController extends Controller
   private $hotel;
   private $category;
 
-  // コンストラクタでUser,Hotel,HotelCategoryモデルをインジェクト
+  // コンストラクタでUser,Hotel,Categoryモデルをインジェクト
   public function __construct(User $user, Hotel $hotel, Category $category)
   {
     $this->user = $user;
@@ -33,16 +33,22 @@ class ProfileController extends Controller
 
     //Userモデルのhotelメソッドを取得
     // $hotel = $this->user::with('hotel')->get();
-   
+
+    // ログインユーザーに関連するホテル情報を取得
     $hotel = $this->user::find(Auth::id())->hotel;
 
-    // $category = Hotel::where('user_id', auth()->id())->with('categories')->get();
-    $categories = $hotel->categories;
+   
+    // ホテルに関連するカテゴリー情報をタイプ別に取得
+    $categories = $hotel->categories->where('type', 'category');
+    $services = $hotel->categories->where('type', 'service');
+    $amenities = $hotel->categories->where('type', 'amenity');
+    $free_toiletries = $hotel->categories->where('type', 'free_toiletries');
+
     // $category = Hotel::with('categories')->findOrFail(Auth::id());
     // dd($category);
 
     // ビューにデータを渡す　compact('hotel', 'user', 'category')とは"ビューに$hotelデータと$userデータと$categoryデータを渡す"
-    return view('hotels.profile.show', compact('user', 'hotel', 'categories'));
+    return view('hotels.profile.show', compact('user', 'hotel', 'categories', 'services', 'amenities', 'free_toiletries'));
   }
 
 

@@ -21,50 +21,50 @@
                             <div class="mb-3">
                                 <label for="hotel_name" class="form-label">Hotel Name</label>
                                 <input type="text" class="form-control" id="hotel_name" name="hotel_name"
-                                    value="{{ old('hotel_name') }}">
+                                    value="{{ old('hotel_name', $user->hotel->hotel_name) }}">
                             </div>
                             <div class="mb-3">
                                 <label for="hotel_email" class="form-label">Email</label>
                                 <input type="email" class="form-control" id="hotel_email" name="hotel_email"
-                                    value="{{ old('email') }}">
+                                    value="{{ old('email', $user->email) }}">
                             </div>
                             <div class="mb-3">
                                 <label for="url" class="form-label">Website URL</label>
                                 <input type="url" class="form-control" id="url" name="url"
-                                    value="{{ old('url') }}">
+                                    value="{{ old('url', $user->hotel->url) }}">
                             </div>
 
                             <div class="mb-3">
                                 <label for="postal_code" class="form-label">Postal Code</label>
                                 <div class="input-group">
                                     <span class="input-group-text">〒</span>
-                                    <input type="text" class="form-control" id="postal_code"
-                                        name="postal_code" value="{{ old('postal_code') }}">
+                                    <input type="text" class="form-control" id="postal_code" name="postal_code"
+                                        value="{{ old('postal_code', $user->hotel->postal_code) }}">
                                 </div>
                             </div>
 
                             <div class="mb-3">
                                 <label for="prefecture" class="form-label">Address</label>
                                 <input type="text" class="form-control mb-2" id="prefecture" name="prefecture"
-                                    placeholder="Region/State" value="{{ old('prefecture') }}">
+                                    placeholder="Region/State" value="{{ old('prefecture', $user->hotel->prefecture) }}">
                                 <input type="text" class="form-control mb-2" id="city" name="city"
-                                    placeholder="City" value="{{ old('city') }}">
+                                    placeholder="City" value="{{ old('city', $user->hotel->city) }}">
                                 <input type="text" class="form-control" id="address" name="address"
-                                    placeholder="Address" value="{{ old('address') }}">
+                                    placeholder="Address" value="{{ old('address', $user->hotel->address) }}">
                             </div>
                             <div class="mb-3">
                                 <label for="phone_number" class="form-label">Phone Number</label>
                                 <input type="text" class="form-control" id="phone_number" name="phone_number"
-                                    value="{{ old('phone_number') }}">
+                                    value="{{ old('phone_number', $user->phone_number) }}">
                             </div>
                             <div class="mb-3">
                                 <label for="access" class="form-label">Access</label>
                                 <input type="text" class="form-control" id="access" name="access"
-                                    value="{{ old('access') }}">
+                                    value="{{ old('access', $user->hotel->access) }}">
                             </div>
                             <div class="mb-3">
                                 <label for="description" class="form-label">Description</label>
-                                <textarea class="form-control" id="description" name="description">{{ old('description') }}</textarea>
+                                <textarea class="form-control" id="description" name="description">{{ old('description',$user->hotel->description) }}</textarea>
                             </div>
                         </div>
                     </div>
@@ -93,10 +93,11 @@
                                             onclick="removeImage({{ $i }})">&times;</span>
                                     </div>
                                 @endfor
+                                <small class="text-muted ms-3">↑ Click here. You can upload up to 5 images.</small>
                             </div>
-                            <small class="text-muted ms-3">↑ Click here. You can upload up to 5 images.</small>
                         </div>
                     </div>
+
 
                     {{-- 写真空欄のコード　後で消す --}}
                     {{-- <div class="col-md-6">
@@ -119,20 +120,35 @@
                         <div class="card-header">Service</div>
                         <div class="card-body">
                             <!-- Hotel Service Section -->
+                            {{-- @foreach ($all_categories as $category)
+                            <div class="form-check form-check-inline">
+                                @if (in_array($category->id, $selected_categories))
+                                    <input type="checkbox" name="category[]" id="{{ $category->name }}" value="{{ $category->id }}"
+                                        class="form-check-input" checked>
+                                @else
+                                    <input type="checkbox" name="category[]" id="{{ $category->name }}" value="{{ $category->id }}"
+                                        class="form-check-input">
+                                @endif
+                                <label for="{{ $category->name }}" class="form-check-label">{{ $category->name }}</label>
+                            </div>
+                        @endforeach
+ --}}
+
+
                             <div class="mb-3">
                                 <h6>Hotel Service :</h6>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="parking" name="services"
+                                    <input class="form-check-input" type="checkbox" id="parking" name="services[]"
                                         value="parking">
                                     <label class="form-check-label" for="parking">Parking availability</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="luggage" name="services"
+                                    <input class="form-check-input" type="checkbox" id="luggage" name="services[]"
                                         value="luggage">
                                     <label class="form-check-label" for="luggage">Luggage storage service</label>
                                 </div><br>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="breakfast" name="services"
+                                    <input class="form-check-input" type="checkbox" id="breakfast" name="services[]"
                                         value="breakfast">
                                     <label class="form-check-label" for="breakfast">Breakfast</label>
                                 </div>
@@ -150,22 +166,22 @@
                             <div class="mb-3">
                                 <h6>Amenity :</h6>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="wifi" name="amenities"
+                                    <input class="form-check-input" type="checkbox" id="wifi" name="amenities[]"
                                         value="wifi">
                                     <label class="form-check-label" for="wifi">Wi-Fi</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="aircon" name="amenities"
+                                    <input class="form-check-input" type="checkbox" id="aircon" name="amenities[]"
                                         value="aircon">
                                     <label class="form-check-label" for="aircon">Air conditioning</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="tv" name="amenities"
+                                    <input class="form-check-input" type="checkbox" id="tv" name="amenities[]"
                                         value="tv">
                                     <label class="form-check-label" for="tv">TV</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="dryer" name="amenities"
+                                    <input class="form-check-input" type="checkbox" id="dryer" name="amenities[]"
                                         value="dryer">
                                     <label class="form-check-label" for="dryer">Dryer</label>
                                 </div>
@@ -175,22 +191,22 @@
                             <div class="mb-3">
                                 <h6>Free Toiletries :</h6>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="shampoo" name="toiletries"
+                                    <input class="form-check-input" type="checkbox" id="shampoo" name="free_toiletries[]"
                                         value="shampoo">
                                     <label class="form-check-label" for="shampoo">Shampoo</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="conditioner" name="toiletries"
+                                    <input class="form-check-input" type="checkbox" id="conditioner" name="free_toiletries[]"
                                         value="conditioner">
                                     <label class="form-check-label" for="conditioner">Conditioner</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="bodywash" name="toiletries"
+                                    <input class="form-check-input" type="checkbox" id="bodywash" name="free_toiletries[]"
                                         value="bodywash">
                                     <label class="form-check-label" for="bodywash">Body wash</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="tooth" name="toiletries"
+                                    <input class="form-check-input" type="checkbox" id="tooth" name="free_toiletries[]"
                                         value="tooth">
                                     <label class="form-check-label" for="tooth">Toothbrush&paste</label>
                                 </div>
@@ -204,10 +220,26 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md">
+
+     {{-- @foreach ($categories as $category)
+                            <div class="form-check form-check-inline">
+                                @if (in_array($category->id, $selected_categories))
+                                    <input type="checkbox" name="category[]" id="{{ $category->name }}" value="{{ $category->id }}"
+                                        class="form-check-input" checked>
+                                @else
+                                    <input type="checkbox" name="category[]" id="{{ $category->name }}" value="{{ $category->id }}"
+                                        class="form-check-input">
+                                @endif
+                                <label for="{{ $category->name }}" class="form-check-label">{{ $category->name }}</label>
+                            </div>
+                        @endforeach
+ --}}
+
+
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" id="wheelchair"
                                             name="categories[]" value="1">
-                                        <label class="form-check-label" for="wheelchair" >Wheelchair and
+                                        <label class="form-check-label" for="wheelchair">Wheelchair and
                                             Senior-friendly</label>
                                     </div>
                                     <div class="form-check">
@@ -285,14 +317,15 @@
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Buttons -->
-                <div class="row mt-4 mb-2 text-end">
-                    <div class="col">
-                        <a href="{{ route('hotel.profile.show') }}" class="text-decoration-none text-dark">
-                            <button type="button" class="btn btn-sub2">Cancel</button></a>
-                        <button type="submit" class="btn btn btn-main ms-2">Confirm</button>
+
+                    <!-- Buttons -->
+                    <div class="row mt-4 mb-2 text-end">
+                        <div class="col">
+                            <a href="{{ route('hotel.profile.show') }}" class="text-decoration-none text-dark">
+                                <button type="button" class="btn btn-sub2">Cancel</button></a>
+                            <button type="submit" class="btn btn btn-main ms-2">Confirm</button>
+                        </div>
                     </div>
                 </div>
         </form>
