@@ -77,7 +77,7 @@
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
 
-                                 <script src="{{ asset('js/addimage.js') }}"></script>
+                                 <script src="{{ asset('js/editimage.js') }}"></script>
 
 
                             <div class="mb-3">
