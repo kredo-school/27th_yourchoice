@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\RoomPriceRate;
 use App\Models\Room;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth; 
 
 class PriceController extends Controller
 {
@@ -27,7 +28,7 @@ class PriceController extends Controller
         $endDate = $startDate->copy()->endOfWeek();
         
         // 固定されたホテルID
-        $hotelId = 1;
+        $hotelId = Auth::user()->hotel->id;
 
         // ホテルが持つ全てのルームタイプを取得（重複を排除）
         $roomTypes = Room::where('hotel_id', $hotelId)
@@ -71,7 +72,7 @@ class PriceController extends Controller
         $endDate = $startDate->copy()->endOfWeek();
 
         // 固定されたホテルID
-                $hotelId = 1;
+        $hotelId = Auth::user()->hotel->id;
 
         // ホテルが持つ全てのルームタイプを取得（重複を排除）
         $roomTypes = Room::where('hotel_id', $hotelId)
@@ -110,6 +111,8 @@ class PriceController extends Controller
             'rates.*.rate' => 'required|numeric|min:0|max:200',
         ]);
 
+        $hotelId = Auth::user()->hotel->id;
+
         // 送信されたレートをループ処理で更新
         foreach ($request->input('rates') as $rateData) {
             RoomPriceRate::updateOrCreate(
@@ -118,7 +121,7 @@ class PriceController extends Controller
                     'room_type' => $rateData['room_type'],
                     'date' => $rateData['date'],
                     'rate' => round(abs($rateData['rate'])), // 正数かつ四捨五入
-                    'hotel_id' => 1, // 必要に応じて固定または動的に設定
+                    'hotel_id' => $hotelId, // 必要に応じて固定または動的に設定
                 ]
             );
         }
