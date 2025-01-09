@@ -56,15 +56,17 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function () {
 Route::group(['prefix' => 'hotel', 'as' => 'hotel.', 'middleware' => 'hotel'], function () {
 // Route::group(['prefix' => 'hotel', 'as' => 'hotel.'], function () {
 
-    Route::get('/inquary/show',[App\Http\Controllers\Hotel\InquaryController::class,'show'])->name('inquary.show');
+    Route::get('/inquary/show', [App\Http\Controllers\Hotel\InquaryController::class, 'show'])->name('inquary.show');
 
-    Route::get('/profile/show',[App\Http\Controllers\Hotel\ProfileController::class,'show'])->name('profile.show');
-    Route::get('/profile/edit',[App\Http\Controllers\Hotel\ProfileController::class,'edit'])->name('profile.edit');
-    Route::get('/profile/editpass',[App\Http\Controllers\Hotel\ProfileController::class,'editpass'])->name('profile.editpass');
+    Route::get('/profile/show', [App\Http\Controllers\Hotel\ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/profile/edit', [App\Http\Controllers\Hotel\ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/profile/update', [App\Http\Controllers\Hotel\ProfileController::class, 'update'])->name('profile.update'); 
+    Route::get('/profile/editpass', [App\Http\Controllers\Hotel\ProfileController::class, 'editpass'])->name('profile.editpass');
+    Route::post('/profile/updatepass', [App\Http\Controllers\Hotel\ProfileController::class, 'updatepass'])->name('profile.updatepass'); 
 
-    Route::get('/room/show',[App\Http\Controllers\Hotel\RoomController::class,'show'])->name('room.show');
-    Route::get('/room/create',[App\Http\Controllers\Hotel\RoomController::class,'create'])->name('room.create');
-    Route::get('/room/{id}/edit',[App\Http\Controllers\Hotel\RoomController::class,'edit'])->name('room.edit');
+    Route::get('/room/show', [App\Http\Controllers\Hotel\RoomController::class, 'show'])->name('room.show');
+    Route::get('/room/create', [App\Http\Controllers\Hotel\RoomController::class, 'create'])->name('room.create');
+    Route::get('/room/{id}/edit', [App\Http\Controllers\Hotel\RoomController::class, 'edit'])->name('room.edit');
     Route::put('/room/{id}/update',[App\Http\Controllers\Hotel\RoomController::class,'update'])->name('room.update');
     Route::post('/room/store',[App\Http\Controllers\Hotel\RoomController::class,'store'])->name('room.store');
     Route::delete('/room/{id}/destroy', [App\Http\Controllers\Hotel\RoomController::class, 'destroy'])->name('room.destroy');
