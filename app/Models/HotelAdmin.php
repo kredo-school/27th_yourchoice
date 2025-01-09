@@ -49,4 +49,5 @@ class HotelAdmin extends Model
     {
         return $this->password_hash;
     }
+    
 }

@@ -60,17 +60,17 @@
                                 </button>
                                 
 
-                                <!--@if (Route::has('password.request'))
+                                @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 @endif
-                                -->
+                                
                                 <!-- Forgot Password -->
                                 {{--優先度下げる　時間があれば --}}
-                                {{-- <div class="mt-3">
+                                <div class="mt-3">
                                     <a href="{{ route('password.request') }}" class="text-decoration-none">Forgot your password?</a>
-                                </div> --}}
+                                </div> 
 
                             </div>
                         </div>
@@ -90,4 +90,5 @@
         </div>
     </div>
 </div>
+
 @endsection
