@@ -36,10 +36,12 @@
                             <td>{{ $room -> price }}</td>
                             <td>{{ $room -> capacity }}</td>
                             <td>
-                            <img src="{{ $room -> image }}" alt="{{ $room -> image }}" class="rounded-circle d-block mx-auto avatar-md">
+                            <img src="{{ $room->image ?? asset('images/no-image.png') }}" 
+                                alt="{{ $room->image ? 'Room Image' : 'Placeholder Image' }}" 
+                                class="d-block mx-auto roomimage">
                             </td>
                             <td>{{ $room -> remarks }}</td>
-                            <td>
+                            <td class="text-nowrap">
 
                                 {{-- editページにつながる --}}
 
@@ -48,7 +50,8 @@
 
                                 {{-- deleteページにつながる --}}
                                 <a href="#" title="Delete" data-bs-toggle="modal"
-                                    data-bs-target="#deleteModal"><img src="{{ asset('images/trash-can-solid.svg') }}"
+                                    data-bs-target="#delete-room-{{$room->id}}">
+                                    <img src="{{ asset('images/trash-can-solid.svg') }}"
                                         class="icon-md ms-1"></a>
                                         
                                 {{-- Include modal here --}}
