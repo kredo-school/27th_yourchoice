@@ -48,14 +48,6 @@ class ReservationRoomTableSeeder extends Seeder
                     'updated_at'       => now(),
                 ],
                 [
-                    'reservation_id'   => 3,
-                    'room_id'          => 4,
-                    'number_of_people' => 2, 
-                    'price'            => 100.00, // 部屋料金: 50.00〜200.00
-                    'created_at'       => now(),
-                    'updated_at'       => now(),
-                ],
-                [
                     'reservation_id'   => 4,
                     'room_id'          => 5,
                     'number_of_people' => 1, 
