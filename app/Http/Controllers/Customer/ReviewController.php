@@ -8,6 +8,7 @@ use App\Models\Hotel;
 use App\Models\Review;
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth; 
 
 class ReviewController extends Controller
 {
@@ -32,16 +33,14 @@ class ReviewController extends Controller
 
     private function getReviewList()
     {
-        $all_reviews = $this->review->with(['hotel.categories','reservation.rooms'])->latest()->get();
-        $list_reviews =[];
+        $currentUserId = Auth::id();
 
-        foreach($all_reviews as $review){
-            if($review->user->id === 1) ;  //Auth::user()->id
-            {
-                $list_reviews[] = $review;
-            }
-        }
-
+        // レビューを取得し、ログイン中のユーザーにフィルタリング
+        $list_reviews = $this->review->with(['hotel.categories', 'reservation.rooms'])
+            ->where('user_id', $currentUserId) // user_id でフィルタリング
+            ->latest()
+            ->get();
+    
         return $list_reviews;
 
     }

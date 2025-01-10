@@ -10,8 +10,10 @@
                 @foreach($list_reviews as $review)
                  <div class="card p-3 mb-3">
                     <div class="review-card">
-                            <div class="hotel-image">
-                                <img src="{{ asset('images/hotel.jpg') }}" alt="hotel-img" class="hotel-img">
+                            <div class="hotel-image">                             
+                                <img src="{{ $review->hotel->image ?? asset('images/no-image.png') }}" 
+                                alt="{{ $review->hotel ? 'Room Image' : 'Placeholder Image' }}" 
+                                class="hotel-img">
                             </div>
                             <div class="hotel-info">
                                 <h5 class="card-title">{{ $review->hotel->hotel_name }}</h5>

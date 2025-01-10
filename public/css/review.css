@@ -24,6 +24,7 @@
 
 .hotel-image {
   flex: 0 0 auto; /* 画像のサイズを固定 */
+  border: 0.1px solid #e2e2e2; /* 枠線の太さ、スタイル、色 */
 }
 
 .bg-pink {
