@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{{ asset('css/hoteladmin.css') }}">
     {{-- Editpageはvalue={{old}}置いておけばOK　新規登録の場合は空欄になる --}}
     <div class="container mt-2">
-        <form method="POST" action="{{ route('hotel.profile.show') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('hotel.profile.update') }}" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
             <div class="row">
@@ -22,6 +22,9 @@
                                 <label for="hotel_name" class="form-label">Hotel Name</label>
                                 <input type="text" class="form-control" id="hotel_name" name="hotel_name"
                                     value="{{ old('hotel_name', $user->hotel->hotel_name) }}">
+                                    @if ($errors->has('hotel_name'))
+                                <span class="text-danger">{{ $errors->first('hotel_name') }}</span>
+                            @endif
                             </div>
                             <div class="mb-3">
                                 <label for="hotel_email" class="form-label">Email</label>
@@ -71,7 +74,7 @@
                 </div>
 
                 <!-- Right Side (Images and Other Sections) -->
-                <div class="col-md-6">
+                {{-- <div class="col-md-6">
                     <div class="card mt-2 mb-2">
                         <h5 class="card-header">Upload Images</h5>
                         <div class="card-body">
@@ -97,7 +100,7 @@
                             </div>
                         </div>
                     </div>
-
+ --}}
 
                     {{-- 写真空欄のコード　後で消す --}}
                     {{-- <div class="col-md-6">
@@ -345,7 +348,7 @@
 
 
     {{-- 写真関連 --}}
-    <script>
+    {{-- <script>
         function previewImage(event, index) {
             const input = event.target;
             const preview = document.getElementById(`preview-${index}`);
@@ -382,6 +385,6 @@
                 label.textContent = index === 0 ? 'main' : `sub${index}`;
             });
         });
-    </script>
+    </script> --}}
 
 @endsection
