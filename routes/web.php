@@ -25,7 +25,7 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function () {
 
 
   // ログインが必要ページ
-  //Route::group(['middleware' => 'auth'], function () {
+  Route::group(['middleware' => 'auth'], function () {
   Route::get('/reserve/edit', [App\Http\Controllers\Customer\ReserveController::class, 'edit'])->name('reserve.edit');
   Route::get('/reserve/show', [App\Http\Controllers\Customer\ReserveController::class, 'show'])->name('reserve.show');
   Route::get('/reserve/confirmation', [App\Http\Controllers\Customer\ReserveController::class, 'confirmation'])->name('reserve.confirmation');
@@ -47,7 +47,7 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function () {
 
   Route::get('/inquary/show', [App\Http\Controllers\Customer\InquaryController::class, 'show'])->name('inquary.show');
 
-   //});
+  });
 
 });
 
