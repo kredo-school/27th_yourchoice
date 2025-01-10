@@ -29,6 +29,7 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function () {
       Route::get('/reserve/edit',[App\Http\Controllers\Customer\ReserveController::class,'edit'])->name('reserve.edit');
       Route::get('/reserve/show',[App\Http\Controllers\Customer\ReserveController::class,'show'])->name('reserve.show');
       Route::get('/reserve/confirmation',[App\Http\Controllers\Customer\ReserveController::class,'confirmation'])->name('reserve.confirmation');
+      Route::post('/reserve/confirmation/book',[App\Http\Controllers\Customer\ReserveController::class,'store'])->name('reserve.confirmation.book');
 
       Route::get('/profile/show',[App\Http\Controllers\Customer\ProfileController::class,'show'])->name('profile.show');
       Route::get('/profile/edit',[App\Http\Controllers\Customer\ProfileController::class,'edit'])->name('profile.edit');
