@@ -1,6 +1,6 @@
 <!-- Delete Modal -->
 <link rel="stylesheet" href="{{ asset('css/hoteladmin.css') }}">
-<div class="modal fade" id="deleteModal">
+<div class="modal fade" id="delete-room-{{$room->id}}">
     <form method="POST" action="{{ route('hotel.room.destroy', $room->id) }}" enctype="multipart/form-data">
       @csrf
       @method('DELETE')
