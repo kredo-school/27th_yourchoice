@@ -45,9 +45,15 @@
   .reviewslist-css{
     background-color: #f8d7da; /* ボタンの背景色（淡いピンク） */
     color: black; /* 文字の色（ダークレッド） */
-    padding: 5px 5px;
+    padding:5px 5px;
     border-radius: 5px;
     font-size: 14px;
     display: inline-block;
   }
   
+  .profile_text{
+    color: black; 
+    padding: 5px 5px;
+    border-radius: 5px;
+    font-size: 20px;
+  }

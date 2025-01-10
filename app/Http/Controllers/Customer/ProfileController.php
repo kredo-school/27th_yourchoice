@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Models\User;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -11,31 +12,29 @@ class ProfileController extends Controller
 {
 
     private $user;
+    private $category;
 
-    public function __construct(User $user)
+    public function __construct(User $user, Category $category)
     {
         $this->user = $user;
+        $this->category = $category;
     }
-
-    public function index()
-    {
-        $all_posts = $this->user->latest()->paginate(5);
-    }
-
 
      // show() - view the profile page of a user
     public function show()
     {
-        $user = $this->user->findOrFail(Auth::user()->id);
+        $user = $this->user->findOrFail(Auth::id());
+        $categories = $user->categories;
 
         return view('customers.mypage.profile.show')
-                ->with('user', $user);
-
+                ->with('user', $user)
+                ->with('categories', $categories);
     }
+
 
     public function edit()
     {
-        $user = $this->user->findOrFail(Auth::user()->id);
+        $user = $this->user->findOrFail(Auth::user());
 
         return view('customers.mypage.profile.edit')
                 ->with('user', $user);
@@ -54,7 +53,7 @@ class ProfileController extends Controller
             'first_name'         => 'min:1|max:100',
             'last_name'          => 'min:1|max:100',
             'username'           => 'min:1|max:100',
-            'email'              => 'email|max:100|unique:users,email,' . Auth::user()->id,
+            'email'              => 'email|max:100|unique:users,email,' . Auth::user(),
             'phone_number'       => 'numeric|min:1|max:20',
             'password_hash'      => 'min:4',
         ]);
@@ -71,7 +70,7 @@ class ProfileController extends Controller
         # Save
         $user->save();
 
-        return redirect()->route('customers.mypage.profile.show', Auth::user()->id);
+        return redirect()->route('customers.mypage.profile.show');
     }
     
 
