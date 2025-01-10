@@ -24,7 +24,7 @@ class ProfileController extends Controller
     public function show()
     {
         $user = $this->user->findOrFail(Auth::id());
-        $categories = $this->category->all();
+        $categories = $user->categories;
 
         return view('customers.mypage.profile.show')
                 ->with('user', $user)
