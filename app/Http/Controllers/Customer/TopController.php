@@ -40,47 +40,42 @@ class TopController extends Controller
     
         // 検索キーワードの取得
         $location = $request->input('location');
-        $date = $request->input('date');
+        // $date = $request->input('date');
         $travellers = $request->input('travellers');
-        $topCategory2 = $topCategory;
 
-        
+        // セッションで `topCategory` を保持
+        if (!empty($topCategory)) {
+            session(['topCategory' => $topCategory]);
+        } else {
+            $topCategory = session('topCategory'); // セッションから取得
+        }
+
         // クエリの準備
         $query = Hotel::query();
        
-                
         // キーワード検索条件の適用(topページからの検索)
         if (!empty($topCategory)) {
             $query->whereHas('categories', function ($query) use ($topCategory) {
                 $query->where('name', 'LIKE', "%{$topCategory}%");
             });
         }
-        $hotels = $query->with('categories')->get();
-
-        // $filteredHotels = $query->get();
 
         // キーワード検索条件の適用(searchページの中での検索)
         if (!empty($location)) {
             // $topCategory = $request->input('topCategory');
-            $hotels=$query->where('prefecture', 'LIKE', "%{$location}%")->whereHas('categories', function ($query) use ($topCategory2) {
-                $query->where('name', 'LIKE', "%{$topCategory2}%");
+            $hotels=$query->where('prefecture', 'LIKE', "%{$location}%")->whereHas('categories', function ($query) use ($topCategory) {
+                $query->where('name', 'LIKE', "%{$topCategory}%");
             });
         }
-        \Log::info('////////////////////////////////////////');
-        \Log::info('Executed Query: ', [DB::getQueryLog()]);
-        \Log::info('Location: ' . $location); \Log::info('Top Category: ' . $topCategory2);
 
-        // 検索結果の取得
+        $hotels = $query->with('categories')->get();
 
-
-        // $hotels = Hotel::where('name', 'LIKE', "%{$topCategory}%")
-        //        ->whereHas('categories', function ($query) use ($topCategory) {
-        //        })
-        //        ->get();
+        // \Log::info('////////////////////////////////////////');
+        // \Log::info('Executed Query: ', [DB::getQueryLog()]);
+        // \Log::info('Location: ' . $location); \Log::info('Top Category: ' . $topCategory);
         
         // ビューのレンダリング
-        return view('customers.hotel_search', ['hotels' => $hotels, 'topCategory' => $topCategory , 'topCategory2' => $topCategory2]);
-
+        return view('customers.hotel_search', ['hotels' => $hotels, 'topCategory' => $topCategory]);
     }
     
     public function show($id, Request $request)
