@@ -17,16 +17,16 @@
         <div class="col-md-6">
             <div class="row">
                 <div class="col-6 col-md-6 pb-2">
-                    <img src="{{ asset('images/hotel.jpg') }}" alt="hotel-img" class="img-fluid small-img">
+                    <img src="{{ asset($hotels->image_sub1) }}" alt="hotel-img" class="img-fluid small-img">
                 </div>
                 <div class="col-6 col-md-6 pb-2">
-                    <img src="{{ asset('images/hotel.jpg') }}" alt="hotel-img" class="img-fluid small-img">
+                    <img src="{{ asset($hotels->image_sub2) }}" alt="hotel-img" class="img-fluid small-img">
                 </div>
                 <div class="col-6 col-md-6 pb-2">
-                    <img src="{{ asset('images/hotel.jpg') }}" alt="hotel-img" class="img-fluid small-img">
+                    <img src="{{ asset($hotels->image_sub3) }}" alt="hotel-img" class="img-fluid small-img">
                 </div>
                 <div class="col-6 col-md-6 pb-2">
-                    <img src="{{ asset('images/hotel.jpg') }}" alt="hotel-img" class="img-fluid small-img">
+                    <img src="{{ asset($hotels->image_sub4) }}" alt="hotel-img" class="img-fluid small-img">
                 </div>
             </div>
         </div>
@@ -109,7 +109,7 @@
                         </ul>
                     </div>
                     <div class="col-md-3 text-end">
-                        <h6>{{ $room->price }} / {{$room->capacity }} travellers</h6>
+                        <h6>{{$room->price }} / {{$room->capacity }} travellers</h6>
                         <small>include taxes & fees for 1 night</small>
                         <a href="#" class="btn btn-danger mt-2">Book now</a>
                     </div>
@@ -120,17 +120,12 @@
     </div>
 </div>
 
-<script>
-    (g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})({
-      key: "AIzaSyAQ1u-pft-pLmlVb5TYcprtivdXXNkjfDk",
-      v: "weekly",
-      // Use the 'v' parameter to indicate the version to use (weekly, beta, alpha, etc.).
-      // Add other bootstrap parameters as needed, using camel case.
-    });
+<script> 
+    window.hotelAddress = @json($address);
 </script>
 
 <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
 <script src="{{ asset('js/jquery-ui.js') }}"></script>
-<script src="{{ asset('js/jquery.js') }}"></script>
+<script src="{{ asset('js/jquery_top.js') }}"></script>
 
 @endsection
