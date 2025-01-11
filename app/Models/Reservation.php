@@ -49,7 +49,8 @@ class Reservation extends Model
     
     public function review()
     {
-        return $this->belongsTo(Review::class);
+        // return $this->belongsTo(Review::class);  reservation detail Pageで取得できなかったため以下に変更
+        return $this->hasOne(Review::class, 'reservation_id');
     }
 
     public function rooms()

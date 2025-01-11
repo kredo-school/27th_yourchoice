@@ -74,7 +74,6 @@ class TopController extends Controller
         // \Log::info('Executed Query: ', [DB::getQueryLog()]);
         // \Log::info('Location: ' . $location); \Log::info('Top Category: ' . $topCategory);
         
-        // ビューのレンダリング
         return view('customers.hotel_search', ['hotels' => $hotels, 'topCategory' => $topCategory]);
     }
     
@@ -83,6 +82,11 @@ class TopController extends Controller
         // $reservation = $this->reservation;
         // ホテルを取得
         $hotels = Hotel::with(['categories', 'rooms.reservations'])->find($id);
+
+        $address = $hotels->address;
+
+        // // JSON形式で返却
+        // return response()->json($address);
     
         if (!$hotels) {
             abort(404, 'Hotel not found');
@@ -117,7 +121,7 @@ class TopController extends Controller
         return view('customers.hotel_detail', [
             'hotels' => $hotels,
             'availableRooms' => $availableRooms,
-            // 'reservationid' => $reservation->id,
+            'address' => $address,
         ]);
     }
     
