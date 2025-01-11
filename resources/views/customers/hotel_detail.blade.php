@@ -71,15 +71,27 @@
     </div>
 
     <div class="input-group my-4 w-50">
-        <input type="date" class="form-control">
-        <input type="number" class="form-control" placeholder="Travellers">
-        <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button">
-                <i class="fa fa-search"></i>
-            </button>
+        <form action="#" method="POST" class="form-inline">
+            @csrf
+            <div class="d-flex align-items-center">
+                <!-- チェックイン日入力 -->
+                <input type="date" name="checkInDate" class="form-control" id="checkInDate" placeholder="Check-in Date">
+                
+                <!-- チェックアウト日入力 -->
+                <input type="date" name="checkOutDate" class="form-control me-2" id="checkOutDate" placeholder="Check-out Date">
+                
+                <!-- 人数入力 -->
+                <input type="number" name="travellers" class="form-control me-2" placeholder="Travellers" id="travellers">
+                
+                <!-- 検索ボタン -->
+                <button class="btn btn-outline-secondary" type="submit">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+        </form>
         </div>
     </div>
-    @foreach ($hotels->rooms as $room)
+    @foreach ($availableRooms as $room)
         <div class="list-group">
             <div class="list-group-item">
                 <div class="row align-items-center">
@@ -99,7 +111,7 @@
                     <div class="col-md-3 text-end">
                         <h6>{{ $room->price }} / {{$room->capacity }} travellers</h6>
                         <small>include taxes & fees for 1 night</small>
-                        <a href="{{ route('customer.reserve.edit') }}" class="btn btn-danger mt-2">Book now</a>
+                        <a href="#" class="btn btn-danger mt-2">Book now</a>
                     </div>
                 </div>
             </div>

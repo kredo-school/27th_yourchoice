@@ -4,22 +4,27 @@ namespace App\Http\Controllers\Customer;
 use App\Models\User;
 use App\Models\Hotel;
 use App\Models\Room;
+use App\Models\Reservation;
 use App\Models\Category;
 use App\Models\HotelCategory;
 use App\Models\HasFactory;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 
 class TopController extends Controller
 {
     private $hotel;
 
-    public function __construct(Hotel $hotel , Category $category , Room $room)
+    public function __construct(Hotel $hotel , Category $category , Room $room, Reservation $reservation)
     {
         $this->hotel = $hotel;
         $this->category = $category;
         $this->room = $room;
+        $this->reservation = $reservation;
     }
 
     public function list()
@@ -35,14 +40,19 @@ class TopController extends Controller
     
         // 検索キーワードの取得
         $location = $request->input('location');
-        $date = $request->input('date');
+        // $date = $request->input('date');
         $travellers = $request->input('travellers');
 
+        // セッションで `topCategory` を保持
+        if (!empty($topCategory)) {
+            session(['topCategory' => $topCategory]);
+        } else {
+            $topCategory = session('topCategory'); // セッションから取得
+        }
 
-        
         // クエリの準備
         $query = Hotel::query();
-                
+       
         // キーワード検索条件の適用(topページからの検索)
         if (!empty($topCategory)) {
             $query->whereHas('categories', function ($query) use ($topCategory) {
@@ -50,30 +60,65 @@ class TopController extends Controller
             });
         }
 
-        $filteredHotels = $query->get();
-
         // キーワード検索条件の適用(searchページの中での検索)
         if (!empty($location)) {
-            $query->where('prefecture', 'LIKE', "%{$location}%");
+            // $topCategory = $request->input('topCategory');
+            $hotels=$query->where('prefecture', 'LIKE', "%{$location}%")->whereHas('categories', function ($query) use ($topCategory) {
+                $query->where('name', 'LIKE', "%{$topCategory}%");
+            });
         }
 
-        // 検索結果の取得
         $hotels = $query->with('categories')->get();
 
+        // \Log::info('////////////////////////////////////////');
+        // \Log::info('Executed Query: ', [DB::getQueryLog()]);
+        // \Log::info('Location: ' . $location); \Log::info('Top Category: ' . $topCategory);
         
         // ビューのレンダリング
         return view('customers.hotel_search', ['hotels' => $hotels, 'topCategory' => $topCategory]);
-
     }
     
-    public function show($id)
+    public function show($id, Request $request)
     {
-
-        $hotels = Hotel::with(['categories' ,'rooms'])->find($id); // IDに基づいてホテルを取得
-        
-
-        return view('customers.hotel_detail', ['hotels' => $hotels]);
-
+        // $reservation = $this->reservation;
+        // ホテルを取得
+        $hotels = Hotel::with(['categories', 'rooms.reservations'])->find($id);
+    
+        if (!$hotels) {
+            abort(404, 'Hotel not found');
+        }
+    
+        // 入力された日程を取得
+        $date = $request->input('date');
+    
+        // ホテルに紐づく部屋を取得
+        $rooms = $hotels->rooms;
+    
+        // 利用可能な部屋をフィルタリング
+        $availableRooms = $rooms->filter(function ($room) use ($date) {
+            foreach ($room->reservations as $reservation) {
+                // 既存予約の日程を取得
+                $checkInDate = $reservation->check_in_date;
+                $checkOutDate = $reservation->check_out_date;
+    
+                // 入力した日程が既存予約の日程に該当する場合
+                if (
+                    ($date >= $checkInDate && $date < $checkOutDate) || // チェックイン日が既存予約期間内
+                    ($date <= $checkInDate && $date >= $checkOutDate)   // 予約期間を完全に含む
+                ) {
+                    return false; // 利用不可の部屋は除外
+                }
+            }
+    
+            return true; // 利用可能な部屋
+        });
+    
+        // ビューにデータを渡す
+        return view('customers.hotel_detail', [
+            'hotels' => $hotels,
+            'availableRooms' => $availableRooms,
+            // 'reservationid' => $reservation->id,
+        ]);
     }
     
 }
