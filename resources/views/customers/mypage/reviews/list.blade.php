@@ -36,7 +36,7 @@
                                 <p class="card-text">
                                         @if (strlen($review->comment) > $commentLimit=100)
                                             {{ Str::limit($review->comment, $commentLimit, '...') }}
-                                            read more</a>
+                                            </a>
                                         @else
                                             {{ $review->comment }}
                                         @endif
