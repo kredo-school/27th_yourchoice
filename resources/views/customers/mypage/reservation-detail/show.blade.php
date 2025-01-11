@@ -22,6 +22,7 @@
 {{-- DEBUG用 最終確認まで済んだら削除------------------ここまで --}}
 
 @section('content')
+<link rel="stylesheet" href="{{ asset('css/review.css') }}">
 <div class="container mt-5">
     <div class="card">
         <div class="card-body">
@@ -36,7 +37,14 @@
                     {{-- Location --}}
                     <p class="text-muted">{{ $hotel->prefecture }}</p>
                     {{-- Category --}}
-                    {{-- <span class="badge bg-danger">{{$hotel->categories->pluck('name')->implode(', ')}}</span> UserTableのusernameからHotelTableのHotel_nameへ仕様変更 --}}
+                    {{-- @foreach($hotel->categories ?? [] as $hotelcategory)
+                    <pre>{{ $hotel->categories->toJson(JSON_PRETTY_PRINT) }}</pre>
+                    @endforeach --}}
+
+                    @foreach ($hotel->categories ?? [] as $hotelcategory)
+                    <span class="badge bg-pink">{{ $hotelcategory->name }}</span>
+                    @endforeach
+
                     <span class="badge bg-danger">{{ $hotel->hotelname }}</span>
                 </div>
                 <div class="col-4">
@@ -80,11 +88,21 @@
 
             {{-- 宿泊前後で表示切替 --}}
             @if($reservation->checkin_status == 'done')
-            <div class="mt-3 d-flex justify-content-center">
-                <a href="{{ route('customer.review.create', $reservation-> id) }}">
-                    <button class="btn btn-outline-secondary me-5">Write review</button>
-                </a>
-            </div>
+                {{-- レビューが存在するかを確認 --}}
+                {{-- {{dd($review->toArray());}}  --}}
+                @if(optional($review)->exists())
+                    <div class="mt-3 d-flex justify-content-center">
+                        <a href="{{ route('customer.review.show', $review->id) }}">
+                            <button class="btn btn-outline-secondary me-5">Show review</button>
+                        </a>
+                    </div>
+                @else
+                    <div class="mt-3 d-flex justify-content-center">
+                        <a href="{{ route('customer.review.create', $reservation-> id) }}">
+                            <button class="btn btn-outline-secondary me-5">Write review</button>
+                        </a>
+                    </div>
+                @endif
             @else
                 <div class="mt-3 d-flex justify-content-center">
                     <button class="btn btn-outline-secondary me-5" data-bs-toggle="modal" data-bs-target="#delete">Cancel reservation</button>
@@ -92,6 +110,7 @@
                     <button class="btn btn-danger ms-5">Contact Hotel</button>
                 </div>
             @endif
+            
 
         </div>
     </div>
