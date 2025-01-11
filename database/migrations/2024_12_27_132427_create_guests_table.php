@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('first_name', 100)->nullable();
             $table->string('last_name', 100)->nullable();
             $table->string('phone_number', 20);
+            $table->timestamps(); // 作成日時と更新日時
         });
     }
 

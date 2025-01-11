@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Room;
 use App\Models\Reservation;
+use App\Models\guest;
 use App\Models\ReservationRoom;
 use Carbon\Carbon;
 
@@ -77,7 +78,7 @@ class ReservationController extends Controller
             // Room モデルから room_number を取得
             $room = Room::find($roomId);
     
-            return view('hotels.reservations.edit', [
+            return view('hotels.reservations.edit2', [
                 'reservation' => null,
                 'date' => $date,
                 'room_id' => $roomId,
@@ -106,7 +107,7 @@ class ReservationController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store_block(Request $request)
     {
         // バリデーション
         $validated = $request->validate([
@@ -122,6 +123,45 @@ class ReservationController extends Controller
             'check_out_date' => $validated['check_out_date'],
             'customer_request' => $validated['customer_request'] ?? null,
             // 必要に応じて他のカラムを追加
+        ]);
+
+        // ReservationRoom を作成して中間テーブルに保存
+        ReservationRoom::create([
+            'reservation_id' => $reservation->id,
+            'room_id' => $validated['room_id'],
+        ]);
+
+        return redirect()->route('hotel.reservation.show_daily', ['date' => $request->input('date')])
+        ->with('success', 'Reservation updated successfully.');
+    }
+
+    public function store_guest(Request $request)
+    {
+        // バリデーション
+        $validated = $request->validate([
+            'check_in_date' => 'required|date',
+            'check_out_date' => 'required|date',
+            'first_name' => 'required|string|max:100',
+            'last_name' => 'required|string|max:100',
+            'phone_number' => 'required|string|max:20',
+            'customer_request' => 'nullable|string|max:255',
+            'room_id' => 'required|integer|exists:rooms,id',
+        ]);
+
+        // 新しい予約を作成
+        $reservation = Reservation::create([
+            'check_in_date' => $validated['check_in_date'],
+            'check_out_date' => $validated['check_out_date'],
+            'customer_request' => $validated['customer_request'] ?? null,
+            // 必要に応じて他のカラムを追加
+        ]);
+
+        $guest = Guest::create([
+            'first_name' => $validated['first_name'],
+            'last_name' => $validated['last_name'],
+            'phone_number' => $validated['phone_number'],
+            // 必要に応じて他のカラムを追加
+            
         ]);
 
         // ReservationRoom を作成して中間テーブルに保存
