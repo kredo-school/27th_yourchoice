@@ -22,59 +22,90 @@
                                 <label for="hotel_name" class="form-label">Hotel Name</label>
                                 <input type="text" class="form-control" id="hotel_name" name="hotel_name"
                                     value="{{ old('hotel_name', $user->hotel->hotel_name) }}">
-                                    @if ($errors->has('hotel_name'))
-                                <span class="text-danger">{{ $errors->first('hotel_name') }}</span>
-                            @endif
+                                @if ($errors->has('hotel_name'))
+                                    <span class="text-danger">{{ $errors->first('hotel_name') }}</span>
+                                @endif
+                                {{-- @error('hotel_name')
+                                    <div class="text-danger small">{{ $message }}</div>
+                                @enderror --}}
+
                             </div>
                             <div class="mb-3">
                                 <label for="hotel_email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="hotel_email" name="hotel_email"
+                                <input type="email" class="form-control" id="email" name="email"
                                     value="{{ old('email', $user->email) }}">
+                                @error('email')
+                                    <div class="text-danger small">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="mb-3">
                                 <label for="url" class="form-label">Website URL</label>
                                 <input type="url" class="form-control" id="url" name="url"
                                     value="{{ old('url', $user->hotel->url) }}">
+                                @error('url')
+                                    <div class="text-danger small">{{ $message }}</div>
+                                @enderror
                             </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="postal_code" class="form-label">Postal Code</label>
+                            <div class="input-group">
+                                <span class="input-group-text">〒</span>
+                                <input type="text" class="form-control" id="postal_code" name="postal_code"
+                                    value="{{ old('postal_code', $user->hotel->postal_code) }}">
+                                @error('postal_code')
+                                    <div class="text-danger small">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
 
-                            <div class="mb-3">
-                                <label for="postal_code" class="form-label">Postal Code</label>
-                                <div class="input-group">
-                                    <span class="input-group-text">〒</span>
-                                    <input type="text" class="form-control" id="postal_code" name="postal_code"
-                                        value="{{ old('postal_code', $user->hotel->postal_code) }}">
-                                </div>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="prefecture" class="form-label">Address</label>
-                                <input type="text" class="form-control mb-2" id="prefecture" name="prefecture"
-                                    placeholder="Region/State" value="{{ old('prefecture', $user->hotel->prefecture) }}">
-                                <input type="text" class="form-control mb-2" id="city" name="city"
-                                    placeholder="City" value="{{ old('city', $user->hotel->city) }}">
-                                <input type="text" class="form-control" id="address" name="address"
-                                    placeholder="Address" value="{{ old('address', $user->hotel->address) }}">
-                            </div>
-                            <div class="mb-3">
-                                <label for="phone_number" class="form-label">Phone Number</label>
-                                <input type="text" class="form-control" id="phone_number" name="phone_number"
-                                    value="{{ old('phone_number', $user->phone_number) }}">
-                            </div>
-                            <div class="mb-3">
-                                <label for="access" class="form-label">Access</label>
-                                <input type="text" class="form-control" id="access" name="access"
-                                    value="{{ old('access', $user->hotel->access) }}">
-                            </div>
-                            <div class="mb-3">
-                                <label for="description" class="form-label">Description</label>
-                                <textarea class="form-control" id="description" name="description">{{ old('description',$user->hotel->description) }}</textarea>
-                            </div>
+                        <div class="mb-3">
+                            <label for="prefecture" class="form-label">Address</label>
+                            <input type="text" class="form-control mb-2" id="prefecture" name="prefecture"
+                                placeholder="Region/State" value="{{ old('prefecture', $user->hotel->prefecture) }}">
+                            @error('prefecture')
+                                <div class="text-danger small">{{ $message }}</div>
+                            @enderror
+                            <input type="text" class="form-control mb-2" id="city" name="city" placeholder="City"
+                                value="{{ old('city', $user->hotel->city) }}">
+                            @error('city')
+                                <div class="text-danger small">{{ $message }}</div>
+                            @enderror
+                            <input type="text" class="form-control" id="address" name="address" placeholder="Address"
+                                value="{{ old('address', $user->hotel->address) }}">
+                            @error('address')
+                                <div class="text-danger small">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone_number" class="form-label">Phone Number</label>
+                            <input type="text" class="form-control" id="phone_number" name="phone_number"
+                                value="{{ old('phone_number', $user->phone_number) }}">
+                            @error('phone_number')
+                                <div class="text-danger small">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="access" class="form-label">Access</label>
+                            <input type="text" class="form-control" id="access" name="access"
+                                value="{{ old('access', $user->hotel->access) }}">
+                            @error('access')
+                                <div class="text-danger small">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" id="description" name="description">{{ old('description', $user->hotel->description) }}</textarea>
+                            @error('description')
+                                <div class="text-danger small">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Right Side (Images and Other Sections) -->
-                {{-- <div class="col-md-6">
+            <!-- Right Side (Images and Other Sections) -->
+            {{-- <div class="col-md-6">
                     <div class="card mt-2 mb-2">
                         <h5 class="card-header">Upload Images</h5>
                         <div class="card-body">
@@ -102,8 +133,8 @@
                     </div>
  --}}
 
-                    {{-- 写真空欄のコード　後で消す --}}
-                    {{-- <div class="col-md-6">
+            {{-- 写真空欄のコード　後で消す --}}
+            {{-- <div class="col-md-6">
                     <div class="card mb-2">
                         <div class="card-body">
                             <h5 class="card-header">Upload Images</h5>
@@ -119,11 +150,11 @@
                         </div>
                     </div> --}}
 
-                    <div class="card mt-2 mb-2">
-                        <div class="card-header">Service</div>
-                        <div class="card-body">
-                            <!-- Hotel Service Section -->
-                            {{-- @foreach ($all_categories as $category)
+            <div class="card mt-2 mb-2">
+                <div class="card-header">Service</div>
+                <div class="card-body">
+                    <!-- Hotel Service Section -->
+                    {{-- @foreach ($all_categories as $category)
                             <div class="form-check form-check-inline">
                                 @if (in_array($category->id, $selected_categories))
                                     <input type="checkbox" name="category[]" id="{{ $category->name }}" value="{{ $category->id }}"
@@ -138,200 +169,196 @@
  --}}
 
 
-                            <div class="mb-3">
-                                <h6>Hotel Service :</h6>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="parking" name="services[]"
-                                        value="parking">
-                                    <label class="form-check-label" for="parking">Parking availability</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="luggage" name="services[]"
-                                        value="luggage">
-                                    <label class="form-check-label" for="luggage">Luggage storage service</label>
-                                </div><br>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="breakfast" name="services[]"
-                                        value="breakfast">
-                                    <label class="form-check-label" for="breakfast">Breakfast</label>
-                                </div>
-                                <div class="price-input d-inline-flex align-items-center">
-                                    <span>Price:</span>
-                                    <div class="input-group ms-2 w-50">
-                                        <span class="input-group-text">$</span>
-                                        <input type="number" class="form-control w-50" name="breakfast_price"
-                                            aria-label="Price">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Amenity Section -->
-                            <div class="mb-3">
-                                <h6>Amenity :</h6>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="wifi" name="amenities[]"
-                                        value="wifi">
-                                    <label class="form-check-label" for="wifi">Wi-Fi</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="aircon" name="amenities[]"
-                                        value="aircon">
-                                    <label class="form-check-label" for="aircon">Air conditioning</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="tv" name="amenities[]"
-                                        value="tv">
-                                    <label class="form-check-label" for="tv">TV</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="dryer" name="amenities[]"
-                                        value="dryer">
-                                    <label class="form-check-label" for="dryer">Dryer</label>
-                                </div>
-                            </div>
-
-                            <!-- Free Toiletries Section -->
-                            <div class="mb-3">
-                                <h6>Free Toiletries :</h6>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="shampoo" name="free_toiletries[]"
-                                        value="shampoo">
-                                    <label class="form-check-label" for="shampoo">Shampoo</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="conditioner" name="free_toiletries[]"
-                                        value="conditioner">
-                                    <label class="form-check-label" for="conditioner">Conditioner</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="bodywash" name="free_toiletries[]"
-                                        value="bodywash">
-                                    <label class="form-check-label" for="bodywash">Body wash</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="tooth" name="free_toiletries[]"
-                                        value="tooth">
-                                    <label class="form-check-label" for="tooth">Toothbrush&paste</label>
-                                </div>
+                    <div class="mb-3">
+                        <h6>Hotel Service :</h6>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="category_7" name="categories[]"
+                                value="7" @if ($user->hotel->categories->contains(7)) checked @endif>
+                            <label class="form-check-label" for="parking">Parking availability</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="category_8" name="categories[]"
+                                value="8" @if ($user->hotel->categories->contains(8)) checked @endif>
+                            <label class="form8-check-label" for="luggage">Luggage storage service</label>
+                        </div><br>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="category_9" name="categories[]"
+                                value="9" @if ($user->hotel->categories->contains(9)) checked @endif>
+                            <label class="form-check-label" for="breakfast">Breakfast</label>
+                        </div>
+                        <div class="price-input d-inline-flex align-items-center">
+                            <span>Price:</span>
+                            <div class="input-group ms-2 w-50">
+                                <span class="input-group-text">$</span>
+                                <input type="number" class="form-control w-50" id="breakfast_price"
+                                    name="breakfast_price" aria-label="Price">
                             </div>
                         </div>
                     </div>
 
-                    <!-- Category Section -->
-                    <div class="card mt-2 mb-2">
-                        <h5 class="card-header">Category</h5>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md">
-
-     {{-- @foreach ($categories as $category)
-                            <div class="form-check form-check-inline">
-                                @if (in_array($category->id, $selected_categories))
-                                    <input type="checkbox" name="category[]" id="{{ $category->name }}" value="{{ $category->id }}"
-                                        class="form-check-input" checked>
-                                @else
-                                    <input type="checkbox" name="category[]" id="{{ $category->name }}" value="{{ $category->id }}"
-                                        class="form-check-input">
-                                @endif
-                                <label for="{{ $category->name }}" class="form-check-label">{{ $category->name }}</label>
-                            </div>
-                        @endforeach
- --}}
-
-
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="wheelchair"
-                                            name="categories[]" value="1">
-                                        <label class="form-check-label" for="wheelchair">Wheelchair and
-                                            Senior-friendly</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="visual"
-                                            name="categories[]" value="2">
-                                        <label class="form-check-label" for="visual">Visual and Hearing
-                                            Impaired-friendly</label>
-                                    </div>
-                                </div>
-                                <div class="col-md">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="pregnancy"
-                                            name="categories[]" value="3">
-                                        <label class="form-check-label" for="pregnancy">Pregnancy-friendly</label>
-                                    </div><br>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="religious"
-                                            name="categories[]" value="4">
-                                        <label class="form-check-label" for="religious">Religious-friendly</label>
-                                    </div>
-                                </div>
-                                <div class="col-md">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="family"
-                                            name="categories[]" value="5">
-                                        <label class="form-check-label" for="family">Family-friendly</label>
-                                    </div><br>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="english"
-                                            name="categories[]" value="6">
-                                        <label class="form-check-label" for="english">English-friendly</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Requirements Button -->
-                            <div class="row">
-                                <div class="col text-end">
-                                    <button type="button" class="btn btn-sub mt-3 ms-auto" data-bs-toggle="modal"
-                                        data-bs-target="#requirementsModal">
-                                        Requirements
-                                    </button>
-                                </div>
-                            </div>
-                            {{-- Include modal here --}}
-                            @include('hotels.profile.modals.requirements_category')
+                    <!-- Amenity Section -->
+                    <div class="mb-3">
+                        <h6>Amenity :</h6>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="category_10" name="categories[]"
+                                value="10" @if ($user->hotel->categories->contains(10)) checked @endif>
+                            <label class="form-check-label" for="wifi">Wi-Fi</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="category_11" name="categories[]"
+                                value="11" @if ($user->hotel->categories->contains(11)) checked @endif>
+                            <label class="form-check-label" for="aircon">Air conditioning</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="category_12" name="categories[]"
+                                value="12" @if ($user->hotel->categories->contains(12)) checked @endif>
+                            <label class="form-check-label" for="tv">TV</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="category_13" name="categories[]"
+                                value="13" @if ($user->hotel->categories->contains(13)) checked @endif>
+                            <label class="form-check-label" for="dryer">Dryer</label>
                         </div>
                     </div>
 
-                    <!-- Cancellation Policy Section -->
-                    <div class="card mt-2 mb-2">
-                        <h5 class="card-header">Cancellation Policy</h5>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label for="freeCancellation">Free Cancellation Period:</label>
-                                    <div class="d-flex align-items-center">
-                                        <input type="number" class="form-control me-2 form-width" id="freeCancellation"
-                                            name="free_cancellation">
-                                        <span>days before the reservation date.</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <label>Cancellation Fee Percentage:</label>
-                                    <div class="d-flex align-items-center mt-1">
-                                        <span class="me-3">General</span>
-                                        <input type="number" class="form-control mx-2 form-width" name="fee_general">
-                                        <span>%</span>
-                                    </div>
-                                    <div class="d-flex align-items-center mt-1">
-                                        <span>Same-Day</span>
-                                        <input type="number" class="form-control mx-2 form-width" name="fee_same_day">
-                                        <span>%</span>
-                                    </div>
-                                </div>
-                            </div>
+                    <!-- Free Toiletries Section -->
+                    <div class="mb-3">
+                        <h6>Free Toiletries :</h6>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="category_14" name="categories[]"
+                                value="14" @if ($user->hotel->categories->contains(14)) checked @endif>
+                            <label class="form-check-label" for="shampoo">Shampoo</label>
                         </div>
-                    </div>
-
-
-                    <!-- Buttons -->
-                    <div class="row mt-4 mb-2 text-end">
-                        <div class="col">
-                            <a href="{{ route('hotel.profile.show') }}" class="text-decoration-none text-dark">
-                                <button type="button" class="btn btn-sub2">Cancel</button></a>
-                            <button type="submit" class="btn btn btn-main ms-2">Confirm</button>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="category_15" name="categories[]"
+                                value="15" @if ($user->hotel->categories->contains(15)) checked @endif>
+                            <label class="form-check-label" for="conditioner">Conditioner</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="category_16" name="categories[]"
+                                value="16" @if ($user->hotel->categories->contains(16)) checked @endif>
+                            <label class="form-check-label" for="bodywash">Body wash</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="category_17" name="categories[]"
+                                value="17" @if ($user->hotel->categories->contains(17)) checked @endif>
+                            <label class="form-check-label" for="tooth">Toothbrush&paste</label>
                         </div>
                     </div>
                 </div>
-        </form>
+            </div>
+
+            <!-- Category Section -->
+            <div class="card mt-2 mb-2">
+                <h5 class="card-header">Category</h5>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md">
+
+
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="category_1" name="categories[]"
+                                    value="1" @if ($user->hotel->categories->contains(1)) checked @endif>
+                                <label class="form-check-label" for="wheelchair">Wheelchair and
+                                    Senior-friendly</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="category_2" name="categories[]"
+                                    value="2" @if ($user->hotel->categories->contains(2)) checked @endif>
+                                <label class="form-check-label" for="visual">Visual and Hearing
+                                    Impaired-friendly</label>
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="category_3" name="categories[]"
+                                    value="3" @if ($user->hotel->categories->contains(3)) checked @endif>
+                                <label class="form-check-label" for="pregnancy">Pregnancy-friendly</label>
+                            </div><br>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="category_4" name="categories[]"
+                                    value="4" @if ($user->hotel->categories->contains(4)) checked @endif>
+                                <label class="form-check-label" for="religious">Religious-friendly</label>
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="category_5" name="categories[]"
+                                    value="5" @if ($user->hotel->categories->contains(5)) checked @endif>
+                                <label class="form-check-label" for="family">Family-friendly</label>
+                            </div><br>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="category_6" name="categories[]"
+                                    value="6" @if ($user->hotel->categories->contains(6)) checked @endif>
+                                <label class="form-check-label" for="english">English-friendly</label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Requirements Button -->
+                    <div class="row">
+                        <div class="col text-end">
+                            <button type="button" class="btn btn-sub mt-3 ms-auto" data-bs-toggle="modal"
+                                data-bs-target="#requirementsModal">
+                                Requirements
+                            </button>
+                        </div>
+                    </div>
+                    {{-- Include modal here --}}
+                    @include('hotels.profile.modals.requirements_category')
+                </div>
+            </div>
+
+            <!-- Cancellation Policy Section -->
+            <div class="card mt-2 mb-2">
+                <h5 class="card-header">Cancellation Policy</h5>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="freeCancellation">Free Cancellation Period:</label>
+                            <div class="d-flex align-items-center">
+                                <input type="number" class="form-control me-2 form-width" id="cancellation_period"
+                                    name="cancellation_period">
+                                <span>days before the reservation date.</span>
+                                @error('cancellation_period')
+                                    <div class="text-danger small">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Cancellation Fee Percentage:</label>
+                            <div class="d-flex align-items-center mt-1">
+                                <span class="me-3">General</span>
+                                <input type="number" class="form-control mx-2 form-width" name="general_fee"
+                                    id="general_fee">
+                                <span>%</span>
+                                @error('general_fee')
+                                    <div class="text-danger small">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="d-flex align-items-center mt-1">
+                                <span>Same-Day</span>
+                                <input type="number" class="form-control mx-2 form-width" name="sameday_fee"
+                                    id="sameday_fee">
+                                <span>%</span>
+                                @error('sameday_fee')
+                                    <div class="text-danger small">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Buttons -->
+            <div class="row mt-4 mb-2 text-end">
+                <div class="col">
+                    <a href="{{ route('hotel.profile.show') }}" class="text-decoration-none text-dark">
+                        <button type="button" class="btn btn-sub2">Cancel</button></a>
+                    <button type="submit" class="btn btn btn-main ms-2">Confirm</button>
+                </div>
+            </div>
+    </div>
+    </form>
     </div>
 
     {{-- 写真の削除 --}}
