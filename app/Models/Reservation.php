@@ -13,7 +13,7 @@ class Reservation extends Model
     protected $fillable = [
         'user_id', 'payment_id', 'check_in_date', 'check_out_date', 
         'number_of_people', 'breakfast', 'reservation_status', 
-        'checkin_status', 'customer_request'
+        'checkin_status', 'customer_request','guest_id',
     ];
 
     // 中間テーブルへのリレーション

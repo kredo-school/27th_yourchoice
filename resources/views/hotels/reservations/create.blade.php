@@ -65,6 +65,17 @@
                                     <input type="number" class="form-control" id="phone_number" name="phone_number">
                                 </div>
 
+                                <div class="form-group mb-3 col-3">
+                                    <label for="number_of_people"><strong>How many people:</strong></label>
+                                    <input type="number" class="form-control" id="number_of_people" name="number_of_people">
+                                </div>
+
+                                <div class="form-check mb-2">
+                                    <input type="hidden" name="breakfast" value="0">    
+                                    <input type="checkbox" class="form-check-input" id="breakfast" value="1">
+                                    <label class="form-check-label" for="breakfast">Breakfast</label>
+                                </div>
+
 
 
 
