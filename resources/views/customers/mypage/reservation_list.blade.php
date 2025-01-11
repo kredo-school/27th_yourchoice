@@ -1,7 +1,7 @@
 {{-- BE: Created by miu --}}
 @extends('layouts.customer_mypage')
 @section('content')
-<link rel="stylesheet" href="{{ asset('css/hotel_search.css') }}">
+<link rel="stylesheet" href="{{ asset('css/reservationlist.css') }}">
 
 <div class="container-fluid">
     <div class="row">
@@ -57,6 +57,14 @@
             </div>
 
             <!-- 残タスク：ページネーション 未実装-->
+            <div class="pagination-wrapper">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        {{ $reservations->links() }}
+                    </ul>
+                </nav>
+            </div>
+            
             {{-- <nav aria-label="Page navigation">
                 <ul class="pagination">
                     <li class="page-item disabled">

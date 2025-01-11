@@ -33,7 +33,9 @@ class ReservationController extends Controller
             abort(403, 'You need login');
         }
 
-        $reservations = $user->reservation ?? collect();
+        // ユーザーの予約を取得し、関連するホテルデータをロード
+        $reservations = $user->reservation()
+        ->with(['reservationRoom.room.hotel.categories','payment'])->paginate(10);
 
         return view('customers.mypage.reservation_list', compact('reservations'));
     }
@@ -72,22 +74,6 @@ class ReservationController extends Controller
         }
 
         return redirect()->back()->with('error', 'Reservation not found.');
-    }
-
-    // 予約一覧ページを表示
-    public function reservationlist()
-    {
-        $user = auth()->user();
-    
-        if (!$user) {
-            abort(403, 'You need login');
-        }
-
-     // ユーザーの予約を取得し、関連するホテルデータをロード
-     $reservations = $user->reservation()
-     ->with(['reservationRoom.room.hotel.categories','payment'])->paginate(10);
-    // 支払い情報を関連付けから取得
-     return view('customers.mypage.reservation_list', compact('reservations'));
     }
     
     // 他のメソッドで共通処理を行うためのヘルパー
