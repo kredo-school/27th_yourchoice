@@ -69,7 +69,7 @@ class ReviewController extends Controller
     {
             $validated = $request->validate([
                 'hotel_id' => 'required|exists:hotels,id',
-                'reservation_id' => 'required|exists:reservations,id',
+                'reservation_id' => 'required|exists:reservations,id|unique:reviews,reservation_id',
                 'rating' => 'required|integer|min:1|max:5',
                 'comment' => 'nullable|string|max:1000',
                 'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
