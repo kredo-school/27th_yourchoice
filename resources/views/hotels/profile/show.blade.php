@@ -5,8 +5,7 @@
 
     <div class="container mt-2">
         <form method="GET" action="{{ route('hotel.profile.edit') }}" enctype="multipart/form-data">
-            {{-- @csrf --}}
-            {{-- @method('GET') --}}
+
             <div class="row">
                 <div class="col-md">
                     <h1 class="mb-4 ms-3 fw-bold">Hotel Admin Profile</h1>
@@ -86,26 +85,18 @@
                         </div>
                     </div>
 
-
                     <!-- Right Side (Service and Amenities) -->
                     <div class="card mt-2 mb-2">
                         <div class="card-header">Service</div>
                         <div class="card-body">
-                            {{-- @foreach ($hotel->hotelCategory as $hotel_category)
-                            <span class="badge bg-pink">{{$hotel_category->id}}</span>
-                        @endforeach --}}
                             <!-- Hotel Service Section -->
                             <div class="mb-3">
                                 <h6>Hotel Service :</h6>
                                 <div class="service-line">
-                                    {{-- @foreach ($hotel->hotelCategories as $hotel_category)
-                                        <span class="service-item">
-                                            {{ $hotel_category->name }}
-                                        </span>
-                                    @endforeach --}}
-                                    {{-- <span class="service-item">Parking availability</span>
-                                    <span class="service-item">Luggage storage service</span>
-                                    <span class="service-item">Breakfast - Price: $20</span> --}}
+                                    @foreach ($services as $service)
+                                        <span class="service-item">{{ $service->name }}</span>
+                                    @endforeach
+                                    <span class="service-item">{{ $user->hotel->breakfast_price }}</span>
                                 </div>
                             </div>
 
@@ -113,21 +104,18 @@
                             <div class="mb-3">
                                 <h6>Amenity :</h6>
                                 <div class="service-line">
-                                    {{-- <span class="service-item">Wi-Fi</span>
-                                    <span class="service-item">Air conditioning</span>
-                                    <span class="service-item">TV</span>
-                                    <span class="service-item">Dryer</span> --}}
+                                    @foreach ($amenities as $amenity)
+                                        <span class="service-item">{{ $amenity->name }}</span>
+                                    @endforeach
                                 </div>
                             </div>
-
                             <!-- Free Toiletries Section -->
                             <div class="mb-3">
                                 <h6>Free Toiletries :</h6>
                                 <div class="service-line">
-                                    {{-- <span class="service-item">Shampoo</span>
-                                    <span class="service-item">Conditioner</span>
-                                    <span class="service-item">Body wash</span>
-                                    <span class="service-item">Toothbrush&paste</span> --}}
+                                    @foreach ($free_toiletries as $item)
+                                        <span class="service-item">{{ $item->name }}</span>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -138,18 +126,11 @@
                         <h5 class="card-header">Category</h5>
                         <div class="card-body">
                             <div class="category-container">
-                                 @foreach ($categories as $category)
-                                        <span class="category-item">
-                                            {{ $category->name }}
-                                        </span>
-                                      @endforeach
-
-                                {{-- <span class="category-item">Wheelchair and Senior</span>
-                                <span class="category-item">Visual and Hearing Impaired</span>
-                                <span class="category-item">Pregnancy</span>
-                                <span class="category-item">Religious</span>
-                                <span class="category-item">Family</span>
-                                <span class="category-item">English</span> --}}
+                                @foreach ($categories as $category)
+                                    <span class="category-item">
+                                        {{ $category->name }}
+                                    </span>
+                                @endforeach
                             </div>
                         </div>
                     </div>
