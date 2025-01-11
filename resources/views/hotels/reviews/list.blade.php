@@ -11,17 +11,9 @@
                 @foreach($list_reviews as $review)
                  <div class="card p-3 mb-3">
                     <div class="review-card">
-                            <div class="hotel-image">                             
-                                <img src="{{ $review->hotel->image ?? asset('images/no-image.png') }}" 
-                                alt="{{ $review->hotel ? 'Room Image' : 'Placeholder Image' }}" 
-                                class="hotel-img">
-                            </div>
                             <div class="hotel-info">
-                                <h5 class="card-title">{{ $review->hotel->hotel_name }}</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">{{ $review->hotel->prefecture }}</h6>
-                                @foreach($review->hotel->categories as $hotelcategory)
-                                <span class="badge bg-pink">{{ $hotelcategory->name }}</span>
-                                @endforeach
+                                <h6 class="card-title">Username: </h5>
+                                <h5 class="card-subtitle mb-2 ms-2 text-muted">  {{ $review->user->username }}</h6>
                             </div>
                             <div class="hotel-review">
                                 <p class="mt-2">Overall Rating: 
@@ -35,9 +27,9 @@
                                 </p>
                                 <label for="comment">Comment:</label>
                                 <p class="card-text">
-                                        @if (strlen($review->comment) > $commentLimit=100)
+                                        @if (strlen($review->comment) > $commentLimit=150)
                                             {{ Str::limit($review->comment, $commentLimit, '...') }}
-                                            read more</a>
+                                            </a>
                                         @else
                                             {{ $review->comment }}
                                         @endif

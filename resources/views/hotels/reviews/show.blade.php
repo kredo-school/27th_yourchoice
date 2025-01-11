@@ -9,18 +9,11 @@
         <div class="card p-5">
                     <div class="review-card">
                     <div class="review-header">
-                        <div class="hotel-image">
-                            <img src="{{ $review->hotel->image ?? asset('images/no-image.png') }}" 
-                                alt="{{ $review->hotel ? 'Room Image' : 'Placeholder Image' }}" 
-                                class="hotel-img">
-                        </div>
+
                         <div class="hotel-info">
-                            <h4>{{ $review->hotel->hotel_name }}</h4>
-                            <p>{{ $review->hotel->prefecture }}</p>
-                                @foreach($review->hotel->categories as $hotelcategory)
-                                    <span class="badge bg-pink">{{ $hotelcategory->name }}</span>
-                                @endforeach
-                        </div>
+                                <h6 class="card-title">Username: </h5>
+                                <h5 class="card-subtitle mb-2 ms-2 text-muted">  {{ $review->user->username }}</h6>
+                            </div>
                         <div class="stay-info text-right">
                             <p><strong>Date of stay:</strong>{{ $review->reservation->check_in_date }} ~ {{ $review->reservation->check_out_date }}</p>
                             <p><strong>people:</strong> {{ $review->reservation->number_of_people }} </p>
