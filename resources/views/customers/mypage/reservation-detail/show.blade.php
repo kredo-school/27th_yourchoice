@@ -28,7 +28,12 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-4">
-                    <img src="{{ asset('images/hotel.jpg') }}" alt="hotel-img" class="hotel-img img-fluid">
+                    {{-- <img src="{{ asset('images/hotel.jpg') }}" alt="hotel-img" class="hotel-img img-fluid"> --}}
+                    <div class="hotel-image">                             
+                        <img src="{{ $review->hotel->image ?? asset('images/no-image.png') }}" 
+                        alt="{{ $review->hotel ? 'Room Image' : 'Placeholder Image' }}" 
+                        class="hotel-img">
+                    </div>
                 </div>
                 <div class="col-2">
                     {{-- Hotel Name --}}
@@ -59,19 +64,19 @@
             <hr>
             <div class="mt-3">
 
-                {{-- 優先度下げ コメントアウト --}}
-                {{-- <div class="container">
+                <div class="container">
                     <div class="row">
                         <div class="col-6">
                             <h4>Price</h4>
                         </div>
                         <div class="col-6 text-right">
-                            <h4>¥{{ $payment->amount }}</h4>
-                            <a href="#" class="btn btn-outline-primary p-1 m-2">View fee details</a>
+                            <h4>${{ $payment->amount }}</h4>
+                            {{-- <a href="#" class="btn btn-outline-primary p-1 m-2">View fee details</a> --}}
                         </div>
                     </div>
-                </div> --}}
+                </div>
 
+                {{-- 優先度下げ コメントアウト --}}
                 {{-- <div class="card">
                     <div class="card-body">
                         <h6 class="fw-bolder">The final price shown is the amount you'll pay to the property.</h6>
