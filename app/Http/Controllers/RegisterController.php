@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\UserCategory;
 use App\Models\HotelAdmin;
+use App\Models\UserCategory;
 use Illuminate\Http\Request;
 //use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
@@ -85,17 +86,19 @@ class RegisterController extends Controller
             ]);
         }
 
+        Auth::login($user);
+
         // Redirect to a specific page
         return redirect()->route('customer.profile.show')->with('success', 'Registration successful!');
     } catch (\Exception $e) {
         Log::error('Failed: ' . $e->getMessage());
-        return redirect()->route('customer.profile.show')->withErrors(['error' => 'Failed']);
+        return redirect()->back()->withErrors(['error' => 'Failed']);
     }
     }
 
     public function create_admin(Request $request)
     {try{
-        $user =  HotelAdmin::create([
+        $user =  User::create([
             'role_id' => $request->input('role_id', 2),
             //'first_name' => $request->input('first_name'),
             //'last_name' => $request->input('last_name'),
@@ -105,11 +108,14 @@ class RegisterController extends Controller
             'password_hash' => Hash::make($request->input('password_hash')),
         ]);
 
+        
+        Auth::login($user);
+
         // Redirect to a specific page
         return redirect()->route('hotel.profile.show')->with('success', 'Registration successful!');
     } catch (\Exception $e) {
         Log::error('Failed: ' . $e->getMessage());
-        return redirect()->route('hotel.profile.show')->withErrors(['error' => 'Failed']);
+        return redirect()->back()->withErrors(['error' => 'Failed']);
     }
     }
 

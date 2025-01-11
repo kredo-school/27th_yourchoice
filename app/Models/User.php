@@ -54,9 +54,9 @@ class User extends Authenticatable
         ];
     }
 
-    public function Category()
+    public function category()
     {
-        return $this->hasMany(UserCategory::class);
+        return $this->hasMany(Category::class);
     }
 
     public function reservation()
@@ -72,4 +72,17 @@ class User extends Authenticatable
     {
         return $this->password_hash;
     }
+    
+    public function hotel()
+    {
+        return $this->hasOne(Hotel::class);
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'user_category', 'user_id', 'category_id');
+    }
+
+
+
 }

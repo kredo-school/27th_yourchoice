@@ -29,34 +29,36 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @foreach ($all_rooms as $room) --}}
+                        @foreach ($rooms as $room)
                         <tr>
-                            <td>101</td>
-                            <td>Single Room</td>
-                            <td>$100.00</td>
-                            <td>1</td>
-                            <td><img src="#" alt="#" class="d-block mx-auto">
-                                {{-- @if ($room->avatar)
-                          <img src="{{ $user->avatar }}" alt="{{ $user->name }}"
-                              class="rounded-circle d-block mx-auto avatar-md">
-                      @else
-                          <i class="fa-solid fa-circle-user d-block text-center icon-md"></i>
-                      @endif --}}
-                            </td>
-                            <td>Not available</td>
+                            <td>{{ $room -> room_number }}</td>
+                            <td>{{ $room -> room_type }}</td>
+                            <td>{{ $room -> price }}</td>
+                            <td>{{ $room -> capacity }}</td>
                             <td>
+                            <img src="{{ $room->image ?? asset('images/no-image.png') }}" 
+                                alt="{{ $room->image ? 'Room Image' : 'Placeholder Image' }}" 
+                                class="d-block mx-auto roomimage">
+                            </td>
+                            <td>{{ $room -> remarks }}</td>
+                            <td class="text-nowrap">
+
                                 {{-- editページにつながる --}}
 
-                                <a href="{{ route('hotel.room.edit') }}" title="Edit"><img
+                                <a href="{{ route('hotel.room.edit', $room->id) }}" title="Edit"><img
                                         src="{{ asset('images/pen-to-square-solid.svg') }}" class="icon-md"></a>
+
                                 {{-- deleteページにつながる --}}
                                 <a href="#" title="Delete" data-bs-toggle="modal"
-                                    data-bs-target="#deleteModal"><img src="{{ asset('images/trash-can-solid.svg') }}"
+                                    data-bs-target="#delete-room-{{$room->id}}">
+                                    <img src="{{ asset('images/trash-can-solid.svg') }}"
                                         class="icon-md ms-1"></a>
+                                        
                                 {{-- Include modal here --}}
                                 @include('hotels.rooms.modals.delete')
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -64,7 +66,7 @@
 
 
             <!-- ページネーションエリア -->
-            {{-- <div class="pagination-container"> --}}
+            <!-- {{-- <div class="pagination-container"> --}}
             <nav aria-label="Page navigation">
                 <ul class="pagination justify-content-center">
                     <li class="page-item disabled">
@@ -80,7 +82,7 @@
                     </li>
                 </ul>
             </nav>
-            {{-- </div> --}}
+            {{-- </div> --}} -->
         </div>
     </div>
 @endsection

@@ -5,7 +5,7 @@
 
     <div class="container mt-2">
         <form method="GET" action="{{ route('hotel.profile.edit') }}" enctype="multipart/form-data">
-            @csrf
+            {{-- @csrf --}}
             {{-- @method('GET') --}}
             <div class="row">
                 <div class="col-md">
@@ -19,43 +19,43 @@
                         <div class="card-header">Basic</div>
                         <div class="card-body">
                             <div class="mb-3">
-                                <label class="form-label">Hotel Name</label>
-                                <p class="form-control-plaintext border-bottom">{{ old('hotel_name') }}</p>
+                                <label class="form-label">Hotel Name :</label>
+                                <p class="form-control-plaintext border-bottom">{{ $user->hotel->hotel_name }}</p>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Email</label>
-                                <p class="form-control-plaintext border-bottom">{{ old('hotel_email') }}</p>
+                                <label class="form-label">Email :</label>
+                                <p class="form-control-plaintext border-bottom">{{ $user->email }}</p>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Website URL</label>
-                                <p class="form-control-plaintext border-bottom">{{ old('website') }}</p>
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label">Postal Code</label>
-                                <p class="form-control-plaintext border-bottom">〒{{ old('hotel_postal_code') }}</p>
+                                <label class="form-label">Website URL :</label>
+                                <p class="form-control-plaintext border-bottom">{{ $user->hotel->url }}</p>
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label">Address</label>
+                                <label class="form-label">Postal Code :</label>
+                                <p class="form-control-plaintext border-bottom">〒{{ $user->hotel->postal_code }}</p>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Address :</label>
                                 <div>
                                     <p class="form-control-plaintext border-bottom">
-                                        {{ old('hotel_region') }}{{ old('hotel_city') }}{{ old('hotel_address') }}
+                                        {{ $user->hotel->prefecture }} {{ $user->hotel->city }} {{ $user->hotel->address }}
                                     </p>
                                 </div>
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label">Phone Number</label>
-                                <p class="form-control-plaintext border-bottom">{{ old('hotel_phone') }}</p>
+                                <label class="form-label">Phone Number :</label>
+                                <p class="form-control-plaintext border-bottom">{{ $user->phone_number }}</p>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Access</label>
-                                <p class="form-control-plaintext border-bottom">{{ old('access') }}</p>
+                                <label class="form-label">Access :</label>
+                                <p class="form-control-plaintext border-bottom">{{ $user->hotel->access }}</p>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Description</label>
-                                <p class="form-control-plaintext border-bottom">{{ old('attractions') }}</p>
+                                <label class="form-label">Description :</label>
+                                <p class="form-control-plaintext border-bottom">{{ $user->hotel->description }}</p>
                             </div>
                         </div>
                     </div>
@@ -86,120 +86,70 @@
                         </div>
                     </div>
 
+
                     <!-- Right Side (Service and Amenities) -->
                     <div class="card mt-2 mb-2">
                         <div class="card-header">Service</div>
                         <div class="card-body">
+                            {{-- @foreach ($hotel->hotelCategory as $hotel_category)
+                            <span class="badge bg-pink">{{$hotel_category->id}}</span>
+                        @endforeach --}}
                             <!-- Hotel Service Section -->
                             <div class="mb-3">
-                                <h6>Hotel Service:</h6>
+                                <h6>Hotel Service :</h6>
                                 <div class="service-line">
-                                    <span class="service-item">Parking availability</span>
+                                    {{-- @foreach ($hotel->hotelCategories as $hotel_category)
+                                        <span class="service-item">
+                                            {{ $hotel_category->name }}
+                                        </span>
+                                    @endforeach --}}
+                                    {{-- <span class="service-item">Parking availability</span>
                                     <span class="service-item">Luggage storage service</span>
-                                    <span class="service-item">Breakfast - Price: $20</span>
+                                    <span class="service-item">Breakfast - Price: $20</span> --}}
                                 </div>
                             </div>
 
                             <!-- Amenity Section -->
                             <div class="mb-3">
-                                <h6>Amenity:</h6>
+                                <h6>Amenity :</h6>
                                 <div class="service-line">
-                                    <span class="service-item">Wi-Fi</span>
+                                    {{-- <span class="service-item">Wi-Fi</span>
                                     <span class="service-item">Air conditioning</span>
                                     <span class="service-item">TV</span>
-                                    <span class="service-item">Dryer</span>
+                                    <span class="service-item">Dryer</span> --}}
                                 </div>
                             </div>
 
                             <!-- Free Toiletries Section -->
                             <div class="mb-3">
-                                <h6>Free Toiletries:</h6>
+                                <h6>Free Toiletries :</h6>
                                 <div class="service-line">
-                                    <span class="service-item">Shampoo</span>
+                                    {{-- <span class="service-item">Shampoo</span>
                                     <span class="service-item">Conditioner</span>
                                     <span class="service-item">Body wash</span>
-                                    <span class="service-item">Toothbrush&paste</span>
+                                    <span class="service-item">Toothbrush&paste</span> --}}
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
-                    {{-- 以下backend作成時参考にするコード --}}
-                    {{-- <!-- Right Side (Service and Amenities) -->
-                <div class="card mb-2">
-                    <div class="card-header">Service</div>
-                    <div class="card-body">
-                        <!-- Hotel Service Section -->
-                        <div class="mb-3">
-                            <h6>Hotel Service :</h6>
-                            <ul>
-                                @if (in_array('parking', $services))
-                                    <li>Parking availability</li>
-                                @endif
-                                @if (in_array('luggage', $services))
-                                    <li>Luggage storage service</li>
-                                @endif
-                                @if (in_array('breakfast', $services))
-                                    <li>Breakfast - Price: ${{ $breakfast_price }}</li>
-                                @endif
-                            </ul>
-                        </div>
-
-                        <!-- Amenity Section -->
-                        <div class="mb-3">
-                            <h6>Amenity :</h6>
-                            <ul>
-                                @if (in_array('wifi', $amenities))
-                                    <li>Wi-Fi</li>
-                                @endif
-                                @if (in_array('aircon', $amenities))
-                                    <li>Air conditioning</li>
-                                @endif
-                                @if (in_array('tv', $amenities))
-                                    <li>TV</li>
-                                @endif
-                                @if (in_array('dryer', $amenities))
-                                    <li>Dryer</li>
-                                @endif
-                            </ul>
-                        </div>
-
-                        <!-- Free Toiletries Section -->
-                        <div class="mb-3">
-                            <h6>Free Toiletries :</h6>
-                            <ul>
-                                @if (in_array('shampoo', $toiletries))
-                                    <li>Shampoo</li>
-                                @endif
-                                @if (in_array('conditioner', $toiletries))
-                                    <li>Conditioner</li>
-                                @endif
-                                @if (in_array('bodywash', $toiletries))
-                                    <li>Body wash</li>
-                                @endif
-                                @if (in_array('toothbrush', $toiletries))
-                                    <li>Toothbrush</li>
-                                @endif
-                                @if (in_array('toothpaste', $toiletries))
-                                    <li>Toothpaste</li>
-                                @endif
-                            </ul>
-                        </div>
-                    </div>
-                </div> --}}
 
                     <!-- Category Section -->
                     <div class="card mt-2 mb-2">
                         <h5 class="card-header">Category</h5>
                         <div class="card-body">
                             <div class="category-container">
-                                <span class="category-item">Wheelchair and Senior</span>
+                                 @foreach ($categories as $category)
+                                        <span class="category-item">
+                                            {{ $category->name }}
+                                        </span>
+                                      @endforeach
+
+                                {{-- <span class="category-item">Wheelchair and Senior</span>
                                 <span class="category-item">Visual and Hearing Impaired</span>
                                 <span class="category-item">Pregnancy</span>
                                 <span class="category-item">Religious</span>
                                 <span class="category-item">Family</span>
-                                <span class="category-item">English</span>
+                                <span class="category-item">English</span> --}}
                             </div>
                         </div>
                     </div>
@@ -210,25 +160,27 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <p>Free Cancellation Period: <br>X days before the reservation date.</p>
+                                    <p>Free Cancellation Period :<br> {{ $user->hotel->cancellation_period }} days
+                                        before the
+                                        reservation date.</p>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>Cancellation Fee Percentage:</p>
-                                    <p>General: X%</p>
-                                    <p>Same-Day: X%</p>
+                                    <p>Cancellation Fee Percentage :</p>
+                                    <p>General : {{ $user->hotel->general_fee }}%</p>
+                                    <p>Same-Day : {{ $user->hotel->sameday_fee }}%</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Buttons -->
-                <div class="row mt-4 mb-2 text-end">
-                    <div class="col">
-                        <a href="{{ route('hotel.profile.editpass') }}" class="text-decoration-none text-dark">
-                            <button type="button" class="btn btn-sub">Password Setting</button></a>
-                        <a href="{{ route('hotel.profile.edit') }}" class="text-decoration-none text-dark ms-2">
-                            <button type="submit" class="btn btn-sub">Edit</button>
+                    <!-- Buttons -->
+                    <div class="row mt-4 mb-2 text-end">
+                        <div class="col">
+                            <a href="{{ route('hotel.profile.editpass') }}" class="text-decoration-none text-dark">
+                                <button type="button" class="btn btn-sub">Password Setting</button></a>
+                            <a href="{{ route('hotel.profile.edit') }}" class="text-decoration-none text-dark ms-2">
+                                <button type="submit" class="btn btn-sub">Edit</button>
+                        </div>
                     </div>
                 </div>
         </form>

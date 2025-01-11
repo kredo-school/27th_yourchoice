@@ -17,7 +17,7 @@
                             @method('GET')
                             <div class="row">
                                 <div class="mb-3">
-                                    <label for="username" class="form-label">{{ __('Hotel name') }}</label>
+                                    <label for="username" class="form-label">{{ __('User Name') }}</label>
                                     <input type="text" class="form-control" id="username" name="username"
                                         value="{{ old('username') }}">
                                         @error('username')
