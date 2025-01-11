@@ -141,18 +141,49 @@ input[type="file"] {
   cursor: pointer;
 }
 
-.rating span {
-  color: #ddd; /* デフォルトの星の色 */
+.rating {
+  display: flex;
+  flex-direction: row-reverse; /* 高評価が右に来る */
+  justify-content: flex-start;
+  cursor: pointer;
+}
+
+.rating .star {
+  font-size: 2rem;
+  color: #ccc; /* デフォルトの星の色 */
   transition: color 0.2s ease-in-out;
 }
 
-.rating span:hover,
-.rating span:hover ~ span {
-  color: #f39c12; /* ホバー時の星の色 */
+.rating .star.selected,
+.rating .star.selected ~ .star {
+  color: #f39c12; /* 塗りつぶされた星の色 */
 }
 
-.rating span.selected,
-.rating span.selected ~ span {
-  color: #f39c12; /* 選択時の星の色 */
+.image-preview {
+  display: flex; /* 子要素を並列に並べる */
+  flex-wrap: wrap; /* 必要に応じて折り返し可能にする */
+  gap: 10px; /* 要素間のスペースを追加 */
+}
+
+.preview-thumbnail {
+  max-width: 150px;
+  max-height: 150px;
+  object-fit: cover;
+  border: 1px solid #ddd;
+
+  padding: 5px;
+  margin-top: 5px;
+}
+
+.preview-icon{
+  cursor: pointer;
+  display: block;
+  width: 150px;
+  height: 150px;
+  border: 1px solid #ddd;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 

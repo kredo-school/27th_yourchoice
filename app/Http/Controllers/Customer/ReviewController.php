@@ -72,7 +72,7 @@ class ReviewController extends Controller
                 'reservation_id' => 'required|exists:reservations,id',
                 'rating' => 'required|integer|min:1|max:5',
                 'comment' => 'nullable|string|max:1000',
-                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             ]);
 
             $review = new Review();
@@ -82,9 +82,18 @@ class ReviewController extends Controller
             $review->rating = $validated['rating'];
             $review->comment = $validated['comment'];
 
-            if ($request->hasFile('image')) {
-                $image = $request->file('image');
-                $review->image = $image->store('reviews', 'public'); // 保存先を指定
+            if ($request->hasFile('images')) {
+                $images = $request->file('images');
+                
+                if (isset($images[0])) {
+                    $review->image1 = 'data:image/' . $images[0]->getClientOriginalExtension() . ';base64,' . base64_encode(file_get_contents($images[0]));
+                }
+                if (isset($images[1])) {
+                    $review->image2 = 'data:image/' . $images[1]->getClientOriginalExtension() . ';base64,' . base64_encode(file_get_contents($images[1]));
+                }
+                if (isset($images[2])) {
+                    $review->image3 = 'data:image/' . $images[2]->getClientOriginalExtension() . ';base64,' . base64_encode(file_get_contents($images[2]));
+                }
             }
 
             $review->save();
