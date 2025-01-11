@@ -22,12 +22,12 @@
                                 <label for="hotel_name" class="form-label">Hotel Name</label>
                                 <input type="text" class="form-control" id="hotel_name" name="hotel_name"
                                     value="{{ old('hotel_name', $user->hotel->hotel_name) }}">
-                                @if ($errors->has('hotel_name'))
+                                {{-- @if ($errors->has('hotel_name'))
                                     <span class="text-danger">{{ $errors->first('hotel_name') }}</span>
-                                @endif
-                                {{-- @error('hotel_name')
+                                @endif --}}
+                                @error('hotel_name')
                                     <div class="text-danger small">{{ $message }}</div>
-                                @enderror --}}
+                                @enderror
 
                             </div>
                             <div class="mb-3">
@@ -53,10 +53,10 @@
                                 <span class="input-group-text">〒</span>
                                 <input type="text" class="form-control" id="postal_code" name="postal_code"
                                     value="{{ old('postal_code', $user->hotel->postal_code) }}">
-                                @error('postal_code')
-                                    <div class="text-danger small">{{ $message }}</div>
-                                @enderror
                             </div>
+                            @error('postal_code')
+                                <div class="text-danger small">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="mb-3">
@@ -191,7 +191,7 @@
                             <div class="input-group ms-2 w-50">
                                 <span class="input-group-text">$</span>
                                 <input type="number" class="form-control w-50" id="breakfast_price"
-                                    name="breakfast_price" aria-label="Price">
+                                    name="breakfast_price" aria-label="Price" value="{{ old('breakfast_price', $user->hotel->breakfast_price) }}">
                             </div>
                         </div>
                     </div>
@@ -254,9 +254,6 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md">
-
-
-
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="category_1" name="categories[]"
                                     value="1" @if ($user->hotel->categories->contains(1)) checked @endif>
@@ -318,33 +315,33 @@
                             <label for="freeCancellation">Free Cancellation Period:</label>
                             <div class="d-flex align-items-center">
                                 <input type="number" class="form-control me-2 form-width" id="cancellation_period"
-                                    name="cancellation_period">
-                                <span>days before the reservation date.</span>
-                                @error('cancellation_period')
-                                    <div class="text-danger small">{{ $message }}</div>
-                                @enderror
+                                    name="cancellation_period"  value="{{ old('cancellation_period', $user->hotel->cancellation_period) }}">
+                                <span>days before the reservation date.</span><br>
                             </div>
+                            @error('cancellation_period')
+                                <div class="text-danger small">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-md-6">
                             <label>Cancellation Fee Percentage:</label>
                             <div class="d-flex align-items-center mt-1">
                                 <span class="me-3">General</span>
                                 <input type="number" class="form-control mx-2 form-width" name="general_fee"
-                                    id="general_fee">
-                                <span>%</span>
-                                @error('general_fee')
-                                    <div class="text-danger small">{{ $message }}</div>
-                                @enderror
+                                    id="general_fee" value="{{ old('general_fee', $user->hotel->general_fee) }}">
+                                <span>%</span><br>
                             </div>
+                            @error('general_fee')
+                                <div class="text-danger small">{{ $message }}</div>
+                            @enderror
                             <div class="d-flex align-items-center mt-1">
                                 <span>Same-Day</span>
                                 <input type="number" class="form-control mx-2 form-width" name="sameday_fee"
-                                    id="sameday_fee">
-                                <span>%</span>
-                                @error('sameday_fee')
-                                    <div class="text-danger small">{{ $message }}</div>
-                                @enderror
+                                    id="sameday_fee" value="{{ old('sameday_fee', $user->hotel->sameday_fee) }}">
+                                <span>%</span><br>
                             </div>
+                            @error('sameday_fee')
+                                <div class="text-danger small">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                 </div>

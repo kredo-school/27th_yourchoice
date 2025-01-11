@@ -5,7 +5,7 @@
 
     <div class="container mt-2">
         <form method="GET" action="{{ route('hotel.profile.edit') }}" enctype="multipart/form-data">
-           
+
             <div class="row">
                 <div class="col-md">
                     <h1 class="mb-4 ms-3 fw-bold">Hotel Admin Profile</h1>
@@ -96,6 +96,7 @@
                                     @foreach ($services as $service)
                                         <span class="service-item">{{ $service->name }}</span>
                                     @endforeach
+                                    <span class="service-item">{{ $user->hotel->breakfast_price }}</span>
                                 </div>
                             </div>
 

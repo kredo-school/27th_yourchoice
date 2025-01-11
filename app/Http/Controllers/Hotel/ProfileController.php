@@ -73,7 +73,7 @@ class ProfileController extends Controller
 
   public function update(Request $request)
   {
-    try {
+    // try {
       // dd($request);
       #1. Validate all form data
       $request->validate([
@@ -158,7 +158,7 @@ class ProfileController extends Controller
       // ]);
 
       // チェックされたカテゴリの ID を取得
-      $categories = $request->input('categories');
+      $categories = $request->input('categories');//, []); // カテゴリが送信されない場合は空配列を使用
       // 中間テーブルにデータを挿入
       foreach ($categories as $category_id) {
         HotelCategory::create([
@@ -166,13 +166,12 @@ class ProfileController extends Controller
           'category_id' => $category_id,
         ]);
       }
-
       // プロフィールページへリダイレクト
       return redirect()->route('hotel.profile.show');
-    } catch (\Exception $e) {
-      Log::error('Failed: ' . $e->getMessage());
-      return redirect()->back()->withErrors(['error' => 'Failed']);
-    }
+    // } catch (\Exception $e) {
+    //   Log::error('Failed: ' . $e->getMessage());
+    //   return redirect()->back()->withErrors(['error' => 'Failed']);
+    // }
   }
 
 
