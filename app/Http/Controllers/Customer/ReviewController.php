@@ -52,14 +52,45 @@ class ReviewController extends Controller
         return view('customers.mypage.reviews.view') ->with('review', $review);
     }
 
-    public function create()
+    public function create($id)
     {
-        return view('customers.mypage.reviews.submittion');
+        $reservation = $this->reservation->findOrFail($id);
+
+        $hotel_id = $reservation->reservationRoom->map(function ($reservationRoom) {
+            return $reservationRoom->room->hotel_id;
+        })->unique()->implode(', '); // カンマ区切りで表示
+
+        $hotel = $this->hotel->findOrFail($hotel_id);
+
+        return view('customers.mypage.reviews.submittion')->with('reservation', $reservation)->with('hotel', $hotel);
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        return redirect()->route('customer.review.list');
+            $validated = $request->validate([
+                'hotel_id' => 'required|exists:hotels,id',
+                'reservation_id' => 'required|exists:reservations,id',
+                'rating' => 'required|integer|min:1|max:5',
+                'comment' => 'nullable|string|max:1000',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            ]);
+
+            $review = new Review();
+            $review->user_id = Auth::id();
+            $review->hotel_id = $request->hotel_id; // 必要に応じてホテルIDを追加
+            $review->reservation_id = $request->reservation_id; // 必要に応じてホテルIDを追加
+            $review->rating = $validated['rating'];
+            $review->comment = $validated['comment'];
+
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $review->image = $image->store('reviews', 'public'); // 保存先を指定
+            }
+
+            $review->save();
+
+
+        return redirect()->route('customer.review.list')->with('success', 'Review submitted successfully!');
     }
     
 }

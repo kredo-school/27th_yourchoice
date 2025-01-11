@@ -77,6 +77,7 @@ input[type="file"] {
 
 .hotel-image {
   flex: 0 0 auto; /* 画像のサイズを固定 */
+  border: 0.1px solid #e2e2e2; /* 枠線の太さ、スタイル、色 */
 }
 
 .bg-pink {
@@ -131,3 +132,27 @@ input[type="file"] {
   text-decoration: none; /* 下線を削除 */
   cursor: pointer; /* ホバー時のポインター表示 */
 }
+
+.rating {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.rating span {
+  color: #ddd; /* デフォルトの星の色 */
+  transition: color 0.2s ease-in-out;
+}
+
+.rating span:hover,
+.rating span:hover ~ span {
+  color: #f39c12; /* ホバー時の星の色 */
+}
+
+.rating span.selected,
+.rating span.selected ~ span {
+  color: #f39c12; /* 選択時の星の色 */
+}
+
