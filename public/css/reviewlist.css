@@ -31,3 +31,19 @@
   background-color: #ffcccb; /* 薄いピンク */
   color: #000000 !important; /* 文字色（必要に応じて変更） */
 }
+
+.not_selected {
+  font-size: 1.5rem;
+  color: #ccc; /* デフォルトの星の色 */
+}
+
+.selected {
+    font-size: 1.5rem;
+    color: gold; /* 選択およびホバー時の星の色 */
+}
+
+.rate-text {
+  font-size: 1.5rem;
+  margin-left: 10px;
+  color: #333;
+}

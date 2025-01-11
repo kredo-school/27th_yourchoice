@@ -22,17 +22,6 @@
   display: block;
 }
 
-.rating {
-  font-size: 20px;
-  color: #ccc;
-  cursor: pointer;
-  margin-bottom: 10px;
-}
-
-.rating span:hover,
-.rating span:hover ~ span {
-  color: gold;
-}
 
 textarea {
   width: 100%;
@@ -133,31 +122,32 @@ input[type="file"] {
   cursor: pointer; /* ホバー時のポインター表示 */
 }
 
-.rating {
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: flex-start;
-  font-size: 2rem;
-  cursor: pointer;
-}
 
-.rating {
-  display: flex;
-  flex-direction: row-reverse; /* 高評価が右に来る */
-  justify-content: flex-start;
-  cursor: pointer;
+  .rating {
+    display: flex;
+    justify-content: flex-start;
+    cursor: pointer;
 }
 
 .rating .star {
-  font-size: 2rem;
-  color: #ccc; /* デフォルトの星の色 */
-  transition: color 0.2s ease-in-out;
+    font-size: 2rem;
+    color: #ccc; /* デフォルトの星の色 */
+    transition: color 0.2s ease-in-out;
 }
 
 .rating .star.selected,
-.rating .star.selected ~ .star {
-  color: #f39c12; /* 塗りつぶされた星の色 */
+.rating .star:hover,
+.rating .star ~ .star:hover {
+    color: gold; /* 選択およびホバー時の星の色 */
 }
+
+.rate-text {
+  font-size: 2rem;
+  margin-left: 10px;
+  color: #333;
+}
+
+
 
 .image-preview {
   display: flex; /* 子要素を並列に並べる */

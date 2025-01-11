@@ -43,19 +43,21 @@
                             <!-- Overall rating -->
                             <label for="rating">Overall Rating</label>
                                 <div class="rating" id="rating">
-                                    <span data-value="5" class="star">☆</span>
-                                    <span data-value="4" class="star">☆</span>
-                                    <span data-value="3" class="star">☆</span>
-                                    <span data-value="2" class="star">☆</span>
-                                    <span data-value="1" class="star">☆</span>
+                                    <span data-value="1" class="star">★</span>
+                                    <span data-value="2" class="star">★</span>
+                                    <span data-value="3" class="star">★</span>
+                                    <span data-value="4" class="star">★</span>
+                                    <span data-value="5" class="star">★</span>
+                                    <p id="rate-display" class="rate-text"> 0</p>
                                 </div>
+                               
                             <!-- Hidden input for rating value -->
                             <input type="hidden" name="rating" id="rating-value">
                             <script src="{{ asset('js/rating.js') }}"></script>
 
                             <!-- Comments -->
                             <label for="comment">Comment</label>
-                            <textarea id="comment" name="comment" rows="4"></textarea>
+                            <textarea id="comment" name="comment" rows="4" required></textarea>
 
                             <!-- Image upload -->
                             <label for="comment">Images</label>

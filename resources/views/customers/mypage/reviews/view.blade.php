@@ -38,15 +38,15 @@
                     <hr>
                     <div class="review-body">
                         <h5>Overall rating</h5>
-                        <p class="rating">
+                        <p class="mt-2">
                                     @for ($i = 0; $i < $review->rating; $i++)
-                                        <strong>★</strong>
+                                        <span class="selected">★</span>
                                     @endfor
                                     @for ($i = $review->rating; $i < 5; $i++)
-                                        <strong>☆</strong>
+                                        <span class="not_selected">★</span>
                                     @endfor
-                                    {{ $review->rating }}
-                        </p>
+                                    <span id="rate-display" class="rate-text">{{ $review->rating }}</span>
+                                </p>
                         <h5>Comments</h5>
                         <p>
                         {{ $review->comment }}

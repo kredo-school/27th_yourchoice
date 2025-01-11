@@ -25,13 +25,14 @@
                             <div class="hotel-review">
                                 <p class="mt-2">Overall Rating: 
                                     @for ($i = 0; $i < $review->rating; $i++)
-                                        <strong>★</strong>
+                                        <span class="selected">★</span>
                                     @endfor
                                     @for ($i = $review->rating; $i < 5; $i++)
-                                        <strong>☆</strong>
+                                        <span class="not_selected">★</span>
                                     @endfor
-                                    {{ $review->rating }}
+                                    <span id="rate-display" class="rate-text">{{ $review->rating }}</span>
                                 </p>
+                                <label for="comment">Comment:</label>
                                 <p class="card-text">
                                         @if (strlen($review->comment) > $commentLimit=100)
                                             {{ Str::limit($review->comment, $commentLimit, '...') }}
