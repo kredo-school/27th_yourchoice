@@ -81,7 +81,7 @@
             {{-- 宿泊前後で表示切替 --}}
             @if($reservation->checkin_status == 'done')
             <div class="mt-3 d-flex justify-content-center">
-                <a href="{{ route('customer.review.create') }}">
+                <a href="{{ route('customer.review.create', $reservation-> id) }}">
                     <button class="btn btn-outline-secondary me-5">Write review</button>
                 </a>
             </div>

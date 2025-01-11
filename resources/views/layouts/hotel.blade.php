@@ -86,7 +86,7 @@
                 <div class="col-md-2 sidebar-menu p-2">
                 <!-- サイドメニュー -->
                     <div class="list-group">
-                    <div class="mt-4"><h2>Kredo Hotel</h2></div>
+                    <div class="mt-4"><h2>{{ Auth::user()->hotel->hotel_name }}</h2></div>
 
                         <a href="{{ route('hotel.profile.show') }}" class="list-group-item list-group-item-action mt-3 p-3 {{ request()->is('hotel/profile/*') ? 'active' : '' }}">Profile</a>
                         <a href="{{ route('hotel.room.show') }}" class="list-group-item list-group-item-action mt-3 p-3 {{ request()->is('hotel/room/*') ? 'active' : '' }}">Room List</a>

@@ -233,6 +233,15 @@ textarea#remarks {
 
 /* edit delete icon */
 .icon-md {
-  height: 30px;
-  width: 30px;
+  height: 25px;
+  width: 25px;
+ }
+
+ /* 部屋の画像の大きさ */
+ .roomimage{
+  height: 50px !important;
+  width: 50px !important;
+  object-fit: cover !important; /* 画像の縦横比を維持しつつ切り取り */
+  object-position: center !important; /* 画像の中心を基準に切り取る */
+  display: block !important; /* 不要な余白をなくすため */
  }
