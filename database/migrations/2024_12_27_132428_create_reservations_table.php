@@ -22,11 +22,13 @@ return new class extends Migration
             $table->enum('reservation_status', ['confirmed', 'cancelled'])->default('confirmed'); // 予約状態
             $table->enum('checkin_status', ['done', 'not done'])->default('not done'); // チェックイン状態
             $table->string('customer_request', 255)->nullable(); // 顧客リクエスト
+            $table->unsignedBigInteger('guest_id')->nullable(); // ゲストID（外部キー）
             $table->timestamps(); // 作成日と更新日
 
             // 外部キー制約
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('payment_id')->references('id')->on('payments')->onDelete('cascade');
+            $table->foreign('guest_id')->references('id')->on('guests')->onDelete('cascade');
         });
     }
 

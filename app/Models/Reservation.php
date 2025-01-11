@@ -36,6 +36,11 @@ class Reservation extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function guest()
+    {
+        return $this->belongsTo(Guest::class, 'guest_id');
+    }
+
     //paymentとのリレーション
     public function payment()
     {
