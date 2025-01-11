@@ -15,13 +15,16 @@
             @csrf
             <div class="d-flex align-items-center">
                 <!-- 場所入力 -->
-                <input type="text" name="location" class="form-control" placeholder="Where to?">
+                <input type="text" name="location" class="form-control me-2" placeholder="Where to?" id="location">
                 
-                <!-- 日付入力 -->
-                <input type="date" name="date" class="form-control">
+                <!-- チェックイン日入力 -->
+                <input type="date" name="checkInDate" class="form-control" id="checkInDate" placeholder="Check-in Date">
+                
+                <!-- チェックアウト日入力 -->
+                <input type="date" name="checkOutDate" class="form-control me-2" id="checkOutDate" placeholder="Check-out Date">
                 
                 <!-- 人数入力 -->
-                <input type="number" name="travellers" class="form-control" placeholder="Travellers">
+                <input type="number" name="travellers" class="form-control" placeholder="Travellers" id="travellers">
                 
                 <!-- 検索ボタン -->
                 <button class="btn btn-outline-secondary" type="submit">
