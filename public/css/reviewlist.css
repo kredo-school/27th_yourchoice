@@ -24,9 +24,26 @@
 
 .hotel-image {
   flex: 0 0 auto; /* 画像のサイズを固定 */
+  border: 0.1px solid #e2e2e2; /* 枠線の太さ、スタイル、色 */
 }
 
 .bg-pink {
   background-color: #ffcccb; /* 薄いピンク */
   color: #000000 !important; /* 文字色（必要に応じて変更） */
+}
+
+.not_selected {
+  font-size: 1.5rem;
+  color: #ccc; /* デフォルトの星の色 */
+}
+
+.selected {
+    font-size: 1.5rem;
+    color: gold; /* 選択およびホバー時の星の色 */
+}
+
+.rate-text {
+  font-size: 1.5rem;
+  margin-left: 10px;
+  color: #333;
 }

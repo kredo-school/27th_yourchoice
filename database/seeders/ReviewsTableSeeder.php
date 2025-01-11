@@ -32,7 +32,7 @@ class ReviewsTableSeeder extends Seeder
                 'updated_at'        => now(), // 更新日時
             ],
             [
-                'user_id'            => 2,
+                'user_id'            => 3,
                 'hotel_id'           => 2,
                 'reservation_id'     => 2, 
                 'rating'    => 2,
@@ -47,7 +47,7 @@ class ReviewsTableSeeder extends Seeder
                 'updated_at'        => now(), // 更新日時
             ],
             [
-                'user_id'            => 2,
+                'user_id'            => 3,
                 'hotel_id'           => 2,
                 'reservation_id'     => 3, 
                 'rating'    => 3,
