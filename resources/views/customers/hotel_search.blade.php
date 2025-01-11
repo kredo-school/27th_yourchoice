@@ -67,7 +67,7 @@
                 <a href="{{ route('customer.top.show', ['id' => $hotel->id]) }}" class="stretched-link"></a>
                 <div class="row align-items-center">
                     <div class="col-md-2">
-                        <img src="{{ asset('images/hotel.jpg') }}" alt="hotel-img" class="hotel-img">
+                        <img src="{{ asset($hotel->image_main) }}" alt="hotel-img" class="hotel-img">
                     </div>
                     <div class="col-md-7">
                         <h5>{{$hotel->hotel_name}}</h5>

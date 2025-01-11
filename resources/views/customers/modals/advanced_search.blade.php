@@ -87,4 +87,4 @@
 
 <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
 <script src="{{ asset('js/jquery-ui.js') }}"></script>
-<script src="{{ asset('js/jquery.js') }}"></script>
+<script src="{{ asset('js/jquery_top.js') }}"></script>
