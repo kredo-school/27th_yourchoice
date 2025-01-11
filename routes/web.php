@@ -85,7 +85,7 @@ Route::group(['prefix' => 'hotel', 'as' => 'hotel.', 'middleware' => 'hotel'], f
 
 
     Route::get('/review/list',[App\Http\Controllers\Hotel\ReviewController::class,'list'])->name('review.list');
-    Route::get('/review/show',[App\Http\Controllers\Hotel\ReviewController::class,'show'])->name('review.show');
+    Route::get('/review/show/{id}',[App\Http\Controllers\Hotel\ReviewController::class,'show'])->name('review.show');
 
 });
 
