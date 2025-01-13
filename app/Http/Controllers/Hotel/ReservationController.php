@@ -152,6 +152,24 @@ class ReservationController extends Controller
             'breakfast' => 'required|integer|max:2',
         ]);
 
+        $overlappingReservation = Reservation::whereHas('reservationRoom.room', function ($query) use ($request) {
+            $query->where('id', $request->room_id); // 部屋IDに絞り込み
+        })
+        ->where(function ($query) use ($request) {
+            $query->whereBetween('check_in_date', [$request->check_in_date, $request->check_out_date])
+                  ->orWhereBetween('check_out_date', [$request->check_in_date, $request->check_out_date])
+                  ->orWhere(function ($query) use ($request) {
+                      $query->where('check_in_date', '<=', $request->check_in_date)
+                            ->where('check_out_date', '>=', $request->check_out_date);
+                  });
+        })
+        ->where(function ($query) use ($request) {
+            $query->where('check_out_date', '!=', $request->check_in_date); // 許容条件を追加
+        })
+        ->exists();
+        
+
+
         $guest = Guest::create([
             'first_name' => $validated['first_name'],
             'last_name' => $validated['last_name'],
