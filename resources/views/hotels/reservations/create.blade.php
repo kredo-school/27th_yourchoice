@@ -7,6 +7,15 @@
     <div class="row">
 
                         <h2 class="mb-4"><strong>Edit Reservation</strong></h2>
+                                    @error('to')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                    @error('check_in_date')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                    @error('check_out_date')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
 
                                 <!-- タブナビゲーション -->
         <ul class="nav nav-tabs" id="reservationTab" role="tablist">
@@ -39,11 +48,14 @@
                                             value="{{ $date }}">
                                     </div>
 
+
                                     <div class="form-group mb-3 col-2 ms-3">
                                         <label for="check-out-date"><strong>Check-out date:</strong></label>
                                         <input type="date" class="form-control" id="check-out-date" name="check_out_date">
                                     </div>
+
                                 </div>
+
                         </div>
 
                         <div class="mb-1">
@@ -120,10 +132,12 @@
                                 </div>
 
                                 <div class="form-group mb-3 col-2">
-                                    <label for="check-out-date"><strong>To:</strong></label>
-                                    <input type="date" class="form-control" id="check-out-date" name="check_out_date">
+                                    <label for="to"><strong>To:</strong></label>
+                                    <input type="date" class="form-control" id="to" name="to">
                                 </div>
+
                         </div>
+
 
                         <!-- Comment Section -->
                              <!-- 隠しフィールドで date を保持 -->

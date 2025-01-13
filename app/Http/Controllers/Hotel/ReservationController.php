@@ -114,7 +114,7 @@ class ReservationController extends Controller
         // バリデーション
         $validated = $request->validate([
             'check_in_date' => 'required|date',
-            'check_out_date' => 'required|date',
+            'to' => 'required|date|after:check_in_date',
             'customer_request' => 'nullable|string|max:255',
             'room_id' => 'required|integer|exists:rooms,id',
         ]);
@@ -122,7 +122,7 @@ class ReservationController extends Controller
         // 新しい予約を作成
         $reservation = Reservation::create([
             'check_in_date' => $validated['check_in_date'],
-            'check_out_date' => $validated['check_out_date'],
+            'check_out_date' => $validated['to'],
             'customer_request' => $validated['customer_request'] ?? null,
             // 必要に応じて他のカラムを追加
         ]);
@@ -142,7 +142,7 @@ class ReservationController extends Controller
         // バリデーション
         $validated = $request->validate([
             'check_in_date' => 'required|date',
-            'check_out_date' => 'required|date',
+            'check_out_date' => 'required|date|after:check_in_date',
             'first_name' => 'required|string|max:100',
             'last_name' => 'required|string|max:100',
             'phone_number' => 'required|string|max:20',
@@ -215,8 +215,14 @@ class ReservationController extends Controller
         $reservations = Reservation::with(['reservationRoom.room' => function ($query) use ($hotelId) {
                 $query->where('hotel_id', $hotelId);
             }])
-            ->whereBetween('check_in_date', [$request->start, $request->end])
-            ->orWhereBetween('check_out_date', [$request->start, $request->end])
+            ->whereHas('reservationRoom.room', function ($query) use ($hotelId) {
+                $query->where('hotel_id', $hotelId); // そのホテルに関連する予約のみ取得
+            })
+            ->where('reservation_status', '!=', 'cancelled') // cancelled の予約を除外
+            ->where(function ($query) use ($request) {
+                $query->whereBetween('check_in_date', [$request->start, $request->end])
+                      ->orWhereBetween('check_out_date', [$request->start, $request->end]);
+            })
             ->get();
 
         // 日ごとの空き部屋数を計算
@@ -233,7 +239,7 @@ class ReservationController extends Controller
             // その日の予約された部屋IDを取得
             $reservedRoomIds = $reservations
                 ->filter(function ($reservation) use ($dateStr) {
-                    return $dateStr >= $reservation->check_in_date && $dateStr <= $reservation->check_out_date;
+                    return $dateStr >= $reservation->check_in_date && $dateStr < $reservation->check_out_date;
                 })
                 ->flatMap(function ($reservation) {
                     return $reservation->reservationRoom->pluck('room_id');
