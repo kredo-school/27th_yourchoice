@@ -158,7 +158,7 @@ class ProfileController extends Controller
       // ]);
 
       // チェックされたカテゴリの ID を取得
-      $categories = $request->input('categories');//, []); // カテゴリが送信されない場合は空配列を使用
+      $categories = $request->input('categories', []); // カテゴリが送信されない場合は空配列を使用
       // 中間テーブルにデータを挿入
       foreach ($categories as $category_id) {
         HotelCategory::create([
