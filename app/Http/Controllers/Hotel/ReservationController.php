@@ -119,6 +119,27 @@ class ReservationController extends Controller
             'room_id' => 'required|integer|exists:rooms,id',
         ]);
 
+        $overlappingReservations = Reservation::whereHas('reservationRoom.room', function ($query) use ($request) {
+            $query->where('id', $request->room_id); // 部屋IDに絞り込み
+        })
+        ->where('reservation_status', '!=', 'cancelled') // cancelled の予約を除外
+        ->where(function ($query) use ($request) {
+            // 新しい check_out_date が既存予約の期間に含まれるかを確認
+            $query->where('check_in_date', '<', $request->to);
+        })
+        ->get();
+
+        
+        if ($overlappingReservations->isNotEmpty()) {
+            return redirect()->back()->withErrors([
+                'check_out_date' => 'The selected room is already reserved for the specified dates: ' . 
+                    $overlappingReservations->map(function ($reservation) {
+                        return "Check-in: {$reservation->check_in_date}, Check-out: {$reservation->check_out_date}";
+                    })->implode('; ')
+            ]);
+        }
+        
+
         // 新しい予約を作成
         $reservation = Reservation::create([
             'check_in_date' => $validated['check_in_date'],
@@ -137,6 +158,7 @@ class ReservationController extends Controller
         ->with('success', 'Reservation updated successfully.');
     }
 
+    
     public function store_guest(Request $request)
     {
         // バリデーション
@@ -152,22 +174,26 @@ class ReservationController extends Controller
             'breakfast' => 'required|integer|max:2',
         ]);
 
-        $overlappingReservation = Reservation::whereHas('reservationRoom.room', function ($query) use ($request) {
+        $overlappingReservations = Reservation::whereHas('reservationRoom.room', function ($query) use ($request) {
             $query->where('id', $request->room_id); // 部屋IDに絞り込み
         })
+        ->where('reservation_status', '!=', 'cancelled') // cancelled の予約を除外
         ->where(function ($query) use ($request) {
-            $query->whereBetween('check_in_date', [$request->check_in_date, $request->check_out_date])
-                  ->orWhereBetween('check_out_date', [$request->check_in_date, $request->check_out_date])
-                  ->orWhere(function ($query) use ($request) {
-                      $query->where('check_in_date', '<=', $request->check_in_date)
-                            ->where('check_out_date', '>=', $request->check_out_date);
-                  });
+            // 新しい check_out_date が既存予約の期間に含まれるかを確認
+            $query->where('check_in_date', '<', $request->check_out_date);
         })
-        ->where(function ($query) use ($request) {
-            $query->where('check_out_date', '!=', $request->check_in_date); // 許容条件を追加
-        })
-        ->exists();
+        ->get();
+
         
+        if ($overlappingReservations->isNotEmpty()) {
+            return redirect()->back()->withErrors([
+                'check_out_date' => 'The selected room is already reserved for the specified dates: ' . 
+                    $overlappingReservations->map(function ($reservation) {
+                        return "Check-in: {$reservation->check_in_date}, Check-out: {$reservation->check_out_date}";
+                    })->implode('; ')
+            ]);
+        }
+    
 
 
         $guest = Guest::create([
