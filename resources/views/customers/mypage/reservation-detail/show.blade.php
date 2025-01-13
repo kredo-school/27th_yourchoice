@@ -24,7 +24,7 @@
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/review.css') }}">
 <div class="container mt-5">
-    <div class="card">
+    <div class="card {{ $reservation->reservation_status == 'cancelled' ? 'opacity-50' : '' }}">
         <div class="card-body">
             <div class="row">
                 <div class="col-4">
@@ -96,7 +96,7 @@
             {{-- Cancelされていた場合 --}}
             @if($reservation->reservation_status == 'cancelled')
             <div class="mt-3 d-flex justify-content-center">
-                <h3>Cancelled</h3>
+                <h3 class="font-weight-bold text-danger">Cancelled</h3>
             </div>
             {{-- Cancell以外 --}}
             @else
