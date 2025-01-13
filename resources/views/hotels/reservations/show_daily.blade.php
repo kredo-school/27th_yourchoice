@@ -46,9 +46,9 @@
                         @endif
                         </td>
                         <td>{{ $status['room']->room_number }}</td>
-                        @if ($status['reservation'])
-                            <td>{{ $status['reservation']->user->first_name ?? ''}} {{ $status['reservation']->user->last_name ?? ''}}</td>
-                            <td>{{ $status['details']->number_of_people }}</td>
+                        @if (!empty($status['reservation']) && ($status['reservation']->guest || $status['reservation']->user))
+                            <td>{{ $status['reservation']->user->first_name ?? $status['reservation']->guest->first_name }} {{ $status['reservation']->user->last_name ?? $status['reservation']->guest->last_name }}</td>
+                            <td>{{ $status['details']->number_of_people ?? $status['reservation']->number_of_people }}</td>
                             <td>{{ $status['reservation']->check_in_date }}</td>
                             <td>{{ $status['reservation']->check_out_date }}</td>
                             <td>{{ $status['reservation']->breakfast ? 'Yes' : 'No' }}</td>
@@ -63,8 +63,10 @@
                                     </select>
                                 </form>
                             </td> 
-                            <td>{{ $status['reservation']->user->phone_number ?? ''}}</td>
+                            <td>{{ $status['reservation']->user->phone_number ?? $status['reservation']->guest->phone_number }}</td>
                             <td>{{ $status['reservation']->customer_request }}</td>
+                        @elseif(!empty($status['reservation']) )
+                            <td colspan="9" class="text-center fw-bold">- - - - - - - - - - -Blocked- - - - - - - - - - -</td>
                         @else
                             <td colspan="9" class="text-center">No Reservation</td>
                         @endif
