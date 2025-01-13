@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Customer;
 use App\Models\User;
 use App\Models\Hotel;
 use App\Models\Room;
+use App\Models\Review;
 use App\Models\Reservation;
 use App\Models\Category;
 use App\Models\HotelCategory;
@@ -19,11 +20,12 @@ class TopController extends Controller
 {
     private $hotel;
 
-    public function __construct(Hotel $hotel , Category $category , Room $room, Reservation $reservation)
+    public function __construct(Hotel $hotel , Category $category , Room $room, Reservation $reservation,Review $review)
     {
-        $this->hotel = $hotel;
-        $this->category = $category;
         $this->room = $room;
+        $this->hotel = $hotel;
+        $this->review = $review;
+        $this->category = $category;
         $this->reservation = $reservation;
     }
 
@@ -68,7 +70,7 @@ class TopController extends Controller
             });
         }
 
-        $hotels = $query->with('categories')->get();
+        $hotels = $query->with('categories','rooms')->get();
 
         // \Log::info('////////////////////////////////////////');
         // \Log::info('Executed Query: ', [DB::getQueryLog()]);
@@ -116,12 +118,19 @@ class TopController extends Controller
     
             return true; // 利用可能な部屋
         });
+
+        // Show Reviews
+        $hotel_reviews = $this->review->where('hotel_id', $id)
+        ->latest()
+        ->get();
+
     
         // ビューにデータを渡す
         return view('customers.hotel_detail', [
             'hotels' => $hotels,
             'availableRooms' => $availableRooms,
             'address' => $address,
+            'hotel_reviews' => $hotel_reviews
         ]);
     }
     
