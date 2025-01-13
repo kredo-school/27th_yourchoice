@@ -39,7 +39,7 @@
                                 <label class="form-label">Address :</label>
                                 <div>
                                     <p class="form-control-plaintext border-bottom">
-                                        {{ $user->hotel->prefecture }} {{ $user->hotel->city }} {{ $user->hotel->address }}
+                                        {{ $user->hotel->address }}
                                     </p>
                                 </div>
                             </div>
@@ -64,9 +64,56 @@
                 <div class="col-md-6">
                     <div class="card mt-2 mb-2">
                         <h5 class="card-header">Uploaded Images</h5>
-                        <div class="card-body">
-                            <div class="image-upload-container ms-3 mt-3">
-                                @for ($i = 0; $i < 5; $i++)
+                        <div class="card-body image-upload-container">
+                            <div class="image-preview mb-3">
+                                @if ($hotel->image_main)
+                                    <img src="{{ $hotel->image_main }}" alt="Hotel Image"
+                                        class="img-thumbnail preview-thumbnail"><br>
+                                    <p>main</p>
+                                @else
+                                    <p class="text-muted">No image uploaded</p>
+                                @endif
+                            </div>
+                            <div class="image-preview mb-3">
+                                @if ($hotel->image_sub1)
+                                    <img src="{{ $hotel->image_sub1 }}" alt="Hotel Image"
+                                        class="img-thumbnail preview-thumbnail"><br>
+                                    <p>sub1</p>
+                                @else
+                                    <p class="text-muted">No image uploaded</p>
+                                @endif
+                            </div>
+                            <div class="image-preview mb-3">
+                                @if ($hotel->image_sub2)
+                                    <img src="{{ $hotel->image_sub2 }}" alt="Hotel Image"
+                                        class="img-thumbnail preview-thumbnail"><br>
+                                    <p>sub2</p>
+                                @else
+                                    <p class="text-muted">No image uploaded</p>
+                                @endif
+                            </div>
+                            <div class="image-preview mb-3">
+                                @if ($hotel->image_sub3)
+                                    <img src="{{ $hotel->image_sub3 }}" alt="Hotel Image"
+                                        class="img-thumbnail preview-thumbnail"><br>
+                                    <p>sub3</p>
+                                @else
+                                    <p class="text-muted">No image uploaded</p>
+                                @endif
+                            </div>
+                            <div class="image-preview mb-3">
+                                @if ($hotel->image_sub4)
+                                    <img src="{{ $hotel->image_sub4 }}" alt="Hotel Image"
+                                        class="img-thumbnail preview-thumbnail"> <br>
+                                    <p>sub4</p>
+                                @else
+                                    <p class="text-muted">No image uploaded</p>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- @for ($i = 0; $i < 5; $i++)
                                     <div class="image-preview">
                                         <div class="position-relative">
                                             @if (isset($images[$i]))
@@ -80,10 +127,8 @@
                                             @endif
                                         </div>
                                     </div>
-                                @endfor
-                            </div>
-                        </div>
-                    </div>
+                                @endfor --}}
+
 
                     <!-- Right Side (Service and Amenities) -->
                     <div class="card mt-2 mb-2">
