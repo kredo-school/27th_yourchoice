@@ -44,3 +44,17 @@
   text-decoration: none; /* 下線を削除 */
   cursor: pointer; /* ホバー時のポインター表示 */
 }
+
+.subbtn3 {
+  display: inline-block; /* サイズ指定を適用可能に */
+  width: 200px; /* 幅 */
+  height: 50px; /* 高さ */
+  text-align: center; /* テキストを中央揃え */
+  line-height: 50px; /* 縦方向のテキスト中央揃え */
+  background-color: #ff0000; /* 背景色 */
+  color: #ffffff; /* テキスト色 */
+  border: 1px solid #ccc; /* ボーダー */
+  border-radius: 8px; /* 角を丸める */
+  text-decoration: none; /* 下線を削除 */
+  cursor: pointer; /* ホバー時のポインター表示 */
+}
