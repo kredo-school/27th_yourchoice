@@ -30,14 +30,14 @@
                 <div class="col-4">
                     {{-- <img src="{{ asset('images/hotel.jpg') }}" alt="hotel-img" class="hotel-img img-fluid"> --}}
                     <div class="hotel-image">                             
-                        <img src="{{ $review->hotel->image ?? asset('images/no-image.png') }}" 
-                        alt="{{ $review->hotel ? 'Room Image' : 'Placeholder Image' }}" 
+                        <img src="{{ $hotel->image_main ?? asset('images/no-image.png') }}" 
+                        alt="{{ $review->hotel ? 'Hotel Image' : 'Placeholder Image' }}" 
                         class="hotel-img">
                     </div>
                 </div>
                 <div class="col-2">
                     {{-- Hotel Name --}}
-                    <h3 class="card-title">{{ $hotel->user->username}}</h3>
+                    <h3 class="card-title">{{ $hotel->hotel_name}}</h3>
                     {{-- <h3 class="card-title">{{ $hotelname->username}}</h3> --}}
                     {{-- Location --}}
                     <p class="text-muted">{{ $hotel->prefecture }}</p>
@@ -91,31 +91,43 @@
                 </div> --}}
             </div>
 
-            {{-- 宿泊前後で表示切替 --}}
-            @if($reservation->checkin_status == 'done')
-                {{-- レビューが存在するかを確認 --}}
-                {{-- {{dd($review->toArray());}}  --}}
-                @if(optional($review)->exists())
-                    <div class="mt-3 d-flex justify-content-center">
-                        <a href="{{ route('customer.review.show', $review->id) }}">
-                            <button class="btn btn-outline-secondary me-5">Show review</button>
-                        </a>
-                    </div>
+            {{-- 表示切替 --}}
+
+            {{-- Cancelされていた場合 --}}
+            @if($reservation->reservation_status == 'cancelled')
+            <div class="mt-3 d-flex justify-content-center">
+                <h3>Cancelled</h3>
+            </div>
+            {{-- Cancell以外 --}}
+            @else
+                {{-- check in 後 --}}
+                @if($reservation->checkin_status == 'done')
+                    {{-- レビューが存在するかを確認 --}}
+                    {{-- {{dd($review->toArray());}}  --}}
+                    @if(optional($review)->exists())
+                        <div class="mt-3 d-flex justify-content-center">
+                            <a href="{{ route('customer.review.show', $review->id) }}">
+                                <button class="btn btn-outline-secondary me-5">Show review</button>
+                            </a>
+                        </div>
+                    @else
+                        <div class="mt-3 d-flex justify-content-center">
+                            <a href="{{ route('customer.review.create', $reservation-> id) }}">
+                                <button class="btn btn-outline-secondary me-5">Write review</button>
+                            </a>
+                        </div>
+                    @endif
+                {{-- check in前 --}}
                 @else
                     <div class="mt-3 d-flex justify-content-center">
-                        <a href="{{ route('customer.review.create', $reservation-> id) }}">
-                            <button class="btn btn-outline-secondary me-5">Write review</button>
-                        </a>
+                        <button class="btn btn-outline-secondary me-5" data-bs-toggle="modal" data-bs-target="#delete">Cancel reservation</button>
+                        @include('customers.mypage.reservation-detail.modals.delete')
+                        <button class="btn btn-danger ms-5">Contact Hotel</button>
                     </div>
                 @endif
-            @else
-                <div class="mt-3 d-flex justify-content-center">
-                    <button class="btn btn-outline-secondary me-5" data-bs-toggle="modal" data-bs-target="#delete">Cancel reservation</button>
-                    @include('customers.mypage.reservation-detail.modals.delete')
-                    <button class="btn btn-danger ms-5">Contact Hotel</button>
-                </div>
-            @endif
-            
+
+
+            @endif            
 
         </div>
     </div>

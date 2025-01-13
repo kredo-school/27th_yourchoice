@@ -59,10 +59,16 @@ class User extends Authenticatable
         return $this->hasMany(Category::class);
     }
 
+    // reservation と reservationsどちらも使用中のため消さないで下さい
     public function reservation()
     {
         return $this->hasMany(Reservation::class, 'user_id');
     }
+       // 予約とのリレーション sをつけないとCancel時にUpdate失敗したため追加
+       public function reservations()
+       {
+           return $this->hasMany(Reservation::class, 'user_id');
+       }
 
     public function reviews()
     {
