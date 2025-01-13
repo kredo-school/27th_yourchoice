@@ -13,7 +13,7 @@
       <section class="step">
          <h2><strong><i class="fa-solid fa-user"></i> Step 1: Your Details</strong></h2>
           <!-- {{-- <form class="step1" id="step1" action="/reserved_confirmation" method="POST"> --}} -->
-            <form class="step1" id="step1" action="{{ route('customer.reserve.confirmation.book') }}" method="POST">
+            <form class="step1" id="step1" action="{{ route('customer.reserve.show') }}" method="POST">
             @csrf <!-- LaravelのCSRFトークン -->
             <label for="first-name"><strong>First Name</strong></label>
             <input type="text" id="first-name" name="first_name" required>
@@ -134,7 +134,7 @@
         </div>
       </section>
 
-  <!-- Reservation Details -->
+  {{-- <!-- Reservation Details -->
   <section class="step">
     <div class="reservation-container">
       <h1>■Reservation Details</h1>
@@ -163,12 +163,12 @@
               <label><input type="checkbox" checked disabled> Dryer</label>
           </div>
       </div>
-  </div>
+  </div> --}}
 </div>
 </div>
 </div>
   
-  </section>
+  {{-- </section> --}}
 
     <!-- Submit Button -->
 

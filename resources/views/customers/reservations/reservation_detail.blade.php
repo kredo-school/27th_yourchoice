@@ -30,6 +30,20 @@
         </form>
       </section>
 
+      <!-- Step 2 -->
+      <section class="step" id="step2">
+        <h2 class="step5"><strong>■ Optional</strong></h2>
+          <label class="breakfast" for="breakfast">
+            <input type="checkbox" id="breakfast" name="breakfast">Breakfast</input>
+          </label>
+      </section>
+
+      <!-- Step 3 -->
+      <section class="step" id="step3">
+        <h2 class="step5"><strong>■ Requests to the Hotel</strong></h2>
+          <textarea class="requests" id="requests" name="requests" placeholder="Enter your requests here..."></textarea>
+      </section>
+
    <!-- Payment Details -->
       <section class="step" id="step4">
         <h2 class="step5"><strong>■ Payment details</strong></h2>
@@ -119,6 +133,39 @@
    </div>
 </section>
 
+
+<!-- Step 5: Cancellation Policy -->
+<section class="step">
+          
+  <div class="cancellation-policy">
+    <div class="policy-box">
+        <h2 class="step5">■ Cancellation Policy</h2>
+        <div class="policy-details">
+          <div class="free-cancellation">
+            <span>Free Cancellation Period :</span>
+              <div class="free-cancellation">
+                <span>Free Cancellation Period :</span><br>
+                  <div class="days-box">7</div><br>
+                  <span>days before the reservation date.</span>
+              </div>
+              
+            <div class="cancellation-fees">
+                <span>Cancellation Fee Percentage :</span>
+                <div class="fees">
+                    <div>General <div class="fee-box">20</div>%</div>
+                    <div>Same-Day <div class="fee-box">80</div>%</div>
+                    <div>No-Shows <div class="fee-box">100</div>%</div>
+                </div>
+            </div>
+          </div>  
+        </div>
+    </div>
+
+    <div class="fully-refundable">
+        <span>Fully refundable until <strong>2024-12-02</strong></span>
+    </div>
+  </div>
+</section>
         
 
     <!-- Button -->
