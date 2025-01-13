@@ -43,7 +43,19 @@ class ReservationController extends Controller
     // 予約詳細ページを表示
     public function show($id)
     {
-        $reservation = $this->reservation->findOrFail($id);
+        // Reservationと関連するReviewを取得
+        $reservation = $this->reservation
+        ->with(['review', 'reservationRoom.room.hotel'])
+        ->findOrFail($id);
+
+       // Reviewを取得（Reservationのリレーションを使用）
+        $review = $reservation->review;
+        // デバッグログで確認
+        // if ($review) {
+        //     Log::info('Review fetched successfully:', $review->toArray());
+        // } else {
+        //     Log::warning('No review found for reservation ID: ' . $id);
+        // }
 
         // 支払い情報を関連付けから取得
         $payment = $reservation->payment;
@@ -60,7 +72,7 @@ class ReservationController extends Controller
             abort(404, 'Not found hotel informations');
         }
         // ビューにデータを渡して表示
-        return view('customers.mypage.reservation-detail.show', compact('reservation', 'payment', 'hotel', 'roomTypes'));
+        return view('customers.mypage.reservation-detail.show', compact('reservation', 'payment', 'hotel', 'roomTypes','review'));
     }
 
 

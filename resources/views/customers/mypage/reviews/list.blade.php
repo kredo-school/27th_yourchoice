@@ -10,8 +10,10 @@
                 @foreach($list_reviews as $review)
                  <div class="card p-3 mb-3">
                     <div class="review-card">
-                            <div class="hotel-image">
-                                <img src="{{ asset('images/hotel.jpg') }}" alt="hotel-img" class="hotel-img">
+                            <div class="hotel-image">                             
+                                <img src="{{ $review->hotel->image ?? asset('images/no-image.png') }}" 
+                                alt="{{ $review->hotel ? 'Room Image' : 'Placeholder Image' }}" 
+                                class="hotel-img">
                             </div>
                             <div class="hotel-info">
                                 <h5 class="card-title">{{ $review->hotel->hotel_name }}</h5>
@@ -23,17 +25,18 @@
                             <div class="hotel-review">
                                 <p class="mt-2">Overall Rating: 
                                     @for ($i = 0; $i < $review->rating; $i++)
-                                        <strong>★</strong>
+                                        <span class="selected">★</span>
                                     @endfor
                                     @for ($i = $review->rating; $i < 5; $i++)
-                                        <strong>☆</strong>
+                                        <span class="not_selected">★</span>
                                     @endfor
-                                    {{ $review->rating }}
+                                    <span id="rate-display" class="rate-text">{{ $review->rating }}</span>
                                 </p>
+                                <label for="comment">Comment:</label>
                                 <p class="card-text">
                                         @if (strlen($review->comment) > $commentLimit=100)
                                             {{ Str::limit($review->comment, $commentLimit, '...') }}
-                                            read more</a>
+                                            </a>
                                         @else
                                             {{ $review->comment }}
                                         @endif

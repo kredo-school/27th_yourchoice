@@ -41,8 +41,8 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function () {
       
       Route::get('/review/list',[App\Http\Controllers\Customer\ReviewController::class,'list'])->name('review.list');
       Route::get('/review/show/{id}',[App\Http\Controllers\Customer\ReviewController::class,'show'])->name('review.show');
-      Route::get('/review/create',[App\Http\Controllers\Customer\ReviewController::class,'create'])->name('review.create');
-      Route::get('/review/store',[App\Http\Controllers\Customer\ReviewController::class,'store'])->name('review.store');
+      Route::get('/review/create/{id}',[App\Http\Controllers\Customer\ReviewController::class,'create'])->name('review.create');
+      Route::post('/review/store',[App\Http\Controllers\Customer\ReviewController::class,'store'])->name('review.store');
 
       Route::get('/inquary/show',[App\Http\Controllers\Customer\InquaryController::class,'show'])->name('inquary.show');
 
@@ -58,7 +58,7 @@ Route::group(['prefix' => 'hotel', 'as' => 'hotel.', 'middleware' => 'hotel'], f
 
     Route::get('/profile/show', [App\Http\Controllers\Hotel\ProfileController::class, 'show'])->name('profile.show');
     Route::get('/profile/edit', [App\Http\Controllers\Hotel\ProfileController::class, 'edit'])->name('profile.edit');
-    Route::get('/profile/update', [App\Http\Controllers\Hotel\ProfileController::class, 'update'])->name('profile.update'); 
+    Route::patch('/profile/update', [App\Http\Controllers\Hotel\ProfileController::class, 'update'])->name('profile.update'); 
     Route::get('/profile/editpass', [App\Http\Controllers\Hotel\ProfileController::class, 'editpass'])->name('profile.editpass');
     Route::post('/profile/updatepass', [App\Http\Controllers\Hotel\ProfileController::class, 'updatepass'])->name('profile.updatepass'); 
 
@@ -85,7 +85,7 @@ Route::group(['prefix' => 'hotel', 'as' => 'hotel.', 'middleware' => 'hotel'], f
 
 
     Route::get('/review/list',[App\Http\Controllers\Hotel\ReviewController::class,'list'])->name('review.list');
-    Route::get('/review/show',[App\Http\Controllers\Hotel\ReviewController::class,'show'])->name('review.show');
+    Route::get('/review/show/{id}',[App\Http\Controllers\Hotel\ReviewController::class,'show'])->name('review.show');
 
 });
 

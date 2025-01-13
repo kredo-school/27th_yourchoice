@@ -22,17 +22,6 @@
   display: block;
 }
 
-.rating {
-  font-size: 20px;
-  color: #ccc;
-  cursor: pointer;
-  margin-bottom: 10px;
-}
-
-.rating span:hover,
-.rating span:hover ~ span {
-  color: gold;
-}
 
 textarea {
   width: 100%;
@@ -77,6 +66,7 @@ input[type="file"] {
 
 .hotel-image {
   flex: 0 0 auto; /* 画像のサイズを固定 */
+  border: 0.1px solid #e2e2e2; /* 枠線の太さ、スタイル、色 */
 }
 
 .bg-pink {
@@ -131,3 +121,59 @@ input[type="file"] {
   text-decoration: none; /* 下線を削除 */
   cursor: pointer; /* ホバー時のポインター表示 */
 }
+
+
+  .rating {
+    display: flex;
+    justify-content: flex-start;
+    cursor: pointer;
+}
+
+.rating .star {
+    font-size: 2rem;
+    color: #ccc; /* デフォルトの星の色 */
+    transition: color 0.2s ease-in-out;
+}
+
+.rating .star.selected,
+.rating .star:hover,
+.rating .star ~ .star:hover {
+    color: gold; /* 選択およびホバー時の星の色 */
+}
+
+.rate-text {
+  font-size: 2rem;
+  margin-left: 10px;
+  color: #333;
+}
+
+
+
+.image-preview {
+  display: flex; /* 子要素を並列に並べる */
+  flex-wrap: wrap; /* 必要に応じて折り返し可能にする */
+  gap: 10px; /* 要素間のスペースを追加 */
+}
+
+.preview-thumbnail {
+  max-width: 150px;
+  max-height: 150px;
+  object-fit: cover;
+  border: 1px solid #ddd;
+
+  padding: 5px;
+  margin-top: 5px;
+}
+
+.preview-icon{
+  cursor: pointer;
+  display: block;
+  width: 150px;
+  height: 150px;
+  border: 1px solid #ddd;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
