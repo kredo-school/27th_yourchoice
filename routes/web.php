@@ -78,7 +78,10 @@ Route::group(['prefix' => 'hotel', 'as' => 'hotel.', 'middleware' => 'hotel'], f
     Route::put('/hotel/reservation/{id}/update-checkin-status', [App\Http\Controllers\Hotel\ReservationController::class, 'updateCheckinStatus'])->name('reservation.updateCheckinStatus');
     Route::get('/reservation/{id}/edit',[App\Http\Controllers\Hotel\ReservationController::class,'edit'])->where('id', 'new|\d+') // 'new' または数字を許可
     ->name('reservation.edit');
-    Route::post('/reservation/store',[App\Http\Controllers\Hotel\ReservationController::class,'store'])->name('reservation.store');
+    Route::post('/reservation/store_block',[App\Http\Controllers\Hotel\ReservationController::class,'store_block'])->name('reservation.store_block');
+    Route::post('/reservation/store_guest',[App\Http\Controllers\Hotel\ReservationController::class,'store_guest'])->name('reservation.store_guest');
+    Route::put('/reservation/{id}/cancel', [App\Http\Controllers\Hotel\ReservationController::class, 'cancel'])->name('reservation.cancel');
+
     Route::put('/reservation/update/{id}',[App\Http\Controllers\Hotel\ReservationController::class,'update'])->name('reservation.update');
     Route::get('/api/hotel/reservations/calendar', [App\Http\Controllers\Hotel\ReservationController::class, 'getCalendarEvents']);
 
