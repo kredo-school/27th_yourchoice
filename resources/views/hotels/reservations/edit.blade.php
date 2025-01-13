@@ -11,8 +11,13 @@
 
                     @if (!empty($reservation) && ($reservation->guest || $reservation->user))
                         <div class="d-flex justify-content-end">
-                            <a href="{{ route('hotel.reservation.show_daily', ['date' => request('date', $reservation->check_in_date ?? $date)]) }}" class="subbtn2">Reservation Cancel</a>
-                        </div>
+                            <a href="#" title="Delete" data-bs-toggle="modal"
+                                    data-bs-target="#delete-reservation-{{$reservation->id}}" class="subbtn2">Reservation Cancel</a>
+                                    {{-- Include modal here --}}
+                                @include('hotels.reservations.modals.delete_reserve')
+                        </div>                                     
+                                
+
                     <form action="{{ route('hotel.reservation.update', $reservation->id) }}" method="POST">
                             @csrf
                                 @method('PUT')
@@ -46,9 +51,12 @@
                     </div>
 
                     @else
-                    <div class="d-flex justify-content-end">
-                            <a href="{{ route('hotel.reservation.show_daily', ['date' => request('date', $reservation->check_in_date ?? $date)]) }}" class="subbtn2">Cancel Blocked</a>
-                        </div>
+                        <div class="d-flex justify-content-end">
+                            <a href="#" title="Delete" data-bs-toggle="modal"
+                                    data-bs-target="#delete-reservation-{{$reservation->id}}" class="subbtn2">Cancel Blocked</a>
+                                    {{-- Include modal here --}}
+                                @include('hotels.reservations.modals.delete_block')
+                        </div> 
                     <form action="{{ route('hotel.reservation.update', $reservation->id) }}" method="POST">
                             @csrf
                                 @method('PUT')

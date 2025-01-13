@@ -30,6 +30,7 @@ class ReservationController extends Controller
         },'guest', 'user', 'payment'])
         ->whereDate('check_in_date', '<=', $date)
         ->whereDate('check_out_date', '>=', $nextDate)
+        ->where('reservation_status', '!=', 'cancelled') // cancel の予約を除外
         ->get();
 
         // 部屋ごとの予約状況を作成
@@ -265,7 +266,22 @@ class ReservationController extends Controller
     }
 
 
-    
+    public function cancel(Request $request, $id)
+{
+    // 対象の予約を取得
+    $reservation = Reservation::find($id);
+
+    if (!$reservation) {
+        return response()->json(['success' => false, 'message' => 'Reservation not found.'], 404);
+    }
+
+    // ステータスを更新
+    $reservation->reservation_status = 'cancelled';
+    $reservation->save();
+
+    return redirect()->route('hotel.reservation.show_daily', ['date' => $request->input('date')])
+    ->with('success', 'Reservation updated successfully.');
+}
 
 
     
