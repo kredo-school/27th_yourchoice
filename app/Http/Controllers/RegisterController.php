@@ -118,6 +118,7 @@ class RegisterController extends Controller
         'postal_code' => '',
         'prefecture' => '',
         'city' => '',
+        'street_address' => '',
         'address' => '',
         'access' => '',
         'description' => '',
