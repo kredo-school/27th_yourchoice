@@ -13,6 +13,8 @@ use App\Http\Middleware\CheckRole;
 
 Auth::routes();
 
+//artisan serveからのLinkからもTopPage開けるようにする
+Route::get('/',[App\Http\Controllers\Customer\TopController::class,'list'])->name('top.list');
 
 // カスタマー側
 
@@ -37,7 +39,7 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function () {
 
       Route::get('/reservation/reservationlist',[ReservationController::class,'index'])->middleware('auth')->name('reservation.reservationlist'); 
       Route::get('/reservation/{reservationid}/show', [ReservationController::class, 'show'])->name('reservation.show');
-      Route::delete('/reservation/{reservationid}', [ReservationController::class, 'destroy'])->name('reservation.destroy');
+      Route::post('/reservation/{reservationid}', [ReservationController::class, 'cancel'])->name('reservation.cancel');
       
       Route::get('/review/list',[App\Http\Controllers\Customer\ReviewController::class,'list'])->name('review.list');
       Route::get('/review/show/{id}',[App\Http\Controllers\Customer\ReviewController::class,'show'])->name('review.show');
@@ -58,7 +60,7 @@ Route::group(['prefix' => 'hotel', 'as' => 'hotel.', 'middleware' => 'hotel'], f
 
     Route::get('/profile/show', [App\Http\Controllers\Hotel\ProfileController::class, 'show'])->name('profile.show');
     Route::get('/profile/edit', [App\Http\Controllers\Hotel\ProfileController::class, 'edit'])->name('profile.edit');
-    Route::get('/profile/update', [App\Http\Controllers\Hotel\ProfileController::class, 'update'])->name('profile.update'); 
+    Route::patch('/profile/update', [App\Http\Controllers\Hotel\ProfileController::class, 'update'])->name('profile.update'); 
     Route::get('/profile/editpass', [App\Http\Controllers\Hotel\ProfileController::class, 'editpass'])->name('profile.editpass');
     Route::post('/profile/updatepass', [App\Http\Controllers\Hotel\ProfileController::class, 'updatepass'])->name('profile.updatepass'); 
 
@@ -78,7 +80,10 @@ Route::group(['prefix' => 'hotel', 'as' => 'hotel.', 'middleware' => 'hotel'], f
     Route::put('/hotel/reservation/{id}/update-checkin-status', [App\Http\Controllers\Hotel\ReservationController::class, 'updateCheckinStatus'])->name('reservation.updateCheckinStatus');
     Route::get('/reservation/{id}/edit',[App\Http\Controllers\Hotel\ReservationController::class,'edit'])->where('id', 'new|\d+') // 'new' または数字を許可
     ->name('reservation.edit');
-    Route::post('/reservation/store',[App\Http\Controllers\Hotel\ReservationController::class,'store'])->name('reservation.store');
+    Route::post('/reservation/store_block',[App\Http\Controllers\Hotel\ReservationController::class,'store_block'])->name('reservation.store_block');
+    Route::post('/reservation/store_guest',[App\Http\Controllers\Hotel\ReservationController::class,'store_guest'])->name('reservation.store_guest');
+    Route::put('/reservation/{id}/cancel', [App\Http\Controllers\Hotel\ReservationController::class, 'cancel'])->name('reservation.cancel');
+
     Route::put('/reservation/update/{id}',[App\Http\Controllers\Hotel\ReservationController::class,'update'])->name('reservation.update');
     Route::get('/api/hotel/reservations/calendar', [App\Http\Controllers\Hotel\ReservationController::class, 'getCalendarEvents']);
 

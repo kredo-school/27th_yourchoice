@@ -19,7 +19,7 @@
                                 <div class="mb-3">
                                     <label for="username" class="form-label">{{ __('User Name') }}</label>
                                     <input type="text" class="form-control" id="username" name="username"
-                                        value="{{ old('username') }}">
+                                        value="{{ old('username') }}" autofocus>
                                         @error('username')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -51,7 +51,7 @@
                                 <!-- Password -->
                                 <div class="mb-3">
                                     <label class="form-label">{{ __('Password') }}</label>
-                                    <input type="password" name="password_hash" id="password_hash" class="form-control" value="{{ old('password_hash') }}" autofocus>
+                                    <input type="password" name="password_hash" id="password_hash" class="form-control" value="{{ old('password_hash') }}">
                                         @error('passwordd_hash')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

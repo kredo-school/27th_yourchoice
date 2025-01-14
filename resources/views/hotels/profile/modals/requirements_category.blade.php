@@ -8,8 +8,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>If your hotel includes all the features of a specific category, it can choose that category.<br>
-                    (Your hotel can belong to two or more categories.)</p>
+                <p>You need to select at least one category.<br>If your hotel includes all the features of a specific category, you can choose that category. <br>(Your hotel can belong to two or more categories.)</p>
 
                 <h6 class=" fw-bold">Wheelchair and Senior-Friendly</h6>
                 <ul>

@@ -5,8 +5,7 @@
 
     <div class="container mt-2">
         <form method="GET" action="{{ route('hotel.profile.edit') }}" enctype="multipart/form-data">
-            {{-- @csrf --}}
-            {{-- @method('GET') --}}
+
             <div class="row">
                 <div class="col-md">
                     <h1 class="mb-4 ms-3 fw-bold">Hotel Admin Profile</h1>
@@ -40,7 +39,7 @@
                                 <label class="form-label">Address :</label>
                                 <div>
                                     <p class="form-control-plaintext border-bottom">
-                                        {{ $user->hotel->prefecture }} {{ $user->hotel->city }} {{ $user->hotel->address }}
+                                        {{ $user->hotel->address }}
                                     </p>
                                 </div>
                             </div>
@@ -65,9 +64,56 @@
                 <div class="col-md-6">
                     <div class="card mt-2 mb-2">
                         <h5 class="card-header">Uploaded Images</h5>
-                        <div class="card-body">
-                            <div class="image-upload-container ms-3 mt-3">
-                                @for ($i = 0; $i < 5; $i++)
+                        <div class="card-body image-upload-container">
+                            <div class="image-preview mb-3">
+                                @if ($hotel->image_main)
+                                    <img src="{{ $hotel->image_main }}" alt="Hotel Image"
+                                        class="img-thumbnail preview-thumbnail"><br>
+                                    <p>main</p>
+                                @else
+                                    <p class="text-muted">No image uploaded</p>
+                                @endif
+                            </div>
+                            <div class="image-preview mb-3">
+                                @if ($hotel->image_sub1)
+                                    <img src="{{ $hotel->image_sub1 }}" alt="Hotel Image"
+                                        class="img-thumbnail preview-thumbnail"><br>
+                                    <p>sub1</p>
+                                @else
+                                    <p class="text-muted">No image uploaded</p>
+                                @endif
+                            </div>
+                            <div class="image-preview mb-3">
+                                @if ($hotel->image_sub2)
+                                    <img src="{{ $hotel->image_sub2 }}" alt="Hotel Image"
+                                        class="img-thumbnail preview-thumbnail"><br>
+                                    <p>sub2</p>
+                                @else
+                                    <p class="text-muted">No image uploaded</p>
+                                @endif
+                            </div>
+                            <div class="image-preview mb-3">
+                                @if ($hotel->image_sub3)
+                                    <img src="{{ $hotel->image_sub3 }}" alt="Hotel Image"
+                                        class="img-thumbnail preview-thumbnail"><br>
+                                    <p>sub3</p>
+                                @else
+                                    <p class="text-muted">No image uploaded</p>
+                                @endif
+                            </div>
+                            <div class="image-preview mb-3">
+                                @if ($hotel->image_sub4)
+                                    <img src="{{ $hotel->image_sub4 }}" alt="Hotel Image"
+                                        class="img-thumbnail preview-thumbnail"> <br>
+                                    <p>sub4</p>
+                                @else
+                                    <p class="text-muted">No image uploaded</p>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- @for ($i = 0; $i < 5; $i++)
                                     <div class="image-preview">
                                         <div class="position-relative">
                                             @if (isset($images[$i]))
@@ -81,31 +127,21 @@
                                             @endif
                                         </div>
                                     </div>
-                                @endfor
-                            </div>
-                        </div>
-                    </div>
+                                @endfor --}}
 
 
                     <!-- Right Side (Service and Amenities) -->
                     <div class="card mt-2 mb-2">
                         <div class="card-header">Service</div>
                         <div class="card-body">
-                            {{-- @foreach ($hotel->hotelCategory as $hotel_category)
-                            <span class="badge bg-pink">{{$hotel_category->id}}</span>
-                        @endforeach --}}
                             <!-- Hotel Service Section -->
                             <div class="mb-3">
                                 <h6>Hotel Service :</h6>
                                 <div class="service-line">
-                                    {{-- @foreach ($hotel->hotelCategories as $hotel_category)
-                                        <span class="service-item">
-                                            {{ $hotel_category->name }}
-                                        </span>
-                                    @endforeach --}}
-                                    {{-- <span class="service-item">Parking availability</span>
-                                    <span class="service-item">Luggage storage service</span>
-                                    <span class="service-item">Breakfast - Price: $20</span> --}}
+                                    @foreach ($services as $service)
+                                        <span class="service-item">{{ $service->name }}</span>
+                                    @endforeach
+                                    <span class="service-item">{{ $user->hotel->breakfast_price }}</span>
                                 </div>
                             </div>
 
@@ -113,21 +149,18 @@
                             <div class="mb-3">
                                 <h6>Amenity :</h6>
                                 <div class="service-line">
-                                    {{-- <span class="service-item">Wi-Fi</span>
-                                    <span class="service-item">Air conditioning</span>
-                                    <span class="service-item">TV</span>
-                                    <span class="service-item">Dryer</span> --}}
+                                    @foreach ($amenities as $amenity)
+                                        <span class="service-item">{{ $amenity->name }}</span>
+                                    @endforeach
                                 </div>
                             </div>
-
                             <!-- Free Toiletries Section -->
                             <div class="mb-3">
                                 <h6>Free Toiletries :</h6>
                                 <div class="service-line">
-                                    {{-- <span class="service-item">Shampoo</span>
-                                    <span class="service-item">Conditioner</span>
-                                    <span class="service-item">Body wash</span>
-                                    <span class="service-item">Toothbrush&paste</span> --}}
+                                    @foreach ($free_toiletries as $item)
+                                        <span class="service-item">{{ $item->name }}</span>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -138,18 +171,11 @@
                         <h5 class="card-header">Category</h5>
                         <div class="card-body">
                             <div class="category-container">
-                                 @foreach ($categories as $category)
-                                        <span class="category-item">
-                                            {{ $category->name }}
-                                        </span>
-                                      @endforeach
-
-                                {{-- <span class="category-item">Wheelchair and Senior</span>
-                                <span class="category-item">Visual and Hearing Impaired</span>
-                                <span class="category-item">Pregnancy</span>
-                                <span class="category-item">Religious</span>
-                                <span class="category-item">Family</span>
-                                <span class="category-item">English</span> --}}
+                                @foreach ($categories as $category)
+                                    <span class="category-item">
+                                        {{ $category->name }}
+                                    </span>
+                                @endforeach
                             </div>
                         </div>
                     </div>

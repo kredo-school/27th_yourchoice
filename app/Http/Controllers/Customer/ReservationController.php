@@ -41,7 +41,19 @@ class ReservationController extends Controller
     // 予約詳細ページを表示
     public function show($id)
     {
-        $reservation = $this->reservation->findOrFail($id);
+        // Reservationと関連するReviewを取得
+        $reservation = $this->reservation
+        ->with(['review', 'reservationRoom.room.hotel'])
+        ->findOrFail($id);
+
+       // Reviewを取得（Reservationのリレーションを使用）
+        $review = $reservation->review;
+        // デバッグログで確認
+        // if ($review) {
+        //     Log::info('Review fetched successfully:', $review->toArray());
+        // } else {
+        //     Log::warning('No review found for reservation ID: ' . $id);
+        // }
 
         // 支払い情報を関連付けから取得
         $payment = $reservation->payment;
@@ -58,21 +70,43 @@ class ReservationController extends Controller
             abort(404, 'Not found hotel informations');
         }
         // ビューにデータを渡して表示
-        return view('customers.mypage.reservation-detail.show', compact('reservation', 'payment', 'hotel', 'roomTypes'));
+        return view('customers.mypage.reservation-detail.show', compact('reservation', 'payment', 'hotel', 'roomTypes','review'));
     }
 
 
-    // 予約削除処理
-    public function destroy($id)
-    {
-        $reservation = auth()->user()->reservations()->find($id);
-        if ($reservation) {
-            $reservation->delete();
-            return redirect()->route('customers.mypage.reservation_list')->with('success', 'Reservation deleted successfully.');
-        }
+    // // 予約削除処理
+    // public function destroy($id)
+    // {
+    //     $reservation = auth()->user()->reservations()->find($id);
+    //     if ($reservation) {
+    //         $reservation->delete();
+    //         return redirect()->route('customers.mypage.reservation_list')->with('success', 'Reservation deleted successfully.');
+    //     }
 
-        return redirect()->back()->with('error', 'Reservation not found.');
-    }
+    //     return redirect()->back()->with('error', 'Reservation not found.');
+    // }
+
+      // 予約Cancel処理
+      public function cancel($reservationid)
+      {
+          $reservation = auth()->user()->reservations()->find($reservationid);
+          if ($reservationid) {
+
+            //reservation_statusをCancelに書き換え
+            $reservation->update([
+                'reservation_status' => 'cancelled'
+            ]);
+
+        
+        // 予約一覧ページにリダイレクト
+        return redirect()
+            ->route('customer.reservation.reservationlist')
+            ->with('success', 'Reservation has been cancelled successfully.');
+                
+          }
+  
+          return redirect()->back()->with('error', 'Reservation not found.');
+      }
 
     // 予約一覧ページを表示
     public function reservationlist()
