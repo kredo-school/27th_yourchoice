@@ -10,7 +10,7 @@ use App\Models\Category;
 use App\Models\HotelCategory;
 use App\Models\HasFactory;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -37,13 +37,23 @@ class TopController extends Controller
     }
     public function search(Request $request)
     {
+        // クエリの準備
+        $query = Hotel::query();
         // カテゴリー情報の取得
         $topCategory = $request->input('topCategory');
-    
         // 検索キーワードの取得
         $location = $request->input('location');
         // $date = $request->input('date');
         $travellers = $request->input('travellers');
+        //検索されたpriceの最小値
+        // $minPrice = $this->hotel->rooms()
+        // ->when(!is_null($travellers), function ($query) use ($travellers) {
+        //     $query->where('capacity', $travellers);
+        // })
+        // ->min('price');
+
+
+
 
         // セッションで `topCategory` を保持
         if (!empty($topCategory)) {
@@ -52,9 +62,6 @@ class TopController extends Controller
             $topCategory = session('topCategory'); // セッションから取得
         }
 
-        // クエリの準備
-        $query = Hotel::query();
-       
         // キーワード検索条件の適用(topページからの検索)
         if (!empty($topCategory)) {
             $query->whereHas('categories', function ($query) use ($topCategory) {
@@ -64,9 +71,14 @@ class TopController extends Controller
 
         // キーワード検索条件の適用(searchページの中での検索)
         if (!empty($location)) {
-            // $topCategory = $request->input('topCategory');
-            $hotels=$query->where('prefecture', 'LIKE', "%{$location}%")->whereHas('categories', function ($query) use ($topCategory) {
+            $query->where('prefecture', 'LIKE', "%{$location}%")->whereHas('categories', function ($query) use ($topCategory) {
                 $query->where('name', 'LIKE', "%{$topCategory}%");
+            });
+        }
+        //部屋のキャパシティ
+        if (!empty($travellers)) {
+            $query->whereHas('rooms', function ($query) use ($travellers) {
+                $query->where('capacity', '>=', $travellers);
             });
         }
 
@@ -75,8 +87,34 @@ class TopController extends Controller
         // \Log::info('////////////////////////////////////////');
         // \Log::info('Executed Query: ', [DB::getQueryLog()]);
         // \Log::info('Location: ' . $location); \Log::info('Top Category: ' . $topCategory);
+
+        // Show Review information
+        $hotels = $hotels->map(function ($hotel) {
+            $hotel->averageRating = ceil(
+                $this->review
+                    ->where('hotel_id', $hotel->id)
+                    ->avg('rating') ?? 0
+            );
+            return $hotel;
+        });
+
+        $hotels = $hotels->map(function ($hotel) {
+            $hotel->reviews = $this->review
+                ->where('hotel_id', $hotel->id)
+                ->get();
+            return $hotel;
+        });
+
+
         
-        return view('customers.hotel_search', ['hotels' => $hotels, 'topCategory' => $topCategory]);
+        return view('customers.hotel_search', [
+            'hotels' => $hotels, 
+            // 'reviews' => $reviews,
+            // 'averageRating' => $averageRating,
+            // 'minPrice' => $minPrice, 
+            'travellers' => $travellers,
+            'topCategory' => $topCategory,
+        ]);
     }
     
     public function show($id, Request $request)
@@ -86,9 +124,8 @@ class TopController extends Controller
         $hotels = Hotel::with(['categories', 'rooms.reservations'])->find($id);
 
         $address = $hotels->address;
-
-        // // JSON形式で返却
-        // return response()->json($address);
+        // ホテルに紐づく部屋を取得
+        $rooms = $hotels->rooms;
     
         if (!$hotels) {
             abort(404, 'Hotel not found');
@@ -97,8 +134,7 @@ class TopController extends Controller
         // 入力された日程を取得
         $date = $request->input('date');
     
-        // ホテルに紐づく部屋を取得
-        $rooms = $hotels->rooms;
+
     
         // 利用可能な部屋をフィルタリング
         $availableRooms = $rooms->filter(function ($room) use ($date) {

@@ -68,7 +68,24 @@
                                 <p class="text-muted small">{{ $review->user->username }}</p>
                             </div>
                         </div>
-                    @endforeach
+                                <!-- モーダル -->
+                                <div class="modal fade" id="commentModal-{{ $index }}" tabindex="-1" aria-labelledby="commentModalLabel-{{ $index }}" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="commentModalLabel-{{ $index }}">Full Comment</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                {{ $review->comment }}
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        @endforeach
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -100,11 +117,6 @@
                             @foreach ($hotels->categories->where('type', 'free_toiletries') as $category)
                                 <li class="list-inline-item"><i class="fa fa-check"></i>{{ $category->name }}</li>
                             @endforeach
-                            {{-- <li class="list-inline-item"><i class="fa fa-check"></i> Shampoo</li>
-                            <li class="list-inline-item"><i class="fa fa-check"></i> Conditioner</li>
-                            <li class="list-inline-item"><i class="fa fa-check"></i> Body wash</li>
-                            <li class="list-inline-item"><i class="fa fa-check"></i> Toothbrush</li>
-                            <li class="list-inline-item"><i class="fa fa-check"></i> Toothpaste</li> --}}
                         </ul>
                     </div>
                     <div class="text-end">

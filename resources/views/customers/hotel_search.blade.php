@@ -72,20 +72,21 @@
                     <div class="col-md-7">
                         <h5>{{$hotel->hotel_name}}</h5>
                         <p>{{$hotel->prefecture}}</p>
-                            @foreach($hotel->categories as $hotelcategory)
-                                <span class="badge bg-pink">{{ $hotelcategory->name }}</span>
+                            @foreach($hotel->categories->where('type','category') as $category)
+                                <span class="badge bg-pink">{{ $category->name }}</span>
                             @endforeach
                     </div>
                     <div class="col-md-3 text-end">
                         <div class="rating">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            (120)
+                            @for ($i = 0; $i < $hotel->averageRating ; $i++)
+                                <span class="selected">★</span>
+                            @endfor
+                            @for ($i = $hotel->averageRating; $i < 5; $i++)
+                                <span class="not_selected">★</span>
+                            @endfor
+                            ({{ $hotel->averageRating}})
                         </div>
-                        <h6>$100 / 2 travellers</h6>
+                            <h6>${{ $hotel->rooms->min('price') }}/ {{ $travellers ?? 2 }} {{ Str::plural('traveller', $travellers ?? 2) }}</h6>
                         <small>include taxes & fees for 1 night</small>
                     </div>
                 </div>
