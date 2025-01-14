@@ -19,7 +19,8 @@ return new class extends Migration
       $table->string('postal_code', 10)->nullable(); // 郵便番号
       $table->string('prefecture', 10)->nullable(); // 都道府県
       $table->string('city', 100)->nullable(); // 市
-      $table->string('address', 100)->nullable(); // 市以下の住所
+      $table->string('street_address', 100)->nullable(); // 市以下の住所
+      $table->string('address', 100)->nullable(); // 住所全体
       $table->string('access')->nullable(); // 最寄駅までのアクセス時間
       $table->text('description')->nullable(); // ホテルの説明
       $table->longText('image_main')->nullable(); // ホテルの画像(メイン)

@@ -13,6 +13,8 @@ use App\Http\Middleware\CheckRole;
 
 Auth::routes();
 
+//artisan serveからのLinkからもTopPage開けるようにする
+Route::get('/',[App\Http\Controllers\Customer\TopController::class,'list'])->name('top.list');
 
 // カスタマー側
 
@@ -37,7 +39,7 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function () {
 
       Route::get('/reservation/reservationlist',[ReservationController::class,'index'])->middleware('auth')->name('reservation.reservationlist'); 
       Route::get('/reservation/{reservationid}/show', [ReservationController::class, 'show'])->name('reservation.show');
-      Route::delete('/reservation/{reservationid}', [ReservationController::class, 'destroy'])->name('reservation.destroy');
+      Route::post('/reservation/{reservationid}', [ReservationController::class, 'cancel'])->name('reservation.cancel');
       
       Route::get('/review/list',[App\Http\Controllers\Customer\ReviewController::class,'list'])->name('review.list');
       Route::get('/review/show/{id}',[App\Http\Controllers\Customer\ReviewController::class,'show'])->name('review.show');
