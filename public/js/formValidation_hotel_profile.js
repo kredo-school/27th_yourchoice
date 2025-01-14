@@ -1,28 +1,4 @@
-//”カテゴリー1つ以上選択必須”のバリデーション
-
-document.addEventListener('DOMContentLoaded', function () {
-  const form = document.getElementById('categoryForm');
-  const errorMessageDiv = document.getElementById('error-message');
-
-  form.addEventListener('submit', function (event) {
-      // type="category" のチェックボックスを取得
-      const categoryCheckboxes = document.querySelectorAll('input[data-type="category"]');
-      
-      // 少なくとも1つが選択されているか確認
-      const isChecked = Array.from(categoryCheckboxes).some(checkbox => checkbox.checked);
-      
-      if (!isChecked) {
-          event.preventDefault(); // フォーム送信を停止
-          errorMessageDiv.style.display = 'block'; // エラー表示領域を表示
-          errorMessageDiv.textContent = 'Please select at least one category.';
-      } else {
-          errorMessageDiv.style.display = 'none'; // エラーがない場合は非表示
-      }
-  });
-});
-
-
-//”朝食ありがチェックされたときは値段は必須”のバリデーション
+//朝食ありがチェックされたときは値段は必須
 
 document.addEventListener('DOMContentLoaded', function () {
   const breakfastCheckbox = document.getElementById('category_9');

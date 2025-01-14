@@ -60,75 +60,24 @@
                     </div>
                 </div>
 
-                <!-- Right Side (Images and Other Sections) -->
+                <!-- Right Side (Images Sections) -->
                 <div class="col-md-6">
                     <div class="card mt-2 mb-2">
                         <h5 class="card-header">Uploaded Images</h5>
                         <div class="card-body image-upload-container">
-                            <div class="image-preview mb-3">
-                                @if ($hotel->image_main)
-                                    <img src="{{ $hotel->image_main }}" alt="Hotel Image"
-                                        class="img-thumbnail preview-thumbnail"><br>
-                                    <p>main</p>
-                                @else
-                                    <p class="text-muted">No image uploaded</p>
-                                @endif
-                            </div>
-                            <div class="image-preview mb-3">
-                                @if ($hotel->image_sub1)
-                                    <img src="{{ $hotel->image_sub1 }}" alt="Hotel Image"
-                                        class="img-thumbnail preview-thumbnail"><br>
-                                    <p>sub1</p>
-                                @else
-                                    <p class="text-muted">No image uploaded</p>
-                                @endif
-                            </div>
-                            <div class="image-preview mb-3">
-                                @if ($hotel->image_sub2)
-                                    <img src="{{ $hotel->image_sub2 }}" alt="Hotel Image"
-                                        class="img-thumbnail preview-thumbnail"><br>
-                                    <p>sub2</p>
-                                @else
-                                    <p class="text-muted">No image uploaded</p>
-                                @endif
-                            </div>
-                            <div class="image-preview mb-3">
-                                @if ($hotel->image_sub3)
-                                    <img src="{{ $hotel->image_sub3 }}" alt="Hotel Image"
-                                        class="img-thumbnail preview-thumbnail"><br>
-                                    <p>sub3</p>
-                                @else
-                                    <p class="text-muted">No image uploaded</p>
-                                @endif
-                            </div>
-                            <div class="image-preview mb-3">
-                                @if ($hotel->image_sub4)
-                                    <img src="{{ $hotel->image_sub4 }}" alt="Hotel Image"
-                                        class="img-thumbnail preview-thumbnail"> <br>
-                                    <p>sub4</p>
-                                @else
-                                    <p class="text-muted">No image uploaded</p>
-                                @endif
-                            </div>
+                            @foreach (['image_main', 'image_sub1', 'image_sub2', 'image_sub3', 'image_sub4'] as $imageField)
+                                <div class="image-preview mb-3">
+                                    @if ($hotel->$imageField)
+                                        <img src="{{ $hotel->$imageField }}" alt="Hotel Image"
+                                            class="img-thumbnail preview-thumbnail"><br>
+                                        <p>{{ str_replace('image_', '', $imageField) }}</p>
+                                    @else
+                                        <p class="text-muted">No image uploaded</p>
+                                    @endif
+                                </div>
+                            @endforeach
                         </div>
                     </div>
-
-                    {{-- @for ($i = 0; $i < 5; $i++)
-                                    <div class="image-preview">
-                                        <div class="position-relative">
-                                            @if (isset($images[$i]))
-                                                <img src="{{ $images[$i] }}" alt="Uploaded Image"
-                                                    class="img-thumbnail preview-thumbnail"
-                                                    id="preview-{{ $i }}">
-                                                <span class="badge bg-secondary position-absolute top-0 start-0"
-                                                    id="label-{{ $i }}">Image {{ $i + 1 }}</span>
-                                            @else
-                                                <p class="text-muted">No image uploaded</p>
-                                            @endif
-                                        </div>
-                                    </div>
-                                @endfor --}}
-
 
                     <!-- Right Side (Service and Amenities) -->
                     <div class="card mt-2 mb-2">
@@ -211,58 +160,4 @@
                 </div>
         </form>
     </div>
-
-    {{-- 写真の削除 --}}
-    {{-- <script>
-        document.querySelectorAll('.delete-image').forEach(button => {
-            button.addEventListener('click', function() {
-                const imageElement = this.closest('.image-preview');
-                imageElement.remove(); // Remove the preview element
-            });
-        });
-    </script> --}}
-
-    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> --}}
-
-
-    {{-- 写真関連 --}}
-    <script>
-        function previewImage(event, index) {
-            const input = event.target;
-            const preview = document.getElementById(`preview-${index}`);
-            const icon = document.getElementById(`icon-${index}`);
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    preview.src = e.target.result;
-                    preview.classList.remove('d-none');
-                    icon.classList.add('d-none');
-                };
-                reader.readAsDataURL(input.files[0]);
-            } else {
-                preview.src = "";
-                preview.classList.add('d-none');
-                icon.classList.remove('d-none');
-            }
-        }
-
-        function removeImage(index) {
-            const input = document.querySelectorAll('.image-input')[index];
-            const preview = document.getElementById(`preview-${index}`);
-            const icon = document.getElementById(`icon-${index}`);
-            input.value = "";
-            preview.src = "";
-            preview.classList.add('d-none');
-            icon.classList.remove('d-none');
-        }
-
-        // Frontend-only label setup
-        document.addEventListener('DOMContentLoaded', function() {
-            const labels = document.querySelectorAll('.badge');
-            labels.forEach((label, index) => {
-                label.textContent = index === 0 ? 'main' : `sub${index}`;
-            });
-        });
-    </script>
-
 @endsection

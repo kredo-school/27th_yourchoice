@@ -11,6 +11,7 @@ use App\Models\HotelCategory;
 use App\Models\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\ValidationException;
 
 class ProfileController extends Controller
 {
@@ -29,10 +30,10 @@ class ProfileController extends Controller
 
   public function show()
   {
-    //ログインユーザー情報を取得
+    // ログインユーザー情報を取得
     $user = $this->user->findOrFail(Auth::id());
 
-    //ログインユーザーに関連するホテル情報を取得
+    // ログインユーザーに関連するホテル情報を取得
     $hotel = $this->user::findOrFail(Auth::id())->hotel;
 
     // ホテルに関連するカテゴリー情報をタイプ別に取得
@@ -49,11 +50,6 @@ class ProfileController extends Controller
   {
     $user = $this->user->findOrFail(Auth::id());
 
-    // // カテゴリーをタイプごとにグループ化
-    // $categories = $this->category::all()->groupBy('type');
-    // // このhotelが選択しているカテゴリーnameを取得
-    // $selected_categories = $user->categories->pluck('name')->toArray();
-
     return view('hotels.profile.edit', compact('user'));
   }
 
@@ -61,7 +57,7 @@ class ProfileController extends Controller
   {
     // try {
     // dd($request);
-    #1. Validate all form data
+    # バリデーション
     $request->validate([
       'hotel_name'           => 'required|string|max:255',
       'url'                  => 'nullable|url',
@@ -71,11 +67,12 @@ class ProfileController extends Controller
       'street_address'       => 'required|string|max:100',
       'access'               => 'required|string|max:255',
       'description'          => 'required|string',
-      'image_main'           => 'required|mimes:jpeg,png,jpg,gif|max:2048',  // main画像は必須
-      'image_sub1'           => 'nullable|mimes:jpeg,png,jpg,gif|max:2048',  // sub画像は任意
+      'image_main'           => 'nullable|mimes:jpeg,png,jpg,gif|max:2048',  // main画像、sub画像ともに一旦nullable
+      'image_sub1'           => 'nullable|mimes:jpeg,png,jpg,gif|max:2048',
       'image_sub2'           => 'nullable|mimes:jpeg,png,jpg,gif|max:2048',
       'image_sub3'           => 'nullable|mimes:jpeg,png,jpg,gif|max:2048',
       'image_sub4'           => 'nullable|mimes:jpeg,png,jpg,gif|max:2048',
+      'categories'           => 'required|array|min:1',  //name="categories[]"のみ1つ以上選択必須
       'cancellation_period'  => 'required|integer|max:100',
       'general_fee'          => 'required|integer|max:100',
       'sameday_fee'          => 'required|integer|max:100',
@@ -85,12 +82,12 @@ class ProfileController extends Controller
       'phone_number'         => 'string|max:20',
     ]);
 
-    #2. Save the profile
-    //ログインユーザー情報を取得
+    # 更新
+     // ログインユーザー情報を取得
     $user = $this->user->findOrFail(Auth::id());
     // ログインユーザーに関連するホテル情報を取得
     $hotel = $this->user::find(Auth::id())->hotel;
-
+    // dd($hotel);
     // ホテル情報を更新
     $hotel->hotel_name          = $request->hotel_name;
     $hotel->url                 = $request->input('url') ?: null;
@@ -107,47 +104,37 @@ class ProfileController extends Controller
     $hotel->sameday_fee         = $request->sameday_fee;
     $hotel->breakfast_price     = $request->breakfast_price;
 
-    //画像の更新
-    if ($request->hasFile('image_main')) {
-      // 新しい画像がアップロードされた場合
-      $image_main = $request->file('image_main');
-      $base64Image = 'data:image/' . $image_main->getClientOriginalExtension() . ';base64,' . base64_encode(file_get_contents($image_main));
-      $hotel->image_main = $base64Image; // 新しい画像を保存
-    } elseif ($request->input('delete_image_main') == 'true') {
-      // 画像削除のリクエストがあった場合
-      $hotel->image_main = null; // 画像を削除（nullを設定）
-    }  // 新しい画像がアップロードされていない場合、既存の画像をそのまま使用
 
-    if ($request->hasFile('image_sub1')) {
-      $image_sub1 = $request->file('image_sub1');
-      $base64Image = 'data:image/' . $image_sub1->getClientOriginalExtension() . ';base64,' . base64_encode(file_get_contents($image_sub1));
-      $hotel->image_sub1 = $base64Image;
-    } elseif ($request->input('delete_image_sub1') == 'true') {
-      $hotel->image_sub1 = null;
-    }
-    if ($request->hasFile('image_sub2')) {
-      $image_sub2 = $request->file('image_sub2');
-      $base64Image = 'data:image/' . $image_sub2->getClientOriginalExtension() . ';base64,' . base64_encode(file_get_contents($image_sub2));
-      $hotel->image_sub2 = $base64Image;
-    } elseif ($request->input('delete_image_sub2') == 'true') {
-      $hotel->image_sub2 = null;
-    }
-    if ($request->hasFile('image_sub3')) {
-      $image_sub3 = $request->file('image_sub3');
-      $base64Image = 'data:image/' . $image_sub3->getClientOriginalExtension() . ';base64,' . base64_encode(file_get_contents($image_sub3));
-      $hotel->image_sub3 = $base64Image;
-    } elseif ($request->input('delete_image_sub3') == 'true') {
-      $hotel->image_sub3 = null;
-    }
-    if ($request->hasFile('image_sub4')) {
-      $image_sub4 = $request->file('image_sub4');
-      $base64Image = 'data:image/' . $image_sub4->getClientOriginalExtension() . ';base64,' . base64_encode(file_get_contents($image_sub4));
-      $hotel->image_sub4 = $base64Image;
-    } elseif ($request->input('delete_image_sub4') == 'true') {
-      $hotel->image_sub4 = null;
+    // main画像は必須
+    if ($hotel->image_main == "" && !$request->hasFile('image_main')) {
+      throw ValidationException::withMessages(['image_main' => 'Main image is required',]);
     }
 
-    //ユーザー情報の更新
+    // 画像の更新
+    // 画像のフィールド名リスト
+    $imageFields = [
+      'image_main',
+      'image_sub1',
+      'image_sub2',
+      'image_sub3',
+      'image_sub4',
+    ];
+
+    // 各画像フィールドに対して処理を実行
+    foreach ($imageFields as $imageField) {
+      if ($request->hasFile($imageField)) {
+        // 新しい画像がアップロードされた場合
+        $image = $request->file($imageField);
+        $base64Image = 'data:image/' . $image->getClientOriginalExtension() . ';base64,' . base64_encode(file_get_contents($image));
+        $hotel->$imageField = $base64Image; // 新しい画像を保存
+      } elseif ($request->input('delete_' . $imageField) == 'true') {
+        // 画像削除のリクエストがあった場合
+        $hotel->$imageField = null; // 画像を削除（nullを設定）
+      } // 新しい画像がアップロードされていない場合、既存の画像をそのまま使用
+
+    }
+
+    // ユーザー情報の更新
     $user->email        = $request->email;
     $user->phone_number = $request->phone_number;
 
@@ -158,15 +145,25 @@ class ProfileController extends Controller
     $user->save();
     $hotel->save();
 
-    // チェックされたカテゴリの ID を取得
-    $categories = $request->input('categories', []); // カテゴリが送信されない場合は空配列を使用
-    // 中間テーブルにデータを挿入
-    foreach ($categories as $category_id) {
-      HotelCategory::create([
-        'hotel_id' => $hotel->id,
-        'category_id' => $category_id,
-      ]);
+
+    // すべてのカテゴリをまとめて取得
+    $allCategories = [
+      $request->input('category_services', []), // カテゴリが送信されない場合は空配列を使用
+      $request->input('category_amenities', []),
+      $request->input('category_toiletries', []),
+      $request->input('categories', []),
+    ];
+
+    // カテゴリをループして中間テーブルにデータを挿入
+    foreach ($allCategories as $categories) {
+      foreach ($categories as $category_id) {
+        HotelCategory::create([
+          'hotel_id' => $hotel->id,
+          'category_id' => $category_id,
+        ]);
+      }
     }
+
     // プロフィールページへリダイレクト
     return redirect()->route('hotel.profile.show');
     // } catch (\Exception $e) {
@@ -174,7 +171,6 @@ class ProfileController extends Controller
     //   return redirect()->back()->withErrors(['error' => 'Failed']);
     // }
   }
-
 
   public function editpass()
   {

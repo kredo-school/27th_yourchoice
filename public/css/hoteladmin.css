@@ -1,4 +1,4 @@
-/* HotelAdmin Profile Show rina */
+/* HotelAdmin Profile Show */
 
 .form-control-plaintext.border-bottom {
   border-bottom: 1px solid #cdcdcd;
@@ -103,9 +103,9 @@
 
 
 
-/* HotelAdmin Profile Edit rina */
+/* HotelAdmin Profile Edit */
 .form-width {
-  width: 80px;
+  width: 60px;
 }
 
 .image-upload-container {
@@ -118,6 +118,7 @@
   /* 垂直方向の中央配置 */
   height: 100%;
   /* 必要に応じて高さを指定 */
+  margin-bottom: 20px;
 
 }
 
@@ -232,6 +233,12 @@ textarea#remarks {
   margin-left: 0.1rem;
 }
 
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
 
 /* .btn-main{
   background-color: #CA5C6F; 
@@ -272,7 +279,7 @@ textarea#remarks {
 
 } */
 
-/* HotelAdmin Rooms List rina */
+/* HotelAdmin Rooms List */
 
 /* modal */
 .modal-message {
