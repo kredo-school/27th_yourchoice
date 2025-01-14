@@ -8,26 +8,26 @@
             </div>
 
             <div class="modal-body">
-                <p>Are you sure you want to delete this room?<br>
+                <p>Are you sure you want to delete this reservation?<br>
                     This action cannot be undone.</p>
             </div>
 
             <div class="modal-footer border-0">
                 <!-- 削除フォーム -->
 
-                <form action="{{ route('customer.reservation.destroy', $reservation->id) }}" method="POST">
+                <form action="{{ route('customer.reservation.cancel', $reservation->id) }}" method="POST">
                     @csrf
-                    @method('DELETE')
+                    {{-- @method('cancel') --}}
                 
-                <!-- キャンセルボタン -->
-                <button class="btn btn-outline-danger btn-sm" type="button" data-bs-dismiss="modal">
-                    Cancel
-                </button>
-                
-                <!-- 削除ボタン -->
-                <button type="submit" class="btn btn-danger btn-sm">
-                    Delete
-                </button>
+                    <!-- キャンセルボタン -->
+                    <button class="btn btn-outline-danger btn-sm" type="button" data-bs-dismiss="modal">
+                        Go Back
+                    </button>
+                    
+                    <!-- 削除ボタン -->
+                    <button type="submit" class="btn btn-danger btn-sm">
+                        Cancel Reservation
+                    </button>
 
                 </form>
             </div>
