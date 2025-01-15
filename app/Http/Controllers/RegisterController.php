@@ -105,8 +105,36 @@ class RegisterController extends Controller
             'password_hash' => Hash::make($request->input('password_hash')),
         ]);
 
-        // Redirect to a specific page
-        return redirect()->route('login')->with('success', 'Registration successful!');
+      //   ユーザーエントリー後にホテル作成 (空の値を挿入)
+      Hotel::create([
+        'user_id' => $user->id, // ユーザーに紐づけ
+        'hotel_name' => '', // 必須項目も空欄でOK
+        'url' => '',
+        'postal_code' => '',
+        'prefecture' => '',
+        'city' => '',
+        'street_address' => '',
+        'address' => '',
+        'access' => '',
+        'description' => '',
+        'image_main' => '',
+        'image_sub1' => '',
+        'image_sub2' => '',
+        'image_sub3' => '',
+        'image_sub4' => '',
+        'cancellation_period' => 0,
+        'general_fee' => 0,
+        'sameday_fee' => 0,
+        'breakfast_price' => 0,
+
+      ]);
+
+
+        
+        Auth::login($user);
+
+      // Redirect to a specific page
+      return redirect()->route('hotel.profile.show')->with('success', 'Registration successful!');
     } catch (\Exception $e) {
         Log::error('Failed: ' . $e->getMessage());
         return redirect()->back()->withErrors(['error' => 'Failed']);

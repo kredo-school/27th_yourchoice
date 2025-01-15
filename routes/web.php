@@ -11,6 +11,9 @@ use App\Http\Controllers\ReservationController;
 
 Auth::routes();
 
+//artisan serveからのLinkからもTopPage開けるようにする
+Route::get('/',[App\Http\Controllers\Customer\TopController::class,'list'])->name('top.list');
+
 // カスタマー側
 
 Route::group(['prefix' => 'customer', 'as' => 'customer.'], function () {
@@ -32,10 +35,10 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function () {
       Route::get('/profile/edit',[App\Http\Controllers\Customer\ProfileController::class,'edit'])->name('profile.edit');
       Route::get('/profile/editpass',[App\Http\Controllers\Customer\ProfileController::class,'editpass'])->name('profile.editpass');
 
-      Route::get('/reservation/reservationlist',[App\Http\Controllers\Customer\ReservationController::class,'reservationlist'])->name('reservation.reservationlist');
-      Route::get('/reservation/show',[App\Http\Controllers\Customer\ReservationController::class,'show'])->name('reservation.show');
-      Route::get('/reservation/show2',[App\Http\Controllers\Customer\ReservationController::class,'show2'])->name('reservation.show2');
-
+      Route::get('/reservation/reservationlist',[ReservationController::class,'index'])->middleware('auth')->name('reservation.reservationlist'); 
+      Route::get('/reservation/{reservationid}/show', [ReservationController::class, 'show'])->name('reservation.show');
+      Route::post('/reservation/{reservationid}', [ReservationController::class, 'cancel'])->name('reservation.cancel');
+      
       Route::get('/review/list',[App\Http\Controllers\Customer\ReviewController::class,'list'])->name('review.list');
       Route::get('/review/show',[App\Http\Controllers\Customer\ReviewController::class,'show'])->name('review.show');
       Route::get('/review/create',[App\Http\Controllers\Customer\ReviewController::class,'create'])->name('review.create');
