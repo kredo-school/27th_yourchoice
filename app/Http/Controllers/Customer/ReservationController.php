@@ -33,7 +33,9 @@ class ReservationController extends Controller
             abort(403, 'You need login');
         }
 
-        $reservations = $user->reservation ?? collect();
+        // ユーザーの予約を取得し、関連するホテルデータをロード
+        $reservations = $user->reservation()
+        ->with(['reservationRoom.room.hotel.categories','payment'])->paginate(10);
 
         return view('customers.mypage.reservation_list', compact('reservations'));
     }
