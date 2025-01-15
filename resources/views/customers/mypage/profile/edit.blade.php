@@ -50,7 +50,7 @@
                     <div class="mb-4">
                         <label class="form-label">Category</label>
                         <div class="category-checkbox">
-                            @foreach ($categories as $category)
+                            @foreach ($categories->whereIn('id', [1, 2, 3, 4, 5, 6])  as $category)
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="categories[]" value="{{ $category->id }}"
                                         {{ $user->categories->contains($category->id) ? 'checked' : '' }}>
