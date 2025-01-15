@@ -12,9 +12,9 @@
             <!-- Edit Profile Information -->
             <div class="profile-section mb-4">
                 <h2>Edit Profile</h2>
-                <form action="{{ route('customer.profile.edit', $post->id) }}" method="POST">
+                <form action="{{ route('customer.profile.update') }}" method="POST">
                     @csrf
-                    @method('PARCH') <!-- Specify the method for updating -->
+                    @method('PATCH') <!-- Specify the method for updating -->
 
                     <!-- First Name and Last Name -->
                     <div class="row mb-3">
@@ -31,7 +31,7 @@
                     <!-- Username -->
                     <div class="mb-3">
                         <label class="form-label">Username</label>
-                        <input type="text" name="username" id="username" class="form-control" value="{{ old('username', $user->username) }}">
+                        <input type="text" name="username" id="username" class="form-control" value="{{ old('username', $user->username) }}" autofocus>
                     </div>
 
                     <!-- Email -->
@@ -43,32 +43,31 @@
                     <!-- Phone Number -->
                     <div class="mb-3">
                         <label class="form-label">Phone Number</label>
-                        <input type="text" name="phone_number" id="phone_number" class="form_control" value="{{ old('phone_number', $user->phone_number) }}">
+                        <input type="text" name="phone_number" id="phone_number" class="form_control" value="{{ old('phone_number', $user->phone_number) }}" autofocus>
                     </div>
 
                     <!-- Accessibility Categories -->
                     <div class="mb-4">
                         <label class="form-label">Category</label>
-                    
-                        @foreach ($categories as $category_id)
-                        <div class="form-check form-check-inline">
-                            @if (in_array($user->id, $category_id))
-                            <input type="checkbox" name="category[]" id="{{ $userCategory->name }}" class="form-check-input" value="{{ $userCategory->id }}" checked>
-                            <label for="{{ $category->name }}" class="form-check-label">{{ $category->name}}</label>
-                                
-                            @else
-                            <input type="checkbox" name="categories[]" id="{{ $userCategory->name }}" class="form-check-input" value="{{ $userCategory->id }}">
-                            <label for="{{ $userCategory->name }}" class="form-check-label">{{ $userCategory->name}}</label>
-                                
-                            @endif
-                            
+                        <div class="category-checkbox">
+                            @foreach ($categories as $category)
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="categories[]" value="{{ $category->id }}"
+                                        {{ $user->categories->contains($category->id) ? 'checked' : '' }}>
+                                    <label class="form-check-label">
+                                        {{ $category->name }}
+                                    </label>
+                                </div>
+                            @endforeach
+                            {{-- Error message area --}}
+                            @error('category')
+                                <div class="text-danger small">{{ $message }}</div>
+                            @enderror
                         </div>
-                        @endforeach
-                        {{-- Error message area --}}
-                        @error('category')
-                            <div class="text-danger small">{{ $message }}</div>
-                        @enderror
                     </div>
+                            
+                        
+                
 
                     <!-- Action Buttons -->
                     <div class="d-flex justify-content-between">
