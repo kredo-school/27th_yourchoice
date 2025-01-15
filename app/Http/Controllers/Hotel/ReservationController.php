@@ -118,15 +118,21 @@ class ReservationController extends Controller
             'customer_request' => 'nullable|string|max:255',
             'room_id' => 'required|integer|exists:rooms,id',
         ]);
+        
+        $newCheckInDate = $request->check_in_date;
+        $newCheckOutDate = $request->to;
 
         $overlappingReservations = Reservation::whereHas('reservationRoom.room', function ($query) use ($request) {
             $query->where('id', $request->room_id); // 部屋IDに絞り込み
         })
         ->where('reservation_status', '!=', 'cancelled') // cancelled の予約を除外
-        ->where(function ($query) use ($request) {
-            // 新しい check_out_date が既存予約の期間に含まれるかを確認
-            $query->where('check_in_date', '<', $request->to);
-        })
+        ->where(function ($query) use ($newCheckInDate, $newCheckOutDate) {
+            $query->where(function ($subQuery) use ($newCheckInDate, $newCheckOutDate) {
+                // 既存の予約が新しい予約と重なる場合をチェック
+                $subQuery->where('check_in_date', '<', $newCheckOutDate)
+                    ->where('check_out_date', '>', $newCheckInDate);
+            });
+        }) 
         ->get();
 
         
@@ -138,7 +144,6 @@ class ReservationController extends Controller
                     })->implode('; ')
             ]);
         }
-        
 
         // 新しい予約を作成
         $reservation = Reservation::create([
@@ -174,14 +179,20 @@ class ReservationController extends Controller
             'breakfast' => 'required|integer|max:2',
         ]);
 
+        $newCheckInDate = $request->check_in_date;
+        $newCheckOutDate = $request->check_out_date;
+
         $overlappingReservations = Reservation::whereHas('reservationRoom.room', function ($query) use ($request) {
             $query->where('id', $request->room_id); // 部屋IDに絞り込み
         })
         ->where('reservation_status', '!=', 'cancelled') // cancelled の予約を除外
-        ->where(function ($query) use ($request) {
-            // 新しい check_out_date が既存予約の期間に含まれるかを確認
-            $query->where('check_in_date', '<', $request->check_out_date);
-        })
+        ->where(function ($query) use ($newCheckInDate, $newCheckOutDate) {
+            $query->where(function ($subQuery) use ($newCheckInDate, $newCheckOutDate) {
+                // 既存の予約が新しい予約と重なる場合をチェック
+                $subQuery->where('check_in_date', '<', $newCheckOutDate)
+                    ->where('check_out_date', '>', $newCheckInDate);
+            });
+        }) 
         ->get();
 
         
