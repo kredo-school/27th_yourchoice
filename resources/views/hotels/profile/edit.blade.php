@@ -20,7 +20,7 @@
                             <div class="mb-3">
                                 <label for="hotel_name" class="form-label" required>Hotel Name</label>
                                 <input type="text" class="form-control" id="hotel_name" name="hotel_name"
-                                    value="{{ old('hotel_name', $user->hotel->hotel_name) }}">
+                                    value="{{ old('hotel_name', $user->hotel->hotel_name) }}" autofocus>
                                 @error('hotel_name')
                                     <div class="text-danger small">{{ $message }}</div>
                                 @enderror
