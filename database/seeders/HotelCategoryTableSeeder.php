@@ -63,6 +63,22 @@ class HotelCategoryTableSeeder extends Seeder
                 'hotel_id' => 6,
                 'category_id' => 5,
             ],
+            [
+                'hotel_id' => 2,
+                'category_id' => 14,
+            ],
+            [
+                'hotel_id' => 2,
+                'category_id' => 15,
+            ],
+            [
+                'hotel_id' => 2,
+                'category_id' => 16,
+            ],
+            [
+                'hotel_id' => 2,
+                'category_id' => 17,
+            ],
         ]);
     }
 }

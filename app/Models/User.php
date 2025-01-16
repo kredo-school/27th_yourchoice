@@ -54,15 +54,21 @@ class User extends Authenticatable
         ];
     }
 
-    public function Category()
+    public function category()
     {
-        return $this->hasMany(UserCategory::class);
+        return $this->hasMany(Category::class);
     }
 
+    // reservation と reservationsどちらも使用中のため消さないで下さい
     public function reservation()
     {
         return $this->hasMany(Reservation::class, 'user_id');
     }
+       // 予約とのリレーション sをつけないとCancel時にUpdate失敗したため追加
+       public function reservations()
+       {
+           return $this->hasMany(Reservation::class, 'user_id');
+       }
 
     public function reviews()
     {
@@ -76,6 +82,11 @@ class User extends Authenticatable
     public function hotel()
     {
         return $this->hasOne(Hotel::class);
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'user_category', 'user_id', 'category_id');
     }
 
 

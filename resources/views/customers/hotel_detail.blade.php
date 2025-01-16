@@ -11,133 +11,119 @@
     <div class="row">
         <!-- Large Image -->
         <div class="col-md-6">
-            <img src="{{ asset('images/hotel.jpg') }}" alt="hotel-img" class="img-fluid large-img">
+            <img src="{{ asset($hotels->image_main) }}" alt="hotel-img" class="img-fluid large-img w-100">
         </div>
         <!-- Small Images -->
         <div class="col-md-6">
             <div class="row">
-                <div class="col-6 col-md-6 pb-2">
-                    <img src="{{ asset('images/hotel.jpg') }}" alt="hotel-img" class="img-fluid small-img">
-                </div>
-                <div class="col-6 col-md-6 pb-2">
-                    <img src="{{ asset('images/hotel.jpg') }}" alt="hotel-img" class="img-fluid small-img">
-                </div>
-                <div class="col-6 col-md-6 pb-2">
-                    <img src="{{ asset('images/hotel.jpg') }}" alt="hotel-img" class="img-fluid small-img">
-                </div>
-                <div class="col-6 col-md-6 pb-2">
-                    <img src="{{ asset('images/hotel.jpg') }}" alt="hotel-img" class="img-fluid small-img">
-                </div>
+                @foreach ([$hotels->image_sub1, $hotels->image_sub2, $hotels->image_sub3, $hotels->image_sub4] as $image)
+                    @if($image)
+                        <div class="col-6 pb-2">
+                            <img src="{{ asset($image) }}" alt="hotel-img" class="img-fluid small-img w-100">
+                        </div>
+                    @endif
+                @endforeach
             </div>
         </div>
     </div>
-    <div class="row">
+
+    <div class="row mt-4">
+        <!-- ホテル情報 -->
         <div class="col-md-8">
-            <h1 class="mt-3">Hotel A</h1>
-            <span class="badge badge-primary">Family</span>
-            <p class="mt-3">About</p>
-            <p>Hotel A offers modern and comfortable accommodations conveniently located within a 5-minute walk from Shibatachi Station and Shiba Park. This hotel is ideal for both business and leisure travelers, providing easy access to local attractions, restaurants, and parks. Our rooms are equipped with all the amenities you need for a pleasant stay, including free Wi-Fi, air conditioning, a flat-screen TV, and a private bathroom with complimentary toiletries. Enjoy our on-site restaurant, fitness center, and 24-hour front desk service.</p>
-            <p>Access</p>
-            <p>From Shibatachi Station, it takes approximately 5 minutes to walk to Hotel A. The hotel is also within a 10-minute drive from Tokyo Tower and 20 minutes from Haneda Airport by car. Nearby attractions include the beautiful Shiba Park, the historic Zojoji Temple, and the bustling Roppongi area. Shiba Park offers a peaceful retreat in the heart of Tokyo, while Roppongi is known for its vibrant nightlife and diverse dining options.</p>
+            <h1 class="mt-3">{{ $hotels->hotel_name }}</h1>
+            <span class="badge badge-primary">{{ $hotels->categories->pluck('name')->join(', ') }}</span>
+
+            <h3 class="section-title">About</h3>
+            <p>{{ $hotels->description }}</p>
+
+            <h3 class="section-title mt-5">Access</h3>
+            <p>{{ $hotels->access }}</p>
         </div>
+
+        <!-- レビューカルーセル -->
         <div class="col-md-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Exceptional 43 reviews</h5>
-                    <div class="d-flex align-items-center">
-                        <span class="badge badge-success mr-2">10</span>
-                        <div>
-                            <i class="fa fa-star text-warning"></i>
-                            <i class="fa fa-star text-warning"></i>
-                            <i class="fa fa-star text-warning"></i>
-                            <i class="fa fa-star text-warning"></i>
-                            <i class="fa fa-star text-warning"></i>
+            <div id="carouselExampleIndicators" class="carousel slide w-100">
+                <div class="carousel-inner">
+                    @foreach($hotel_reviews as $index => $review)
+                        <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                            <div class="custom-outline p-3">
+                                <h5>Exceptional {{ $hotel_reviews->count() }} reviews</h5>
+                                <div class="d-flex align-items-center">
+                                    <span class="rate-text me-1">{{ $review->rating }}</span>
+                                    @for ($i = 0; $i < $review->rating; $i++)
+                                        <span class="selected">★</span>
+                                    @endfor
+                                    @for ($i = $review->rating; $i < 5; $i++)
+                                        <span class="not_selected">★</span>
+                                    @endfor
+                                </div>
+                                <p class="mt-3">
+                                    @if (strlen($review->comment) > 100)
+                                        {{ Str::limit($review->comment, 100) }}
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#commentModal-{{ $index }}">Read more</a>
+                                    @else
+                                        {{ $review->comment }}
+                                    @endif
+                                </p>
+                                <p class="text-muted small">{{ $review->user->username }}</p>
+                            </div>
                         </div>
-                    </div>
-                    <p class="mt-3">"素晴らしい滞在でした。Booking.comでの宿泊のレビューが信頼できます。"</p>
-                    <p>— User Name</p>
-                    <div class="mt-4">
-                        <h6>Explore the area</h6>
-                        <p>Blackheath, NSW</p>
-                    </div>
+                    @endforeach
                 </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
+            <!-- 地図を表示 -->
             <div class="card mt-2">
                 <div class="card-body">
-                    <div id="map"></div>
+                    <div id="map" style="height: 200px; width: 100%;"></div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="input-group my-4 w-50">
-        <input type="date" class="form-control">
-        <input type="number" class="form-control" placeholder="Travellers">
-        <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button">
-                <i class="fa fa-search"></i>
-            </button>
-        </div>
-    </div>
-    <div class="list-group">
-        <div class="list-group-item">
-            <div class="row align-items-center">
-                <div class="col-md-2">
-                    <img src="{{ asset('images/hotel-room.jpg') }}" alt="hotel-room" class="hotel-room img-fluid">
-                </div>
-                <div class="col-md-7">
-                    <h5>Single Room</h5>
-                    <ul class="list-inline">
-                        <li class="list-inline-item"><i class="fa fa-check"></i> Shampoo</li>
-                        <li class="list-inline-item"><i class="fa fa-check"></i> Conditioner</li>
-                        <li class="list-inline-item"><i class="fa fa-check"></i> Body wash</li>
-                        <li class="list-inline-item"><i class="fa fa-check"></i> Toothbrush</li>
-                        <li class="list-inline-item"><i class="fa fa-check"></i> Toothpaste</li>
-                    </ul>
-                </div>
-                <div class="col-md-3 text-end">
-                    <h6>$100 / 2 travellers</h6>
-                    <small>include taxes & fees for 1 night</small>
-                    <a href="{{ route('customer.reserve.edit') }}" class="btn btn-danger mt-2">Book now</a>
+    <!-- 部屋リスト -->
+    <div class="row mt-5">
+        @foreach ($availableRooms as $room)
+            <div class="col-md-12 mb-4">
+                <div class="d-flex align-items-center border p-3 rounded">
+                    <img src="{{ asset('images/hotel-room.jpg') }}" alt="hotel-room" class="img-fluid" style="max-width: 150px;">
+                    <div class="ms-3 flex-grow-1">
+                        <h5>{{ $room->room_type }}</h5>
+                        <ul class="list-inline">
+                            @foreach ($hotels->categories->where('type', 'free_toiletries') as $category)
+                                <li class="list-inline-item"><i class="fa fa-check"></i>{{ $category->name }}</li>
+                            @endforeach
+                            {{-- <li class="list-inline-item"><i class="fa fa-check"></i> Shampoo</li>
+                            <li class="list-inline-item"><i class="fa fa-check"></i> Conditioner</li>
+                            <li class="list-inline-item"><i class="fa fa-check"></i> Body wash</li>
+                            <li class="list-inline-item"><i class="fa fa-check"></i> Toothbrush</li>
+                            <li class="list-inline-item"><i class="fa fa-check"></i> Toothpaste</li> --}}
+                        </ul>
+                    </div>
+                    <div class="text-end">
+                        <h6 class="mb-1">{{ $room->price }} / {{ $room->capacity }} travellers</h6>
+                        <small>Includes taxes & fees for 1 night</small>
+                        <a href="#" class="btn btn-danger mt-2">Book now</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="list-group-item">
-            <div class="row align-items-center">
-                <div class="col-md-2">
-                    <img src="{{ asset('images/hotel-room.jpg') }}" alt="hotel-room" class="hotel-room img-fluid">
-                </div>
-                <div class="col-md-7">
-                    <h5>Double Room</h5>
-                    <ul class="list-inline">
-                        <li class="list-inline-item"><i class="fa fa-check"></i> Shampoo</li>
-                        <li class="list-inline-item"><i class="fa fa-check"></i> Conditioner</li>
-                        <li class="list-inline-item"><i class="fa fa-check"></i> Body wash</li>
-                        <li class="list-inline-item"><i class="fa fa-check"></i> Toothbrush</li>
-                        <li class="list-inline-item"><i class="fa fa-check"></i> Toothpaste</li>
-                    </ul>
-                </div>
-                <div class="col-md-3 text-end">
-                    <h6>$100 / 2 travellers</h6>
-                    <small>include taxes & fees for 1 night</small>
-                    <a href="{{ route('customer.reserve.edit') }}" class="btn btn-danger mt-2">Book now</a>
-                </div>
-            </div>
-        </div>
+        @endforeach
     </div>
 </div>
 
-<script>
-    (g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})({
-      key: "AIzaSyAQ1u-pft-pLmlVb5TYcprtivdXXNkjfDk",
-      v: "weekly",
-      // Use the 'v' parameter to indicate the version to use (weekly, beta, alpha, etc.).
-      // Add other bootstrap parameters as needed, using camel case.
-    });
+<script> 
+    window.hotelAddress = @json($address);
 </script>
 
 <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
 <script src="{{ asset('js/jquery-ui.js') }}"></script>
-<script src="{{ asset('js/jquery.js') }}"></script>
+<script src="{{ asset('js/jquery_top.js') }}"></script>
 
 @endsection

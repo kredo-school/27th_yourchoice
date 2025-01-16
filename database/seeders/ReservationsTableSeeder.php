@@ -31,7 +31,7 @@ class ReservationsTableSeeder extends Seeder
             ],
             // パターン2
             [
-                'user_id'           => 2,
+                'user_id'           => 3,
                 'payment_id'        => 2,
                 'check_in_date'     => '2025-02-03',
                 'check_out_date'    => '2025-02-04',
@@ -45,7 +45,7 @@ class ReservationsTableSeeder extends Seeder
             ],
             // パターン3
             [
-                'user_id'           => 1,
+                'user_id'           => 3,
                 'payment_id'        => 3,
                 'check_in_date'     => '2025-02-03',
                 'check_out_date'    => '2025-02-05',
@@ -59,7 +59,7 @@ class ReservationsTableSeeder extends Seeder
             ],
             // パターン4
             [
-                'user_id'           => 2,
+                'user_id'           => 1,
                 'payment_id'        => 4,
                 'check_in_date'     => '2025-02-01',
                 'check_out_date'    => '2025-02-03',
@@ -73,7 +73,7 @@ class ReservationsTableSeeder extends Seeder
             ],
             // パターン5
             [
-                'user_id'           => 2,
+                'user_id'           => 1,
                 'payment_id'        => 5,
                 'check_in_date'     => '2024-02-02',
                 'check_out_date'    => '2024-02-04',

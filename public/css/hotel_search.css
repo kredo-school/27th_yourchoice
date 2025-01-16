@@ -36,6 +36,93 @@
 
 /* hotel_detail */
 
+/* アウトラインのデザイン */
+.custom-outline {
+    border: 1px solid #ddd; /* グレーの枠線 */
+    padding: 20px; /* 内側の余白 */
+    border-radius: 8px; /* 角丸にする */
+    background-color: #f9f9f9; /* 背景色 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 軽い影を追加 */
+    margin-bottom: 15px; /* 下に間隔を追加 */
+}
+
+/* タイトルのデザイン */
+.custom-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.not_selected {
+    font-size: 1.5rem;
+    color: #ccc; /* デフォルトの星の色 */
+  }
+  
+  .selected {
+      font-size: 1.5rem;
+      color: gold; /* 選択およびホバー時の星の色 */
+  }
+
+/* 左右ボタンのカスタマイズ */
+/* 初期状態では矢印ボタンを非表示 */
+.carousel-control-prev,
+.carousel-control-next {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* ホバー時に矢印ボタンを表示 */
+.carousel:hover .carousel-control-prev,
+.carousel:hover .carousel-control-next {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ボタンのデザイン */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.6); /* 黒色の背景 */
+    border-radius: 50%; /* 丸みをつける */
+    width: 30px;
+    height: 30px;
+}
+
+/* ボタンの親要素の大きさを調整 */
+.carousel-control-prev,
+.carousel-control-next {
+    width: 50px;
+}
+
+/* コメントを見やすくする */
+.card-body {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f9f9f9; /* 背景を少し明るく */
+    border-radius: 10px; /* 角丸 */
+}
+
+/* 見出しデザイン */
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* カルーセル全体の間隔 */
+.carousel-inner {
+    margin: 20px auto;
+    max-width: 800px; /* 最大幅を制限 */
+}
+
+.text-truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
 
 /* Google map */
 #map {

@@ -6,19 +6,34 @@
 <link rel="stylesheet" href="{{ asset('css/hotel_search.css') }}">
 
 <div class="container mt-5">
+
     <h1 class="text-center">{{ ucfirst($topCategory) }}</h1>
-    
+
     <div class="input-group my-4">
-        <input type="text" class="form-control" placeholder="Where to?">
-        <input type="date" class="form-control">
-        <input type="number" class="form-control" placeholder="Travellers">
-        <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button">
-                <i class="fa fa-search"></i>
-            </button>
-        </div>
+        {{-- 検索機能実装 --}}
+        <form action="#" method="POST" class="form-inline">
+            @csrf
+            <div class="d-flex align-items-center">
+                <!-- 場所入力 -->
+                <input type="text" name="location" class="form-control me-2" placeholder="Where to?" id="location">
+                
+                <!-- チェックイン日入力 -->
+                <input type="date" name="checkInDate" class="form-control" id="checkInDate" placeholder="Check-in Date">
+                
+                <!-- チェックアウト日入力 -->
+                <input type="date" name="checkOutDate" class="form-control me-2" id="checkOutDate" placeholder="Check-out Date">
+                
+                <!-- 人数入力 -->
+                <input type="number" name="travellers" class="form-control" placeholder="Travellers" id="travellers">
+                
+                <!-- 検索ボタン -->
+                <button class="btn btn-outline-secondary" type="submit">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+        </form>
     </div>
-    
+
     <div class="d-flex justify-content-start mb-3">
         <div class="me-3">
             <button class="btn btn-outline-secondary" type="button" aria-haspopup="true" aria-expanded="false" data-bs-toggle="modal" data-bs-target="#advanced-search">
@@ -49,19 +64,21 @@
     <div class="list-group">
         @foreach ($hotels as $hotel)
             <div class="list-group-item">
-                <a href="{{ route('customer.top.show') }}" class="stretched-link"></a>
+                <a href="{{ route('customer.top.show', ['id' => $hotel->id]) }}" class="stretched-link"></a>
                 <div class="row align-items-center">
                     <div class="col-md-2">
-                        <img src="{{ asset('images/hotel.jpg') }}" alt="hotel-img" class="hotel-img">
+                        <img src="{{ asset($hotel->image_main) }}" alt="hotel-img" class="hotel-img">
                     </div>
                     <div class="col-md-7">
                         <h5>{{$hotel->hotel_name}}</h5>
                         <p>{{$hotel->prefecture}}</p>
-                        <span class="badge bg-pink">{{ $hotel->categories->pluck('name')->implode(', ') }}</span>
+                            @foreach($hotel->categories as $hotelcategory)
+                                <span class="badge bg-pink">{{ $hotelcategory->name }}</span>
+                            @endforeach
                     </div>
                     <div class="col-md-3 text-end">
                         <div class="rating">
-                            <span class="fa fa-star checked"></span>x
+                            <span class="fa fa-star checked"></span>
                             <span class="fa fa-star checked"></span>
                             <span class="fa fa-star checked"></span>
                             <span class="fa fa-star"></span>

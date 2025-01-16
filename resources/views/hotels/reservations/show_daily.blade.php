@@ -26,7 +26,7 @@
                     <th class="col4">People</th>
                     <th class="col5">Check-in date</th>
                     <th class="col6">Check-out date</th>
-                    <th class="col7">Option</th>
+                    <th class="col7">Breakfast</th>
                     <th class="col8">Payment</th>
                     <th class="col9">Check-in</th>
                     <th class="col10">Phone number</th>
@@ -46,12 +46,12 @@
                         @endif
                         </td>
                         <td>{{ $status['room']->room_number }}</td>
-                        @if ($status['reservation'])
-                            <td>{{ $status['reservation']->user->first_name ?? ''}} {{ $status['reservation']->user->last_name ?? ''}}</td>
-                            <td>{{ $status['details']->number_of_people }}</td>
+                        @if (!empty($status['reservation']) && ($status['reservation']->guest || $status['reservation']->user))
+                            <td>{{ $status['reservation']->user->first_name ?? $status['reservation']->guest->first_name }} {{ $status['reservation']->user->last_name ?? $status['reservation']->guest->last_name }}</td>
+                            <td>{{ $status['details']->number_of_people ?? $status['reservation']->number_of_people }}</td>
                             <td>{{ $status['reservation']->check_in_date }}</td>
                             <td>{{ $status['reservation']->check_out_date }}</td>
-                            <td>{{ $status['reservation']->breakfast ? 'Yes' : 'No' }}</td>
+                            <td>{{ $status['reservation']->breakfast ? 'No' : 'Yes' }}</td>
                             <td>{{ $status['payment_status'] }}</td>
                             <td>
                                 <form action="{{ route('hotel.reservation.updateCheckinStatus', $status['reservation']->id) }}" method="POST">
@@ -63,8 +63,10 @@
                                     </select>
                                 </form>
                             </td> 
-                            <td>{{ $status['reservation']->user->phone_number ?? ''}}</td>
+                            <td>{{ $status['reservation']->user->phone_number ?? $status['reservation']->guest->phone_number }}</td>
                             <td>{{ $status['reservation']->customer_request }}</td>
+                        @elseif(!empty($status['reservation']) )
+                            <td colspan="9" class="text-center fw-bold">- - - - - - - - - - -Blocked- - - - - - - - - - -</td>
                         @else
                             <td colspan="9" class="text-center">No Reservation</td>
                         @endif

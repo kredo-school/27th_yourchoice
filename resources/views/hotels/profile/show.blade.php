@@ -5,8 +5,7 @@
 
     <div class="container mt-2">
         <form method="GET" action="{{ route('hotel.profile.edit') }}" enctype="multipart/form-data">
-            {{-- @csrf --}}
-            {{-- @method('GET') --}}
+
             <div class="row">
                 <div class="col-md">
                     <h1 class="mb-4 ms-3 fw-bold">Hotel Admin Profile</h1>
@@ -40,7 +39,7 @@
                                 <label class="form-label">Address :</label>
                                 <div>
                                     <p class="form-control-plaintext border-bottom">
-                                        {{ $user->hotel->prefecture }} {{ $user->hotel->city }} {{ $user->hotel->address }}
+                                        {{ $user->hotel->address }}
                                     </p>
                                 </div>
                             </div>
@@ -61,51 +60,37 @@
                     </div>
                 </div>
 
-                <!-- Right Side (Images and Other Sections) -->
+                <!-- Right Side (Images Sections) -->
                 <div class="col-md-6">
                     <div class="card mt-2 mb-2">
                         <h5 class="card-header">Uploaded Images</h5>
-                        <div class="card-body">
-                            <div class="image-upload-container ms-3 mt-3">
-                                @for ($i = 0; $i < 5; $i++)
-                                    <div class="image-preview">
-                                        <div class="position-relative">
-                                            @if (isset($images[$i]))
-                                                <img src="{{ $images[$i] }}" alt="Uploaded Image"
-                                                    class="img-thumbnail preview-thumbnail"
-                                                    id="preview-{{ $i }}">
-                                                <span class="badge bg-secondary position-absolute top-0 start-0"
-                                                    id="label-{{ $i }}">Image {{ $i + 1 }}</span>
-                                            @else
-                                                <p class="text-muted">No image uploaded</p>
-                                            @endif
-                                        </div>
-                                    </div>
-                                @endfor
-                            </div>
+                        <div class="card-body image-upload-container">
+                            @foreach (['image_main', 'image_sub1', 'image_sub2', 'image_sub3', 'image_sub4'] as $imageField)
+                                <div class="image-preview mb-3">
+                                    @if ($hotel->$imageField)
+                                        <img src="{{ $hotel->$imageField }}" alt="Hotel Image"
+                                            class="img-thumbnail preview-thumbnail"><br>
+                                        <p>{{ str_replace('image_', '', $imageField) }}</p>
+                                    @else
+                                        <p class="text-muted">No image uploaded</p>
+                                    @endif
+                                </div>
+                            @endforeach
                         </div>
                     </div>
-
 
                     <!-- Right Side (Service and Amenities) -->
                     <div class="card mt-2 mb-2">
                         <div class="card-header">Service</div>
                         <div class="card-body">
-                            {{-- @foreach ($hotel->hotelCategory as $hotel_category)
-                            <span class="badge bg-pink">{{$hotel_category->id}}</span>
-                        @endforeach --}}
                             <!-- Hotel Service Section -->
                             <div class="mb-3">
                                 <h6>Hotel Service :</h6>
                                 <div class="service-line">
-                                    {{-- @foreach ($hotel->hotelCategories as $hotel_category)
-                                        <span class="service-item">
-                                            {{ $hotel_category->name }}
-                                        </span>
-                                    @endforeach --}}
-                                    {{-- <span class="service-item">Parking availability</span>
-                                    <span class="service-item">Luggage storage service</span>
-                                    <span class="service-item">Breakfast - Price: $20</span> --}}
+                                    @foreach ($services as $service)
+                                        <span class="service-item">{{ $service->name }}</span>
+                                    @endforeach
+                                    <span class="service-item">{{ $user->hotel->breakfast_price }}</span>
                                 </div>
                             </div>
 
@@ -113,21 +98,18 @@
                             <div class="mb-3">
                                 <h6>Amenity :</h6>
                                 <div class="service-line">
-                                    {{-- <span class="service-item">Wi-Fi</span>
-                                    <span class="service-item">Air conditioning</span>
-                                    <span class="service-item">TV</span>
-                                    <span class="service-item">Dryer</span> --}}
+                                    @foreach ($amenities as $amenity)
+                                        <span class="service-item">{{ $amenity->name }}</span>
+                                    @endforeach
                                 </div>
                             </div>
-
                             <!-- Free Toiletries Section -->
                             <div class="mb-3">
                                 <h6>Free Toiletries :</h6>
                                 <div class="service-line">
-                                    {{-- <span class="service-item">Shampoo</span>
-                                    <span class="service-item">Conditioner</span>
-                                    <span class="service-item">Body wash</span>
-                                    <span class="service-item">Toothbrush&paste</span> --}}
+                                    @foreach ($free_toiletries as $item)
+                                        <span class="service-item">{{ $item->name }}</span>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -138,12 +120,11 @@
                         <h5 class="card-header">Category</h5>
                         <div class="card-body">
                             <div class="category-container">
-                                {{-- <span class="category-item">Wheelchair and Senior</span>
-                                <span class="category-item">Visual and Hearing Impaired</span>
-                                <span class="category-item">Pregnancy</span>
-                                <span class="category-item">Religious</span>
-                                <span class="category-item">Family</span>
-                                <span class="category-item">English</span> --}}
+                                @foreach ($categories as $category)
+                                    <span class="category-item">
+                                        {{ $category->name }}
+                                    </span>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -179,58 +160,4 @@
                 </div>
         </form>
     </div>
-
-    {{-- 写真の削除 --}}
-    {{-- <script>
-        document.querySelectorAll('.delete-image').forEach(button => {
-            button.addEventListener('click', function() {
-                const imageElement = this.closest('.image-preview');
-                imageElement.remove(); // Remove the preview element
-            });
-        });
-    </script> --}}
-
-    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> --}}
-
-
-    {{-- 写真関連 --}}
-    <script>
-        function previewImage(event, index) {
-            const input = event.target;
-            const preview = document.getElementById(`preview-${index}`);
-            const icon = document.getElementById(`icon-${index}`);
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    preview.src = e.target.result;
-                    preview.classList.remove('d-none');
-                    icon.classList.add('d-none');
-                };
-                reader.readAsDataURL(input.files[0]);
-            } else {
-                preview.src = "";
-                preview.classList.add('d-none');
-                icon.classList.remove('d-none');
-            }
-        }
-
-        function removeImage(index) {
-            const input = document.querySelectorAll('.image-input')[index];
-            const preview = document.getElementById(`preview-${index}`);
-            const icon = document.getElementById(`icon-${index}`);
-            input.value = "";
-            preview.src = "";
-            preview.classList.add('d-none');
-            icon.classList.remove('d-none');
-        }
-
-        // Frontend-only label setup
-        document.addEventListener('DOMContentLoaded', function() {
-            const labels = document.querySelectorAll('.badge');
-            labels.forEach((label, index) => {
-                label.textContent = index === 0 ? 'main' : `sub${index}`;
-            });
-        });
-    </script>
-
 @endsection
