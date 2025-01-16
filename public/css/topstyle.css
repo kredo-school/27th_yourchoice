@@ -49,19 +49,11 @@ a {
   gap: 20px; /* 各グリッドアイテム間に20pxの間隔を設定 */
 }
 
-.category img {
-  width: 100%;
-  max-width: 100%;
-  margin-bottom: 0px;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.category {
+.category-form {
   text-decoration: none;
   color: inherit;
 }
-.category:hover {
+.category-form:hover {
   transform: scale(1.05);
   transition: transform 0.3s ease;
 }
@@ -78,7 +70,9 @@ a {
 }
 
 .category-btn img {
-  width: 450px; /* 適切なサイズに調整してください */
-  height: auto;
-  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 0px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }

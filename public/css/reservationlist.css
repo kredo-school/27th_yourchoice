@@ -1,0 +1,52 @@
+/* hotel_search */
+
+.rating .fa-star.checked {
+    color: yellow;
+  }
+
+.bg-pink {
+    background-color: #ffcccb; /* 薄いピンク */
+    color: #000000; /* 文字色（必要に応じて変更） */
+}
+
+.hotel-img {
+    width: 200px; /* 画像の幅を設定 */
+    height: auto; /* アスペクト比を保持 */
+}
+
+.list-group-item {
+    padding: 20px 15px; /* 十分なパディングを確保して文字と画像が重ならないようにする */
+}
+
+/* advanced_search  */
+.slidecontainer {
+    position: relative;
+    width: 80%; /* スライダーの幅*/
+    margin-top: 50px;
+}
+
+.slider-value {
+    position: absolute;
+    top: -30px;
+    left: 0; /* 左寄せに設定 */
+    font-weight: bold;
+}
+
+/* Pagenation */
+/* ページネーション全体のリンクのスタイル */
+.pagination{
+    font-size: 20px; /* フォントサイズを小さく */
+    padding: 20px 8px; /* 余白を調整 */
+}
+
+/* 非アクティブ状態のスタイル */
+.pagination .page-item.disabled .page-link {
+    color: #aaa; /* グレー */
+}
+
+/* アクティブ状態のスタイル */
+.pagination .page-item.active .page-link {
+    background-color: #007bff; /* アクティブ時の背景色 */
+    color: white;
+    font-size: 12px; /* アクティブ時もフォントサイズを適用 */
+}
