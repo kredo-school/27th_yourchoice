@@ -21,7 +21,7 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function () {
     Route::get('/top/list',[App\Http\Controllers\Customer\TopController::class,'list'])->name('top.list');
     Route::post('/top/search',[App\Http\Controllers\Customer\TopController::class,'search'])->name('top.search');
 
-    Route::get('/top/show',[App\Http\Controllers\Customer\TopController::class,'show'])->name('top.show');
+  Route::get('/top/show', [App\Http\Controllers\Customer\TopController::class, 'show'])->name('top.show');
 
 
   // ログインが必要ページ
@@ -31,9 +31,9 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function () {
       Route::get('/reserve/confirmation',[App\Http\Controllers\Customer\ReserveController::class,'confirmation'])->name('reserve.confirmation');
       Route::post('/reserve/confirmation/book',[App\Http\Controllers\Customer\ReserveController::class,'store'])->name('reserve.confirmation.book');
 
-      Route::get('/profile/show',[App\Http\Controllers\Customer\ProfileController::class,'show'])->name('profile.show');
-      Route::get('/profile/edit',[App\Http\Controllers\Customer\ProfileController::class,'edit'])->name('profile.edit');
-      Route::get('/profile/editpass',[App\Http\Controllers\Customer\ProfileController::class,'editpass'])->name('profile.editpass');
+  Route::get('/profile/show', [App\Http\Controllers\Customer\ProfileController::class, 'show'])->name('profile.show');
+  Route::get('/profile/edit', [App\Http\Controllers\Customer\ProfileController::class, 'edit'])->name('profile.edit');
+  Route::get('/profile/editpass', [App\Http\Controllers\Customer\ProfileController::class, 'editpass'])->name('profile.editpass');
 
       Route::get('/reservation/reservationlist',[App\Http\Controllers\Customer\ReservationController::class,'reservationlist'])->name('reservation.reservationlist');
       //後ほど使用↓
@@ -46,7 +46,7 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function () {
       Route::get('/review/create',[App\Http\Controllers\Customer\ReviewController::class,'create'])->name('review.create');
       Route::get('/review/store',[App\Http\Controllers\Customer\ReviewController::class,'store'])->name('review.store');
 
-      Route::get('/inquary/show',[App\Http\Controllers\Customer\InquaryController::class,'show'])->name('inquary.show');
+  Route::get('/inquary/show', [App\Http\Controllers\Customer\InquaryController::class, 'show'])->name('inquary.show');
 
   // });
 
@@ -56,16 +56,20 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function () {
 // Route::group(['prefix' => 'hotel', 'as' => 'hotel.', 'middleware' => 'auth'], function () {
 Route::group(['prefix' => 'hotel', 'as' => 'hotel.'], function () {
 
-    Route::get('/inquary/show',[App\Http\Controllers\Hotel\InquaryController::class,'show'])->name('inquary.show');
+  Route::get('/inquary/show', [App\Http\Controllers\Hotel\InquaryController::class, 'show'])->name('inquary.show');
 
-    Route::get('/profile/show',[App\Http\Controllers\Hotel\ProfileController::class,'show'])->name('profile.show');
-    Route::get('/profile/edit',[App\Http\Controllers\Hotel\ProfileController::class,'edit'])->name('profile.edit');
-    Route::get('/profile/editpass',[App\Http\Controllers\Hotel\ProfileController::class,'editpass'])->name('profile.editpass');
+  Route::get('/profile/show', [App\Http\Controllers\Hotel\ProfileController::class, 'show'])->name('profile.show');
+  Route::get('/profile/edit', [App\Http\Controllers\Hotel\ProfileController::class, 'edit'])->name('profile.edit');
+  Route::get('/profile/update', [App\Http\Controllers\Hotel\ProfileController::class, 'update'])->name('profile.update'); 
+  Route::get('/profile/editpass', [App\Http\Controllers\Hotel\ProfileController::class, 'editpass'])->name('profile.editpass');
+  Route::post('/profile/updatepass', [App\Http\Controllers\Hotel\ProfileController::class, 'updatepass'])->name('profile.updatepass'); 
 
-    Route::get('/room/show',[App\Http\Controllers\Hotel\RoomController::class,'show'])->name('room.show');
-    Route::get('/room/create',[App\Http\Controllers\Hotel\RoomController::class,'create'])->name('room.create');
-    Route::get('/room/edit',[App\Http\Controllers\Hotel\RoomController::class,'edit'])->name('room.edit');
-    Route::get('/room/destroy', [App\Http\Controllers\Hotel\RoomController::class, 'destroy'])->name('room.destroy');
+  Route::get('/room/show', [App\Http\Controllers\Hotel\RoomController::class, 'show'])->name('room.show');
+  Route::get('/room/create', [App\Http\Controllers\Hotel\RoomController::class, 'create'])->name('room.create');
+  Route::get('/room/{id}/edit', [App\Http\Controllers\Hotel\RoomController::class, 'edit'])->name('room.edit');
+  Route::put('/room/{id}/update',[App\Http\Controllers\Hotel\RoomController::class,'update'])->name('room.update');
+    Route::post('/room/store',[App\Http\Controllers\Hotel\RoomController::class,'store'])->name('room.store');
+    Route::delete('/room/{id}/destroy', [App\Http\Controllers\Hotel\RoomController::class, 'destroy'])->name('room.destroy');
 
     Route::get('/price/show',[App\Http\Controllers\Hotel\PriceController::class,'show'])->name('price.show');
     Route::get('/price/edit',[App\Http\Controllers\Hotel\PriceController::class,'edit'])->name('price.edit');
@@ -73,24 +77,18 @@ Route::group(['prefix' => 'hotel', 'as' => 'hotel.'], function () {
 
     Route::get('/reservation/show_monthly',[App\Http\Controllers\Hotel\ReservationController::class,'show_monthly'])->name('reservation.show_monthly');
     Route::get('/reservation/show_daily',[App\Http\Controllers\Hotel\ReservationController::class,'show_daily'])->name('reservation.show_daily');
-    Route::put('/hotel/reservation/{id}/update-checkin-status', [App\Http\Controllers\Hotel\ReservationController::class, 'updateCheckinStatus'])->name('reservation.updateCheckinStatus');
-    Route::get('/reservation/{id}/edit',[App\Http\Controllers\Hotel\ReservationController::class,'edit'])->where('id', 'new|\d+') // 'new' または数字を許可
-    ->name('reservation.edit');
-    Route::post('/reservation/store',[App\Http\Controllers\Hotel\ReservationController::class,'store'])->name('reservation.store');
-    Route::put('/reservation/update/{id}',[App\Http\Controllers\Hotel\ReservationController::class,'update'])->name('reservation.update');
-    Route::get('/api/hotel/reservations/calendar', [App\Http\Controllers\Hotel\ReservationController::class, 'getCalendarEvents']);
+    Route::get('/reservation/edit',[App\Http\Controllers\Hotel\ReservationController::class,'edit'])->name('reservation.edit');
+    Route::get('/reservation/store',[App\Http\Controllers\Hotel\ReservationController::class,'store'])->name('reservation.store');
 
 
-
-    Route::get('/review/list',[App\Http\Controllers\Hotel\ReviewController::class,'list'])->name('review.list');
-    Route::get('/review/show',[App\Http\Controllers\Hotel\ReviewController::class,'show'])->name('review.show');
-
+  Route::get('/review/list', [App\Http\Controllers\Hotel\ReviewController::class, 'list'])->name('review.list');
+  Route::get('/review/show', [App\Http\Controllers\Hotel\ReviewController::class, 'show'])->name('review.show');
 });
 
 
-Route::get('/register/top',[App\Http\Controllers\RegisterController::class,'top'])->name('register.top');
-Route::get('/register/create_customer',[App\Http\Controllers\RegisterController::class,'create_customer'])->name('register.create_customer');
-Route::get('/register/create_hotel',[App\Http\Controllers\RegisterController::class,'create_hotel'])->name('register.create_hotel');
+Route::get('/register/top', [App\Http\Controllers\RegisterController::class, 'top'])->name('register.top');
+Route::get('/register/create_customer', [App\Http\Controllers\RegisterController::class, 'create_customer'])->name('register.create_customer');
+Route::get('/register/create_hotel', [App\Http\Controllers\RegisterController::class, 'create_hotel'])->name('register.create_hotel');
 
 // Route::get('/register', [CustomerController::class, 'register'])->name('register');
 Route::get('/register/create_customer/signup',[App\Http\Controllers\RegisterController::class,'create'])->name('register.create');
