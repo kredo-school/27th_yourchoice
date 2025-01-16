@@ -71,7 +71,7 @@ public function visible($id)
     $review = Review::findOrFail($id);
 
     // ステータスを "hidden" に設定
-    $review->status = 'hidden';
+    $review->status = null;
     $review->save();
 
     // リダイレクト

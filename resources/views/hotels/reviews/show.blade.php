@@ -71,9 +71,9 @@
                     </div>
                 </div>
                 @if($review->status)
-                    <a href="{{ route('review.visible'), $review-> id) }}" class="subbtn2">Show this review</a>
+                    <a href="{{ route('hotel.review.visible', $review-> id) }}" class="subbtn2">Show this review</a>
                 @else
-                    <a href="{{ route('review.hide', $review-> id) }}" class="subbtn1">Hide this review</a>
+                    <a href="{{ route('hotel.review.hide', $review-> id) }}" class="subbtn1">Hide this review</a>
                 @endif
             </div>
 
