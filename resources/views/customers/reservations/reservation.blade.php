@@ -13,20 +13,20 @@
       <section class="step">
          <h2><strong><i class="fa-solid fa-user"></i> Step 1: Your Details</strong></h2>
           <!-- {{-- <form class="step1" id="step1" action="/reserved_confirmation" method="POST"> --}} -->
-            <form class="step1" id="step1" action="{{ route('customer.reserve.show') }}" method="POST">
+            <form class="step1" id="step1" action="{{ route('customer.reserve.confirmation.book') }}" method="POST">
             @csrf <!-- LaravelのCSRFトークン -->
             <label for="first-name"><strong>First Name</strong></label>
-            <input type="text" id="first-name" name="first_name" required>
+            <input type="text" id="first-name" name="first_name" value="{{ old('first_name', $user->first_name) }}" required>
             <!-- {{-- <input type="text" name="first_name" value="{{ $first_name }}" readonly> --}} -->
 
             <label for="last-name"><strong>Last Name</strong></label>
-            <input type="text" id="last-name" name="last_name" required>
+            <input type="text" id="last-name" name="last_name" value="{{ old('last_name', $user->last_name) }}" required>
 
             <label for="contact"><strong> Email Address</strong></label>
-            <input type="email" id="contact" name="contact" required>
+            <input type="email" id="contact" name="contact" value="{{ old('email', $user->email) }}" required>
 
             <label for="contact"><strong> Mobile Number</strong></label>
-            <input type="tel" id="contact" name="contact" required>
+            <input type="tel" id="contact" name="contact" value="{{ old('phone_number', $user->phone_number) }}" required>
             
           
       </section>
@@ -56,7 +56,7 @@
               <p> <span class="as">*</span>required fields</p>
                 <div class="form-group">
                     <label for="first-name">First Name <span class="as">*</span></label>
-                    <input type="text" id="first-name" required>
+                    <input type="text" id="first-name" required> 
                 </div>
                 <div class="form-group">
                     <label for="last-name">Last Name <span class="as">*</span></label>

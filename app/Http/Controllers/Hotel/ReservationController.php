@@ -23,7 +23,7 @@ class ReservationController extends Controller
         // 指定日の予約を取得
         $nextDate = Carbon::parse($date)->addDay(); // 指定日付の翌日を取得
 
-        $reservations = Reservation::with(['reservationRooms.room' => function ($query) use ($hotelId) {
+        $reservations = Reservation::with(['reservationRoom.room' => function ($query) use ($hotelId) {
             $query->where('hotel_id', $hotelId); // hotel_id が $hotelId の部屋のみ
         }, 'user', 'payment'])
         ->whereDate('check_in_date', '<=', $date)
@@ -33,7 +33,7 @@ class ReservationController extends Controller
         // 部屋ごとの予約状況を作成
         $roomStatus = $rooms->map(function ($room) use ($reservations) {
             $reservationRoom = $reservations
-                ->flatMap->reservationRooms
+                ->flatMap->reservationRoom
                 ->firstWhere('room_id', $room->id);
 
             return [
@@ -92,7 +92,7 @@ class ReservationController extends Controller
             abort(404, 'Reservation not found');
         }
 
-        $rooms = $reservation->reservationRooms->map(function ($reservationRoom) {
+        $rooms = $reservation->reservationRoom->map(function ($reservationRoom) {
             return $reservationRoom->room;
         });
     
@@ -163,7 +163,7 @@ class ReservationController extends Controller
         $rooms = Room::where('hotel_id', $hotelId)->get();
 
         // 指定期間の予約を取得（必要なら期間をリクエストから指定）
-        $reservations = Reservation::with(['reservationRooms.room' => function ($query) use ($hotelId) {
+        $reservations = Reservation::with(['reservationRoom.room' => function ($query) use ($hotelId) {
                 $query->where('hotel_id', $hotelId);
             }])
             ->whereBetween('check_in_date', [$request->start, $request->end])
@@ -187,7 +187,7 @@ class ReservationController extends Controller
                     return $dateStr >= $reservation->check_in_date && $dateStr <= $reservation->check_out_date;
                 })
                 ->flatMap(function ($reservation) {
-                    return $reservation->reservationRooms->pluck('room_id');
+                    return $reservation->reservationRoom->pluck('room_id');
                 })
                 ->unique();
 

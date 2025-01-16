@@ -14,7 +14,9 @@ class CreatePaymentsTable extends Migration
             $table->decimal('amount', 10, 2); // 金額（小数点以下2桁まで）
             $table->enum('payment_method', ['credit_card', 'paypal', 'bank_transfer']); // 支払い方法
             $table->enum('status', ['pending', 'completed', 'failed']); // 支払いのステータス
+            $table->unsignedBigInteger('user_id')->nullable(); // ユーザーID（外部キー）
             $table->timestamps(); // created_at, updated_at
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

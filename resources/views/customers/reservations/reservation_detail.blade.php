@@ -12,19 +12,19 @@
           @csrf
         
             <label class="form-lavel">First Name</label>
-            <input type="text" name="first_name" id="first-name" class="form-control" value="{{ old('first_name', $first_name ?? '') }}" readonly>
+            <input type="text" name="first_name" id="first-name" class="form-control" value="{{ old('first_name', $user->first_name ?? '') }}" readonly>
             {{-- <input type="text" name="first-name" id="first-name" class="form-control" value="{{ $first_name }}" readonly> --}}
             
             <label class="form-lavel">Last Name</label>
-            <input type="text" name="last_name" id="last-name" class="form-control" value="#" autofocus>
+            <input type="text" name="last_name" id="last-name" class="form-control" value="{{ old('last_name', $user->last_name ?? '') }}" autofocus readonly>
             
             <label class="form-lavel">Email Address</label>
-            <input type="email" name="reservation-email" id="reservation-email" class="form-control" value="#" autofocus>
+            <input type="email" name="reservation-email" id="reservation-email" class="form-control" value="{{ old('email', $user->email ?? '') }}" autofocus readonly>
                     
             {{-- <input type="email" placeholder="youremail@gmail.com" required> --}}
             
             <label class="form-lavel">Mobile Number</label>
-            <input type="text" name="reservation-phone" id="reservation-phone" class="form-control" value="{{ old('reservation-phone') }}">
+            <input type="text" name="reservation-phone" id="reservation-phone" class="form-control" value="{{ old('phone_number', $user->phone_number) }}" readonly>
             {{-- <input type="tel" placeholder="089-4243-4242" required> --}}
         </div>
         </form>
@@ -34,14 +34,14 @@
       <section class="step" id="step2">
         <h2 class="step5"><strong>■ Optional</strong></h2>
           <label class="breakfast" for="breakfast">
-            <input type="checkbox" id="breakfast" name="breakfast">Breakfast</input>
+            <input type="checkbox" id="breakfast" name="breakfast" value="{{ old('breakfast', $user->breakfast) }}"  disabled>Breakfast</input>
           </label>
       </section>
 
       <!-- Step 3 -->
       <section class="step" id="step3">
         <h2 class="step5"><strong>■ Requests to the Hotel</strong></h2>
-          <textarea class="requests" id="requests" name="requests" placeholder="Enter your requests here..."></textarea>
+          <textarea class="requests" id="requests" name="requests" placeholder="Enter your requests here..." value="{{ old('customer_request', $user->cunstomer_request) }}"   readonly></textarea>
       </section>
 
    <!-- Payment Details -->
@@ -55,7 +55,7 @@
               <p> <span class="as">*</span>required fields</p>
                 <div class="form-group">
                     <label for="first-name">First Name <span class="as">*</span></label>
-                    <input type="text" id="first-name" required>
+                    <input type="text" id="first-name" name="first-name" value="{{ old('first_name', $user->first_name) }}" readonly>
                 </div>
                 <div class="form-group">
                     <label for="last-name">Last Name <span class="as">*</span></label>

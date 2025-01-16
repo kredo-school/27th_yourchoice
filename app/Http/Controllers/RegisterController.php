@@ -34,6 +34,34 @@ class RegisterController extends Controller
 
     }
 
+    // public function update(Request $request)
+  // {
+  //   #1. Validate all form data
+  // $request->validate([
+  //   'hotel_name'           => 'required|string|max:255',
+  //   'url'                  => 'nullable|url',
+  //   'postal_code'          => 'required|string|max:10',
+  //   'prefecture'           => 'required|string|max:10',
+  //   'city'                 => 'required|string|max:100',
+  //   'address'              => 'required|string|max:100',
+  //   'access'               => 'nullable|string|max:255',
+  //   'description'          => 'nullable|string',
+  //   'image_main'           => 'required|image',  // main画像は必須
+  //   'image_sub1'           => 'nullable|image',  // サブ画像は任意
+  //   'image_sub2'           => 'nullable|image',
+  //   'image_sub3'           => 'nullable|image',
+  //   'image_sub4'           => 'nullable|image',
+  //   'cancellation_period'  => 'required|integer',
+  //   'general_fee'          => 'required|integer',
+  //   'sameday_fee'          => 'required|integer',
+  //   'breakfast_price'      => 'required|numeric',
+  //   'username'             => 'required|string|max:100',
+  //   'email'                => 'required|email|unique:users,email,' . Auth::id(),
+  //   'phone_number'         => 'required|string|max:20',
+  //   // 'password' => 'nullable|min:8|confirmed', // パスワードの確認フィールドを追加する場合
+  // ]);
+
+
     public function create_hotel()
     {
         return view('auth.hotel_register', ['role_id' => 2]);
@@ -89,7 +117,7 @@ class RegisterController extends Controller
         return redirect()->route('customer.profile.show')->with('success', 'Registration successful!');
     } catch (\Exception $e) {
         Log::error('Failed: ' . $e->getMessage());
-        return redirect()->route('customer.profile.show')->withErrors(['error' => 'Failed']);
+        return redirect()->back()->withErrors(['error' => 'Failed']);
     }
     }
 
@@ -109,7 +137,7 @@ class RegisterController extends Controller
         return redirect()->route('hotel.profile.show')->with('success', 'Registration successful!');
     } catch (\Exception $e) {
         Log::error('Failed: ' . $e->getMessage());
-        return redirect()->route('hotel.profile.show')->withErrors(['error' => 'Failed']);
+        return redirect()->back()->withErrors(['error' => 'Failed']);
     }
     }
 

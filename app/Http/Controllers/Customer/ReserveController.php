@@ -5,18 +5,42 @@ namespace App\Http\Controllers\Customer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Reservation;
 
 class ReserveController extends Controller
 {
+    private $user;
     public function edit()
     {
-        return view('customers.reservations.reservation');
+        $user = $this->user->findOrFail(Auth::id());
+        return view('customers.reservations.reservation',compact('user'));
     }
 
-    public function show()
-    {
-        return view('customers.reservations.reservation_detail');
-    }
+    // public function show()
+    // {
+    //     $user = $this->user->findOrFail(Auth::id());
+        
+    //     return view('customers.reservations.reservation_detail', compact('user'));
+    // }
+
+    
+
+public function show()
+{
+    $user = $this->user->findOrFail(Auth::id());
+    $model = new reservation(); // モデルを正しくインスタンス化
+    $record = $model->findOrFail($id);
+    return view('customers.reserve.show', compact('record','user'));
+}
+
+
+    public function __construct(User $user)
+  {
+    $this->user = $user;
+   
+  }
 
 
     public function store(Request $request) // バリデーション 
@@ -52,6 +76,29 @@ class ReserveController extends Controller
             Log::error('Failed: ' . $e->getMessage());
             return redirect()->route('customer.profile.show')->withErrors(['error' => 'Failed']);
         }
+
+        $reservation = Reservation::create([
+    'user_id' => $request->input('user_id'), // ユーザーID
+    'payment_id' => $paymentId, // 支払い情報の関連付け
+    'check_in_date' => $request->input('check_in_date'), // チェックイン日
+    'check_out_date' => $request->input('check_out_date'), // チェックアウト日
+    'number_of_people' => $request->input('number_of_people'), // 宿泊人数
+    'reservation_status' => 'pending', // 初期ステータス
+]);
+
+$reservationId = $reservation->id; // 生成されたIDを取得
+
+
+$rooms = $request->input('rooms'); // 部屋情報（配列形式）
+foreach ($rooms as $room) {
+    ReservationRoom::create([
+        'reservation_id' => $reservationId, // 予約情報の関連付け
+        'room_id' => $room['room_id'], // 部屋ID
+        'room_type' => $room['room_type'], // 部屋タイプ
+        'price' => $room['price'], // 部屋料金
+    ]);
+}
+
     }
 
     public function confirmation()

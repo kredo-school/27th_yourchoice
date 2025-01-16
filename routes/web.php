@@ -15,7 +15,7 @@ Auth::routes();
 
 // カスタマー側
 
-Route::group(['prefix' => 'customer', 'as' => 'customer.'], function () {
+Route::group(['prefix' => 'customer', 'as' => 'customer.','middleware' => 'auth'], function () {
 
   // ログイン不要ページ
     Route::get('/top/list',[App\Http\Controllers\Customer\TopController::class,'list'])->name('top.list');
@@ -27,7 +27,7 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function () {
   // ログインが必要ページ
   // Route::group(['middleware' => 'auth'], function () {
       Route::get('/reserve/edit',[App\Http\Controllers\Customer\ReserveController::class,'edit'])->name('reserve.edit');
-      Route::post('/reserve/show',[App\Http\Controllers\Customer\ReserveController::class,'show'])->name('reserve.show');
+      Route::get('/reserve/show',[App\Http\Controllers\Customer\ReserveController::class,'show'])->name('reserve.show');
       Route::get('/reserve/confirmation',[App\Http\Controllers\Customer\ReserveController::class,'confirmation'])->name('reserve.confirmation');
       Route::post('/reserve/confirmation/book',[App\Http\Controllers\Customer\ReserveController::class,'store'])->name('reserve.confirmation.book');
 
