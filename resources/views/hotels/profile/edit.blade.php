@@ -18,7 +18,7 @@
                         <div class="card-header">Basic</div>
                         <div class="card-body">
                             <div class="mb-3">
-                                <label for="hotel_name" class="form-label">Hotel Name</label>
+                                <label for="hotel_name" class="form-label" required>Hotel Name</label>
                                 <input type="text" class="form-control" id="hotel_name" name="hotel_name"
                                     value="{{ old('hotel_name', $user->hotel->hotel_name) }}">
                                 @error('hotel_name')
@@ -26,7 +26,7 @@
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <label for="hotel_email" class="form-label">Email</label>
+                                <label for="hotel_email" class="form-label" required>Email</label>
                                 <input type="email" class="form-control" id="email" name="email"
                                     value="{{ old('email', $user->email) }}">
                                 @error('email')
@@ -42,7 +42,7 @@
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <label for="postal_code" class="form-label">Postal Code</label>
+                                <label for="postal_code" class="form-label" required>Postal Code</label>
                                 <div class="input-group">
                                     <span class="input-group-text">〒</span>
                                     <input type="text" class="form-control" id="postal_code" name="postal_code"
@@ -53,7 +53,7 @@
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <label for="prefecture" class="form-label">Address</label>
+                                <label for="prefecture" class="form-label" required>Address</label>
                                 <input type="text" class="form-control mb-1" id="prefecture" name="prefecture"
                                     placeholder="prefecture" value="{{ old('prefecture', $user->hotel->prefecture) }}">
                                 @error('prefecture')
@@ -72,7 +72,7 @@
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <label for="phone_number" class="form-label">Phone Number</label>
+                                <label for="phone_number" class="form-label" required>Phone Number</label>
                                 <input type="text" class="form-control" id="phone_number" name="phone_number"
                                     value="{{ old('phone_number', $user->phone_number) }}">
                                 @error('phone_number')
@@ -80,16 +80,17 @@
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <label for="access" class="form-label">Access</label>
-                                <input type="text" class="form-control" id="access" name="access"
-                                    value="{{ old('access', $user->hotel->access) }}">
+                                <label for="access" class="form-label" required>Access</label>
+                                {{-- <input type="text" class="form-control" id="access" name="access"
+                                    value="{{ old('access', $user->hotel->access) }}"> --}}
+                                <textarea type="text" class="form-control" id="access" name="access">{{ old('access', $user->hotel->access) }}</textarea>
                                 @error('access')
                                     <div class="text-danger small">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <label for="description" class="form-label">Description</label>
-                                <textarea class="form-control" id="description" name="description">{{ old('description', $user->hotel->description) }}</textarea>
+                                <label for="description" class="form-label" required>Description</label>
+                                <textarea class="form-control custom-textarea" id="description" name="description">{{ old('description', $user->hotel->description) }}</textarea>
                                 @error('description')
                                     <div class="text-danger small">{{ $message }}</div>
                                 @enderror
@@ -130,7 +131,19 @@
                                         <input type="hidden" name="delete_{{ $imageField }}"
                                             id="delete_{{ $imageField }}">
                                     @endif
-                                    <p class="mt-2">{{ str_replace('image_', '', $imageField) }}</p>
+                                    {{-- <p class="mt-2">
+                                        {{ str_replace('image_', '', $imageField) }}
+                                        @if ($imageField === 'image_main')
+                                            <span class="text-danger">*</span>
+                                        @endif
+                                    </p> --}}
+                                    <!-- ラベルにrequiredを追加 -->
+                                    <label for="{{ $imageField }}" class="mt-2">
+                                        {{ str_replace('image_', '', $imageField) }}
+                                        @if ($imageField === 'image_main')
+                                            <span class="text-danger">*</span>
+                                        @endif
+                                    </label>
                                     @error($imageField)
                                         <div class="text-danger small">{{ $message }}</div>
                                     @enderror
@@ -172,7 +185,8 @@
                                         <span class="input-group-text">$</span>
                                         <input type="number" class="form-control w-50" id="breakfast_price"
                                             name="breakfast_price" aria-label="Price"
-                                            value="{{ old('breakfast_price', $user->hotel->breakfast_price) }}" disabled>
+                                            value="{{ old('breakfast_price', $user->hotel->breakfast_price) }}" disabled
+                                            min="0">
                                     </div>
                                 </div>
                                 @error('breakfast_price')
@@ -231,9 +245,11 @@
                     <!-- Category Section -->
 
                     <div class="card mt-2 mb-2">
-                        <h5 class="card-header">Category<br>
-                            <h6 class="text-center">--- Please select at least one category ---</h6>
-                        </h5>
+                        <h5 class="card-header">Category</h5>
+                        <label for="#" class="text-center" required>
+                            --- Please select at least one category ---
+                        </label>
+
                         <div class="card-body">
                             <div class="categories-grid">
                                 @php
@@ -281,11 +297,12 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label for="freeCancellation">Free Cancellation Period:</label>
+                                    <label for="freeCancellation" required>Free Cancellation Period</label>
                                     <div class="d-flex align-items-center">
                                         <input type="number" class="form-control me-2 form-width"
                                             id="cancellation_period" name="cancellation_period"
-                                            value="{{ old('cancellation_period', $user->hotel->cancellation_period) }}">
+                                            value="{{ old('cancellation_period', $user->hotel->cancellation_period) }}"
+                                            min="0">
                                         <span>days before the reservation date.</span><br>
                                     </div>
                                     @error('cancellation_period')
@@ -293,11 +310,12 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6">
-                                    <label>Cancellation Fee Percentage:</label>
+                                    <label for="#" required>Cancellation Fee Percentage</label>
                                     <div class="d-flex align-items-center mt-1">
                                         <span class="me-3">General</span>
                                         <input type="number" class="form-control mx-2 form-width" name="general_fee"
-                                            id="general_fee" value="{{ old('general_fee', $user->hotel->general_fee) }}">
+                                            id="general_fee" value="{{ old('general_fee', $user->hotel->general_fee) }}"
+                                            min="0">
                                         <span>%</span><br>
                                     </div>
                                     @error('general_fee')
@@ -306,7 +324,8 @@
                                     <div class="d-flex align-items-center mt-1">
                                         <span>Same-Day</span>
                                         <input type="number" class="form-control mx-2 form-width" name="sameday_fee"
-                                            id="sameday_fee" value="{{ old('sameday_fee', $user->hotel->sameday_fee) }}">
+                                            id="sameday_fee" value="{{ old('sameday_fee', $user->hotel->sameday_fee) }}"
+                                            min="0">
                                         <span>%</span><br>
                                     </div>
                                     @error('sameday_fee')

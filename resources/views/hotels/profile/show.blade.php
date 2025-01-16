@@ -90,7 +90,7 @@
                                     @foreach ($services as $service)
                                         <span class="service-item">{{ $service->name }}</span>
                                     @endforeach
-                                    <span class="service-item">{{ $user->hotel->breakfast_price }}</span>
+                                    <span class="service-item">${{ $user->hotel->breakfast_price }}</span>
                                 </div>
                             </div>
 
@@ -135,14 +135,14 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <p>Free Cancellation Period :<br> {{ $user->hotel->cancellation_period }} days
+                                    <p>Free Cancellation Period :<br>  {{ $user->hotel->cancellation_period }} days
                                         before the
                                         reservation date.</p>
                                 </div>
                                 <div class="col-md-6">
                                     <p>Cancellation Fee Percentage :</p>
-                                    <p>General : {{ $user->hotel->general_fee }}%</p>
-                                    <p>Same-Day : {{ $user->hotel->sameday_fee }}%</p>
+                                    <p>General :  {{ $user->hotel->general_fee }}%</p>
+                                    <p>Same-Day :  {{ $user->hotel->sameday_fee }}%</p>
                                 </div>
                             </div>
                         </div>
@@ -154,7 +154,7 @@
                             <a href="{{ route('hotel.profile.editpass') }}" class="text-decoration-none text-dark">
                                 <button type="button" class="btn btn-sub">Password Setting</button></a>
                             <a href="{{ route('hotel.profile.edit') }}" class="text-decoration-none text-dark ms-2">
-                                <button type="submit" class="btn btn-sub">Edit</button>
+                                <button type="submit" class="btn btn-sub w-25">Edit</button>
                         </div>
                     </div>
                 </div>
