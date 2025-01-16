@@ -52,5 +52,31 @@ class ReviewController extends Controller
         return view('hotels.reviews.show') ->with('review', $review);
     }
 
+    public function hide($id)
+{
+    // レビューを取得
+    $review = Review::findOrFail($id);
+
+    // ステータスを "hidden" に設定
+    $review->status = 'hidden';
+    $review->save();
+
+    // リダイレクト
+    return redirect()->back()->with('success', 'Review status updated to hidden.');
+}
+
+public function visible($id)
+{
+    // レビューを取得
+    $review = Review::findOrFail($id);
+
+    // ステータスを "hidden" に設定
+    $review->status = 'hidden';
+    $review->save();
+
+    // リダイレクト
+    return redirect()->back()->with('success', 'Review status updated to hidden.');
+}
+
     
 }
