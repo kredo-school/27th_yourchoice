@@ -1,15 +1,15 @@
 <?php
 
 namespace App\Http\Controllers\Customer;
-use App\Models\User;
-use App\Models\Hotel;
-use App\Models\Room;
-use App\Models\Review;
-use App\Models\Reservation;
-use App\Models\Category;
-use App\Models\HotelCategory;
-use App\Models\HasFactory;
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Models\Room;
+use App\Models\Hotel;
+use App\Models\Review;
+use App\Models\Category;
+use App\Models\HasFactory;
+use App\Models\Reservation;
+use App\Models\HotelCategory;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -156,7 +156,9 @@ class TopController extends Controller
         });
 
         // Show Reviews
-        $hotel_reviews = $this->review->where('hotel_id', $id)
+        $hotel_reviews = $this->review
+        ->where('hotel_id', $id)
+        // ->whereNull('status') // status カラムが NULL の条件を追加
         ->latest()
         ->get();
 
