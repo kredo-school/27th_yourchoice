@@ -46,13 +46,15 @@ class TopController extends Controller
         // $date = $request->input('date');
         $travellers = $request->input('travellers');
         //検索されたpriceの最小値
-        // $minPrice = $this->hotel->rooms()
-        // ->when(!is_null($travellers), function ($query) use ($travellers) {
-        //     $query->where('capacity', $travellers);
-        // })
-        // ->min('price');
+        $minPrice = $this->hotel->rooms()
+        ->when(!is_null($travellers), function ($query) use ($travellers) {
+            $query->where('capacity', $travellers);
+        })
+        ->min('price');
 
-
+        // \Log::info('////////////////////////////////////////');
+        // \Log::info('Executed Query: ', [DB::getQueryLog()]);
+        // \Log::info('MinPrice: ' . $minPrice);\Log::info('Travellers: ' . $travellers);
 
 
         // セッションで `topCategory` を保持
@@ -111,7 +113,7 @@ class TopController extends Controller
             'hotels' => $hotels, 
             // 'reviews' => $reviews,
             // 'averageRating' => $averageRating,
-            // 'minPrice' => $minPrice, 
+            'minPrice' => $minPrice, 
             'travellers' => $travellers,
             'topCategory' => $topCategory,
         ]);

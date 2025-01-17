@@ -86,7 +86,7 @@
                             @endfor
                             ({{ $hotel->averageRating}})
                         </div>
-                            <h6>${{ $hotel->rooms->min('price') }}/ {{ $travellers ?? 2 }} {{ Str::plural('traveller', $travellers ?? 2) }}</h6>
+                            <h6>${{ $minPrice ?? 'N/A' }}/ {{ $travellers ?? 2 }} {{ Str::plural('traveller', $travellers ?? 2) }}</h6>
                         <small>include taxes & fees for 1 night</small>
                     </div>
                 </div>
