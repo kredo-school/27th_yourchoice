@@ -7,11 +7,15 @@
 <div class="container-fluid">
     <div class="row">
             <h2>Review List</h2>
+                    @if ($list_reviews->isEmpty())
+                            <p>There are currently no reviews.</p>
+                    @else
             <div class="review-list">
                 @foreach($list_reviews as $review)
                  <div class="card p-3 mb-3">
                     <div class="review-card">
                             <div class="hotel-info">
+                                <h3 class=" text-danger mb-4">{{ $review->status}}</h3>
                                 <h6 class="card-title">Username: </h5>
                                 <h5 class="card-subtitle mb-2 ms-2 text-muted">  {{ $review->user->username }}</h6>
                             </div>
@@ -57,6 +61,7 @@
                     </li>
                 </ul>
             </nav> -->
+            @endif
         </div>
 </div>
 @endsection

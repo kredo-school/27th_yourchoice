@@ -6,6 +6,9 @@
 <div class="container-fluid">
     <div class="row">
             <h2>Review List</h2>
+                    @if ($list_reviews->isEmpty())
+                            <p>There are currently no reviews.</p>
+                    @else
             <div class="review-list">
                 @foreach($list_reviews as $review)
                  <div class="card p-3 mb-3">
@@ -63,6 +66,7 @@
                     </li>
                 </ul>
             </nav> -->
+            @endif
         </div>
 </div>
 @endsection

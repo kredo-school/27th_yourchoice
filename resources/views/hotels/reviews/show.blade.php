@@ -70,7 +70,13 @@
                         @endif
                     </div>
                 </div>
+                @if($review->status)
+                    <a href="{{ route('hotel.review.visible', $review-> id) }}" class="subbtn2">Show this review</a>
+                @else
+                    <a href="{{ route('hotel.review.hide', $review-> id) }}" class="subbtn1">Hide this review</a>
+                @endif
             </div>
+
     </div>
 </div>
 @endsection
