@@ -36,6 +36,7 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function () {
       Route::get('/profile/show',[App\Http\Controllers\Customer\ProfileController::class,'show'])->name('profile.show');
       Route::get('/profile/edit',[App\Http\Controllers\Customer\ProfileController::class,'edit'])->name('profile.edit');
       Route::get('/profile/editpass',[App\Http\Controllers\Customer\ProfileController::class,'editpass'])->name('profile.editpass');
+      Route::put('/profile/update',[App\Http\Controllers\Customer\ProfileController::class,'update'])->name('profile.update');
 
       Route::get('/reservation/reservationlist',[ReservationController::class,'index'])->middleware('auth')->name('reservation.reservationlist'); 
       Route::get('/reservation/{reservationid}/show', [ReservationController::class, 'show'])->name('reservation.show');
