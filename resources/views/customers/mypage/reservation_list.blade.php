@@ -17,8 +17,6 @@
                     <pre>{{ $reservationRoom->toJson(JSON_PRETTY_PRINT) }}</pre>
                     @endforeach --}}
 
-
-
                     <a href="{{ route('customer.reservation.show', $reservation->id )}}" class="text-decoration-none text-dark align-self-end">
                         {{-- cancellされていたらグレーアウト --}}
                         <div class="card mb-3 {{ $reservation->reservation_status == 'cancelled' ? 'opacity-50' : '' }}">
@@ -28,10 +26,8 @@
                                     <div class="row align-items-center">                                    
                                         @foreach ($reservation->reservationRoom->unique('reservation_id')  as $reservationRoom)
                                             <div class="col">
-                                                <div class="hotel-image">                             
-                                                    {{-- <img src="{{ $hotel->image_main ?? asset('images/no-image.png') }}" 
-                                                    class="hotel-img"> --}}
-                                                    <img src="{{ asset( $reservationRoom->room->hotel->image_main ) }}" alt="hotel-img" class="hotel-img">
+                                                <div class="hotel-image">                           
+                                                    <img src="{{ ( $reservationRoom->room->hotel->image_main ) }}" alt="hotel-img" class="hotel-img">
                                                 </div>
                                             </div>
                                             <div class="col">
@@ -66,28 +62,9 @@
                  @endif  
             </div>
 
-            <!-- 残タスク：ページネーション 未実装-->
-            <div class="pagination-wrapper">
-                <nav aria-label="Page navigation">
-                    <ul class="pagination">
-                        {{ $reservations->links() }}
-                    </ul>
-                </nav>
-            </div>
-            
-            {{-- <nav aria-label="Page navigation">
-                <ul class="pagination">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1">Previous</a>
-                    </li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                    </li>
-                </ul>
-            </nav> --}}
+            <div class="pagination">
+                {{ $reservations->links('pagination::bootstrap-4') }}
+            </div>           
         </div>
 </div>
 @endsection

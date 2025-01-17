@@ -31,22 +31,3 @@
     left: 0; /* 左寄せに設定 */
     font-weight: bold;
 }
-
-/* Pagenation */
-/* ページネーション全体のリンクのスタイル */
-.pagination{
-    font-size: 20px; /* フォントサイズを小さく */
-    padding: 20px 8px; /* 余白を調整 */
-}
-
-/* 非アクティブ状態のスタイル */
-.pagination .page-item.disabled .page-link {
-    color: #aaa; /* グレー */
-}
-
-/* アクティブ状態のスタイル */
-.pagination .page-item.active .page-link {
-    background-color: #007bff; /* アクティブ時の背景色 */
-    color: white;
-    font-size: 12px; /* アクティブ時もフォントサイズを適用 */
-}
