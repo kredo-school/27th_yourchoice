@@ -7,7 +7,7 @@
 <div class="container-fluid">
   <div class="row">                                
     <div class="container-reservations">
-      <button  type="submit" class="button1"><a href="{{ route('customer.top.show') }}" >Return to the  previous page</button></a>
+      <button  type="submit" class="button1"><a href="#" >Return to the  previous page</button></a>
                       
       <!-- Step 1 -->
       <section class="step" id="step1">

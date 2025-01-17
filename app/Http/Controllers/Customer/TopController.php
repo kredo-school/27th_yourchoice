@@ -35,16 +35,40 @@ class TopController extends Controller
         $categories = $this->category->all();
         return view('customers.toppage',['hotels' => $hotels ]);
     }
+
+    public function displayHotels(Request $request){
+        if (!empty($topCategory)) {
+            session(['topCategory' => $topCategory]);
+        } else {
+            $topCategory = session('topCategory');
+        }
+
+        $query = Hotel::query();
+        $topCategory = $request->input('topCategory');
+
+        if (!empty($topCategory)) {
+            $query->whereHas('categories', function ($query) use ($topCategory) {
+                $query->where('name', 'LIKE', "%{$topCategory}%");
+            });
+        }
+
+        $hotels = $query->with('categories','rooms')->get();
+
+        return view('customers.hotel_search', compact('hotels','topCategory'));
+
+    }
+
+
     public function search(Request $request)
     {
-        // クエリの準備
         $query = Hotel::query();
-        // カテゴリー情報の取得
+
         $topCategory = $request->input('topCategory');
-        // 検索キーワードの取得
         $location = $request->input('location');
-        // $date = $request->input('date');
         $travellers = $request->input('travellers');
+        $checkInDate = $request->input('checkInDate');
+        $checkOutDate = $request->input('checkOutDate');
+
         //検索されたpriceの最小値
         $minPrice = $this->hotel->rooms()
         ->when(!is_null($travellers), function ($query) use ($travellers) {
@@ -52,35 +76,30 @@ class TopController extends Controller
         })
         ->min('price');
 
-        // \Log::info('////////////////////////////////////////');
-        // \Log::info('Executed Query: ', [DB::getQueryLog()]);
-        // \Log::info('MinPrice: ' . $minPrice);\Log::info('Travellers: ' . $travellers);
-
-
-        // セッションで `topCategory` を保持
-        if (!empty($topCategory)) {
-            session(['topCategory' => $topCategory]);
-        } else {
-            $topCategory = session('topCategory'); // セッションから取得
+        if (!empty($location)) {
+            $query->where('prefecture', 'LIKE', "%{$location}%");
         }
+
+        $availableHotelIds = Room::whereDoesntHave('reservations', function ($query) use ($checkInDate, $checkOutDate) {
+            $query->where(function ($query) use ($checkInDate, $checkOutDate) {
+                $query->whereBetween('check_in_date', [$checkInDate, $checkOutDate])
+                    ->orWhereBetween('check_out_date', [$checkInDate, $checkOutDate])
+                    ->orWhere(function ($query) use ($checkInDate, $checkOutDate) {
+                        $query->where('check_in_date', '<=', $checkInDate)
+                            ->where('check_out_date', '>=', $checkOutDate);
+                    });
+            });
+        })->pluck('hotel_id');
+
+        $query->whereIn('id', $availableHotelIds);
+   
+
+
 
         // キーワード検索条件の適用(topページからの検索)
         if (!empty($topCategory)) {
             $query->whereHas('categories', function ($query) use ($topCategory) {
                 $query->where('name', 'LIKE', "%{$topCategory}%");
-            });
-        }
-
-        // キーワード検索条件の適用(searchページの中での検索)
-        if (!empty($location)) {
-            $query->where('prefecture', 'LIKE', "%{$location}%")->whereHas('categories', function ($query) use ($topCategory) {
-                $query->where('name', 'LIKE', "%{$topCategory}%");
-            });
-        }
-        //部屋のキャパシティ
-        if (!empty($travellers)) {
-            $query->whereHas('rooms', function ($query) use ($travellers) {
-                $query->where('capacity', '>=', $travellers);
             });
         }
 
@@ -110,67 +129,79 @@ class TopController extends Controller
 
         
         return view('customers.hotel_search', [
-            'hotels' => $hotels, 
-            // 'reviews' => $reviews,
-            // 'averageRating' => $averageRating,
-            'minPrice' => $minPrice, 
-            'travellers' => $travellers,
             'topCategory' => $topCategory,
+            'hotels' => $hotels, 
+            'location' => $location,
+            'checkInDate' => $checkInDate,
+            'checkOutDate' => $checkOutDate,
+            'travellers' => $travellers,
+            'minPrice' => $minPrice, 
         ]);
     }
     
     public function show($id, Request $request)
     {
-        // $reservation = $this->reservation;
-        // ホテルを取得
         $hotels = Hotel::with(['categories', 'rooms.reservations'])->find($id);
-
+        $id = $hotels->id;
         $address = $hotels->address;
-        // ホテルに紐づく部屋を取得
-        $rooms = $hotels->rooms;
+        $hotel_reviews = $this->review
+            ->where('hotel_id', $id)
+            // ->whereNull('status') 
+            ->latest()
+            ->get();
+        $checkInDate = $request->input('checkInDate');
+        $checkOutDate = $request->input('checkOutDate');
+        $travellers = $request->input('travellers');
+        // dd($checkInDate,$checkOutDate,$travellers);
     
         if (!$hotels) {
             abort(404, 'Hotel not found');
         }
-    
-        // 入力された日程を取得
-        $date = $request->input('date');
-    
 
-    
-        // 利用可能な部屋をフィルタリング
-        $availableRooms = $rooms->filter(function ($room) use ($date) {
+        $availableRooms = $hotels->rooms->filter(function ($room) use ($checkInDate, $checkOutDate) {
             foreach ($room->reservations as $reservation) {
-                // 既存予約の日程を取得
-                $checkInDate = $reservation->check_in_date;
-                $checkOutDate = $reservation->check_out_date;
-    
-                // 入力した日程が既存予約の日程に該当する場合
-                if (
-                    ($date >= $checkInDate && $date < $checkOutDate) || // チェックイン日が既存予約期間内
-                    ($date <= $checkInDate && $date >= $checkOutDate)   // 予約期間を完全に含む
-                ) {
-                    return false; // 利用不可の部屋は除外
+                if (($checkInDate >= $reservation->check_in_date && $checkInDate < $reservation->check_out_date) ||
+                    ($checkOutDate > $reservation->check_in_date && $checkOutDate <= $reservation->check_out_date) ||
+                    ($checkInDate <= $reservation->check_in_date && $checkOutDate >= $reservation->check_out_date)) {
+                    return false;
                 }
             }
-    
-            return true; // 利用可能な部屋
+            return true;
         });
+    
+        // // 利用可能な部屋をフィルタリング
+        // $availableRooms = $rooms->filter(function ($room) use ($date) {
+        //     foreach ($room->reservations as $reservation) {
+        //         // 既存予約の日程を取得
+        //         $checkInDate = $reservation->check_in_date;
+        //         $checkOutDate = $reservation->check_out_date;
+    
+        //         // 入力した日程が既存予約の日程に該当する場合
+        //         if (
+        //             ($date >= $checkInDate && $date < $checkOutDate) || // チェックイン日が既存予約期間内
+        //             ($date <= $checkInDate && $date >= $checkOutDate)   // 予約期間を完全に含む
+        //         ) {
+        //             return false; // 利用不可の部屋は除外
+        //         }
+        //     }
+    
+        //     return true; // 利用可能な部屋
+        // });
 
         // Show Reviews
-        $hotel_reviews = $this->review
-        ->where('hotel_id', $id)
-        // ->whereNull('status') // status カラムが NULL の条件を追加
-        ->latest()
-        ->get();
+
 
     
         // ビューにデータを渡す
         return view('customers.hotel_detail', [
             'hotels' => $hotels,
+            'id' => $id,
             'availableRooms' => $availableRooms,
             'address' => $address,
-            'hotel_reviews' => $hotel_reviews
+            'hotel_reviews' => $hotel_reviews,
+            'travellers' => $travellers,
+            'checkInDate' => $checkInDate,
+            'checkOutDate' => $checkOutDate
         ]);
     }
     

@@ -108,6 +108,14 @@
     <!-- 部屋リスト -->
     <div class="row mt-5">
         @foreach ($availableRooms as $room)
+        <form action="{{ route('customer.reserve.edit', [
+                            'hotel_id' => $hotels->id, 
+                            'room_id' => $room->id, 
+                            'travellers' => $travellers, 
+                            'checkInDate' => $checkInDate, 
+                            'checkOutDate' => $checkOutDate
+                        ]) }}" method="GET">
+            @csrf
             <div class="col-md-12 mb-4">
                 <div class="d-flex align-items-center border p-3 rounded">
                     <img src="{{ asset('images/hotel-room.jpg') }}" alt="hotel-room" class="img-fluid" style="max-width: 150px;">
@@ -119,13 +127,27 @@
                             @endforeach
                         </ul>
                     </div>
+
+                    <input type="hidden" id="hotel_id" name="hotel_id" value="{{ $hotels->id }}">
+                    <input type="hidden" id="room_id" name="room_id" value="{{ $room->id }}">
+                    <input type="hidden" id="travellers" name="travellers" value="{{ old('travellers', $travellers ?? '') }}">
+                    <input type="hidden" id="checkInDate" name="checkInDate" value="{{ old('checkInDate', $checkInDate ?? '') }}">
+                    <input type="hidden" id="checkOutDate" name="checkOutDate" value="{{ old('checkOutDate', $checkOutDate ?? '') }}">
+                    <button type="submit" class="btn btn-danger mt-2">Book now</button>
                     <div class="text-end">
                         <h6 class="mb-1">{{ $room->price }} / {{ $room->capacity }} travellers</h6>
                         <small>Includes taxes & fees for 1 night</small>
-                        <a href="#" class="btn btn-danger mt-2">Book now</a>
+                        {{-- <a href="{{ route('customer.reserve.edit', [
+                            'hotel_id' => $hotels->id, 
+                            'room_id' => $room->id, 
+                            'travellers' => $travellers, 
+                            'checkInDate' => $checkInDate, 
+                            'checkOutDate' => $checkOutDate
+                        ]) }}" class="btn btn-danger mt-2">Book now</a> --}}
                     </div>
                 </div>
             </div>
+        </form>
         @endforeach
     </div>
 </div>
