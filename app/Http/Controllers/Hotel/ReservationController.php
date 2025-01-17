@@ -114,15 +114,41 @@ class ReservationController extends Controller
         // バリデーション
         $validated = $request->validate([
             'check_in_date' => 'required|date',
-            'check_out_date' => 'required|date',
+            'to' => 'required|date|after:check_in_date',
             'customer_request' => 'nullable|string|max:255',
             'room_id' => 'required|integer|exists:rooms,id',
         ]);
+        
+        $newCheckInDate = $request->check_in_date;
+        $newCheckOutDate = $request->to;
+
+        $overlappingReservations = Reservation::whereHas('reservationRoom.room', function ($query) use ($request) {
+            $query->where('id', $request->room_id); // 部屋IDに絞り込み
+        })
+        ->where('reservation_status', '!=', 'cancelled') // cancelled の予約を除外
+        ->where(function ($query) use ($newCheckInDate, $newCheckOutDate) {
+            $query->where(function ($subQuery) use ($newCheckInDate, $newCheckOutDate) {
+                // 既存の予約が新しい予約と重なる場合をチェック
+                $subQuery->where('check_in_date', '<', $newCheckOutDate)
+                    ->where('check_out_date', '>', $newCheckInDate);
+            });
+        }) 
+        ->get();
+
+        
+        if ($overlappingReservations->isNotEmpty()) {
+            return redirect()->back()->withErrors([
+                'check_out_date' => 'The selected room is already reserved for the specified dates: ' . 
+                    $overlappingReservations->map(function ($reservation) {
+                        return "Check-in: {$reservation->check_in_date}, Check-out: {$reservation->check_out_date}";
+                    })->implode('; ')
+            ]);
+        }
 
         // 新しい予約を作成
         $reservation = Reservation::create([
             'check_in_date' => $validated['check_in_date'],
-            'check_out_date' => $validated['check_out_date'],
+            'check_out_date' => $validated['to'],
             'customer_request' => $validated['customer_request'] ?? null,
             // 必要に応じて他のカラムを追加
         ]);
@@ -137,12 +163,13 @@ class ReservationController extends Controller
         ->with('success', 'Reservation updated successfully.');
     }
 
+    
     public function store_guest(Request $request)
     {
         // バリデーション
         $validated = $request->validate([
             'check_in_date' => 'required|date',
-            'check_out_date' => 'required|date',
+            'check_out_date' => 'required|date|after:check_in_date',
             'first_name' => 'required|string|max:100',
             'last_name' => 'required|string|max:100',
             'phone_number' => 'required|string|max:20',
@@ -151,6 +178,34 @@ class ReservationController extends Controller
             'number_of_people' => 'required|integer|max:20',
             'breakfast' => 'required|integer|max:2',
         ]);
+
+        $newCheckInDate = $request->check_in_date;
+        $newCheckOutDate = $request->check_out_date;
+
+        $overlappingReservations = Reservation::whereHas('reservationRoom.room', function ($query) use ($request) {
+            $query->where('id', $request->room_id); // 部屋IDに絞り込み
+        })
+        ->where('reservation_status', '!=', 'cancelled') // cancelled の予約を除外
+        ->where(function ($query) use ($newCheckInDate, $newCheckOutDate) {
+            $query->where(function ($subQuery) use ($newCheckInDate, $newCheckOutDate) {
+                // 既存の予約が新しい予約と重なる場合をチェック
+                $subQuery->where('check_in_date', '<', $newCheckOutDate)
+                    ->where('check_out_date', '>', $newCheckInDate);
+            });
+        }) 
+        ->get();
+
+        
+        if ($overlappingReservations->isNotEmpty()) {
+            return redirect()->back()->withErrors([
+                'check_out_date' => 'The selected room is already reserved for the specified dates: ' . 
+                    $overlappingReservations->map(function ($reservation) {
+                        return "Check-in: {$reservation->check_in_date}, Check-out: {$reservation->check_out_date}";
+                    })->implode('; ')
+            ]);
+        }
+    
+
 
         $guest = Guest::create([
             'first_name' => $validated['first_name'],
@@ -215,8 +270,14 @@ class ReservationController extends Controller
         $reservations = Reservation::with(['reservationRoom.room' => function ($query) use ($hotelId) {
                 $query->where('hotel_id', $hotelId);
             }])
-            ->whereBetween('check_in_date', [$request->start, $request->end])
-            ->orWhereBetween('check_out_date', [$request->start, $request->end])
+            ->whereHas('reservationRoom.room', function ($query) use ($hotelId) {
+                $query->where('hotel_id', $hotelId); // そのホテルに関連する予約のみ取得
+            })
+            ->where('reservation_status', '!=', 'cancelled') // cancelled の予約を除外
+            ->where(function ($query) use ($request) {
+                $query->whereBetween('check_in_date', [$request->start, $request->end])
+                      ->orWhereBetween('check_out_date', [$request->start, $request->end]);
+            })
             ->get();
 
         // 日ごとの空き部屋数を計算
@@ -233,7 +294,7 @@ class ReservationController extends Controller
             // その日の予約された部屋IDを取得
             $reservedRoomIds = $reservations
                 ->filter(function ($reservation) use ($dateStr) {
-                    return $dateStr >= $reservation->check_in_date && $dateStr <= $reservation->check_out_date;
+                    return $dateStr >= $reservation->check_in_date && $dateStr < $reservation->check_out_date;
                 })
                 ->flatMap(function ($reservation) {
                     return $reservation->reservationRoom->pluck('room_id');

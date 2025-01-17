@@ -36,17 +36,22 @@ class ProfileController extends Controller
 
     public function edit()
     {
-        try {
-            $user = $this->user->findOrFail(Auth::id());
-            $categories = $this->category->all();
-    
-            return view('customers.mypage.profile.edit')
-                ->with('user', $user)
-                ->with('categories', $categories);
-        } catch (\Exception $e) {
-            return redirect()->route('customer.profile.show')->with('error', 'Unable to load edit page.');
+        $user = $this->user->findOrFail(Auth::id());
+
+        $all_categories =$this->category->where('type', 'category')->get();
+        $selected_categories=[];
+        foreach($user->categories as $usercategory)
+        {
+            $selected_categories[]=$usercategory->id;
         }
+
+        return view('customers.mypage.profile.edit')
+                ->with('user', $user)
+                ->with('all_categories',$all_categories)
+                ->with('selected_categories',$selected_categories);
     }
+
+    
 
     // update() - save changes of the Auth user
     public function update(Request $request)
@@ -56,46 +61,36 @@ class ProfileController extends Controller
             'first_name'         => 'min:1|max:100',
             'last_name'          => 'min:1|max:100',
             'username'           => 'min:1|max:100',
-            'email'              => 'email|max:100|unique:users,email,',
-            'phone_number'       => 'numeric|min:1|max:20',
-            'categories'         => 'nullable|array', // カテゴリが配列であることを確認
-            'categories.*'       => 'exists:categories,id', // 各カテゴリIDが有効かを確認
+            'email'              => 'required|email|max:100|unique:users,email,' . Auth::id(),
+            'phone_number'       => 'digits_between:1,20',
+            'category'           => 'array',
+            'category.*'         => 'integer|exists:categories,id',
         ]);
-        
-        $user = Auth::user(); // ログインユーザーを取得
-
-        // user情報を更新
-        $user                  = $this->user->findOrFail(Auth::id());
-        $user->first_name      = $request->first_name;
-        $user->last_name       = $request->last_name;
-        $user->username        = $request->username;
-        $user->email           = $request->email;
-        $user->phone_number    = $request->phone_number; 
-
-        \DB::table('user_category')->where('user_id', $user->id)->delete();
-      
-        
-        foreach ($validatedData as $key => $value) {
-            if (!is_null($value) && $key !== 'categories') { // categories以外を更新
-                $user->$key = $value;
-            }
-        }
-
-          # Save
-          $user->save(); 
-          
-          $categories = $request->input('categories', []); // カテゴリが送信されない場合は空配列を使用
-          // 中間テーブルにデータを挿入
-          foreach ($categories as $category_id) {
+    
+        $user = $this->user->findOrFail(Auth::id());
+        $user->first_name = $request->input('first_name');
+        $user->last_name = $request->input('last_name');
+        $user->username = $request->input('username');
+        $user->email = $request->input('email');
+        $user->phone_number = $request->input('phone_number');
+    
+        # Save user
+        $user->save();
+    
+        # Remove existing categories
+        $user->usercategory()->delete();
+    
+        # Add new categories
+        $categories = $request->input('category', []); // デフォルト値を空配列に設定
+    
+        foreach ($categories as $category_id) {
             UserCategory::create([
-              'user_id' => $user->id,
-              'category_id' => $category_id,
+                'user_id' => $user->id,
+                'category_id' => $category_id,
             ]);
-          }
-
+        }
+    
         return redirect()->route('customer.profile.show')->with('success', 'Profile updated successfully!');
-        
-      
     }
 
     public function editpass()
@@ -104,24 +99,21 @@ class ProfileController extends Controller
     }
 
     public function updatepass(Request $request)
-  {
-    // バリデーション: パスワードが4文字以上で確認用パスワードと一致しているかをチェック/'password'= formの'password'フィールドのこと
-    $request->validate([
-      'password' => 'required|string|min:4|confirmed',
-    ]);
-
-    // 現在のログインユーザーを取得
-    $user = Auth::user(); // Auth::user()を直接使用して現在のユーザーを取得
-
-    // パスワードをハッシュ化して保存
-    $user->password_hash = Hash::make($request->password);  // 'password' フィールドをハッシュ化して 'password_hash' カラムに保存
-
-    // ユーザー情報を保存
-    $user->save();
-
-    // パスワード更新完了後、プロフィールページにリダイレクト
-    return redirect()->route('customer.profile.show');
-  }
-
+    {
+      // バリデーション: パスワードが4文字以上で確認用パスワードと一致しているかをチェック/'password'= formの'password'フィールドのこと
+      $request->validate([
+        'password' => 'required|string|min:4|confirmed',
+      ]);
+      // 現在のログインユーザーを取得
+      $user = Auth::user(); // Auth::user()を直接使用して現在のユーザーを取得
+      // パスワードをハッシュ化して保存
+      $user->password_hash = Hash::make($request->password);  // 'password' フィールドをハッシュ化して 'password_hash' カラムに保存
+      // ユーザー情報を保存
+      $user->save();
+      // パスワード更新完了後、プロフィールページにリダイレクト
+      return redirect()->route('customer.profile.show');
+    }
+    
+        
 
 }

@@ -118,6 +118,7 @@ class RegisterController extends Controller
         'postal_code' => '',
         'prefecture' => '',
         'city' => '',
+        'street_address' => '',
         'address' => '',
         'access' => '',
         'description' => '',
@@ -126,10 +127,10 @@ class RegisterController extends Controller
         'image_sub2' => '',
         'image_sub3' => '',
         'image_sub4' => '',
-        'cancellation_period' => 0,
-        'general_fee' => 0,
-        'sameday_fee' => 0,
-        'breakfast_price' => 0,
+        'cancellation_period' => '0',
+        'general_fee' => '0',
+        'sameday_fee' => '0',
+        'breakfast_price' => '0',
 
       ]);
 
@@ -138,7 +139,7 @@ class RegisterController extends Controller
         Auth::login($user);
 
       // Redirect to a specific page
-      return redirect()->route('hotel.profile.show')->with('success', 'Registration successful!');
+      return redirect()->route('hotel.profile.edit')->with('success', 'Registration successful!');
     } catch (\Exception $e) {
       Log::error('Failed: ' . $e->getMessage());
       return redirect()->back()->withErrors(['error' => 'Failed']);
