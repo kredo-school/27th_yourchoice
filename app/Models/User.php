@@ -90,5 +90,9 @@ class User extends Authenticatable
     }
 
 
+    public function usercategory()
+    {
+        return $this->hasMany(UserCategory::class);
+    }
 
 }
