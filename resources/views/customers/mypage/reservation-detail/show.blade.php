@@ -30,8 +30,8 @@
                 <div class="col-4">
                     {{-- <img src="{{ asset('images/hotel.jpg') }}" alt="hotel-img" class="hotel-img img-fluid"> --}}
                     <div class="hotel-image">                             
-                        <img src="{{ $hotel->image_main ?? asset('images/no-image.png') }}" 
-                        alt="{{ $review->hotel ? 'Hotel Image' : 'Placeholder Image' }}" 
+                        <img src="{{ $hotel->image_main ?? ('images/no-image.png') }}" 
+                        
                         class="hotel-img">
                     </div>
                 </div>
@@ -46,10 +46,14 @@
                     <pre>{{ $hotel->categories->toJson(JSON_PRETTY_PRINT) }}</pre>
                     @endforeach --}}
 
-                    @foreach ($hotel->categories ?? [] as $hotelcategory)
+                    {{-- @foreach ($hotel->categories ?? [] as $hotelcategory)
                     <span class="badge bg-pink">{{ $hotelcategory->name }}</span>
-                    @endforeach
+                    @endforeach --}}
 
+                    @foreach($hotel->categories->where('type','category') as $category)
+                    <span class="badge bg-pink">{{ $category->name }}</span>
+                    @endforeach
+                    
                     <span class="badge bg-danger">{{ $hotel->hotelname }}</span>
                 </div>
                 <div class="col-4">
