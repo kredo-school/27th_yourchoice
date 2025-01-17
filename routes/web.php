@@ -35,6 +35,7 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function () {
       Route::get('/profile/edit', [App\Http\Controllers\Customer\ProfileController::class, 'edit'])->name('profile.edit');
       Route::patch('/profile/update',[App\Http\Controllers\Customer\ProfileController::class,'update'])->name('profile.update');
       Route::get('/profile/editpass',[App\Http\Controllers\Customer\ProfileController::class,'editpass'])->name('profile.editpass');
+      Route::post('/profile/updatepass', [App\Http\Controllers\Customer\ProfileController::class, 'updatepass'])->name('profile.updatepass'); 
 
       Route::get('/reservation/reservationlist',[ReservationController::class,'index'])->middleware('auth')->name('reservation.reservationlist'); 
       Route::get('/reservation/{reservationid}/show', [ReservationController::class, 'show'])->name('reservation.show');

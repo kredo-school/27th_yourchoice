@@ -4,7 +4,7 @@
         color: white; /* Text color */
         border: none; /* Remove border */
         border-radius: 8px; /* Rounded corners */
-        padding: 10px 90px; /* Spacing */
+        padding: 10px 20px; /* Spacing */
         font-size: 16px; /* Font size */
         font-weight: bold; /* Bold text */
         cursor: pointer; /* Pointer cursor on hover */
@@ -17,7 +17,7 @@
     color: #CA5C6F; /* Text color */
     border: 2px solid #CA5C6F; /* Outline color */
     border-radius: 8px; /* Rounded corners */
-    padding: 10px 90px; /* Spacing */
+    padding: 10px 40px; /* Spacing */
     font-size: 16px; /* Font size */
     cursor: pointer; /* Pointer cursor on hover */
   }
@@ -29,7 +29,7 @@
     color: white; /* Disabled text color */
     border: none; /* No border */
     border-radius: 8px; /* Rounded corners */
-    padding: 10px 90px; /* Spacing */
+    padding: 10px 40px; /* Spacing */
     font-size: 16px; /* Font size */
     cursor: not-allowed; /* Show disabled cursor */
   }
