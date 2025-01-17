@@ -8,6 +8,7 @@ use App\Models\UserCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -48,18 +49,7 @@ class ProfileController extends Controller
                 ->with('user', $user)
                 ->with('all_categories',$all_categories)
                 ->with('selected_categories',$selected_categories);
-
-
-
-
-
     }
-
-    public function editpass()
-    {
-        return view('customers.mypage.profile.editpass');
-    }
-
 
     // update() - save changes of the Auth user
     public function update(Request $request)
@@ -98,6 +88,27 @@ class ProfileController extends Controller
         }
     
         return redirect()->route('customer.profile.show')->with('success', 'Profile updated successfully!');
+    }
+
+    public function editpass()
+    {
+        return view('customers.mypage.profile.editpass');
+    }
+
+    public function updatepass(Request $request)
+    {
+      // バリデーション: パスワードが4文字以上で確認用パスワードと一致しているかをチェック/'password'= formの'password'フィールドのこと
+      $request->validate([
+        'password' => 'required|string|min:4|confirmed',
+      ]);
+      // 現在のログインユーザーを取得
+      $user = Auth::user(); // Auth::user()を直接使用して現在のユーザーを取得
+      // パスワードをハッシュ化して保存
+      $user->password_hash = Hash::make($request->password);  // 'password' フィールドをハッシュ化して 'password_hash' カラムに保存
+      // ユーザー情報を保存
+      $user->save();
+      // パスワード更新完了後、プロフィールページにリダイレクト
+      return redirect()->route('customer.profile.show')->with('success', 'Password updated successfully!');
     }
     
         
