@@ -16,7 +16,7 @@
                         <div class="hotel-info">
                             <h4>{{ $review->hotel->hotel_name }}</h4>
                             <p>{{ $review->hotel->prefecture }}</p>
-                                @foreach($review->hotel->categories as $hotelcategory)
+                                @foreach($review->hotel->categories->where('type','category') as $hotelcategory)
                                     <span class="badge bg-pink">{{ $hotelcategory->name }}</span>
                                 @endforeach
                         </div>
