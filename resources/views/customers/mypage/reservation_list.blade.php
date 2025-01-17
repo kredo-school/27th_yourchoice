@@ -40,9 +40,10 @@
                                             <h5 class="card-title">{{ $reservationRoom->room->hotel->hotel_name }}</h5>
                                             <h6 class="card-subtitle mb-2 text-muted">{{ $reservationRoom->room->hotel->prefecture }}</h6>
                                             @endforeach
-                                            @foreach ($reservationRoom->room->hotel->categories ?? [] as $hotelcategory)
-                                            <span class="badge bg-pink">{{ $hotelcategory->name }}</span>
-                                        @endforeach                                    
+                                            {{-- type=categoryのnameだけ取得 --}}
+                                            @foreach($reservationRoom->room->hotel->categories->where('type','category') as $category)
+                                            <span class="badge bg-pink">{{ $category->name }}</span>
+                                            @endforeach                               
                                         </div>
                                         <div class="col">
                                             <p class="mb-1"> {{ $reservation->check_in_date }} ~ {{ $reservation->check_out_date }}</p>
