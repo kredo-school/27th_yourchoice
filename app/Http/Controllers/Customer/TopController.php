@@ -160,7 +160,6 @@ class TopController extends Controller
             'checkInDate' => $checkInDate,
             'checkOutDate' => $checkOutDate,
             'travellers' => $travellers,
-            // 'minPrice' => $minPrice, 
         ]);
     }
     
@@ -171,7 +170,7 @@ class TopController extends Controller
         $address = $hotels->address;
         $hotel_reviews = $this->review
             ->where('hotel_id', $id)
-            // ->whereNull('status') 
+            ->whereNull('status') 
             ->latest()
             ->get();
         $checkInDate = $request->input('checkInDate');
