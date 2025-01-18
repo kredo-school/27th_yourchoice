@@ -45,6 +45,18 @@ class TopController extends Controller
 
         $query = Hotel::query();
         $topCategory = $request->input('topCategory');
+        $travellers = $request->input('travellers');
+        // カテゴリーごとの背景画像設定
+        $backgroundImages = [
+            'Wheelchair and Senior' => 'images/wheelchair_org.png',
+            'Pregnancy' => 'images/pregnancy_org.png',
+            'Family' => 'images/family_org.png',
+            'Visual and Hearing Impaired' => 'images/Visual and Hearing Impaired_org.png',//修正必要
+            'Religious' => 'images/religious_org.png',
+            'English Friendly' => 'images/english-friendly_org.png',
+        ];
+        $backgroundImage = $backgroundImages[$topCategory] ?? 'images/wheelchair_org.png';
+
 
         if (!empty($topCategory)) {
             $query->whereHas('categories', function ($query) use ($topCategory) {
@@ -71,7 +83,21 @@ class TopController extends Controller
             return $hotel;
         });
 
-        return view('customers.hotel_search', compact('hotels','topCategory'));
+        $hotels = $hotels->map(function ($hotel) use ($travellers) {
+            $hotel->minPrice = $hotel->rooms()
+                ->when(!is_null($travellers), function ($query) use ($travellers) {
+                    // $travellers が指定されている場合
+                    $query->where('capacity', '>=', $travellers);
+                }, function ($query) {
+                    // $travellers が null の場合
+                    $query->where('capacity', 2);
+                })
+                ->min('price'); // 最小価格を取得
+        
+            return $hotel;
+        });
+
+        return view('customers.hotel_search', compact('hotels','topCategory','backgroundImage'));
 
     }
 
@@ -85,13 +111,7 @@ class TopController extends Controller
         $travellers = $request->input('travellers');
         $checkInDate = $request->input('checkInDate');
         $checkOutDate = $request->input('checkOutDate');
-
-        //検索されたpriceの最小値
-        // $minPrice = $this->hotel->rooms()
-        // ->when(!is_null($travellers), function ($query) use ($travellers) {
-        //     $query->where('capacity', $travellers);
-        // })
-        // ->min('price');
+        // $defaultMinPrice = $query->room->where('capacity', 2)->min('price');
 
         if (!empty($location)) {
             $query->where('prefecture', 'LIKE', "%{$location}%");
@@ -139,20 +159,21 @@ class TopController extends Controller
                 ->get();
             return $hotel;
         });
-
+        // Show hotel's min price information
         $hotels = $hotels->map(function ($hotel) use ($travellers) {
-            // Room テーブルの price の最小値を取得
             $hotel->minPrice = $hotel->rooms()
                 ->when(!is_null($travellers), function ($query) use ($travellers) {
+                    // $travellers が指定されている場合
                     $query->where('capacity', '>=', $travellers);
+                }, function ($query) {
+                    // $travellers が null の場合
+                    $query->where('capacity', 2);
                 })
-                ->min('price'); // price カラムの最小値を取得
-    
+                ->min('price'); // 最小価格を取得
+        
             return $hotel;
         });
 
-
-        
         return view('customers.hotel_search', [
             'topCategory' => $topCategory,
             'hotels' => $hotels, 
@@ -170,7 +191,7 @@ class TopController extends Controller
         $address = $hotels->address;
         $hotel_reviews = $this->review
             ->where('hotel_id', $id)
-            ->whereNull('status') 
+            // ->whereNull('status') 
             ->latest()
             ->get();
         $checkInDate = $request->input('checkInDate');

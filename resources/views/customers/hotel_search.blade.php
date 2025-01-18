@@ -1,14 +1,17 @@
 @extends('layouts.customer')
+<!-- CSS -->
+<link rel="stylesheet" href="{{ asset('css/hotel_search.css') }}">
 
 @section('title', 'Wheelchair and Senior')
 
 @section('content')
-<link rel="stylesheet" href="{{ asset('css/hotel_search.css') }}">
+
+<section class="hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{ asset($backgroundImage) }}');"">
+    <h1 class="text-center text-light">{{ ucfirst($topCategory) }}</h1>
+</section>
+
 
 <div class="container mt-5">
-
-    <h1 class="text-center">{{ ucfirst($topCategory) }}</h1>
-
     <div class="input-group my-4">
         {{-- 検索機能実装 --}}
         <form action="{{ route('customer.top.search', ['topCategory' => $topCategory ?? '']) }}" method="POST" class="form-inline">
@@ -97,7 +100,7 @@
                             @endfor
                             ({{ $hotel->averageRating}})
                         </div>
-                            <h6>${{ $hotel->minPrice ?? 'N/A' }}/ {{ $travellers ?? 2 }} {{ Str::plural('traveller', $travellers ?? 2) }}</h6>
+                            <h6>${{ $hotel->minPrice }}/ {{ $travellers ?? 2 }} {{ Str::plural('traveller', $travellers ?? 2) }}</h6>
                         <small>include taxes & fees for 1 night</small>
                     </div>
                 </div>
