@@ -76,8 +76,7 @@ class ProfileController extends Controller
       'cancellation_period'  => 'required|integer|max:100',
       'general_fee'          => 'required|integer|max:100',
       'sameday_fee'          => 'required|integer|max:100',
-      'breakfast_price'      => 'required|min:0',//'required_if:categories.0,9|numeric|min:0'
-
+      'breakfast_price'      => 'required|numeric|min:0',
       'email'                => 'required|email',
       'phone_number'         => 'required|string|max:20',
     ]);
