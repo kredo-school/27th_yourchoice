@@ -28,15 +28,15 @@ class ReservationController extends Controller
     public function index()
     {
         $user = auth()->user();
-
+    
         if (!$user) {
-            abort(403, 'You need login');
+            abort(403, 'You need to log in');
         }
-
-        // ユーザーの予約を取得し、関連するホテルデータをロード
+    
         $reservations = $user->reservation()
-        ->with(['reservationRoom.room.hotel.categories','payment'])->paginate(10);
-
+            ->with(['reservationRoom.room.hotel.categories', 'payment'])
+            ->paginate(5);
+    
         return view('customers.mypage.reservation_list', compact('reservations'));
     }
 
@@ -50,12 +50,6 @@ class ReservationController extends Controller
 
        // Reviewを取得（Reservationのリレーションを使用）
         $review = $reservation->review;
-        // デバッグログで確認
-        // if ($review) {
-        //     Log::info('Review fetched successfully:', $review->toArray());
-        // } else {
-        //     Log::warning('No review found for reservation ID: ' . $id);
-        // }
 
         // 支払い情報を関連付けから取得
         $payment = $reservation->payment;
@@ -75,19 +69,6 @@ class ReservationController extends Controller
         return view('customers.mypage.reservation-detail.show', compact('reservation', 'payment', 'hotel', 'roomTypes','review'));
     }
 
-
-    // // 予約削除処理
-    // public function destroy($id)
-    // {
-    //     $reservation = auth()->user()->reservations()->find($id);
-    //     if ($reservation) {
-    //         $reservation->delete();
-    //         return redirect()->route('customers.mypage.reservation_list')->with('success', 'Reservation deleted successfully.');
-    //     }
-
-    //     return redirect()->back()->with('error', 'Reservation not found.');
-    // }
-
       // 予約Cancel処理
       public function cancel($reservationid)
       {
@@ -98,8 +79,7 @@ class ReservationController extends Controller
             $reservation->update([
                 'reservation_status' => 'cancelled'
             ]);
-
-        
+      
         // 予約一覧ページにリダイレクト
         return redirect()
             ->route('customer.reservation.reservationlist')

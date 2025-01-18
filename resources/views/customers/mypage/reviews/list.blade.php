@@ -6,6 +6,9 @@
 <div class="container-fluid">
     <div class="row">
             <h2>Review List</h2>
+                    @if ($list_reviews->isEmpty())
+                            <p>There are currently no reviews.</p>
+                    @else
             <div class="review-list">
                 @foreach($list_reviews as $review)
                  <div class="card p-3 mb-3">
@@ -18,7 +21,7 @@
                             <div class="hotel-info">
                                 <h5 class="card-title">{{ $review->hotel->hotel_name }}</h5>
                                 <h6 class="card-subtitle mb-2 text-muted">{{ $review->hotel->prefecture }}</h6>
-                                @foreach($review->hotel->categories as $hotelcategory)
+                                @foreach($review->hotel->categories->where('type','category') as $hotelcategory)
                                 <span class="badge bg-pink">{{ $hotelcategory->name }}</span>
                                 @endforeach
                             </div>
@@ -63,6 +66,7 @@
                     </li>
                 </ul>
             </nav> -->
+            @endif
         </div>
 </div>
 @endsection

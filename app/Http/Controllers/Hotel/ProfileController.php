@@ -76,10 +76,10 @@ class ProfileController extends Controller
       'cancellation_period'  => 'required|integer|max:100',
       'general_fee'          => 'required|integer|max:100',
       'sameday_fee'          => 'required|integer|max:100',
-      'breakfast_price'      => 'required_if:categories.0,9|numeric|min:0',
+      'breakfast_price'      => 'required|min:0',//'required_if:categories.0,9|numeric|min:0'
 
-      'email'                => 'email',
-      'phone_number'         => 'string|max:20',
+      'email'                => 'required|email',
+      'phone_number'         => 'required|string|max:20',
     ]);
 
     # 更新
@@ -107,7 +107,7 @@ class ProfileController extends Controller
 
     // main画像は必須
     if ($hotel->image_main == "" && !$request->hasFile('image_main')) {
-      throw ValidationException::withMessages(['image_main' => 'Main image is required',]);
+      throw ValidationException::withMessages(['image_main' => 'required',]);
     }
 
     // 画像の更新

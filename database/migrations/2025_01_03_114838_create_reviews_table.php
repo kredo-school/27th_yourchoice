@@ -21,6 +21,8 @@ return new class extends Migration
             $table->longText('image1')->nullable(); // ホテルの画像
             $table->longText('image2')->nullable(); // ホテルの画像
             $table->longText('image3')->nullable(); // ホテルの画像
+            $table->string('status', 100)->nullable();
+
             $table->timestamps(); // created_at, updated_at
             
             // 外部キー制約
