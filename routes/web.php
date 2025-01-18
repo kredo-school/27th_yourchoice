@@ -49,7 +49,8 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function () {
       Route::get('/review/create/{id}',[App\Http\Controllers\Customer\ReviewController::class,'create'])->name('review.create');
       Route::post('/review/store',[App\Http\Controllers\Customer\ReviewController::class,'store'])->name('review.store');
 
-      Route::get('/inquary/show',[App\Http\Controllers\Customer\InquaryController::class,'show'])->name('inquary.show');
+      //Route::get('/inquary/show',[App\Http\Controllers\Customer\InquaryController::class,'show'])->name('inquary.show');
+      //chatityにつなげるにあたり一旦コメントアウト　
 
   });
 
@@ -59,7 +60,8 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function () {
 Route::group(['prefix' => 'hotel', 'as' => 'hotel.', 'middleware' => 'hotel'], function () {
 // Route::group(['prefix' => 'hotel', 'as' => 'hotel.'], function () {
 
-    Route::get('/inquary/show', [App\Http\Controllers\Hotel\InquaryController::class, 'show'])->name('inquary.show');
+    //Route::get('/inquary/show', [App\Http\Controllers\Hotel\InquaryController::class, 'show'])->name('inquary.show');
+    //chatityにつなげるにあたり一旦コメントアウト 
 
     Route::get('/profile/show', [App\Http\Controllers\Hotel\ProfileController::class, 'show'])->name('profile.show');
     Route::get('/profile/edit', [App\Http\Controllers\Hotel\ProfileController::class, 'edit'])->name('profile.edit');
