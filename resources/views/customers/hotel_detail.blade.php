@@ -31,13 +31,19 @@
         <!-- ホテル情報 -->
         <div class="col-md-8">
             <h1 class="mt-3">{{ $hotels->hotel_name }}</h1>
-            <span class="badge badge-primary">{{ $hotels->categories->pluck('name')->join(', ') }}</span>
-
-            <h3 class="section-title">About</h3>
+                @foreach($hotels->categories->where('type','category') as $category)
+                    <span class="badge bg-pink mt-3">{{ $category->name }}</span>
+                @endforeach
+            <h3 class="section-title mt-3">About</h3>
             <p>{{ $hotels->description }}</p>
 
-            <h3 class="section-title mt-5">Access</h3>
+            <h3 class="section-title mt-3">Access</h3>
             <p>{{ $hotels->access }}</p>
+
+            <h3 class="section-title mt-3">Most popular facilities</h3>
+                @foreach($hotels->categories->whereIn('type',['service','amenity']) as $category)
+                    <span class="badge bg-pink mt-3">{{ $category->name }}</span>
+                @endforeach
         </div>
 
         <!-- レビューカルーセル -->
@@ -137,13 +143,6 @@
                     <div class="text-end">
                         <h6 class="mb-1">{{ $room->price }} / {{ $room->capacity }} travellers</h6>
                         <small>Includes taxes & fees for 1 night</small>
-                        {{-- <a href="{{ route('customer.reserve.edit', [
-                            'hotel_id' => $hotels->id, 
-                            'room_id' => $room->id, 
-                            'travellers' => $travellers, 
-                            'checkInDate' => $checkInDate, 
-                            'checkOutDate' => $checkOutDate
-                        ]) }}" class="btn btn-danger mt-2">Book now</a> --}}
                     </div>
                 </div>
             </div>
