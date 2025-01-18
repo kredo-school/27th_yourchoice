@@ -11,20 +11,20 @@
 
     <div class="input-group my-4">
         {{-- 検索機能実装 --}}
-        <form action="#" method="POST" class="form-inline">
+        <form action="{{ route('customer.top.search', ['topCategory' => $topCategory ?? '']) }}" method="POST" class="form-inline">
             @csrf
             <div class="d-flex align-items-center">
                 <!-- 場所入力 -->
-                <input type="text" name="location" class="form-control me-2" placeholder="Where to?" id="location">
+                <input type="text" name="location" class="form-control me-2" placeholder="Where to?" id="location" value="{{ old('location', $location ?? '') }}" required>
                 
                 <!-- チェックイン日入力 -->
-                <input type="date" name="checkInDate" class="form-control" id="checkInDate" placeholder="Check-in Date">
+                <input type="date" name="checkInDate" class="form-control" id="checkInDate" placeholder="Check-in Date" value="{{ old('checkInDate', $checkInDate ?? '') }}" required>
                 
                 <!-- チェックアウト日入力 -->
-                <input type="date" name="checkOutDate" class="form-control me-2" id="checkOutDate" placeholder="Check-out Date">
+                <input type="date" name="checkOutDate" class="form-control me-2" id="checkOutDate" placeholder="Check-out Date" value="{{ old('checkOutDate', $checkOutDate ?? '') }}" required>
                 
                 <!-- 人数入力 -->
-                <input type="number" name="travellers" class="form-control" placeholder="Travellers" id="travellers">
+                <input type="number" name="travellers" class="form-control" placeholder="Travellers" id="travellers" value="{{ old('travellers', $travellers ?? '') }}" required>
                 
                 <!-- 検索ボタン -->
                 <button class="btn btn-outline-secondary" type="submit">
@@ -64,7 +64,18 @@
     <div class="list-group">
         @foreach ($hotels as $hotel)
             <div class="list-group-item">
-                <a href="{{ route('customer.top.show', ['id' => $hotel->id]) }}" class="stretched-link"></a>
+                {{-- <a href="{{ route('customer.top.show', ['id' => $hotel->id]) }}" class="stretched-link"></a> --}}
+                <form action="{{ route('customer.top.show', ['id' => $hotel->id ?? '', 
+                    'checkInDate' => $checkInDate ?? '', 
+                    'checkOutDate' => $checkOutDate ?? '', 
+                    'travellers' => $travellers ?? '']) }}" method="GET">
+
+                @csrf
+                    <input type="hidden" name="travellers" value="{{ old('travellers', $travellers ?? '') }}">
+                    <input type="hidden" name="checkInDate" value="{{ old('checkInDate', $checkInDate ?? '') }}">
+                    <input type="hidden" name="checkOutDate" value="{{ old('checkOutDate', $checkOutDate ?? '') }}">
+                    <button type="submit" class="stretched-link" style="opacity:0;"></button>
+                </form>
                 <div class="row align-items-center">
                     <div class="col-md-2">
                         <img src="{{ asset($hotel->image_main) }}" alt="hotel-img" class="hotel-img">
@@ -72,20 +83,21 @@
                     <div class="col-md-7">
                         <h5>{{$hotel->hotel_name}}</h5>
                         <p>{{$hotel->prefecture}}</p>
-                            @foreach($hotel->categories as $hotelcategory)
-                                <span class="badge bg-pink">{{ $hotelcategory->name }}</span>
+                            @foreach($hotel->categories->where('type','category') as $category)
+                                <span class="badge bg-pink">{{ $category->name }}</span>
                             @endforeach
                     </div>
                     <div class="col-md-3 text-end">
                         <div class="rating">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            (120)
+                            @for ($i = 0; $i < $hotel->averageRating ; $i++)
+                                <span class="selected">★</span>
+                            @endfor
+                            @for ($i = $hotel->averageRating; $i < 5; $i++)
+                                <span class="not_selected">★</span>
+                            @endfor
+                            ({{ $hotel->averageRating}})
                         </div>
-                        <h6>$100 / 2 travellers</h6>
+                            <h6>${{ $minPrice ?? 'N/A' }}/ {{ $travellers ?? 2 }} {{ Str::plural('traveller', $travellers ?? 2) }}</h6>
                         <small>include taxes & fees for 1 night</small>
                     </div>
                 </div>

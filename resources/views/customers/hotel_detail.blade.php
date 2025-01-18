@@ -68,7 +68,24 @@
                                 <p class="text-muted small">{{ $review->user->username }}</p>
                             </div>
                         </div>
-                    @endforeach
+                                <!-- モーダル -->
+                                <div class="modal fade" id="commentModal-{{ $index }}" tabindex="-1" aria-labelledby="commentModalLabel-{{ $index }}" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="commentModalLabel-{{ $index }}">Full Comment</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                {{ $review->comment }}
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        @endforeach
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -91,6 +108,14 @@
     <!-- 部屋リスト -->
     <div class="row mt-5">
         @foreach ($availableRooms as $room)
+        <form action="{{ route('customer.reserve.edit', [
+                            'hotel_id' => $hotels->id, 
+                            'room_id' => $room->id, 
+                            'travellers' => $travellers, 
+                            'checkInDate' => $checkInDate, 
+                            'checkOutDate' => $checkOutDate
+                        ]) }}" method="GET">
+            @csrf
             <div class="col-md-12 mb-4">
                 <div class="d-flex align-items-center border p-3 rounded">
                     <img src="{{ asset('images/hotel-room.jpg') }}" alt="hotel-room" class="img-fluid" style="max-width: 150px;">
@@ -100,20 +125,29 @@
                             @foreach ($hotels->categories->where('type', 'free_toiletries') as $category)
                                 <li class="list-inline-item"><i class="fa fa-check"></i>{{ $category->name }}</li>
                             @endforeach
-                            {{-- <li class="list-inline-item"><i class="fa fa-check"></i> Shampoo</li>
-                            <li class="list-inline-item"><i class="fa fa-check"></i> Conditioner</li>
-                            <li class="list-inline-item"><i class="fa fa-check"></i> Body wash</li>
-                            <li class="list-inline-item"><i class="fa fa-check"></i> Toothbrush</li>
-                            <li class="list-inline-item"><i class="fa fa-check"></i> Toothpaste</li> --}}
                         </ul>
                     </div>
+
+                    <input type="hidden" id="hotel_id" name="hotel_id" value="{{ $hotels->id }}">
+                    <input type="hidden" id="room_id" name="room_id" value="{{ $room->id }}">
+                    <input type="hidden" id="travellers" name="travellers" value="{{ old('travellers', $travellers ?? '') }}">
+                    <input type="hidden" id="checkInDate" name="checkInDate" value="{{ old('checkInDate', $checkInDate ?? '') }}">
+                    <input type="hidden" id="checkOutDate" name="checkOutDate" value="{{ old('checkOutDate', $checkOutDate ?? '') }}">
+                    <button type="submit" class="btn btn-danger mt-2">Book now</button>
                     <div class="text-end">
                         <h6 class="mb-1">{{ $room->price }} / {{ $room->capacity }} travellers</h6>
                         <small>Includes taxes & fees for 1 night</small>
-                        <a href="#" class="btn btn-danger mt-2">Book now</a>
+                        {{-- <a href="{{ route('customer.reserve.edit', [
+                            'hotel_id' => $hotels->id, 
+                            'room_id' => $room->id, 
+                            'travellers' => $travellers, 
+                            'checkInDate' => $checkInDate, 
+                            'checkOutDate' => $checkOutDate
+                        ]) }}" class="btn btn-danger mt-2">Book now</a> --}}
                     </div>
                 </div>
             </div>
+        </form>
         @endforeach
     </div>
 </div>
