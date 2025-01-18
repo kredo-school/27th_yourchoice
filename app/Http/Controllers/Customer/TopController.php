@@ -111,7 +111,16 @@ class TopController extends Controller
         $travellers = $request->input('travellers');
         $checkInDate = $request->input('checkInDate');
         $checkOutDate = $request->input('checkOutDate');
-        // $defaultMinPrice = $query->room->where('capacity', 2)->min('price');
+                // カテゴリーごとの背景画像設定
+                $backgroundImages = [
+                    'Wheelchair and Senior' => 'images/wheelchair_org.png',
+                    'Pregnancy' => 'images/pregnancy_org.png',
+                    'Family' => 'images/family_org.png',
+                    'Visual and Hearing Impaired' => 'images/Visual and Hearing Impaired_org.png',//修正必要
+                    'Religious' => 'images/religious_org.png',
+                    'English Friendly' => 'images/english-friendly_org.png',
+                ];
+                $backgroundImage = $backgroundImages[$topCategory] ?? 'images/wheelchair_org.png';
 
         if (!empty($location)) {
             $query->where('prefecture', 'LIKE', "%{$location}%");
@@ -181,6 +190,7 @@ class TopController extends Controller
             'checkInDate' => $checkInDate,
             'checkOutDate' => $checkOutDate,
             'travellers' => $travellers,
+            'backgroundImage' => $backgroundImage
         ]);
     }
     
