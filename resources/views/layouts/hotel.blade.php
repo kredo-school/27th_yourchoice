@@ -65,8 +65,9 @@
                                     {{-- Include modal here --}}
                                     @include('layouts.modals.notification_hotel')
 
-                                    {{-- <a href="{{ route('hotel.inquary.show') }}"><img src="{{ asset('images/envelope-solid.svg') }}" class="logo-sub me-3"></a>  chatifyへのリンク↓　--}}
-                                    <a href="{{ route(config('chatify.routes.prefix')) }}"><img src="{{ asset('images/envelope-solid.svg') }}" class="logo-sub me-3"></a> 
+                                    <a href="{{ route('hotel.inquary.show') }}"><img src="{{ asset('images/envelope-solid.svg') }}" class="logo-sub me-3"></a>
+                                     <!-- chatifyへのリンク↓ -->
+                                    {{-- <a href="{{ route(config('chatify.routes.prefix')) }}"><img src="{{ asset('images/envelope-solid.svg') }}" class="logo-sub me-3"></a>  --}}
                                     
                                     <a href="{{ route('hotel.profile.show') }}" class="btn btn-outline-secondary btn-mypage me-2">My Page</a>
                                     <a href="#" class="btn btn-outline-secondary btn-logout" 
