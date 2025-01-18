@@ -14,7 +14,7 @@
         <div class="categories-grid">
             <!-- Wheelchair and Senior -->
             {{-- <a href="{{ route('categories.wheelchair') }}" class="category"> --}}
-                <form action="{{ route('customer.top.search') }}" method="POST" class="category-form">
+                <form action="{{ route('customer.top.display') }}" method="GET" class="category-form">
                     @csrf
                     <input type="hidden" name="topCategory" value="Wheelchair and Senior">
                     <button type="submit" class="category-btn">
@@ -22,7 +22,7 @@
                     </button>
                 </form>
             <!-- Pregnancy -->
-            <form action="{{ route('customer.top.search') }}" method="POST" class="category-form">
+            <form action="{{ route('customer.top.display') }}" method="GET" class="category-form">
                 @csrf
                 <input type="hidden" name="topCategory" value="Pregnancy">
                 <button type="submit" class="category-btn">
@@ -30,7 +30,7 @@
                 </button>
             </form>
             <!-- Family -->
-            <form action="{{ route('customer.top.search') }}" method="POST" class="category-form">
+            <form action="{{ route('customer.top.display') }}" method="GET" class="category-form">
                 @csrf
                 <input type="hidden" name="topCategory" value="Family">
                 <button type="submit" class="category-btn">
@@ -38,7 +38,7 @@
                 </button>
             </form>
             <!-- Visual and Hearing Impaired -->
-            <form action="{{ route('customer.top.search') }}" method="POST" class="category-form">
+            <form action="{{ route('customer.top.display') }}" method="GET" class="category-form">
                 @csrf
                 <input type="hidden" name="topCategory" value="Visual and Hearing Impaired">
                 <button type="submit" class="category-btn">
@@ -46,7 +46,7 @@
                 </button>
             </form>
             <!-- Religious -->
-            <form action="{{ route('customer.top.search') }}" method="POST" class="category-form">
+            <form action="{{ route('customer.top.display') }}" method="GET" class="category-form">
                 @csrf
                 <input type="hidden" name="topCategory" value="Religious">
                 <button type="submit" class="category-btn">
@@ -54,7 +54,7 @@
                 </button>
             </form>
             <!-- English Friendly -->
-            <form action="{{ route('customer.top.search') }}" method="POST" class="category-form">
+            <form action="{{ route('customer.top.display') }}" method="GET" class="category-form">
                 @csrf
                 <input type="hidden" name="topCategory" value="English Friendly">
                 <button type="submit" class="category-btn">

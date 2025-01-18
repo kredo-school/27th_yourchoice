@@ -1,16 +1,16 @@
 <?php
 
 namespace App\Http\Controllers\Customer;
-use App\Models\User;
-use App\Models\Hotel;
-use App\Models\Room;
-use App\Models\Review;
-use App\Models\Reservation;
-use App\Models\Category;
-use App\Models\HotelCategory;
-use App\Models\HasFactory;
 use App\Http\Controllers\Controller;
-
+use App\Models\User;
+use App\Models\Room;
+use App\Models\Hotel;
+use App\Models\Review;
+use App\Models\Category;
+use App\Models\HasFactory;
+use App\Models\Reservation;
+use App\Models\HotelCategory;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -35,37 +35,70 @@ class TopController extends Controller
         $categories = $this->category->all();
         return view('customers.toppage',['hotels' => $hotels ]);
     }
-    public function search(Request $request)
-    {
-        // カテゴリー情報の取得
-        $topCategory = $request->input('topCategory');
-    
-        // 検索キーワードの取得
-        $location = $request->input('location');
-        // $date = $request->input('date');
-        $travellers = $request->input('travellers');
 
-        // セッションで `topCategory` を保持
+    public function displayHotels(Request $request){
         if (!empty($topCategory)) {
             session(['topCategory' => $topCategory]);
         } else {
-            $topCategory = session('topCategory'); // セッションから取得
+            $topCategory = session('topCategory');
         }
 
-        // クエリの準備
         $query = Hotel::query();
-       
-        // キーワード検索条件の適用(topページからの検索)
+        $topCategory = $request->input('topCategory');
+
         if (!empty($topCategory)) {
             $query->whereHas('categories', function ($query) use ($topCategory) {
                 $query->where('name', 'LIKE', "%{$topCategory}%");
             });
         }
 
-        // キーワード検索条件の適用(searchページの中での検索)
+        $hotels = $query->with('categories','rooms')->get();
+
+        return view('customers.hotel_search', compact('hotels','topCategory'));
+
+    }
+
+
+    public function search(Request $request)
+    {
+        $query = Hotel::query();
+
+        $topCategory = $request->input('topCategory');
+        $location = $request->input('location');
+        $travellers = $request->input('travellers');
+        $checkInDate = $request->input('checkInDate');
+        $checkOutDate = $request->input('checkOutDate');
+
+        //検索されたpriceの最小値
+        $minPrice = $this->hotel->rooms()
+        ->when(!is_null($travellers), function ($query) use ($travellers) {
+            $query->where('capacity', $travellers);
+        })
+        ->min('price');
+
         if (!empty($location)) {
-            // $topCategory = $request->input('topCategory');
-            $hotels=$query->where('prefecture', 'LIKE', "%{$location}%")->whereHas('categories', function ($query) use ($topCategory) {
+            $query->where('prefecture', 'LIKE', "%{$location}%");
+        }
+
+        $availableHotelIds = Room::whereDoesntHave('reservations', function ($query) use ($checkInDate, $checkOutDate) {
+            $query->where(function ($query) use ($checkInDate, $checkOutDate) {
+                $query->whereBetween('check_in_date', [$checkInDate, $checkOutDate])
+                    ->orWhereBetween('check_out_date', [$checkInDate, $checkOutDate])
+                    ->orWhere(function ($query) use ($checkInDate, $checkOutDate) {
+                        $query->where('check_in_date', '<=', $checkInDate)
+                            ->where('check_out_date', '>=', $checkOutDate);
+                    });
+            });
+        })->pluck('hotel_id');
+
+        $query->whereIn('id', $availableHotelIds);
+   
+
+
+
+        // キーワード検索条件の適用(topページからの検索)
+        if (!empty($topCategory)) {
+            $query->whereHas('categories', function ($query) use ($topCategory) {
                 $query->where('name', 'LIKE', "%{$topCategory}%");
             });
         }
@@ -75,62 +108,100 @@ class TopController extends Controller
         // \Log::info('////////////////////////////////////////');
         // \Log::info('Executed Query: ', [DB::getQueryLog()]);
         // \Log::info('Location: ' . $location); \Log::info('Top Category: ' . $topCategory);
+
+        // Show Review information
+        $hotels = $hotels->map(function ($hotel) {
+            $hotel->averageRating = ceil(
+                $this->review
+                    ->where('hotel_id', $hotel->id)
+                    ->avg('rating') ?? 0
+            );
+            return $hotel;
+        });
+
+        $hotels = $hotels->map(function ($hotel) {
+            $hotel->reviews = $this->review
+                ->where('hotel_id', $hotel->id)
+                ->get();
+            return $hotel;
+        });
+
+
         
-        return view('customers.hotel_search', ['hotels' => $hotels, 'topCategory' => $topCategory]);
+        return view('customers.hotel_search', [
+            'topCategory' => $topCategory,
+            'hotels' => $hotels, 
+            'location' => $location,
+            'checkInDate' => $checkInDate,
+            'checkOutDate' => $checkOutDate,
+            'travellers' => $travellers,
+            'minPrice' => $minPrice, 
+        ]);
     }
     
     public function show($id, Request $request)
     {
-        // $reservation = $this->reservation;
-        // ホテルを取得
         $hotels = Hotel::with(['categories', 'rooms.reservations'])->find($id);
-
+        $id = $hotels->id;
         $address = $hotels->address;
-
-        // // JSON形式で返却
-        // return response()->json($address);
+        $hotel_reviews = $this->review
+            ->where('hotel_id', $id)
+            // ->whereNull('status') 
+            ->latest()
+            ->get();
+        $checkInDate = $request->input('checkInDate');
+        $checkOutDate = $request->input('checkOutDate');
+        $travellers = $request->input('travellers');
+        // dd($checkInDate,$checkOutDate,$travellers);
     
         if (!$hotels) {
             abort(404, 'Hotel not found');
         }
-    
-        // 入力された日程を取得
-        $date = $request->input('date');
-    
-        // ホテルに紐づく部屋を取得
-        $rooms = $hotels->rooms;
-    
-        // 利用可能な部屋をフィルタリング
-        $availableRooms = $rooms->filter(function ($room) use ($date) {
+
+        $availableRooms = $hotels->rooms->filter(function ($room) use ($checkInDate, $checkOutDate) {
             foreach ($room->reservations as $reservation) {
-                // 既存予約の日程を取得
-                $checkInDate = $reservation->check_in_date;
-                $checkOutDate = $reservation->check_out_date;
-    
-                // 入力した日程が既存予約の日程に該当する場合
-                if (
-                    ($date >= $checkInDate && $date < $checkOutDate) || // チェックイン日が既存予約期間内
-                    ($date <= $checkInDate && $date >= $checkOutDate)   // 予約期間を完全に含む
-                ) {
-                    return false; // 利用不可の部屋は除外
+                if (($checkInDate >= $reservation->check_in_date && $checkInDate < $reservation->check_out_date) ||
+                    ($checkOutDate > $reservation->check_in_date && $checkOutDate <= $reservation->check_out_date) ||
+                    ($checkInDate <= $reservation->check_in_date && $checkOutDate >= $reservation->check_out_date)) {
+                    return false;
                 }
             }
-    
-            return true; // 利用可能な部屋
+            return true;
         });
+    
+        // // 利用可能な部屋をフィルタリング
+        // $availableRooms = $rooms->filter(function ($room) use ($date) {
+        //     foreach ($room->reservations as $reservation) {
+        //         // 既存予約の日程を取得
+        //         $checkInDate = $reservation->check_in_date;
+        //         $checkOutDate = $reservation->check_out_date;
+    
+        //         // 入力した日程が既存予約の日程に該当する場合
+        //         if (
+        //             ($date >= $checkInDate && $date < $checkOutDate) || // チェックイン日が既存予約期間内
+        //             ($date <= $checkInDate && $date >= $checkOutDate)   // 予約期間を完全に含む
+        //         ) {
+        //             return false; // 利用不可の部屋は除外
+        //         }
+        //     }
+    
+        //     return true; // 利用可能な部屋
+        // });
 
         // Show Reviews
-        $hotel_reviews = $this->review->where('hotel_id', $id)
-        ->latest()
-        ->get();
+
 
     
         // ビューにデータを渡す
         return view('customers.hotel_detail', [
             'hotels' => $hotels,
+            'id' => $id,
             'availableRooms' => $availableRooms,
             'address' => $address,
-            'hotel_reviews' => $hotel_reviews
+            'hotel_reviews' => $hotel_reviews,
+            'travellers' => $travellers,
+            'checkInDate' => $checkInDate,
+            'checkOutDate' => $checkOutDate
         ]);
     }
     
