@@ -137,13 +137,6 @@
                     <div class="text-end">
                         <h6 class="mb-1">{{ $room->price }} / {{ $room->capacity }} travellers</h6>
                         <small>Includes taxes & fees for 1 night</small>
-                        {{-- <a href="{{ route('customer.reserve.edit', [
-                            'hotel_id' => $hotels->id, 
-                            'room_id' => $room->id, 
-                            'travellers' => $travellers, 
-                            'checkInDate' => $checkInDate, 
-                            'checkOutDate' => $checkOutDate
-                        ]) }}" class="btn btn-danger mt-2">Book now</a> --}}
                     </div>
                 </div>
             </div>

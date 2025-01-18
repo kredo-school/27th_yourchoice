@@ -54,6 +54,23 @@ class TopController extends Controller
 
         $hotels = $query->with('categories','rooms')->get();
 
+        // Show Review information
+        $hotels = $hotels->map(function ($hotel) {
+            $hotel->averageRating = ceil(
+                $this->review
+                    ->where('hotel_id', $hotel->id)
+                    ->avg('rating') ?? 0
+            );
+            return $hotel;
+        });
+
+        $hotels = $hotels->map(function ($hotel) {
+            $hotel->reviews = $this->review
+                ->where('hotel_id', $hotel->id)
+                ->get();
+            return $hotel;
+        });
+
         return view('customers.hotel_search', compact('hotels','topCategory'));
 
     }
@@ -70,11 +87,11 @@ class TopController extends Controller
         $checkOutDate = $request->input('checkOutDate');
 
         //検索されたpriceの最小値
-        $minPrice = $this->hotel->rooms()
-        ->when(!is_null($travellers), function ($query) use ($travellers) {
-            $query->where('capacity', $travellers);
-        })
-        ->min('price');
+        // $minPrice = $this->hotel->rooms()
+        // ->when(!is_null($travellers), function ($query) use ($travellers) {
+        //     $query->where('capacity', $travellers);
+        // })
+        // ->min('price');
 
         if (!empty($location)) {
             $query->where('prefecture', 'LIKE', "%{$location}%");
@@ -93,9 +110,6 @@ class TopController extends Controller
 
         $query->whereIn('id', $availableHotelIds);
    
-
-
-
         // キーワード検索条件の適用(topページからの検索)
         if (!empty($topCategory)) {
             $query->whereHas('categories', function ($query) use ($topCategory) {
@@ -126,6 +140,17 @@ class TopController extends Controller
             return $hotel;
         });
 
+        $hotels = $hotels->map(function ($hotel) use ($travellers) {
+            // Room テーブルの price の最小値を取得
+            $hotel->minPrice = $hotel->rooms()
+                ->when(!is_null($travellers), function ($query) use ($travellers) {
+                    $query->where('capacity', '>=', $travellers);
+                })
+                ->min('price'); // price カラムの最小値を取得
+    
+            return $hotel;
+        });
+
 
         
         return view('customers.hotel_search', [
@@ -135,7 +160,7 @@ class TopController extends Controller
             'checkInDate' => $checkInDate,
             'checkOutDate' => $checkOutDate,
             'travellers' => $travellers,
-            'minPrice' => $minPrice, 
+            // 'minPrice' => $minPrice, 
         ]);
     }
     
@@ -169,39 +194,16 @@ class TopController extends Controller
             return true;
         });
     
-        // // 利用可能な部屋をフィルタリング
-        // $availableRooms = $rooms->filter(function ($room) use ($date) {
-        //     foreach ($room->reservations as $reservation) {
-        //         // 既存予約の日程を取得
-        //         $checkInDate = $reservation->check_in_date;
-        //         $checkOutDate = $reservation->check_out_date;
-    
-        //         // 入力した日程が既存予約の日程に該当する場合
-        //         if (
-        //             ($date >= $checkInDate && $date < $checkOutDate) || // チェックイン日が既存予約期間内
-        //             ($date <= $checkInDate && $date >= $checkOutDate)   // 予約期間を完全に含む
-        //         ) {
-        //             return false; // 利用不可の部屋は除外
-        //         }
-        //     }
-    
-        //     return true; // 利用可能な部屋
-        // });
-
-        // Show Reviews
-
-
-    
         // ビューにデータを渡す
         return view('customers.hotel_detail', [
-            'hotels' => $hotels,
             'id' => $id,
-            'availableRooms' => $availableRooms,
+            'hotels' => $hotels,
             'address' => $address,
-            'hotel_reviews' => $hotel_reviews,
             'travellers' => $travellers,
             'checkInDate' => $checkInDate,
-            'checkOutDate' => $checkOutDate
+            'checkOutDate' => $checkOutDate,
+            'hotel_reviews' => $hotel_reviews,
+            'availableRooms' => $availableRooms,
         ]);
     }
     
