@@ -79,9 +79,3 @@ class HotelCategoryTableSeeder extends Seeder
         ]);
     }
 }
-
-
-
-
-
-
