@@ -644,6 +644,12 @@ p {
     
 }
 
+.readonly-input {
+    background-color: #f5f5f5; 
+    color: #6c757d;
+    border: 1px solid #ced4da; 
+    cursor: not-allowed; 
+}
 
 
 

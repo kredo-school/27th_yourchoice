@@ -47,7 +47,7 @@
   /* Remove border */
   border-radius: 8px;
   /* Rounded corners */
-  padding: 10px 90px;
+  padding: 10px 50px;
   /* Spacing */
   font-size: 16px;
   /* Font size */
@@ -70,7 +70,7 @@
   /* Outline color */
   border-radius: 8px;
   /* Rounded corners */
-  padding: 10px 90px;
+  padding: 10px 50px;
   /* Spacing */
   font-size: 16px;
   /* Font size */
@@ -91,7 +91,7 @@
   /* No border */
   border-radius: 8px;
   /* Rounded corners */
-  padding: 10px 90px;
+  padding: 10px 50px;
   /* Spacing */
   font-size: 16px;
   /* Font size */
@@ -202,10 +202,14 @@
   cursor: pointer;
 }
 
-
-textarea#remarks {
-  min-height: 80px;
+.custom-textarea {
+  height: 150px; /* 高さを設定 */
 }
+
+
+/* textarea#remarks {
+  min-height: 80px;
+} */
 
 /* カードの角の境界線を表示させる */
 .card {
@@ -238,6 +242,15 @@ textarea#remarks {
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
 }
+
+/* 必須フィールドのラベルにアスタリスクを追加 */
+label[for][required]:after {
+  content: " *";
+  color: red; /* 赤色に設定 */
+}
+
+
+
 
 
 /* .btn-main{
@@ -316,3 +329,4 @@ textarea#remarks {
   display: block !important;
   /* 不要な余白をなくすため */
 }
+

@@ -22,6 +22,7 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.','middleware' => 'auth'
 
   // ログイン不要ページ
     Route::get('/top/list',[App\Http\Controllers\Customer\TopController::class,'list'])->name('top.list');
+    Route::get('/top/display/category', [App\Http\Controllers\Customer\TopController::class, 'displayHotels'])->name('top.display');
     Route::post('/top/search',[App\Http\Controllers\Customer\TopController::class,'search'])->name('top.search');
 
     Route::get('/top/show/{id}',[App\Http\Controllers\Customer\TopController::class,'show'])->name('top.show');
@@ -29,14 +30,16 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.','middleware' => 'auth'
 
   // ログインが必要ページ
   Route::group(['middleware' => 'customer'], function () {
-      Route::get('/reserve/edit',[App\Http\Controllers\Customer\ReserveController::class,'edit'])->name('reserve.edit');
-      Route::get('/reserve/show',[App\Http\Controllers\Customer\ReserveController::class,'show'])->name('reserve.show');
-      Route::get('/reserve/confirmation',[App\Http\Controllers\Customer\ReserveController::class,'confirmation'])->name('reserve.confirmation');
-      Route::post('/reserve/confirmation/book',[App\Http\Controllers\Customer\ReserveController::class,'store'])->name('reserve.confirmation.book');
+      Route::get('/reserve/edit/{hotel_id}/{room_id}',[App\Http\Controllers\Customer\ReserveController::class,'edit'])->name('reserve.edit');
+      // Route::get('/reserve/show',[App\Http\Controllers\Customer\ReserveController::class,'show'])->name('reserve.show');
+      // Route::get('/reserve/confirmation',[App\Http\Controllers\Customer\ReserveController::class,'confirmation'])->name('reserve.confirmation');
+      Route::post('/reserve/confirmation/book/{hotel_id}/{room_id}',[App\Http\Controllers\Customer\ReserveController::class,'store'])->name('reserve.confirmation.book');
 
       Route::get('/profile/show',[App\Http\Controllers\Customer\ProfileController::class,'show'])->name('profile.show');
       Route::get('/profile/edit',[App\Http\Controllers\Customer\ProfileController::class,'edit'])->name('profile.edit');
       Route::get('/profile/editpass',[App\Http\Controllers\Customer\ProfileController::class,'editpass'])->name('profile.editpass');
+      Route::put('/profile/update',[App\Http\Controllers\Customer\ProfileController::class,'update'])->name('profile.update');
+      Route::post('/profile/updatepass', [App\Http\Controllers\Customer\ProfileController::class, 'updatepass'])->name('profile.updatepass'); 
 
       Route::get('/reservation/reservationlist',[ReservationController::class,'index'])->middleware('auth')->name('reservation.reservationlist'); 
       Route::get('/reservation/{reservationid}/show', [ReservationController::class, 'show'])->name('reservation.show');
@@ -92,6 +95,8 @@ Route::group(['prefix' => 'hotel', 'as' => 'hotel.', 'middleware' => 'hotel'], f
 
     Route::get('/review/list',[App\Http\Controllers\Hotel\ReviewController::class,'list'])->name('review.list');
     Route::get('/review/show/{id}',[App\Http\Controllers\Hotel\ReviewController::class,'show'])->name('review.show');
+    Route::get('/review/visible/{id}',[App\Http\Controllers\Hotel\ReviewController::class,'visible'])->name('review.visible');
+    Route::get('/review/hide/{id}',[App\Http\Controllers\Hotel\ReviewController::class,'hide'])->name('review.hide');
 
 });
 

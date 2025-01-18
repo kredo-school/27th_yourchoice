@@ -17,6 +17,8 @@ class PaymentsTableSeeder extends Seeder
         DB::table('payments')->insert([
             [
                 'id' => 1,
+                'user_id' => 1,
+                'card_number' => '1234567890123456',
                 'payment_date' => '2024-11-08',
                 'amount' => 100,
                 'payment_method' => 'credit_card', // 支払い方法（credit_card, paypal, bank_transfer）
@@ -26,6 +28,8 @@ class PaymentsTableSeeder extends Seeder
             ],
             [
                 'id' => 2,
+                'user_id' => 2,
+                'card_number' => '1234567890123456',
                 'payment_date' => '2024-11-09',
                 'amount' => 150,
                 'payment_method' => 'paypal',
@@ -35,6 +39,8 @@ class PaymentsTableSeeder extends Seeder
             ],
             [
                 'id' => 3,
+                'user_id' => 3,
+                'card_number' => '1234567890123456',
                 'payment_date' => '2024-11-10',
                 'amount' => 200,
                 'payment_method' => 'bank_transfer',
@@ -44,6 +50,8 @@ class PaymentsTableSeeder extends Seeder
             ],
             [
                 'id' => 4,
+                'user_id' => 4,
+                'card_number' => '1234567890123456',
                 'payment_date' => '2024-11-11',
                 'amount' => 50,
                 'payment_method' => 'credit_card',
@@ -53,6 +61,8 @@ class PaymentsTableSeeder extends Seeder
             ],
             [
                 'id' => 5,
+                'user_id' => 5,
+                'card_number' => '1234567890123456',
                 'payment_date' => '2024-11-12',
                 'amount' => 120,
                 'payment_method' => 'paypal',

@@ -8,97 +8,52 @@ use Illuminate\Support\Facades\Log;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Reservation;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+use App\Models\Hotel;
+use App\Models\Room;
 
 class ReserveController extends Controller
 {
-    private $user;
-    public function edit()
+    public function edit(Request $request)
     {
-        $user = $this->user->findOrFail(Auth::id());
-        return view('customers.reservations.reservation',compact('user'));
-    }
-
-    // public function show()
-    // {
-    //     $user = $this->user->findOrFail(Auth::id());
-        
-    //     return view('customers.reservations.reservation_detail', compact('user'));
-    // }
+        $user = Auth::user();
+        $travellers = $request->input('travellers');
+        $checkInDate = $request->input('checkInDate');
+        $checkOutDate = $request->input('checkOutDate');
+        $hotel_id = $request->input('hotel_id');
+        $room_id = $request->input('room_id'); 
+        $breakfast = $request->input('breakfast',0); 
+        // dd($travellers,$checkInDate,$checkInDate,$hotel_id,$room_id);
 
     
+        $hotel = DB::table('hotels')->where('id', $hotel_id)->first();
+        $room = DB::table('rooms')->where('id', $room_id)->first();
 
-public function show()
-{
-    $user = $this->user->findOrFail(Auth::id());
-    $model = new reservation(); // モデルを正しくインスタンス化
-    $record = $model->findOrFail($id);
-    return view('customers.reserve.show', compact('record','user'));
-}
+    
+        $hotel_name = $hotel->hotel_name;
+        $room_type = $room->room_type;
+        $price = $room->price;
+        $breakfast_price = $hotel-> breakfast_price;
+        $total_price = $breakfast ? $price+$breakfast_price : $price;
 
+        $formattedCheckInDate = date('j, F, Y', strtotime($checkInDate));
+        $formattedCheckOutDate = date('j, F, Y', strtotime($checkOutDate));
 
-    public function __construct(User $user)
-  {
-    $this->user = $user;
-   
-  }
+        return view('customers.reservations.reservation', compact('user','travellers', 'checkInDate', 'checkOutDate', 'room_type',
+            'formattedCheckInDate',
+            'formattedCheckOutDate',
+            'price',
+            'breakfast_price',
+            'breakfast',
+            'total_price',
+            'hotel_id',
+            'room_id', 'hotel_name'));
+    }
 
-
-    public function store(Request $request) // バリデーション 
-    { 
-        try
-        {
-            $request->validate([ 
-            'first_name' => 'required|string|max:255', 
-            'last_name' => 'required|string|max:255', 
-            'email' => 'required|email|max:255',
-            'phone' => 'required|string|max:20',
-            'check_in_date' => 'required|date', 
-            'check_out_date' => 'required|date|after:check_in_date', 
-            'room_type' => 'required|string', 
-            'payment_method' => 'required|string' 
-            ]);
-
-
-            // 予約データの保存
-            $reservation = new Reservation(); 
-            $reservation->guest_name = $request->guest_name; 
-            $reservation->email = $request->email; 
-            $reservation->phone = $request->phone;
-            $reservation->check_in_date = $request->check_in_date; 
-            $reservation->check_out_date = $request->check_out_date; 
-            $reservation->room_type = $request->room_type; 
-            $reservation->payment_method = $request->payment_method; $reservation->save(); 
-
-            // 予約完了ページへのリダイレクト 
-            return redirect()->route('customer.reserve.confirmation');
-        
-        } catch (\Exception $e) {
-            Log::error('Failed: ' . $e->getMessage());
-            return redirect()->route('customer.profile.show')->withErrors(['error' => 'Failed']);
-        }
-
-        $reservation = Reservation::create([
-    'user_id' => $request->input('user_id'), // ユーザーID
-    'payment_id' => $paymentId, // 支払い情報の関連付け
-    'check_in_date' => $request->input('check_in_date'), // チェックイン日
-    'check_out_date' => $request->input('check_out_date'), // チェックアウト日
-    'number_of_people' => $request->input('number_of_people'), // 宿泊人数
-    'reservation_status' => 'pending', // 初期ステータス
-]);
-
-$reservationId = $reservation->id; // 生成されたIDを取得
-
-
-$rooms = $request->input('rooms'); // 部屋情報（配列形式）
-foreach ($rooms as $room) {
-    ReservationRoom::create([
-        'reservation_id' => $reservationId, // 予約情報の関連付け
-        'room_id' => $room['room_id'], // 部屋ID
-        'room_type' => $room['room_type'], // 部屋タイプ
-        'price' => $room['price'], // 部屋料金
-    ]);
-}
-
+    public function show()
+    {
+        return view('customers.reservations.reservation_detail');
     }
 
     public function confirmation()
@@ -155,17 +110,82 @@ public function storeReservationData(Request $request)
     return redirect()->route('reservation_detail'); // 次のページにリダイレクト
 }
 
-// public function store(Request $request)
-// {
-//     // セッションにデータを保存
-//     $request->session()->put('first_name', $request->input('first_name'));
-//     $request->session()->put('last_name', $request->input('last_name'));
-//     $request->session()->put('reservation_email', $request->input('reservation_email'));
-//     $request->session()->put('reservation_phone', $request->input('reservation_phone'));
+public function store( $room_id,$hotel_id, Request $request)
+{
+    // // セッションにデータを保存
+    // $request->session()->put('first_name', $request->input('first_name'));
+    // $request->session()->put('last_name', $request->input('last_name'));
+    // $request->session()->put('reservation_email', $request->input('reservation_email'));
+    // $request->session()->put('reservation_phone', $request->input('reservation_phone'));
 
-//     // 次のページへリダイレクト
-//     return redirect()->route('customer.reserve.show');
-// }
+    // 次のページへリダイレクト
+
+    DB::beginTransaction();
+   try{
+    $user_id = Auth::id();
+        $travellers = $request->input('travellers');
+        $checkInDate = $request->input('checkInDate');
+        $checkOutDate = $request->input('checkOutDate');
+        $hotel_id = $request->input('hotel_id');
+        $room_id = $request->input('room_id'); 
+        $breakfast = $request->has('breakfast') ? 1:0 ; 
+        $requests = $request->input('requests'); 
+        $card_number = $request->input('card_number');
+        $payment_date = Carbon::now()->toDateString();
+        if (!$hotel_id || !$room_id) {
+            abort(404, 'Hotel or Room ID is missing.');
+        }
+
+        $hotel = DB::table('hotels')->where('id', $hotel_id)->first();
+            $room = DB::table('rooms')->where('id', $room_id)->first();
+            $price = $room->price;
+            $breakfast_price = $hotel->breakfast_price;
+            $total_price = $breakfast ? $price + $breakfast_price : $price;
+
+            $payment = DB::table('payments')->insertGetId([
+                'user_id' => $user_id,
+                'payment_date' => $payment_date,
+                'card_number' => $card_number,
+                'amount' => $total_price,
+                'status' => 'completed',
+                'created_at' => now(),
+                'updated_at' => now(),
+                
+            ]);
+
+            $reservation = DB::table('reservations')->insertGetId([
+                'user_id' => $user_id,
+                'payment_id' => $payment,
+                'check_in_date' => $checkInDate,
+                'check_out_date' => $checkOutDate,
+                'number_of_people' => $travellers,
+                'breakfast' => $breakfast,
+                'reservation_status' => 'confirmed',
+                'checkin_status' => 'not done',
+                'customer_request' => $requests,
+                'guest_id' => null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+
+            DB::table('reservation_room')->insert([
+                'reservation_id' => $reservation,
+                'room_id' => $room_id,
+                'number_of_people' => $travellers,
+                'price' => $total_price,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+
+            DB::commit();
+
+     return view('customers.reservations.reserved_confirmation');
+    } catch (\Exception $e) {
+        DB::rollBack();
+        Log::error('Reservation Confirmation Error: ' . $e->getMessage());
+        return back()->withErrors(['error' => 'An error occurred while processing your reservation. Please try again.']);
+    }
+}
 
 public function reserveShow(Request $request)
 {

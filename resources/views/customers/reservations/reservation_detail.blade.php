@@ -12,19 +12,19 @@
           @csrf
         
             <label class="form-lavel">First Name</label>
-            <input type="text" name="first_name" id="first-name" class="form-control" value="{{ old('first_name', $user->first_name ?? '') }}" readonly>
+            <input type="text" name="first_name" id="first-name" class="form-control readonly-input" value="{{ old('first_name', $user->first_name ?? '') }}" readonly>
             {{-- <input type="text" name="first-name" id="first-name" class="form-control" value="{{ $first_name }}" readonly> --}}
             
             <label class="form-lavel">Last Name</label>
-            <input type="text" name="last_name" id="last-name" class="form-control" value="{{ old('last_name', $user->last_name ?? '') }}" autofocus readonly>
+            <input type="text" name="last_name" id="last-name" class="form-control readonly-input" value="{{ old('last_name', $user->last_name ?? '') }}" autofocus readonly>
             
             <label class="form-lavel">Email Address</label>
-            <input type="email" name="reservation-email" id="reservation-email" class="form-control" value="{{ old('email', $user->email ?? '') }}" autofocus readonly>
+            <input type="email" name="reservation-email" id="reservation-email" class="form-control readonly-input" value="{{ old('email', $user->email ?? '') }}" autofocus readonly>
                     
             {{-- <input type="email" placeholder="youremail@gmail.com" required> --}}
             
             <label class="form-lavel">Mobile Number</label>
-            <input type="text" name="reservation-phone" id="reservation-phone" class="form-control" value="{{ old('phone_number', $user->phone_number) }}" readonly>
+            <input type="text" name="reservation-phone" id="reservation-phone" class="form-control readonly-input" value="{{ old('phone_number', $user->phone_number) }}" readonly>
             {{-- <input type="tel" placeholder="089-4243-4242" required> --}}
         </div>
         </form>
