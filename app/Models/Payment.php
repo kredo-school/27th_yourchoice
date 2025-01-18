@@ -20,4 +20,6 @@ class Payment extends Model
     {
         return $this->belongsTo(Reservation::class, 'payment_id');
     }
+
+    
 }
