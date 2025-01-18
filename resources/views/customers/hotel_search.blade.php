@@ -2,6 +2,11 @@
 
 @section('title', 'Wheelchair and Senior')
 
+<!-- Text to Speech：Page Overview ページ概要を説明 -->
+@section('attributes')
+    <body data-page-description="This is the search page for {{ $topCategory }} .">
+@endsection
+
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/hotel_search.css') }}">
 
@@ -63,7 +68,7 @@
 
     <div class="list-group">
         @foreach ($hotels as $hotel)
-            <div class="list-group-item">
+            <div class="list-group-item"  data-description="{{ $hotel->hotel_name }}">
                 {{-- <a href="{{ route('customer.top.show', ['id' => $hotel->id]) }}" class="stretched-link"></a> --}}
                 <form action="{{ route('customer.top.show', ['id' => $hotel->id ?? '', 
                     'checkInDate' => $checkInDate ?? '', 
@@ -82,6 +87,7 @@
                     </div>
                     <div class="col-md-7">
                         <h5>{{$hotel->hotel_name}}</h5>
+                         
                         <p>{{$hotel->prefecture}}</p>
                             @foreach($hotel->categories->where('type','category') as $category)
                                 <span class="badge bg-pink">{{ $category->name }}</span>
@@ -120,3 +126,8 @@
     </nav>
 </div>
 @endsection
+
+<!-- Text to Speech：call js -->
+@push('scripts')
+<script src="{{ asset('js/api_text_to_speech.js') }}"></script>
+@endpush

@@ -1,66 +1,44 @@
 @extends('layouts.customer')
-    <!-- CSS -->
-    <link rel="stylesheet" href="{{ asset('css/topstyle.css') }}">
-@section('content')
-{{-- Customer Toppage --}}
 
-    <section class="hero">
-        <h1>Your Choice</h1>
-        <p>Travel for everyone</p>
-        <p class="description">This website is a hotel platform designed to cater to diverse needs.</p>
-    </section>
-    <section class="categories">
-        <h2>What category are you looking for?</h2>
-        <div class="categories-grid">
-            <!-- Wheelchair and Senior -->
-            {{-- <a href="{{ route('categories.wheelchair') }}" class="category"> --}}
-                <form action="{{ route('customer.top.display') }}" method="GET" class="category-form">
-                    @csrf
-                    <input type="hidden" name="topCategory" value="Wheelchair and Senior">
-                    <button type="submit" class="category-btn">
-                        <img src="{{ asset('images/wheelchair.png') }}" alt="Wheelchair and Senior">
-                    </button>
-                </form>
-            <!-- Pregnancy -->
-            <form action="{{ route('customer.top.display') }}" method="GET" class="category-form">
-                @csrf
-                <input type="hidden" name="topCategory" value="Pregnancy">
-                <button type="submit" class="category-btn">
-                    <img src="{{ asset('images/pregnancy.png') }}" alt="Pregnancy">
-                </button>
-            </form>
-            <!-- Family -->
-            <form action="{{ route('customer.top.display') }}" method="GET" class="category-form">
-                @csrf
-                <input type="hidden" name="topCategory" value="Family">
-                <button type="submit" class="category-btn">
-                    <img src="{{ asset('images/family.png') }}" alt="Family">
-                </button>
-            </form>
-            <!-- Visual and Hearing Impaired -->
-            <form action="{{ route('customer.top.display') }}" method="GET" class="category-form">
-                @csrf
-                <input type="hidden" name="topCategory" value="Visual and Hearing Impaired">
-                <button type="submit" class="category-btn">
-                    <img src="{{ asset('images/visual-hearing.png') }}" alt="Visual and Hearing Impaired">
-                </button>
-            </form>
-            <!-- Religious -->
-            <form action="{{ route('customer.top.display') }}" method="GET" class="category-form">
-                @csrf
-                <input type="hidden" name="topCategory" value="Religious">
-                <button type="submit" class="category-btn">
-                    <img src="{{ asset('images/religious.png') }}" alt="Religious">
-                </button>
-            </form>
-            <!-- English Friendly -->
-            <form action="{{ route('customer.top.display') }}" method="GET" class="category-form">
-                @csrf
-                <input type="hidden" name="topCategory" value="English Friendly">
-                <button type="submit" class="category-btn">
-                    <img src="{{ asset('images/english-friendly.png') }}" alt="English Friendly">
-                </button>
-            </form>
-        </div>
-    </section>
+<!-- CSS -->
+<link rel="stylesheet" href="{{ asset('css/topstyle.css') }}">
+
+<!-- Text to Speech：Page Overview ページ概要を説明 -->
+@section('attributes')
+    <body data-page-description="Welcome to the homepage. Choose your perfect trip.">
 @endsection
+
+@section('content')
+<section class="hero">
+    <h1>Your Choice</h1>
+    <p>Travel for everyone</p>
+    <p class="description">This website is a hotel platform designed to cater to diverse needs.</p>
+</section>
+<section class="categories">
+    <h2>What category are you looking for?</h2>
+    <div class="categories-grid">
+        @foreach ([
+            'Wheelchair and Senior' => 'wheelchair.png',
+            'Pregnancy' => 'pregnancy.png',
+            'Family' => 'family.png',
+            'Visual and Hearing Impaired' => 'visual-hearing.png',
+            'Religious' => 'religious.png',
+            'English Friendly' => 'english-friendly.png'
+        ] as $category => $image)
+            <form action="{{ route('customer.top.display') }}" method="GET" class="category-form">
+                @csrf
+                <input type="hidden" name="topCategory" value="{{ $category }}">
+                <button type="submit" class="category-btn" 
+                        data-description="For {{ $category }} .">
+                    <img src="{{ asset('images/' . $image) }}" alt="{{ $category }}">
+                </button>
+            </form>
+        @endforeach
+    </div>
+</section>
+@endsection
+
+<!-- Text to Speech：call js -->
+@push('scripts')
+<script src="{{ asset('js/api_text_to_speech.js') }}"></script>
+@endpush

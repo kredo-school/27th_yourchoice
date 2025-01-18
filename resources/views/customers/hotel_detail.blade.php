@@ -2,6 +2,11 @@
 
 @section('title', 'Hotel Detail')
 
+<!-- Text to Speech：Page Overview ページ概要を説明 -->
+@section('attributes')
+    <body data-page-description="This is the detail page for {{ $hotels->hotel_name }} .">
+@endsection
+
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/hotel_search.css') }}">
 <link rel="stylesheet" href="{{ asset('css/jquery-ui.css')}}">
@@ -133,7 +138,7 @@
                     <input type="hidden" id="travellers" name="travellers" value="{{ old('travellers', $travellers ?? '') }}">
                     <input type="hidden" id="checkInDate" name="checkInDate" value="{{ old('checkInDate', $checkInDate ?? '') }}">
                     <input type="hidden" id="checkOutDate" name="checkOutDate" value="{{ old('checkOutDate', $checkOutDate ?? '') }}">
-                    <button type="submit" class="btn btn-danger mt-2">Book now</button>
+                    <button type="submit" class="btn btn-danger mt-2" data-description="Book now" >Book now</button>
                     <div class="text-end">
                         <h6 class="mb-1">{{ $room->price }} / {{ $room->capacity }} travellers</h6>
                         <small>Includes taxes & fees for 1 night</small>
@@ -161,3 +166,8 @@
 <script src="{{ asset('js/jquery_top.js') }}"></script>
 
 @endsection
+
+<!-- Text to Speech：call js -->
+@push('scripts')
+<script src="{{ asset('js/api_text_to_speech.js') }}"></script>
+@endpush

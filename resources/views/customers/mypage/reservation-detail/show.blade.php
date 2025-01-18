@@ -1,5 +1,10 @@
 @extends('layouts.customer_mypage')
 
+<!-- Text to Speech：Page Overview ページ概要を説明 -->
+@section('attributes')
+<body data-page-description="This is your reservation of {{$hotel->hotel_name}} .">
+@endsection
+
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/review.css') }}">
 <div class="container mt-5">
@@ -100,3 +105,8 @@
     </div>
 @endif
 @endsection
+
+<!-- Text to Speech：call js -->
+@push('scripts')
+<script src="{{ asset('js/api_text_to_speech.js') }}"></script>
+@endpush
