@@ -32,8 +32,8 @@
             </div>
             <h2><strong> Thank you for your reservation!</strong></h2>
             <p>Your reservation has been completed.<br>Please check your reservation details.</p>
-            <p><strong>reservation number : <span class="reservation-number">ABC12345678</span></strong></p>
-            <button class="check-button" data-description="check your reservation." ><a href="{{ route('customer.reservation.reservationlist') }}" >check your reservation</button></a>
+            {{-- <p><strong>reservation number : <span class="reservation-number">ABC12345678</span></strong></p> --}}
+            <button class="check-button" data-description="check your reservation."><a href="{{ route('customer.reservation.reservationlist') }}" >check your reservation</button></a>
         </div>
     </main>
 </body>
