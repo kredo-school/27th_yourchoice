@@ -94,7 +94,7 @@ class ProfileController extends Controller
     $hotel->prefecture          = $request->prefecture;
     $hotel->city                = $request->city;
     $hotel->street_address      = $request->street_address;
-    $address                    = $request->prefecture . $request->city . $request->street_address; //住所を連結
+    $address                    = $request->street_address .', '.$request->city.', '.$request->prefecture; //住所を連結
     $hotel->address             = $address; // 連結された住所を保存
     $hotel->access              = $request->access;
     $hotel->description         = $request->description;
