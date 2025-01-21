@@ -18,7 +18,7 @@ Route::get('/', [App\Http\Controllers\Customer\TopController::class, 'list'])->n
 
 // カスタマー側
 
-Route::group(['prefix' => 'customer', 'as' => 'customer.', 'middleware' => 'auth'], function () {
+Route::group(['prefix' => 'customer', 'as' => 'customer.'], function () {
 
   // ログイン不要ページ
   Route::get('/top/list', [App\Http\Controllers\Customer\TopController::class, 'list'])->name('top.list');
