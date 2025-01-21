@@ -16,7 +16,7 @@
     <div class="row">
         <!-- Large Image -->
         <div class="col-md-6">
-            <img src="{{ asset($hotels->image_main) }}" alt="hotel-img" class="img-fluid large-img w-100">
+            <img src="{{ $hotels->image_main }}" alt="hotel-img" class="img-fluid large-img w-100">
         </div>
         <!-- Small Images -->
         <div class="col-md-6">
@@ -24,7 +24,7 @@
                 @foreach ([$hotels->image_sub1, $hotels->image_sub2, $hotels->image_sub3, $hotels->image_sub4] as $image)
                     @if($image)
                         <div class="col-6 pb-2">
-                            <img src="{{ asset($image) }}" alt="hotel-img" class="img-fluid small-img w-100">
+                            <img src="{{ $image }}" alt="hotel-img" class="img-fluid small-img w-100">
                         </div>
                     @endif
                 @endforeach
@@ -129,7 +129,7 @@
             @csrf
             <div class="col-md-12 mb-4">
                 <div class="d-flex align-items-center border p-3 rounded">
-                    <img src="{{ asset('images/hotel-room.jpg') }}" alt="hotel-room" class="img-fluid" style="max-width: 150px;">
+                    <img src="{{ $room->image }}" alt="hotel-room" class="img-fluid" style="max-width: 150px;">
                     <div class="ms-3 flex-grow-1">
                         <h5>{{ $room->room_type }}</h5>
                         <ul class="list-inline">
