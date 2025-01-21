@@ -162,3 +162,22 @@ body {
   background-color: #ffffff; /* 任意の背景色 */
 }
 
+/* sound bar */
+/* サウンドアイコンボタンのスタイル */
+#soundToggle {
+  background: none;      /* 背景色をなしに */
+  border: none;          /* 枠線をなしに */
+  padding: 0;            /* 余白をなしに */
+  cursor: pointer;       /* ポインターに変更 */
+}
+
+/* アイコン自体のサイズや色調整（必要に応じて） */
+#soundToggle i {
+  font-size: 24px;       /* アイコンのサイズを調整 */
+  color: #333;           /* アイコンの色 */
+}
+
+/* ボタンがクリックされたときのフォーカスアウトラインを消す */
+#soundToggle:focus {
+  outline: none;         /* フォーカス時のアウトラインを消す */
+}

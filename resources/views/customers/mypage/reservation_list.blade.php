@@ -1,5 +1,11 @@
 {{-- BE: Created by miu --}}
 @extends('layouts.customer_mypage')
+
+<!-- Text to Speech：Page Overview ページ概要を説明 -->
+@section('attributes')
+    <body data-page-description="This is your reservation list page.">
+@endsection
+
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/reservationlist.css') }}">
 
@@ -16,8 +22,12 @@
                     {{-- @foreach($reservation->reservationRoom as $reservationRoom)
                     <pre>{{ $reservationRoom->toJson(JSON_PRETTY_PRINT) }}</pre>
                     @endforeach --}}
-
-                    <a href="{{ route('customer.reservation.show', $reservation->id )}}" class="text-decoration-none text-dark align-self-end">
+                    {{-- 1/18 In progress --}}
+                    {{-- {{dd($reservation->reservationRoom->toArray());}} --}}
+                    {{-- {{dd($reservation->reservationRoom->room->hotel->hotel_name->toArray());}} --}}
+                    {{-- <pre>{{ $reservation->toJson(JSON_PRETTY_PRINT) }}</pre> --}}
+                    
+                    <a href="{{ route('customer.reservation.show', $reservation->id )}}" class="text-decoration-none text-dark align-self-end"">
                         {{-- cancellされていたらグレーアウト --}}
                         <div class="card mb-3 {{ $reservation->reservation_status == 'cancelled' ? 'opacity-50' : '' }}">
                         {{-- <div class="card mb-3"> --}}
@@ -34,6 +44,7 @@
                                             {{-- DEBUG: 配列の中を見ることができる --}}
                                             {{-- {{dd($reservationRoom->room->hotel->categories->toArray());}} --}}
                                             <h5 class="card-title">{{ $reservationRoom->room->hotel->hotel_name }}</h5>
+                                            
                                             <h6 class="card-subtitle mb-2 text-muted">{{ $reservationRoom->room->hotel->prefecture }}</h6>
                                             @endforeach
                                             {{-- type=categoryのnameだけ取得 --}}
@@ -68,3 +79,8 @@
         </div>
 </div>
 @endsection
+
+<!-- Text to Speech：call js -->
+@push('scripts')
+<script src="{{ asset('js/api_text_to_speech.js') }}"></script>
+@endpush

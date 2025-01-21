@@ -32,6 +32,9 @@
 
 </head>
 
+{{-- 音声読み上げ機能：Page読み込み時に説明する --}}
+@yield('attributes', '<body>')
+
 <body>
     <div id="app">
         <div class="container-fluid">
@@ -53,6 +56,10 @@
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ms-auto">
                             <!-- Authentication Links -->
+                            <!-- 音声読み上げ機能：サウンドアイコン -->
+                            <button id="soundToggle" class="btn btn-outline-secondary">
+                                <i id="soundIcon" class="fas fa-volume-up logo-sub me-3"  ></i>
+                            </button>
                             @guest
                                 <div class="d-flex">
                                     <a href="#"><img src="{{ asset('images/globe-solid.svg') }}" class="logo-sub"></a><span class="language mx-1 me-3">English</span>
@@ -103,9 +110,10 @@
             </footer>
         </div>    
     </div>
+
+    {{-- 音声読み上げ機能 HTMLを読み込んでから実行 --}}
+    {{-- api_text_to_speech.js --}}
+    @stack('scripts') 
 </body>
-
-
-
 </html>
 

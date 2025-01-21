@@ -2,6 +2,11 @@
 
 <link rel="stylesheet" href="{{ asset('css/reviewlist.css') }}">
 
+<!-- Text to Speech：Page Overview ページ概要を説明 -->
+@section('attributes')
+    <body data-page-description="This is your review list page.">
+@endsection
+
 @section('content')
 <div class="container-fluid">
     <div class="row">
@@ -70,3 +75,8 @@
         </div>
 </div>
 @endsection
+
+<!-- Text to Speech：call js -->
+@push('scripts')
+<script src="{{ asset('js/api_text_to_speech.js') }}"></script>
+@endpush

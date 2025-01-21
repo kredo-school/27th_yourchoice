@@ -5,6 +5,11 @@
 <!-- CSSのリンク -->
 <link rel="stylesheet" href="{{ asset('css/customer-css.css') }}">
 
+<!-- Text to Speech：Page Overview ページ概要を説明 -->
+@section('attributes')
+    <body data-page-description="This is your profile page.">
+@endsection
+
 @section('content')
 <div class="container-fluid">
     <form method="GET" action="{{ route('customer.profile.edit') }}" enctype="multipart/form-data">
@@ -56,8 +61,8 @@
                     </div>
             
                     <div class="d-flex justify-content-between">
-                        <a href="{{ route('customer.profile.editpass') }}" class="sub-button-outline ">Password Setting</a>
-                        <a href="{{ route('customer.profile.edit') }}" class="sub-button-outline ">Edit Profile</a>
+                        <a href="{{ route('customer.profile.editpass') }}" class="sub-button-outline " data-description="Password Setting">Password Setting</a>
+                        <a href="{{ route('customer.profile.edit') }}" class="sub-button-outline " data-description="Edit Profile">Edit Profile</a>
                     </div>
                 </form>
             </div>
@@ -69,3 +74,8 @@
 </div>
 
 @endsection
+
+<!-- Text to Speech：call js -->
+@push('scripts')
+<script src="{{ asset('js/api_text_to_speech.js') }}"></script>
+@endpush

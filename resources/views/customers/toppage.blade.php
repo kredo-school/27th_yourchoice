@@ -1,6 +1,13 @@
 @extends('layouts.customer')
-    <!-- CSS -->
-    <link rel="stylesheet" href="{{ asset('css/topstyle.css') }}">
+
+<!-- CSS -->
+<link rel="stylesheet" href="{{ asset('css/topstyle.css') }}">
+
+<!-- Text to Speech：Page Overview ページ概要を説明 -->
+@section('attributes')
+    <body data-page-description="Welcome to the homepage. Choose your perfect trip.">
+@endsection
+
 @section('content')
 {{-- Customer Toppage --}}
 
@@ -32,3 +39,8 @@
         </div>
     </section>
 @endsection
+
+<!-- Text to Speech：call js -->
+@push('scripts')
+<script src="{{ asset('js/api_text_to_speech.js') }}"></script>
+@endpush
