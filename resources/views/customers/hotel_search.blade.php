@@ -6,7 +6,7 @@
 
 @section('content')
 
-<section class="hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{ asset($backgroundImage) }}');"">
+<section class="hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{ asset($backgroundImage) }}');">
     <h1 class="text-center text-light">{{ ucfirst($topCategory) }}</h1>
 </section>
 
@@ -81,7 +81,7 @@
                 </form>
                 <div class="row align-items-center">
                     <div class="col-md-2">
-                        <img src="{{ asset($hotel->image_main) }}" alt="hotel-img" class="hotel-img">
+                        <img src="{{ $hotel->image_main }}" alt="hotel-img" class="hotel-img">
                     </div>
                     <div class="col-md-7">
                         <h5>{{$hotel->hotel_name}}</h5>
