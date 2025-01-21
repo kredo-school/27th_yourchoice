@@ -76,8 +76,7 @@ class ProfileController extends Controller
       'cancellation_period'  => 'required|integer|max:100',
       'general_fee'          => 'required|integer|max:100',
       'sameday_fee'          => 'required|integer|max:100',
-      'breakfast_price'      => 'required|min:0',//'required_if:categories.0,9|numeric|min:0'
-
+      'breakfast_price'      => 'required|numeric|min:0',
       'email'                => 'required|email',
       'phone_number'         => 'required|string|max:20',
     ]);
@@ -95,7 +94,7 @@ class ProfileController extends Controller
     $hotel->prefecture          = $request->prefecture;
     $hotel->city                = $request->city;
     $hotel->street_address      = $request->street_address;
-    $address                    = $request->prefecture . $request->city . $request->street_address; //住所を連結
+    $address                    = $request->street_address .', '.$request->city.', '.$request->prefecture; //住所を連結
     $hotel->address             = $address; // 連結された住所を保存
     $hotel->access              = $request->access;
     $hotel->description         = $request->description;

@@ -186,7 +186,7 @@
                                         <input type="number" class="form-control w-50" id="breakfast_price"
                                             name="breakfast_price" aria-label="Price"
                                             value="{{ old('breakfast_price', $user->hotel->breakfast_price) }}" disabled
-                                            min="0">
+                                            min="0" step="0.01">
                                     </div>
                                 </div>
                                 @error('breakfast_price')
