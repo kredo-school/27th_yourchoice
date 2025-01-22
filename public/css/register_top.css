@@ -45,6 +45,13 @@ body {
 }
 
 /* Main Section */
+.choice-section-container {
+  display: flex;
+  justify-content: center; /* 横方向中央揃え */
+  align-items: center;    /* 縦方向中央揃え */
+  min-height: 30vh;      /* ビューポートの高さを占有 */
+}
+
 .choice-section {
   text-align: center;
   margin-top: 100px;
