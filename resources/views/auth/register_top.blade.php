@@ -4,9 +4,8 @@
 @section('content')
 {{-- Customer Toppage --}}
 <!DOCTYPE html>
-<html lang="en">
-
-    <main>
+<html>
+    <main class="choice-section-container">
         <section class="choice-section">
             <h1>Which one are you?</h1>
             <div class="choices">
@@ -15,5 +14,6 @@
             </div>
         </section>
     </main>
-</body>
 </html>
+
+@endsection
